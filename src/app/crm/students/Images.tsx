@@ -28,7 +28,7 @@ export default function Images() {
                 setImages(data.blobs);
             } catch (err) {
                 console.error('Error fetching images:', err);
-                setError(`Failed to load images: ${err.message}`);
+                setError(`Failed to load images: ${err}`);
             } finally {
                 setIsLoading(false);
             }
