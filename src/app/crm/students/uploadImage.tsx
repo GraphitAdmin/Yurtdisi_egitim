@@ -17,7 +17,7 @@ export async function uploadImage(formData: FormData) {
         revalidatePath('/')
         return { url: blob.url, success: true }
     } catch (error) {
-        console.log('not ok')
+        console.log('not ok',error)
 
         return { error: 'Upload failed', success: false }
     }

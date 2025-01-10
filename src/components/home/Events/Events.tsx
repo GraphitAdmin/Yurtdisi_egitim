@@ -3,59 +3,11 @@ import './Events.css'
 import Button from "@/components/UI/Button/Button";
 import Event from "@/components/UI/Event/Event";
 import ImageEvent from "@/assets/home/Illustration.png"
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {IEvent} from "@/interfaces/interfaces";
 const Events =()=>{
     const eventsRef = useRef(null);
-    const [events, setEvents] = useState<IEvent[]>([
-        {
-            imgPost:ImageEvent,
-            type:'Language education',
-            title:'College Alpin Beau Soleil',
-            description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date:'01.01.2025',
-            time:'10:00 - 15:00',
-            location:'Switzerland',
-            link:'/event'
-        },
-        {
-            imgPost:ImageEvent,
-            type:'Language education',
-            title:'College Alpin Beau Soleil',
-            description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date:'01.01.2025',
-            time:'10:00 - 15:00',
-            location:'Switzerland',
-            link:'/event'
-        },{
-            imgPost:ImageEvent,
-            type:'Language education',
-            title:'College Alpin Beau Soleil',
-            description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date:'01.01.2025',
-            time:'10:00 - 15:00',
-            location:'Switzerland',
-            link:'/event'
-        },{
-            imgPost:ImageEvent,
-            type:'Language education',
-            title:'College Alpin Beau Soleil',
-            description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date:'01.01.2025',
-            time:'10:00 - 15:00',
-            location:'Switzerland',
-            link:'/event'
-        },{
-            imgPost:ImageEvent,
-            type:'Language education',
-            title:'College Alpin Beau Soleil',
-            description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date:'01.01.2025',
-            time:'10:00 - 15:00',
-            location:'Switzerland',
-            link:'/event'
-        },
-    ])
+    const [events, setEvents] = useState<IEvent[]>([])
     const scroll = (direction:string) => {
         const scrollAmount = 413; // Adjust the scroll amount based on your layout
         if (eventsRef.current) {
@@ -67,7 +19,57 @@ const Events =()=>{
             });
         }
     };
-
+    useEffect(()=>{
+        setEvents([
+            {
+                imgPost:ImageEvent,
+                type:'Language education',
+                title:'College Alpin Beau Soleil',
+                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
+                date:'01.01.2025',
+                time:'10:00 - 15:00',
+                location:'Switzerland',
+                link:'/event'
+            },
+            {
+                imgPost:ImageEvent,
+                type:'Language education',
+                title:'College Alpin Beau Soleil',
+                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
+                date:'01.01.2025',
+                time:'10:00 - 15:00',
+                location:'Switzerland',
+                link:'/event'
+            },{
+                imgPost:ImageEvent,
+                type:'Language education',
+                title:'College Alpin Beau Soleil',
+                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
+                date:'01.01.2025',
+                time:'10:00 - 15:00',
+                location:'Switzerland',
+                link:'/event'
+            },{
+                imgPost:ImageEvent,
+                type:'Language education',
+                title:'College Alpin Beau Soleil',
+                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
+                date:'01.01.2025',
+                time:'10:00 - 15:00',
+                location:'Switzerland',
+                link:'/event'
+            },{
+                imgPost:ImageEvent,
+                type:'Language education',
+                title:'College Alpin Beau Soleil',
+                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
+                date:'01.01.2025',
+                time:'10:00 - 15:00',
+                location:'Switzerland',
+                link:'/event'
+            },
+        ])
+    },[])
     return(
         <div className="events">
             <div className="events__first">

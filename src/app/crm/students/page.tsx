@@ -25,6 +25,7 @@ export default function AdminPanel() {
                 setError('Upload failed. Please try again.')
             }
         } catch (e) {
+            console.log('error',e)
             setError('Something went wrong. Please try again.')
         } finally {
             setIsUploading(false)
