@@ -1,0 +1,45 @@
+.myInput {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 16px;
+    text-align: left;
+    border-radius: 8px;
+    border: 1px solid var(--Courses-Gray-Gray-300);
+    background: #FFF;
+}
+
+.myInput.active {
+    border: 1px solid var(--courses-brand-blue-400-brand);
+}
+
+.myInput.error {
+    border: 1px solid #fc4242;
+}
+
+.myInput input {
+    all: unset;
+    width: 100%;
+    color: var(--Courses-Gray-Gray-500);
+    font-size: 16px;
+    font-style: normal;
+    height: 100%;
+    font-weight: 400;
+    line-height: 24px;
+}
+.myInput.error input {
+    color: #fc4242;
+}
+.myInput__errorText {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+    margin-top: 6px;
+    margin-left: 16px;
+    color: #fc4242;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+}

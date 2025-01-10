@@ -3,19 +3,144 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --Courses-Base-Black:#1A1A1A;
+  --Courses-Brand-Blue-25: #EFF8FF;
+  --Courses-Brand-Blue-50: #D9EDFF;
+  --Courses-Brand-Blue-100: #B2DDFF;
+  --Courses-Brand-Blue-200: #84CAFF;
+  --Courses-Brand-Blue-300: #53B1FD;
+  --courses-brand-blue-400-brand: #2E90FA;
+  --Courses-Brand-Blue-500: #1570EF;
+  --Courses-Brand-Blue-600: #175CD3;
+  --Courses-Brand-Blue-700: #1849A9;
+  --Courses-Brand-Blue-800: #102A56;
+  --Courses-Gray-Gray-25: #FDFDFD;
+  --Courses-Gray-Gray-50: #FAFAFA;
+  --Courses-Gray-Gray-100: #F5F5F5;
+  --Courses-Gray-Gray-200: #E9EAEB;
+  --Courses-Gray-Gray-300: #D5D7DA;
+  --Courses-Gray-Gray-400: #A4A7AE;
+  --Courses-Gray-Gray-500: #717680;
+  --Courses-Gray-Gray-600: #535862;
+  --Courses-Gray-Gray-700: #414651;
+  --Courses-Gray-Gray-800: #252B37;
+  --Courses-Functional-Error: #F04438;
+  --Courses-Functional-Warning: #F79009;
+  --Courses-Functional-Success: #17B26A;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  height: 100%;
+  /*overflow-x: hidden;*/
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  font-family: var(--font-urbanist), sans-serif;
+}
+
+*::-webkit-scrollbar,*::-webkit-scrollbar:horizontal {
+  width: 0;
+  opacity: 0;
+  -webkit-overflow-scrolling: touch;
+}
+h1{
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 72px;
+  color: var(--Courses-Brand-Blue-800);
+  text-align: center;
+}
+h2{
+  color: var(--Courses-Brand-Blue-800);
+  text-align: center;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 56px;
+}
+h3{
+  color: #FFF;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px;
+  text-align: center;
+}
+h4{
+  color: var(--Courses-Brand-Blue-800);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: center;
+}
+
+h5{
+  color: var(--Courses-Brand-Blue-800);
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px
+}
+h6{
+  color: var(--Courses-Gray-Gray-400);
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+sub{
+  color: #FFF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  bottom: 0;
+  text-align: center;
+}
+
+p{
+  color: #FFF;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+small{
+  color: #3538CD;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+}
+.mobile{
+  display: none!important;
+}
+.pc{
+  display: flex!important;
+}
+@media screen and (max-width: 768px) {
+  .mobile {
+    display: flex !important;
+  }
+
+  .pc {
+    display: none !important;
+  }
+  h2{
+    font-size: 32px;
+    line-height: 40px;
+  }
 }

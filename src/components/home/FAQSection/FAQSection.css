@@ -1,0 +1,13 @@
+.faqSection {
+    display: flex;
+    padding: 96px 189px;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+}
+@media screen and (max-width: 992px) {
+    .faqSection {
+        padding: 64px;
+    }
+}

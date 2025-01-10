@@ -1,0 +1,245 @@
+.CRM {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
+    padding: 96px 80px 0 80px;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.CRM__blocks {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    position: relative;
+    justify-content: flex-start;
+    z-index: -1;
+    width: Calc(100vw - 160px);
+    gap: 160px;
+    /*overflow: scroll;*/
+    max-width: 1600px;
+}
+
+.CRM__blocks::-webkit-scrollbar:horizontal {
+    /*width: 6px;*/
+    width: 0;
+    opacity: 0;
+    height: 0;
+}
+
+.CRM__block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    align-self: stretch;
+    position: relative;
+    z-index: -1;
+    min-width: 1340px;
+    max-width: 1340px;
+    border-radius: 24px;
+    border: 1px solid var(--Courses-Gray-Gray-200);
+    background: var(--Courses-Gray-Gray-50);
+    padding: 24px;
+}
+
+.CRM__block__image {
+    height: 460px;
+    align-self: stretch;
+    opacity: 1;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--Courses-Gray-Gray-200, #E9EAEB);
+    background: lightgray 50% / cover no-repeat;
+
+}
+
+.CRM__block__image.visible {
+    opacity: 1;
+}
+
+.CRM__block__description {
+    width: 100%;
+    flex-direction: row;
+    position: relative;
+    border-radius: 12px;
+    border: 1px solid var(--Courses-Gray-Gray-200, #E9EAEB);
+    background: var(--Courses-Gray-Gray-100, #F5F5F5);
+    display: flex;
+    padding: 16px;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-self: stretch;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0.5;
+}
+
+.CRM__block__description.visible {
+    opacity: 1;
+}
+
+.CRM__block__description div h5 {
+    color: var(--Courses-Brand-Blue-800);
+    text-align: left;
+}
+
+.CRM__block__description div p {
+    width: 90%;
+    color: var(--Courses-Gray-Gray-500);
+    text-overflow: ellipsis;
+    text-align: left;
+    margin-top: 8px;
+}
+
+.CRM__block__arrow {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.CRM__block__arrow:hover svg path {
+    fill: var(--courses-brand-blue-400-brand);
+}
+
+.CRM__block__arrow__border {
+    display: flex;
+    padding: 16px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--Courses-Gray-Gray-200);
+}
+
+.CRM__block__mobile__arrows {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 16px;
+    padding-left: 64px;
+}
+
+@media screen and (max-width: 1440px) {
+    .CRM__block {
+        min-width: Calc(100vw - 160px);
+        max-width: Calc(100vw - 160px);
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .CRM__blocks,.CRM__block{
+        min-width: Calc(100vw - 128px);
+        width: calc(100vw - 128px);
+        max-width: Calc(100vw - 128px);
+    }
+    .CRM__block__description {
+        padding: 0 40px;
+        flex-direction: column;
+        gap:24px
+    }
+
+    .CRM__block__description div p {
+        width: 100%;
+    }
+
+    .CRM div h2 {
+        word-wrap: break-word;
+        text-align: center;
+    }
+
+    .CRM {
+        padding: 64px 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .CRM__block img {
+        height: 300px;
+    }
+    .CRM__blocks,.CRM__block,.CRM__block__description{
+        min-width: calc(100vw - 64px);
+        width: calc(100vw - 64px);
+        max-width: Calc(100vw - 64px);
+        padding:0;
+        border: none;
+        background: none;
+    }
+    .CRM__block__description a button{
+        min-width: calc(100vw - 64px);
+        width: calc(100vw - 64px);
+        max-width: Calc(100vw - 64px);
+        padding: 12px 0!important;
+    }
+    .CRM__block__description {
+        height: auto;
+        justify-content: space-between;
+    }
+
+    .CRM__block__description button {
+        /*margin-top: 0!important;*/
+        margin-top: auto !important;
+    }
+
+    .CRM__block__arrow {
+        display: none;
+    }
+
+    .CRM__blocks {
+        overflow: auto;
+    }
+
+    .CRM__block__image {
+        border-radius: 24px;
+    }
+
+    .CRM__block__mobile__arrows {
+        padding-left: 32px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .CRM__blocks,.CRM__block,.CRM__block__description a button,.CRM__block__description{
+        min-width: calc(100vw - 32px);
+        width: calc(100vw - 32px);
+        max-width: Calc(100vw - 32px);
+    }
+    .CRM__block img {
+        height: 200px !important;
+        max-height: 200px !important;
+        min-height: 200px !important;
+        border-radius: 12px;
+    }
+
+    .CRM__block__description a {
+        width: 100%;
+    }
+
+    .CRM__block__description button {
+        width: 100%;
+        padding: 8px 14px !important;
+    }
+
+    .CRM__block__description button div {
+        font-size: 16px !important;
+    }
+
+    .CRM {
+        padding: 48px 16px 64px;
+    }
+
+
+    .CRM__block__mobile__arrows {
+        padding-left: 16px;
+    }
+}

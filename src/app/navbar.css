@@ -1,0 +1,204 @@
+nav{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid var(--Courses-Gray-Gray-200);
+    width: 100%;
+    height: auto;
+    color: var(--Courses-Base-Black);
+}
+.nav__home{
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.30);
+}
+.nav__header__block{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    background:  linear-gradient(97deg, #0D1654 -1.05%, #3043C4 100.82%);
+}
+.nav__header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px 80px;
+    width: 100%;
+    align-items: center;
+    max-width: 1440px;
+}
+.nav__header__item{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+}
+.nav__header__item svg{
+    margin-top: 2px;
+}
+.nav__us{
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-direction: row;
+}
+.nav__us a h6{
+    color: #fff;
+}
+.nav__us__social{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+.nav__links{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 80px 20px;
+    width: 100%;
+    max-width: 1440px;
+    align-items: center;
+}
+
+
+.nav__dropdown{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    height: 40px;
+}
+.nav__dropdown__block{
+    position: absolute;
+    width: max-content;
+    top: 36px;
+    background: #FFF;
+    box-shadow: 0 8px 24px 0 rgba(23, 32, 94, 0.08);
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 1;
+    left: 0;
+    border-radius: 16px;
+}
+.navbar__dropdown__svg{
+    transition: transform 0.4s ease-in-out;
+}
+.nav__dropdown:hover .navbar__dropdown__svg{
+    transform: rotateX(180deg);
+}
+.nav__dropdown:hover .nav__dropdown__block{
+    display: flex;
+}
+.nav__dropdown__block:hover{
+    display: flex;
+}
+
+.nav__dropdown__block__item{
+    display: flex;
+    padding-top: 12px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+    padding-left: 16px;
+}
+.nav__dropdown__block__item:hover{
+    background: var(--Courses-Gray-Gray-200);
+}
+.nav__dropdown__block__item a{
+    line-height: 20px;
+}
+.nav__dropdown__block__item a small{
+    color: var(--Courses-Base-Black, #1A1A1A);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    text-decoration: none;
+    padding-bottom: 8px;
+    padding-right: 16px;
+    width: 240px;
+    min-width: 240px;
+    display: block;
+    text-align: left;
+    border-bottom: solid 1px var(--Courses-Gray-Gray-200);
+    margin-top: 2px;
+}
+.nav__dropdown__block__item:first-child {
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+}
+.nav__dropdown__block__item:last-child{
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    padding-bottom: 4px;
+}
+.nav__dropdown__block__item:last-child a small {
+    border-bottom: none;
+}
+nav .nav__links a{
+    font-size: 18px;
+    line-height: 24px;
+}
+nav .nav__links .nav__dropdown sub,nav .nav__links a{
+    line-height: 24px;
+    color: var(--Courses-Base-Black);
+}
+.nav__home .nav__links .nav__dropdown sub, .nav__home .nav__links a{
+    color: white;
+}
+.nav__home .nav__header__block{
+    background: #fff;
+    color: var(--Courses-Base-Black);
+}
+.nav__home .nav__header__block .nav__header .nav__us a h6,.nav__home .nav__header__block .nav__header .nav__header__item{
+    color: var(--Courses-Base-Black);
+}
+.nav__dropdown svg{
+    margin-top: 2px;
+}
+.svgOpen{
+    transform: rotate(180deg);
+}
+.navbar__burger{
+    display: none;
+}
+@media screen and (max-width: 1140px) {
+    .nav__links .nav__dropdown{
+        display: none;
+    }
+    .navbar__burger{
+        display: block;
+    }
+}
+@media screen and (max-width: 992px) {
+}
+@media screen and (max-width: 768px) {
+}
+@media screen and (max-width: 576px) {
+    .nav__home{
+        gap:0;
+    }
+    .nav__header{
+        padding: 8px 16px;
+    }
+    .nav__us__social{
+        display: none;
+    }
+
+    .nav__dropdown{
+        display: none;
+    }
+}

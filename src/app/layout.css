@@ -1,0 +1,68 @@
+.page__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    gap: 32px;
+    padding: 0 80px 96px;
+}
+
+.page__container h1, .page__container p {
+    text-align: left;
+    width: 100%;
+}
+
+.page__container p {
+    color: var(--Courses-Gray-Gray-500);
+    font-weight: 500;
+}
+
+.page__container__search__dropdowns {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin-bottom: 16px;
+    max-width: Calc(100vw - 160px);
+    width: 100%;
+}
+
+.page__container__countries {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
+    max-width: 1440px;
+    gap: 20px;
+}
+
+@media screen and (max-width: 1240px) {
+    .page__container__search__dropdowns {
+        width: Calc(100vw - 160px);
+        padding: 0;
+    }
+    .page__container__search__dropdowns div{
+
+    }
+    .page__container__search__dropdowns > div {
+        flex: 1 1 0;
+        min-width: 100px;
+    }
+    .page__container__countries {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .page__container__countries {
+        grid-template-columns: 1fr 1fr;
+    }
+    .page__container__search__dropdowns {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        align-items: center;
+    }
+
+}

@@ -1,0 +1,50 @@
+.myTextArea {
+    display: flex;
+    align-items: center;
+    background: var(--surface-blue);
+    width: 100%;
+    padding: 10px 12px;
+    gap: 10px;
+    border: 1px solid #1E1E4D;
+    border-radius:4px;
+    text-align: left;
+}
+
+.myTextArea.active {
+    border: 1px solid #1E1E4D;
+    background: var(--surface-blue);
+    border-radius:4px;
+}
+
+.myTextArea.error {
+    border: 1px solid #fc4242;
+    background: rgba(255, 220, 220, 0.3);
+}
+
+.myTextArea textarea {
+    all: unset;
+    width: 100%;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-style: normal;
+    height: 100%;
+    font-weight: 400;
+    line-height: 150%;
+    min-height: 20px;
+}
+.myTextArea.error input {
+    color: #fc4242;
+}
+.myTextArea__errorText {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+    margin-top: 6px;
+    margin-left: 16px;
+    color: #fc4242;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+}

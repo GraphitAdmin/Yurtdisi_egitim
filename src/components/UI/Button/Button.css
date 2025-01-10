@@ -1,0 +1,77 @@
+.myBtn {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    cursor: pointer;
+    transition: 150ms;
+    gap: 8px;
+    border-radius: 8px;
+    padding: 12px 24px;
+    background: var(--courses-brand-blue-400-brand);
+}
+
+.myBtn .myBtn__label {
+    color: #FFF;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    white-space: nowrap;
+}
+
+.myBtn:hover {
+    transition: 150ms;
+    background: var(--Courses-Brand-Blue-500);
+}
+
+.myBtn:hover .myBtn__label{
+    color: #fff;
+}
+.myBtn:active{
+    transition: 150ms;
+    border-radius: 8px;
+    background: var(--Courses-Brand-Blue-600);
+}
+.myBtn:active .myBtn__label{
+    color: #FFFFFF;
+}
+.secondary{
+    border-radius: 8px;
+    border: 1px solid var(--Courses-Gray-Gray-300);
+    background: #FFF;
+}
+.secondary .myBtn__label{
+   color: var(--Courses-Base-Black);
+}
+.secondary:hover .myBtn__label{
+    color: var(--Courses-Base-Black);
+}
+.secondary:hover{
+    border-radius: 8px;
+    border: 1px solid var(--Courses-Gray-Gray-300);
+    background: var(--Courses-Gray-Gray-50);
+}
+.secondary:active{
+    border-radius: 8px;
+    border: 1px solid var(--Courses-Gray-Gray-300);
+    background: var(--Courses-Gray-Gray-200);
+}
+.secondary:active .myBtn__label{
+    color: var(--Courses-Base-Black);
+}
+.disabled {
+    border-radius: 8px;
+    background: var(--Courses-Gray-Gray-200);
+    color: var(--Courses-Gray-Gray-400);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.disabled:hover {
+    background: #d7dceb;
+}
+.button__href::after{
+    all: unset!important;
+}

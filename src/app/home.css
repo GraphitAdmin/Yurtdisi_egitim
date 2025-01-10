@@ -1,0 +1,102 @@
+.home__container {
+    position: relative;
+    display: flex;
+    height: auto;
+    padding: 0 0 96px 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 72px;
+    width: 100%;
+    align-self: stretch;
+    background: linear-gradient(97deg, #0D1654 -1.05%, #3043C4 100.82%);
+}
+
+.home__container__text {
+    max-width: 55vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.home__container__text h1 {
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 88px;
+}
+
+.home__container__search {
+    position: absolute;
+    bottom: -76px;
+    display: flex;
+    width: auto;
+    padding: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    border-radius: 16px;
+    background: #FFF;
+    box-shadow: 0 8px 24px 0 rgba(23, 32, 94, 0.08);
+
+}
+
+.home__container__search__dropdowns {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.gallery__block{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
+    gap: 20px;
+}
+.gallery__block img{
+    width: 100%;
+    height: 256px;
+    border-radius: 24px;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media screen and (max-width: 1140px) {
+    .home__container {
+        padding-bottom: 360px;
+    }
+
+    .home__container__search__dropdowns {
+        flex-direction: column;
+        min-width: 480px;
+
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .home__container__text {
+        max-width: Calc(100vw - 32px);
+    }
+
+    .home__container {
+        gap: 36px;
+    }
+
+    .home__container__text h1 {
+        font-size: 40px;
+        line-height: 48px;
+    }
+
+    .home__container__search {
+        max-width: Calc(100vw - 32px);
+        padding: 16px;
+    }
+    .home__container__search .dropdown,.home__container__search__dropdowns{
+        max-width: Calc(100vw - 64px);
+        /*min-width: unset;*/
+        min-width: Calc(100vw - 64px);
+    }
+    .home__container__search button{
+        width: auto;
+        max-width: max-content;
+    }
+}

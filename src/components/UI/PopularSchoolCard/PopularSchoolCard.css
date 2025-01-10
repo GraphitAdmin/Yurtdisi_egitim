@@ -1,0 +1,26 @@
+.popular__school__card{
+    display: flex;
+    width: 100%;
+    height: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    border: 1px solid var(--Courses-Gray-Gray-200, #E9EAEB);
+    background: #FFF;
+    position: relative;
+}
+.popular__school__card__button{
+    display: none;
+}
+.popular__school__card:hover .popular__school__card__button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 24px;
+    background: rgba(13, 22, 84, 0.25);
+}
