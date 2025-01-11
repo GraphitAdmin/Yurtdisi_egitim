@@ -1,4 +1,4 @@
-.articles__post {
+.events__post {
     display: flex;
     cursor: pointer;
     width: auto;
@@ -11,10 +11,10 @@
     border: 1px solid var(--Courses-Gray-Gray-200, #E9EAEB);
     background: var(--Courses-Gray-Gray-50, #FAFAFA);
 }
-.articles__post::after{
+.events__post::after{
     all: unset;
 }
-.articles__post p{
+.events__post p{
     max-height: 48px;
     overflow: hidden;
     color: var(--Courses-Gray-Gray-500);
@@ -23,7 +23,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
-.articles__post img{
+.events__post img{
     transition: scale 0.5s ease;
     height: 224px;
     border-radius: 16px;
@@ -31,10 +31,10 @@
     background: lightgray 50% / cover no-repeat;
     object-fit: cover;
 }
-.articles__post:hover img{
+.events__post:hover img{
     scale: 1.05;
 }
-.articles__post small{
+.events__post small{
     border-radius: 100px;
     border: 1px solid #C7D7FE;
     background: #EEF4FF;
@@ -45,6 +45,28 @@
     align-items: center;
     gap: 6px;
 }
-.articles__post:hover div svg path{
+.events__post:hover div svg path{
     fill:var(--courses-brand-blue-400-brand);
+}
+.events__buttons{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    gap:12px;
+    width:100%;
+    margin-top:16px;
+}
+@media screen and (max-width: 576px) {
+    .events__post img{
+        height: 176px;
+    }
+    .events__post{
+        max-width: Calc(100vw - 64px);
+    }
+    .events__buttons {
+        flex-direction: column;
+    }
+    .events__buttons button,.events__buttons button{
+        padding: 12px 0!important;
+    }
 }

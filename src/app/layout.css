@@ -37,18 +37,36 @@
     gap: 20px;
 }
 
+.rounded__buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    margin-right: auto;
+}
+
+.rounded__buttons div {
+    display: flex;
+    padding: 16px;
+    align-items: center;
+    border-radius: 100px;
+    border: 1px solid var(--Courses-Gray-Gray-200, #E9EAEB);
+}
+
 @media screen and (max-width: 1240px) {
     .page__container__search__dropdowns {
         width: Calc(100vw - 160px);
         padding: 0;
     }
-    .page__container__search__dropdowns div{
+
+    .page__container__search__dropdowns div {
 
     }
+
     .page__container__search__dropdowns > div {
         flex: 1 1 0;
         min-width: 100px;
     }
+
     .page__container__countries {
         grid-template-columns: 1fr 1fr 1fr;
     }
@@ -58,6 +76,7 @@
     .page__container__countries {
         grid-template-columns: 1fr 1fr;
     }
+
     .page__container__search__dropdowns {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -65,4 +84,10 @@
         align-items: center;
     }
 
+}
+
+@media screen and (max-width: 576px) {
+    .rounded__buttons {
+        gap: 16px;
+    }
 }

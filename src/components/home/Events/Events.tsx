@@ -9,7 +9,7 @@ const Events =()=>{
     const eventsRef = useRef(null);
     const [events, setEvents] = useState<IEvent[]>([])
     const scroll = (direction:string) => {
-        const scrollAmount = 413; // Adjust the scroll amount based on your layout
+        const scrollAmount = 413;
         if (eventsRef.current) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
@@ -88,9 +88,9 @@ const Events =()=>{
                 {events.map((event, index) => (
                     <Event key={index} {...event}/>
                 ))}
-                <span style={{minWidth: 48, height: "auto"}}/>
+                <span style={{height: "auto"}}/>
             </div>
-            <div className="events__buttons">
+            <div className="rounded__buttons">
                 <div onClick={() => scroll('left')} style={{cursor: 'pointer'}}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M10 18L4 12L10 6L11.4 7.45L7.85 11H20V13H7.85L11.4 16.55L10 18Z" fill="#717680"/>

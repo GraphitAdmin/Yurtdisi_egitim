@@ -16,9 +16,41 @@
     gap: 20px;
     max-width: 1440px;
 }
+.popular__schools .rounded__buttons{
+    display: none;
+}
 
 @media screen and (max-width: 992px) {
     .popular {
         padding: 64px 64px 0 64px;
+    }
+    .popular__schools{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .popular {
+        padding: 64px 16px 0 16px;
+    }
+    .popular__schools{
+        display: flex;
+        flex-direction: row;
+        overflow: auto;
+        gap: 16px;
+    }
+    .popular__schools::-webkit-scrollbar{
+        width: 0;
+        height: 0;
+    }
+    .popular__schools a{
+        width: Calc(100vw - 64px);
+        min-width: calc(100vw - 64px);
+    }
+    .popular button{
+        display: none;
+    }
+    .rounded__buttons{
+        display: flex;
     }
 }

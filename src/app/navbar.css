@@ -3,7 +3,7 @@ nav{
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 0;
     border-bottom: 1px solid var(--Courses-Gray-Gray-200);
     width: 100%;
     height: auto;
@@ -62,7 +62,7 @@ nav{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 80px 20px;
+    padding: 20px 80px;
     width: 100%;
     max-width: 1440px;
     align-items: center;
@@ -184,21 +184,37 @@ nav .nav__links .nav__dropdown sub,nav .nav__links a{
     }
 }
 @media screen and (max-width: 992px) {
+    .nav__links{
+        padding: 20px 64px;
+    }
+    .nav__header{
+        padding: 8px 64px;
+    }
 }
 @media screen and (max-width: 768px) {
+    .nav__links{
+        padding: 20px 32px;
+    }
+    .nav__header{
+        padding: 8px 32px;
+    }
+    .nav__header__item{
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .nav__header{
+        padding: 8px 16px;
+    }
+    .nav__links{
+        padding: 20px 16px;
+    }
 }
 @media screen and (max-width: 576px) {
     .nav__home{
         gap:0;
     }
-    .nav__header{
-        padding: 8px 16px;
-    }
     .nav__us__social{
-        display: none;
-    }
-
-    .nav__dropdown{
         display: none;
     }
 }

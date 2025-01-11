@@ -6,7 +6,7 @@ import {CardProps} from "@/interfaces/interfaces";
 
 const Card: React.FC<CardProps> = ({imgPost, time, title,link,date, description}) => {
     return (
-        <Link className="articles__post" href={link}>
+        <Link className="events__post" href={link}>
             <Image className="w-full" src={imgPost} alt="Post"/>
             <div style={{display: 'flex', flexDirection: 'row', gap: 8, width: '100%',marginTop:12,alignItems:"center"}}>
                 <p style={{color:'var(--courses-brand-blue-400-brand)'}}>{date}</p>

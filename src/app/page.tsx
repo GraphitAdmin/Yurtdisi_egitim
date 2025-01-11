@@ -15,6 +15,7 @@ import Companies from "@/components/home/Companies/Companies";
 import AbroadCard from "@/components/home/AbroadPrograms/AbroadCard";
 import ImageProgram from "@/assets/home/program.jpg";
 import Image from "next/image"
+import Button from "@/components/UI/Button/Button";
 export default function Home() {
     const references=[
         {imgPost:ImageCard,
@@ -60,11 +61,17 @@ export default function Home() {
             <Popular/>
             <Events/>
             <ReviewBlock/>
-            <div className="abroad__programs">
-                <h2>
-                    Our Gallery
-                </h2>
+            <div className="abroad__programs" style={{paddingBottom:'0!important'}}>
+                <div>
+                    <h2>
+                        Gallery
+                    </h2>
+                    <p style={{marginTop: 16,color: 'var(--Courses-Gray-Gray-500)'}}>
+                        From our University, High School and Language Schools
+                    </p>
+                </div>
                 <div className="gallery__block">
+                    <div className="gallery__block__background"/>
                     <Image src={ImageCard} alt=""/>
                     <Image src={ImageCard} alt=""/>
                     <Image src={ImageCard} alt=""/>
@@ -74,6 +81,7 @@ export default function Home() {
                     <Image src={ImageCard} alt=""/>
                     <Image src={ImageCard} alt=""/>
                 </div>
+                <Button label={'Load more'}/>
             </div>
             <div className="abroad__programs">
                 <h2>

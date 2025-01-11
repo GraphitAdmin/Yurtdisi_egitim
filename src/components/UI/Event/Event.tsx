@@ -1,12 +1,11 @@
 import Image from "next/image";
 import React from "react";
 import './Event.css';
-import Link from "next/link";
 import Button from "@/components/UI/Button/Button";
 import {IEvent} from "@/interfaces/interfaces";
 const Event: React.FC<IEvent> = ({imgPost,type, date, time, title, location,link, description}) => {
     return (
-        <Link className="articles__post" href={link}>
+        <div className="events__post">
             <Image className="w-full" src={imgPost} alt="Post"/>
             <small style={{marginTop:12}}>{type}</small>
             <h5 style={{textAlign: 'left',marginTop:8}}>{title}</h5>
@@ -26,12 +25,12 @@ const Event: React.FC<IEvent> = ({imgPost,type, date, time, title, location,link
                     marginLeft:"auto"
                 }}>{location}</p>
             </div>
-            <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',gap:12,width:'100%',marginTop:16}}>
-                <Button label='School details' btnStyle={{width:'100%'}}/>
+            <div className="events__buttons">
+                <Button label='School details' href={link} btnStyle={{width:'100%'}}/>
                 <Button label='Book a meeting' btnStyle={{width:'100%'}} secondary={true}/>
             </div>
 
-        </Link>
+        </div>
     )
 }
 export default Event

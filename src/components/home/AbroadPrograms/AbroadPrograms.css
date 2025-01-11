@@ -63,9 +63,17 @@
     .abroad__programs {
         padding: 64px 32px;
     }
+    .abroad__card{
+        min-height: 180px;
+        padding: 16px;
+    }
 }
 @media screen and (max-width: 576px) {
     .abroad__programs {
         padding: 64px 16px;
+        gap: 48px;
+    }
+    .abroad__card{
+        min-height: 136px;
     }
 }

@@ -14,7 +14,7 @@ const FAQSection = () => {
                     Lorem ipsum dolor sit amet consectetur. Felis sollicitudin ac at sapien.
                 </p>
             </div>
-            <div style={{width:'100%',maxWidth:1440}}>
+            <div style={{width:'100%',maxWidth:1062}}>
                 <FAQBlock header="Lorem ipsum dolor sit amet consectetur?"
                           description="AI holds transformative potential, and with it comes responsibility. Graphit helps clients design, deploy, and manage AI in a way that builds trust, mitigates risks, and maximizes value—ensuring AI serves as a force for good."/>
                 <FAQBlock header="Lorem ipsum dolor sit amet consectetur?"

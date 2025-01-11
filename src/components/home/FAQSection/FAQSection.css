@@ -11,3 +11,19 @@
         padding: 64px;
     }
 }
+@media screen and (max-width: 768px) {
+    .faqSection {
+        padding: 64px 32px;
+    }
+}
+@media screen and (max-width: 576px) {
+    .faqSection {
+        padding: 64px 16px;
+    }
+    .faq__block__header{
+        gap: 24px;
+    }
+    .faq__block__header h4{
+        text-align: left;
+    }
+}

@@ -11,11 +11,11 @@ const FAQBlock: React.FC<TechnicalWhatBlockProps> = ({header,description}) => {
       <div className="faq__block">
           <div className="faq__block__header" onClick={()=>setIsOpen(!isOpen)} >
               <h4>{header}</h4>
-              {!isOpen&&<svg style={{cursor:"pointer"}} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              {!isOpen&&<svg style={{cursor:"pointer",minHeight:24,minWidth:24}} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z" fill="#717680"/>
               </svg>}
               {isOpen &&
-                  <svg onClick={()=>setIsOpen(false)} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <svg onClick={()=>setIsOpen(false)} style={{cursor:"pointer",minHeight:24,minWidth:24}} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                       <g clipPath="url(#clip0_1242_14090)">
                           <mask id="mask0_1242_14090" maskUnits="userSpaceOnUse" x="0" y="0"
                                 width="24" height="24">

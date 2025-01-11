@@ -1,6 +1,5 @@
 'use client'
 import Navbar from "@/components/UI/Navbar/Navbar";
-import '../layout.css'
 import Tabs from "@/components/UI/Tabs/Tabs";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import Button from "@/components/UI/Button/Button";

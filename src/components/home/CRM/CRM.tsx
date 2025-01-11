@@ -25,7 +25,9 @@ const CRM = () => {
         if (crmRef.current) {
             const newIndex = direction === 'right' ? index + 1 : index - 1;
             const normalizedIndex = (newIndex + 4) % 4;
-            const transformValue = `translateX(-${normalizedIndex * 100}vw)`;
+            const scrollLength=window.innerWidth<1460?window.innerWidth:1460;
+            console.log(scrollLength)
+            const transformValue = `translateX(-${normalizedIndex*scrollLength}px)`;
             crmRef.current.style.transition = 'transform 1s ease';
             crmRef.current.style.transform = transformValue;
             setIndex(normalizedIndex);
@@ -33,24 +35,11 @@ const CRM = () => {
     };
 
     const changeIndex = (direction: 'left' | 'right') => {
-        if (!isMobile) {
             clearExistingTimeout();
             setIndex((prevIndex) => {
                 return direction === 'right' ? (prevIndex + 1) % 4 : (prevIndex + 4 - 1) % 4;
             });
             handleSlide(direction);
-        } else {
-            const newIndex = direction === 'right' ? index + 1 : index - 1;
-            setIndex((prevIndex) => {
-                return direction === 'right' ? (prevIndex + 1) % 4 : (prevIndex + 4 - 1) % 4;
-            });
-            const normalizedIndex = (newIndex + 4) % 4;
-            const scrollValue = normalizedIndex * window.innerWidth;
-            console.log(scrollValue)
-            if (crmRef.current) {
-                crmRef.current.scrollLeft = scrollValue;
-            }
-        }
     };
 
     useEffect(() => {

@@ -29,3 +29,7 @@ export interface CardCountryProps {
     population:string;
     language:string;
 }
+export interface IPopularSchool {
+    imgPost:StaticImageData;
+    link:string;
+}

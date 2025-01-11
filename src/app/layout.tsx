@@ -3,9 +3,9 @@ import {Urbanist} from "next/font/google";
 import "./globals.css";
 import "./navbar.css";
 import "./footer.css";
+import "./layout.css"
 import React from "react";
 import Footer from "@/components/UI/Footer/Footer";
-import Subscribe from "@/components/UI/FAQ/Subscribe";
 
 const urbanist = Urbanist({
     weight: ['200','300','400', '500', '600', '700', '800'],
@@ -29,7 +29,6 @@ export default function RootLayout({
         <body>
         <div>
             {children}
-            <Subscribe/>
             <Footer/>
         </div>
         </body>

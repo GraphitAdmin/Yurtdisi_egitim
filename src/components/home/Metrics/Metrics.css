@@ -5,6 +5,8 @@
     flex-direction: row;
     gap: 8px;
     justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 .metrics__body{
     display: flex;
@@ -17,8 +19,8 @@
     align-self: stretch;
     border-radius: 16px;
     background: var(--Courses-Brand-Blue-50);
-    max-width: 1440px;
     width: 100%;
+    max-width: 1440px;
 }
 .metrics__body div{
     width: 33%;
