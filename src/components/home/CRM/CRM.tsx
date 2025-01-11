@@ -5,14 +5,12 @@ import Careers from "@/assets/home/Careers.webp";
 import Button from "@/components/UI/Button/Button";
 import './CRM.css';
 import {useEffect, useRef, useState} from "react";
-import useMobile from "@/hooks/useMobile";
 
 
 const CRM = () => {
     const [index, setIndex] = useState(0);
     const [visible, setVisible] = useState(false);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const isMobile = useMobile(768);
     const crmRef = useRef<HTMLDivElement | null>(null);
 
     const clearExistingTimeout = () => {
