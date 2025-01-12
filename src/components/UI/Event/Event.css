@@ -67,7 +67,7 @@
     .events__buttons {
         flex-direction: column;
     }
-    .events__buttons button,.events__buttons button{
+    .events__buttons button,.events__buttons a{
         padding: 12px 0!important;
     }
 }
