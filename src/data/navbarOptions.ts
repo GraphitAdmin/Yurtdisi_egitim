@@ -1,4 +1,4 @@
-import {allCountries, Australian, Canada, Germany, Irish, Malta, UK, US} from "@/app/countries";
+import {allCountries, Australian, Canada, Germany, Irish, Malta, UK, US} from "@/data/countries";
 
 export const navbarOptions = [
     {
