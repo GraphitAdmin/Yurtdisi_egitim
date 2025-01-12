@@ -82,7 +82,7 @@
         padding: 64px 16px;
         gap: 48px;
     }
-    .abroad__card{
-        min-height: 136px;
-    }
+    /*.abroad__card{*/
+    /*    min-height: 136px;*/
+    /*}*/
 }
