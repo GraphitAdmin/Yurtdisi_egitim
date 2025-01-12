@@ -82,12 +82,44 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
         align-items: center;
+        width: Calc(100vw - 128px);
+        max-width: Calc(100vw - 128px);
     }
 
+    .page__container__search__dropdowns a,.page__container__search__dropdowns a button{
+        max-width: 100% !important;
+        width: 100%!important;
+        padding: 12px 0!important;
+    }
+    .page__container{
+        padding: 0 64px;
+    }
 }
-
+@media screen and (max-width: 768px) {
+    .rounded__buttons {
+        gap: 16px;
+    }
+    .page__container{
+        padding: 0 32px 64px;
+    }
+    .page__container__search__dropdowns{
+        width: Calc(100vw - 64px);
+        max-width: Calc(100vw - 64px);
+    }
+}
 @media screen and (max-width: 576px) {
     .rounded__buttons {
         gap: 16px;
+    }
+    .page__container__search__dropdowns {
+        grid-template-columns: repeat(1, 1fr);
+        width: Calc(100vw - 32px);
+        max-width: Calc(100vw - 32px);
+    }
+    .page__container__countries{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .page__container{
+        padding: 0 16px 64px;
     }
 }

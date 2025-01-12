@@ -1,15 +1,12 @@
-'use client'
 import Navbar from "@/components/UI/Navbar/Navbar";
 import Tabs from "@/components/UI/Tabs/Tabs";
-import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import Button from "@/components/UI/Button/Button";
 import CardCountry from "@/components/UI/CardCountry/CardCountry";
+import PageSearch from "@/components/UI/PageSearch/PageSearch";
 import USA from "@/assets/countries/USA.png"
 import React from "react";
 export default function Home() {
-    const dosmth=(value:string[])=>{
-        console.log(value);
-    }
+
     return (
         <div>
             <Navbar home={false}/>
@@ -24,25 +21,7 @@ export default function Home() {
                     </span>
                     </p>
                 </div>
-                <div className="page__container__search__dropdowns">
-                    <Dropdown label='Education type'
-                              selected={['Education type']}
-                              setSelected={dosmth}
-                              variants={[]}/>
-                    <Dropdown label='Education type'
-                              selected={['Education type']}
-                              setSelected={dosmth}
-                              variants={[]}/>
-                    <Dropdown label='Education type'
-                              selected={['Education type']}
-                              setSelected={dosmth}
-                              variants={[]}/>
-                    <Dropdown label='Education type'
-                              selected={['Education type']}
-                              setSelected={dosmth}
-                              variants={[]}/>
-                    <Button label='Search' btnStyle={{width:100,maxWidth:50}}/>
-                </div>
+               <PageSearch/>
                 <div className="page__container__countries">
                     {
                         Array.from({length: 10}, (_, index) =>

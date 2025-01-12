@@ -25,3 +25,9 @@
 .card__country p span{
     color: var(--Courses-Gray-Gray-500, #717680);
 }
+@media screen and (max-width: 768px) {
+    .card__country img {
+        height: 176px;
+        max-height: 176px;
+    }
+}

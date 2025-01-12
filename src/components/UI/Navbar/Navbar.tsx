@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, {JSX, useEffect, useState} from "react";
 import Logo from "@/components/UI/Logo/Logo";
-import {allCountries, Australian, Canada, Germany, Irish, Malta, UK, US} from "@/app/countries";
+import {navbarOptions} from "@/data/navbarOptions";
 
 interface NavbarProps {
     home: boolean;
@@ -34,14 +34,12 @@ interface NavbarDropdownItemProps {
 const DropdownItem: React.FC<NavbarDropdownItemProps> = ({name, svg, link}) => {
     return (
         <>
-            <div className="nav__dropdown__block__item">
+            <Link className="nav__dropdown__block__item" href={link}>
                 {svg}
-                <Link href={link}>
                     <small>
                         {name}
                     </small>
-                </Link>
-            </div>
+            </Link>
         </>
     )
 }
@@ -55,58 +53,6 @@ const Navbar: React.FC<NavbarProps> = ({home}) => {
             document.body.style.overflow = 'auto';
         }
     }, [navbarOpen]);
-
-    const navbarOptions = [
-        {
-            name: 'Language schools',
-            options: [
-                UK,
-                US,
-                Canada,
-                Malta,
-                Irish,
-                Australian,
-                Germany,
-                allCountries
-            ]
-        },
-        {
-            name: 'Summer schools',
-            options: [
-                UK,
-                allCountries
-            ]
-        },
-        {
-            name: 'High schools',
-            options: [
-                UK,
-                allCountries
-            ]
-        },
-        {
-            name: 'University',
-            options: [
-                UK,
-                allCountries
-            ]
-        },
-        {
-            name: 'Design',
-            options: [
-                UK,
-                allCountries
-            ]
-        },
-        {
-            name: 'Certificate',
-            options: [
-                UK,
-                allCountries
-            ]
-        }
-
-    ]
     return (
         <>
             <nav className={home ? "nav__home" : ""} style={navbarOpen ? {border: 'none'} : {}}>

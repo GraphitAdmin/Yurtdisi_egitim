@@ -1,15 +1,16 @@
-.tabs{
+.tabs {
     display: flex;
-    padding: 24px 80px 32px 80px;
+    padding: 24px 80px 32px;
     flex-direction: row;
     align-items: flex-start;
     gap: 4px;
     align-self: stretch;
-    height: 28px;
+    min-height: 84px;
     max-width: 1440px;
     margin: 0 auto;
 }
-.home__tab{
+
+.home__tab {
     align-items: center;
     justify-content: center;
     border-radius: 6px;
@@ -19,22 +20,27 @@
     gap: 8px;
     cursor: pointer;
 }
-.home__tab:hover{
+
+.home__tab:hover {
     border-radius: 6px;
     background: var(--Courses-Brand-Blue-25, #EFF8FF);
 }
-.home__tab:hover svg path{
+
+.home__tab:hover svg path {
     fill: var(--Courses-Brand-Blue-500);
 }
+
 .home__tab:active {
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.00);
     box-shadow: 0 0 0 2px #FFF, 0 0 0 4px #1570EF;
 }
-.home__tab:active svg path{
+
+.home__tab:active svg path {
     fill: var(--Courses-Gray-Gray-500);
 }
-.tab__item{
+
+.tab__item {
     height: 28px;
     display: flex;
     flex-direction: row;
@@ -42,7 +48,8 @@
     justify-content: flex-start;
     gap: 4px;
 }
-.tab__item small{
+
+.tab__item small {
     color: var(--Courses-Gray-Gray-600);
     font-size: 14px;
     font-weight: 600;
@@ -54,19 +61,40 @@
     gap: 8px;
     cursor: pointer;
 }
-.tab__item:last-child small,.tab__item small:hover{
+
+.tab__item:last-child small, .tab__item small:hover {
     color: var(--Courses-Brand-Blue-500);
     background: var(--Courses-Brand-Blue-25);
 }
-.tab__item small:active{
+
+.tab__item small:active {
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.00);
     box-shadow: 0 0 0 2px #FFF, 0 0 0 4px #1570EF;
     color: var(--Courses-Gray-Gray-600);
 }
-.tab__item:last-child small:active{
+
+.tab__item:last-child small:active {
     border-radius: 6px;
     background: var(--Courses-Brand-Blue-25);
     box-shadow: 0 0 0 2px #FFF, 0 0 0 4px #1570EF;
     color: var(--Courses-Brand-Blue-500);
+}
+
+@media screen and (max-width: 992px) {
+    .tabs {
+        padding: 24px 64px 32px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .tabs {
+        padding: 24px 32px 32px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .tabs {
+        padding: 24px 16px 32px;
+    }
 }

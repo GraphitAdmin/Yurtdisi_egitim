@@ -120,10 +120,8 @@ nav{
 .nav__dropdown__block__item:hover{
     background: var(--Courses-Gray-Gray-200);
 }
-.nav__dropdown__block__item a{
-    line-height: 20px;
-}
-.nav__dropdown__block__item a small{
+
+.nav__dropdown__block__item small{
     color: var(--Courses-Base-Black, #1A1A1A);
     font-size: 14px;
     font-style: normal;
@@ -148,7 +146,7 @@ nav{
     border-bottom-left-radius: 16px;
     padding-bottom: 4px;
 }
-.nav__dropdown__block__item:last-child a small {
+.nav__dropdown__block__item:last-child small {
     border-bottom: none;
 }
 nav .nav__links a{
@@ -200,7 +198,7 @@ nav .nav__links .nav__dropdown sub,nav .nav__links a{
     border-radius: 0!important;
     padding: 0!important;
 }
-.nav__dropdown__block__mobile .nav__dropdown__block__item a small{
+.nav__dropdown__block__mobile .nav__dropdown__block__item small{
     border: none!important;
     padding: 0!important;
     margin-top:0!important;
