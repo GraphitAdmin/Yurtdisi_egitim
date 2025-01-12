@@ -76,7 +76,8 @@ const Footer = () => {
                 <span style={{
                     height: 2,
                     background: 'var(--Courses-Gray-Gray-200)',
-                    width: '100%'
+                    width: '100%',
+                    maxWidth: 1440
                 }}/>
                 <div className="footer__bottom">
                     <p>Copyright 2022</p>

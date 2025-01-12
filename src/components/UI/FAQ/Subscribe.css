@@ -5,7 +5,7 @@
     justify-content: center;
     gap: 8px;
     background: linear-gradient(97deg, #0D1654 -1.05%, #3043C4 100.82%);
-    max-width: 1440px;
+    /*max-width: 1440px;*/
     margin-right: auto;
     margin-left: auto;
 }

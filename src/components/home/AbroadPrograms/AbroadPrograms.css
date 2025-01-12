@@ -33,8 +33,12 @@
     gap: 24px;
     box-sizing: border-box;
     cursor: pointer;
+    opacity: 0.95;
+    transition: opacity 0.2s ease-in-out;
 }
-
+.abroad__card:hover{
+    opacity: 1;
+}
 .big__card {
     flex: 1 1 calc(66.66% - 10px);
     /*width: 66%;*/
@@ -43,7 +47,12 @@
 .small__card {
     flex: 1 1 calc(33.33% - 10px);
 }
-
+.abroad__card h3{
+    /*transition: te;*/
+}
+.abroad__card:hover h3{
+    text-decoration: underline;
+}
 @media screen and (max-width: 992px) {
     .abroad__programs{
         padding: 64px;
