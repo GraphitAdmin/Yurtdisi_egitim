@@ -1,3 +1,4 @@
+'use client'
 import './home.css'
 import Navbar from "@/components/UI/Navbar/Navbar";
 import AbroadPrograms from "@/components/home/AbroadPrograms/AbroadPrograms";
@@ -16,6 +17,7 @@ import AbroadCard from "@/components/home/AbroadPrograms/AbroadCard";
 import ImageProgram from "@/assets/home/program.jpg";
 import Image from "next/image"
 import Button from "@/components/UI/Button/Button";
+import {useState} from "react";
 export default function Home() {
     const references=[
         {imgPost:ImageCard,
@@ -40,6 +42,7 @@ export default function Home() {
             link:"",
         }
     ]
+    const [showAll,setShowAll] = useState(false)
     return (
         <div>
             <div className="home__container">
@@ -70,8 +73,12 @@ export default function Home() {
                         From our University, High School and Language Schools
                     </p>
                 </div>
-                <div className="gallery__block">
-                    <div className="gallery__block__background"/>
+                <div className={showAll?"gallery__block show__all":"gallery__block"}>
+                    <div className={showAll?"gallery__block__background__none":"gallery__block__background"}/>
+                    <Image src={ImageCard} alt=""/>
+                    <Image src={ImageCard} alt=""/>
+                    <Image src={ImageCard} alt=""/>
+                    <Image src={ImageCard} alt=""/>
                     <Image src={ImageCard} alt=""/>
                     <Image src={ImageCard} alt=""/>
                     <Image src={ImageCard} alt=""/>
@@ -81,7 +88,7 @@ export default function Home() {
                     <Image src={ImageCard} alt=""/>
                     <Image src={ImageCard} alt=""/>
                 </div>
-                <Button label={'Load more'}/>
+                <Button label={showAll?'Collapse':'Load more'} onClick={()=>setShowAll(!showAll)}/>
             </div>
             <div className="abroad__programs">
                 <h2>

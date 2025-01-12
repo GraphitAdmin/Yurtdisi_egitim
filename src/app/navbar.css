@@ -175,6 +175,35 @@ nav .nav__links .nav__dropdown sub,nav .nav__links a{
 .navbar__burger{
     display: none;
 }
+.nav__dropdown__mobile{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 340px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.nav__dropdown__mobile h4,.nav__dropdown__mobile small{
+    color: var(--Courses-Base-Black, #1A1A1A);
+}
+.nav__dropdown__block__mobile{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.nav__dropdown__block__mobile .nav__dropdown__block__item{
+    background: #fff!important;
+    border-radius: 0!important;
+    padding: 0!important;
+}
+.nav__dropdown__block__mobile .nav__dropdown__block__item a small{
+    border: none!important;
+    padding: 0!important;
+    margin-top:0!important;
+    font-size: 16px!important;
+    line-height: 24px!important;
+}
 @media screen and (max-width: 1140px) {
     .nav__links .nav__dropdown{
         display: none;
@@ -216,5 +245,8 @@ nav .nav__links .nav__dropdown sub,nav .nav__links a{
     }
     .nav__us__social{
         display: none;
+    }
+    .nav__dropdown__mobile{
+        max-width: Calc(100vw - 32px);
     }
 }

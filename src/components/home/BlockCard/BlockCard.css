@@ -71,6 +71,9 @@
     .block__card .rounded__buttons{
         padding-left: 32px;
     }
+    .block__card__cards span{
+        min-width: 12px;
+    }
 }
 @media screen and (max-width: 576px) {
     .block__card__header{
@@ -78,5 +81,8 @@
     }
     .block__card .rounded__buttons{
         padding-left: 16px;
+    }
+    .block__card__cards span{
+        min-width: 1px;
     }
 }
