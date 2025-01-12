@@ -58,6 +58,9 @@ nav{
     flex-direction: row;
     gap: 16px;
 }
+.nav__us__social svg{
+    cursor: pointer;
+}
 .nav__links{
     display: flex;
     flex-direction: row;
