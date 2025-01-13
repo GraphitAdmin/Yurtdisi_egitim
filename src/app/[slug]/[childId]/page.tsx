@@ -11,8 +11,13 @@ import Image from "next/image";
 import CardCity from "@/components/UI/CardCity/CardCity";
 import Subscribe from "@/components/UI/FAQ/Subscribe";
 import Footer from "@/components/UI/Footer/Footer";
-export default async function Home({ params }: { params: { slug: string, childId: string } }) {
-    const {slug,childId}=await params
+type paramsType = Promise<{ slug: string, childId: string }>;
+export default async function Home({
+                                       params,
+                                   }: {
+    params: paramsType;
+}) {
+    const {slug,childId} = await params
     console.log(slug)
     console.log(childId)
     return (

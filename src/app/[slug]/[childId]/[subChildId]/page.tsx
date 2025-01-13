@@ -1,3 +1,4 @@
+"use client";
 import Navbar from "@/components/UI/Navbar/Navbar";
 import Tabs from "@/components/UI/Tabs/Tabs";
 import Button from "@/components/UI/Button/Button";
@@ -12,8 +13,13 @@ import Link from "next/link";
 import Abroads from "@/components/UI/Abroads/Abroads";
 import Subscribe from "@/components/UI/FAQ/Subscribe";
 import Footer from "@/components/UI/Footer/Footer";
-export default async function Home({ params }: { params: { slug: string, childId: string,subChildId: string } }) {
-    const {slug,childId,subChildId}=await params
+type paramsType = Promise<{ slug: string, childId: string,subChildId:string }>;
+export default async function Home({
+                                       params,
+                                   }: {
+    params: paramsType;
+}) {
+    const {slug,childId,subChildId} = await params
     console.log(slug)
     console.log(childId)
     console.log(subChildId)
@@ -84,3 +90,4 @@ export default async function Home({ params }: { params: { slug: string, childId
         </div>
     );
 }
+

@@ -15,9 +15,14 @@ const slugsArray=[
     'foundation-programs',
     'certificates'
 ]
-export default async function Home({ params }: { params: { slug: string } }) {
-    const { slug } = await params
-    console.log('countries',slug)
+type paramsType = Promise<{ slug: string }>;
+export default async function Home({
+                                       params,
+                                   }: {
+    params: paramsType;
+}) {
+    const {slug} = await params
+    console.log(slug)
     return (
         <div>
             <Navbar home={false}/>
