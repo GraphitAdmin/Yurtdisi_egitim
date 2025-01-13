@@ -28,7 +28,7 @@ const PageSearch = () => {
                       selected={selectedProgram}
                       setSelected={setSelectedProgram}
                       variants={searchPrograms}/>
-            <Button href={selectedCity} label='Search' btnStyle={{width: 100, maxWidth: 50}}/>
+            <Button href={'/'+selectedCity} label='Search' btnStyle={{width: 100, maxWidth: 50}}/>
         </div>
     )
 }

@@ -28,23 +28,23 @@
     gap: 0;
     border-radius: 8px;
     padding: 4px 6px;
-    background: #12122E;
     width: 100%;
     z-index: 9;
     border: 1px solid var(--Courses-Gray-Gray-200, #E9EAEB);
-    background: var(--Courses-Base-White, #FFF);
+    background: #FFF;
 }
 
 .dropdown__select__item{
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     gap: 8px;
     height: 40px;
     padding: 8px;
     border-radius: 8px;
+    min-width: 100%;
 }
 
 .dropdown__select div small {
