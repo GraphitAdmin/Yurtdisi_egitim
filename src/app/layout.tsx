@@ -5,7 +5,6 @@ import "./navbar.css";
 import "./footer.css";
 import "./layout.css"
 import React from "react";
-import Footer from "@/components/UI/Footer/Footer";
 
 const urbanist = Urbanist({
     weight: ['200','300','400', '500', '600', '700', '800'],
