@@ -34,10 +34,10 @@ const References = () => {
                     Our References
                 </h2>
                 <div className="abroad__programs__cards">
-                    <AbroadCard big={true} header='Foreign Language Schools' imgCard={ImageProgram}/>
-                    <AbroadCard big={false} header='High School Abroad' imgCard={ImageProgram}/>
-                    <AbroadCard big={false} header='Summer School Abroad' imgCard={ImageProgram}/>
-                    <AbroadCard big={true} header='University Abroad' imgCard={ImageProgram}/>
+                    <AbroadCard link='/references' big={true} header='References from Overseas Educational Institutions' imgCard={ImageProgram}/>
+                    <AbroadCard link='/references' big={false} header='Summer schools abroad with Bilfen' imgCard={ImageProgram}/>
+                    <AbroadCard link='/references' big={false} header='International projects with Bilfen' imgCard={ImageProgram}/>
+                    <AbroadCard link='/references' big={true} header='Our student’s references' imgCard={ImageProgram}/>
                 </div>
             </div>
             <BlockCard

@@ -1,17 +1,20 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import './Tabs.css'
+import Link from "next/link";
 
 const Tabs: React.FC = () => {
     const [tabsArray, setTabsArray] = useState<string[]>([]);
+    const [tabsPathArray, setTabsPathArray] = useState<string[]>([]);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
             const tabs = window.location.pathname.split('/').slice(1);
             const formattedTabs = tabs.map((tab) =>
-                tab.replace(/-/g, ' ') // Замінюємо дефіси на пробіли
-                    .replace(/^\w/, (char) => char.toUpperCase()) // Зробимо першу літеру великою
+                tab.replace(/-/g, ' ')
+                    .replace(/^\w/, (char) => char.toUpperCase())
             );
+            setTabsPathArray(tabs)
             setTabsArray(formattedTabs);
         }
     }, []);
@@ -33,7 +36,9 @@ const Tabs: React.FC = () => {
                             <path d="M8.40016 8L5.3335 4.93333L6.26683 4L10.2668 8L6.26683 12L5.3335 11.0667L8.40016 8Z"
                                   fill="#535862"/>
                         </svg>
-                        <small>{tabItem}</small>
+                        <Link href={'/' + tabsPathArray.slice(0, index + 1).join('/')}>
+                            <small>{tabItem}</small>
+                        </Link>
                     </div>
                 );
             })}

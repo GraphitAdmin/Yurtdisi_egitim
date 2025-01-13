@@ -92,7 +92,7 @@
         padding: 12px 0!important;
     }
     .page__container{
-        padding: 0 64px;
+        padding: 0 64px 64px;
     }
 }
 @media screen and (max-width: 768px) {
@@ -121,5 +121,10 @@
     }
     .page__container{
         padding: 0 16px 64px;
+    }
+    .page__container button{
+        max-width: 100%;
+        width: 100%;
+        padding: 12px 0!important;
     }
 }

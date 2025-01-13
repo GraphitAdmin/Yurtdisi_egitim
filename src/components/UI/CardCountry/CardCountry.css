@@ -15,6 +15,10 @@
     border-radius: 16px;
     border: 1px solid var(--Courses-Gray-Gray-200);
 }
+.card__school img{
+    height: 224px;
+    max-height: 224px;
+}
 .card__country h4{
     margin-top: 8px;
     color: var(--Courses-Brand-Blue-800);

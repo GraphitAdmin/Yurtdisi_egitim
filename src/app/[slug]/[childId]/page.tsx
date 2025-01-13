@@ -1,22 +1,27 @@
 import Navbar from "@/components/UI/Navbar/Navbar";
 import Tabs from "@/components/UI/Tabs/Tabs";
 import Button from "@/components/UI/Button/Button";
-import CardCountry from "@/components/UI/CardCountry/CardCountry";
 import PageSearch from "@/components/UI/PageSearch/PageSearch";
-import USA from "@/assets/countries/USA.png"
+import London from "@/assets/cities/London.png"
+import UK from "@/assets/countries/UK.png"
 import React from "react";
-import './schools.css'
+import '../../schools.css'
 import Link from "next/link";
 import Image from "next/image";
-export default function Home() {
-
+import CardCity from "@/components/UI/CardCity/CardCity";
+import Subscribe from "@/components/UI/FAQ/Subscribe";
+import Footer from "@/components/UI/Footer/Footer";
+export default async function Home({ params }: { params: { slug: string, childId: string } }) {
+    const {slug,childId}=await params
+    console.log(slug)
+    console.log(childId)
     return (
         <div>
             <Navbar home={false}/>
             <Tabs/>
             <div className="page__container">
                 <div style={{width: '100%'}}>
-                    <h1>Foreign language schools</h1>
+                    <h1>{childId.replace(/-/g, ' ').replace(/^\w/, (char) => char.toUpperCase())}</h1>
                     <p>
                         You can find everything you want to know before you start researching&nbsp;
                         <span style={{fontWeight: 600}}>
@@ -29,18 +34,17 @@ export default function Home() {
                     <div className="page__country__schools__schools">
                         {
                             Array.from({length: 9}, (_, index) =>
-                                <CardCountry key={index}
-                                             title='United Kingdom'
-                                             capital='London'
-                                             imgPost={USA}
-                                             language='English'
-                                             link='/usa' population='54 million (approx.)'/>
+                                <CardCity key={index}
+                                             title='London'
+                                             imgPost={London}
+                                             description={'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.'}
+                                             link='/usa'  buttonDetails={false}/>
                             )
                         }
                     </div>
                     <div className="page__country__schools__country">
                         <div className="page__country__schools__country__info">
-                            <Image src={USA} alt='usa'/>
+                            <Image src={UK} alt='UK'/>
                             <p style={{
                                 fontWeight: 400,
                                 color: 'var(--Courses-Gray-Gray-500)',
@@ -143,7 +147,7 @@ export default function Home() {
                             <Link href={'/smth'}><p>
                                 UK language schools</p>
                             </Link>
-                            <div style={{display: 'flex', flexDirection: 'row', gap: 8}}>
+                            <div style={{display: 'flex', flexDirection: 'row', gap: 4,cursor:"pointer"}}>
                                 <p style={{
                                     fontWeight: 600,
                                     color: 'var(--courses-brand-blue-400-brand, #2E90FA)'
@@ -156,8 +160,10 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <Button btnStyle={{marginRight:'Calc(25% + 10px)'}} label={'Show all countries'}/>
+                <Button btnStyle={{marginRight:'Calc(25% + 10px)'}} label={'Show all cities'}/>
             </div>
+            <Subscribe/>
+            <Footer/>
         </div>
     );
 }

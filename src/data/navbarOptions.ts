@@ -36,7 +36,7 @@ export const navbarOptions = [
         ]
     },
     {
-        name: 'Design',
+        name: 'Foundation programs',
         options: [
             UK,
             allCountries

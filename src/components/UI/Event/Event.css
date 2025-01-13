@@ -12,6 +12,9 @@
     background: var(--Courses-Gray-Gray-50, #FAFAFA);
     min-width: min-content;
 }
+.abroad__post{
+    min-width: 413px;
+}
 .events__post::after{
     all: unset;
 }
@@ -49,6 +52,9 @@
 .events__post:hover div svg path{
     fill:var(--courses-brand-blue-400-brand);
 }
+.abroad__post:hover div svg path{
+    fill:var(--courses-brand-blue-400-brand) !important;
+}
 .events__buttons{
     display:flex;
     flex-direction:row;
@@ -61,11 +67,12 @@
     /*padding: 12px!important;*/
     max-width: fit-content;
 }
+
 @media screen and (max-width: 576px) {
     .events__post img{
         height: 176px;
     }
-    .events__post{
+    .events__post,.abroad__post{
         max-width: Calc(100vw - 64px);
         min-width: Calc(100vw - 64px);
     }
