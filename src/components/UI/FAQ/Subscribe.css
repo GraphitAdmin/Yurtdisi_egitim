@@ -5,7 +5,7 @@
     justify-content: center;
     gap: 8px;
     background: linear-gradient(97deg, #0D1654 -1.05%, #3043C4 100.82%);
-    /*max-width: 1440px;*/
+    /*max-width: 1600px;*/
     margin-right: auto;
     margin-left: auto;
 }
@@ -28,7 +28,7 @@
     justify-content: flex-end;
     gap: 16px;
 }
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1600px) {
     .subscribe{
         max-width: 100vw;
     }

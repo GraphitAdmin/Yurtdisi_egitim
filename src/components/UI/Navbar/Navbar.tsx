@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, {JSX, useEffect, useState} from "react";
 import Logo from "@/components/UI/Logo/Logo";
 import {navbarOptions} from "@/data/navbarOptions";
+import SearchComponent from "@/components/UI/SearchComponent/SearchComponent";
 
 interface NavbarProps {
     home: boolean;
@@ -46,13 +47,14 @@ const DropdownItem: React.FC<NavbarDropdownItemProps> = ({name, svg, link}) => {
 const Navbar: React.FC<NavbarProps> = ({home}) => {
     const [navbarOpen, setNavbarOpen] = useState(false);
     const [navbarSelected, setNavbarSelected] = useState<number | null>(null);
+    const [searchOpen,setSearchOpen] = useState(false);
     useEffect(() => {
-        if (navbarOpen) {
+        if (navbarOpen||searchOpen) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'auto';
         }
-    }, [navbarOpen]);
+    }, [navbarOpen,searchOpen]);
     return (
         <>
             <nav className={home ? "nav__home" : ""} style={navbarOpen ? {border: 'none'} : {}}>
@@ -167,7 +169,7 @@ const Navbar: React.FC<NavbarProps> = ({home}) => {
                                     fill={home ? "white" : "var(--Courses-Base-Black)"}/>
                             </svg>
                             : <>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                <svg onClick={()=>setSearchOpen(true)} style={{cursor:'pointer'}} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none">
                                     <mask id="mask0_1953_11181" x="0" y="0"
                                           width="24" height="24">
@@ -197,7 +199,7 @@ const Navbar: React.FC<NavbarProps> = ({home}) => {
                         background: '#fff',
                         width: '100%',
                         height: 'Calc(100vh - 136px)',
-                        zIndex: 9999,
+                        zIndex: 999,
                         gap:20,
                         display:'flex',
                         flexDirection:"column",
@@ -249,6 +251,9 @@ const Navbar: React.FC<NavbarProps> = ({home}) => {
                     </div>
                 }
             </nav>
+            {searchOpen&&
+                <SearchComponent closeSearch={()=>setSearchOpen(false)}/>
+            }
         </>
     )
         ;

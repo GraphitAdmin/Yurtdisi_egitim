@@ -140,6 +140,10 @@ small {
     display: flex !important;
 }
 
+.phone {
+    display: none !important;
+}
+
 @media screen and (max-width: 768px) {
     .mobile {
         display: flex !important;
@@ -176,5 +180,11 @@ small {
 
     h6 {
         font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .phone {
+        display: flex !important;
     }
 }

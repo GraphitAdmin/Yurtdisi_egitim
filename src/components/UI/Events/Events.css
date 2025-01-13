@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     gap: 32px;
-    max-width: 1440px;
+    max-width: 1600px;
     align-self: stretch;
     margin-left: auto;
     margin-right: auto;
@@ -29,7 +29,7 @@
     flex-direction: row;
     gap: 20px;
     margin-top: 16px;
-    max-width: 1440px;
+    max-width: 1600px;
     overflow-x: auto;
     scroll-behavior: smooth;
 }
@@ -42,27 +42,41 @@
     display: none;
     min-width: 60px;
 }
+.search__recommendations span{
+    display: block;
+    min-width: 60px;
+}
+.schools__recommendations div{
+    min-width: 413px;
+}
+.schools__recommendations div button{
+    text-align: center;
+}
+.search__recommendations .rounded__buttons{
+    margin-left: 64px;
+    margin-right: auto;
+}
 @media screen and (max-width: 1600px) {
     .events {
         max-width: Calc(100vw - 160px);
     }
     .events__block{
-        max-width: Calc(100vw - 160px);
+        max-width: 100vw;
     }
-}
-@media screen and (max-width: 1440px) {
-    .events__block {
-        max-width: Calc(100vw);
-    }
-
     .events__block span {
         display: block;
     }
-
+    .search__recommendations span{
+        display: none;
+    }
     /*.events__header, .events__header__p {*/
     /*    padding-left: 80px;*/
     /*    padding-right: 80px;*/
     /*}*/
+    .search__recommendations .rounded__buttons{
+        margin-left: 0;
+        margin-right: auto;
+    }
 }
 
 @media screen and (max-width: 992px) {
@@ -86,10 +100,12 @@
     .events {
         max-width: Calc(100vw - 32px);
     }
+    .events__block{
+        gap: 15px;
+    }
     .events__header button {
         display: none;
     }
-
     .events__block span {
         min-width: 1px;
     }

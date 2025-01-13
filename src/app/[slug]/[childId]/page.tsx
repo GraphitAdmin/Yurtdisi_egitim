@@ -21,7 +21,7 @@ export default async function Home({ params }: { params: { slug: string, childId
             <Tabs/>
             <div className="page__container">
                 <div style={{width: '100%'}}>
-                    <h1>{childId.replace(/-/g, ' ').replace(/^\w/, (char) => char.toUpperCase())}</h1>
+                    <h1  style={{textTransform:'capitalize'}}>{childId.replace(/-/g, ' ')} {slug.replace(/-/g, ' ')}</h1>
                     <p>
                         You can find everything you want to know before you start researching&nbsp;
                         <span style={{fontWeight: 600}}>
@@ -38,7 +38,7 @@ export default async function Home({ params }: { params: { slug: string, childId
                                              title='London'
                                              imgPost={London}
                                              description={'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.'}
-                                             link='/usa'  buttonDetails={false}/>
+                                             link={'/'+slug+'/'+childId+'/london'}  buttonDetails={false}/>
                             )
                         }
                     </div>

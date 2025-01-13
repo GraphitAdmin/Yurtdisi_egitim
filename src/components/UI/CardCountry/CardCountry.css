@@ -14,6 +14,10 @@
     max-height: 152px;
     border-radius: 16px;
     border: 1px solid var(--Courses-Gray-Gray-200);
+    transition: scale 0.5s ease-in-out;
+}
+.card__country:hover img{
+    scale: 1.05;
 }
 .card__school img{
     height: 224px;
@@ -33,5 +37,10 @@
     .card__country img {
         height: 176px;
         max-height: 176px;
+    }
+}
+@media screen and (max-width: 576px) {
+    .card__school__search {
+        max-width: Calc(100vw - 64px);
     }
 }

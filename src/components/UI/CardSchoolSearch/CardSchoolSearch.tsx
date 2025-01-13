@@ -5,9 +5,9 @@ import Link from "next/link";
 import {CardCityProps} from "@/interfaces/interfaces";
 import Button from "@/components/UI/Button/Button";
 
-const CardCity: React.FC<CardCityProps> = ({imgPost, title,link,description,buttonDetails}) => {
+const CardSchoolSearch: React.FC<CardCityProps> = ({imgPost, title,link,description,buttonDetails}) => {
     return (
-        <Link className={buttonDetails?"card__country card__school":"card__country"} style={{gap:'8px!important'}} href={link}>
+        <Link className="card__country card__school card__school__search" style={{gap:'8px!important'}} href={link}>
             <Image className="w-full" src={imgPost} alt="Country"/>
             <h4 style={{marginTop:12}}>{title}</h4>
             <p style={{color: 'var(--Courses-Gray-Gray-500)',textOverflow:'ellipsis',maxHeight:72,overflow:'hidden',textAlign:'left'}}>
@@ -19,4 +19,4 @@ const CardCity: React.FC<CardCityProps> = ({imgPost, title,link,description,butt
         </Link>
     )
 }
-export default CardCity
+export default CardSchoolSearch

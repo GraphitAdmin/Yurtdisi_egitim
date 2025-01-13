@@ -23,7 +23,7 @@ const CRM = () => {
         if (crmRef.current) {
             const newIndex = direction === 'right' ? index + 1 : index - 1;
             const normalizedIndex = (newIndex + 4) % 4;
-            const scrollLength=window.innerWidth<1460?window.innerWidth:1460;
+            const scrollLength=window.innerWidth<1620?window.innerWidth:1620;
             console.log(scrollLength)
             const transformValue = `translateX(-${normalizedIndex*scrollLength}px)`;
             crmRef.current.style.transition = 'transform 1s ease';

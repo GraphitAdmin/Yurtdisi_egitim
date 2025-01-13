@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
     gap: 48px;
-    max-width: 1440px;
+    max-width: 1600px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -21,8 +21,8 @@
     position: relative;
     justify-content: flex-start;
     z-index: -1;
-    min-width: 1300px;
-    max-width: 1300px;
+    min-width: 1460px;
+    max-width: 1460px;
     gap: 160px;
     /*overflow: scroll;*/
 }
@@ -42,8 +42,8 @@
     align-self: stretch;
     position: relative;
     z-index: -1;
-    min-width: 1300px;
-    max-width: 1300px;
+    min-width: 1460px;
+    max-width: 1460px;
     border-radius: 24px;
     border: 1px solid var(--Courses-Gray-Gray-200);
     background: var(--Courses-Gray-Gray-50);
@@ -129,7 +129,7 @@
     gap: 16px;
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1600px) {
     .CRM__block,.CRM__blocks{
         min-width: Calc(100vw - 160px);
         max-width: Calc(100vw - 160px);

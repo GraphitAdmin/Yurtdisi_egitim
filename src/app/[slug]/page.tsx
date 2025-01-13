@@ -25,7 +25,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
             <Tabs/>
             <div className="page__container">
                 <div style={{width:'100%'}}>
-                    <h1>{slug.replace(/-/g, ' ').replace(/^\w/, (char) => char.toUpperCase())}</h1>
+                    <h1 style={{textTransform:'capitalize'}}>{slug.replace(/-/g, ' ')}</h1>
                     <p>
                         You can find everything you want to know before you start researching&nbsp;
                         <span style={{fontWeight: 600}}>
@@ -42,7 +42,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                                          capital='London'
                                          imgPost={UK}
                                          language='English'
-                                         link='/usa' population='54 million (approx.)'/>
+                                         link={'/'+slug+'/united-kingdom'} population='54 million (approx.)'/>
                                 )
                     }
                 </div>

@@ -37,7 +37,7 @@ const Tabs: React.FC = () => {
                                   fill="#535862"/>
                         </svg>
                         <Link href={'/' + tabsPathArray.slice(0, index + 1).join('/')}>
-                            <small>{tabItem}</small>
+                            <small style={{textTransform:'capitalize'}}>{tabItem}</small>
                         </Link>
                     </div>
                 );
