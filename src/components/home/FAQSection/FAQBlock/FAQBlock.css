@@ -19,6 +19,6 @@
 }
 .faq__block p{
     text-align: justify;
-    color: #FFFFFF;
+    color: var(--Courses-Gray-Gray-500);
     margin-top: 8px;
 }
