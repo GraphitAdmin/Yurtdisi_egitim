@@ -66,9 +66,6 @@
     .events__block span {
         display: block;
     }
-    .search__recommendations span{
-        display: none;
-    }
     /*.events__header, .events__header__p {*/
     /*    padding-left: 80px;*/
     /*    padding-right: 80px;*/
