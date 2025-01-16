@@ -29,6 +29,12 @@ export interface IAbroad {
     time:string;
     link:string;
 }
+export interface IRelated {
+    imgPost:StaticImageData;
+    title:string;
+    description:string;
+    link:string;
+}
 export interface CardCountryProps {
     imgPost:StaticImageData;
     title:string;

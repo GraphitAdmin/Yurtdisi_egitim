@@ -98,6 +98,39 @@
 .page__country__schools__button__tablet{
     display: none;
 }
+.page__school{
+    display: grid;
+    grid-template-columns: 3.5fr 1fr;
+    gap: 20px;
+}
+.page__school__info{
+
+}
+.page__school__right{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.page__school__right__info{
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    align-self: stretch;
+    border-radius: 24px;
+    border: 1px solid var(--Courses-Brand-Blue-100, #B2DDFF);
+    background: var(--Courses-Brand-Blue-25, #EFF8FF);
+    width: 100%;
+}
+.page__school__right__info div p:first-child{
+    font-weight: 400;
+    color: var(--Courses-Gray-Gray-500);
+}
+.page__school__right__info div p:last-child{
+    font-weight: 500;
+    color:var(--Courses-Base-Black);
+}
 
 @media screen and (max-width: 1240px) {
     .page__country__schools__schools {
