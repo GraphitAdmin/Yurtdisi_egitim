@@ -92,6 +92,13 @@
     line-height: 24px;
     text-decoration: underline;
 }
+.page__country__schools__button{
+    margin-right: Calc(25% + 10px);
+}
+.page__country__schools__button__tablet{
+    display: none;
+}
+
 @media screen and (max-width: 1240px) {
     .page__country__schools__schools {
         grid-template-columns: 1fr 1fr;
@@ -100,12 +107,17 @@
     .page__country__schools {
         grid-template-columns: 2fr 1fr;
     }
+    .page__country__schools__button{
+        margin-right: Calc(33.3% + 10px);
+    }
+
 }
 
 @media screen and (max-width: 992px) {
     .page__country__schools {
         display: flex;
         flex-direction: column;
+        gap: 48px;
     }
 
     .page__container__countries {
@@ -130,6 +142,15 @@
         height: 500px;
         object-fit: cover;
     }
+    .page__country__schools__button{
+        display: none;
+    }
+    .page__country__schools__button__tablet{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 16px;
+    }
 }
 @media screen and (max-width: 768px) {
     .about__school div{
@@ -146,13 +167,13 @@
         gap: 36px;
     }
 
-    .page__country__schools {
-        gap: 64px;
-    }
     .about__school div{
         padding: 48px 16px;
     }
     .about__school img{
         height: 240px;
+    }
+    .page__country__schools__button__tablet{
+        width: 100%;
     }
 }

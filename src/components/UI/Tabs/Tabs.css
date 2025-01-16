@@ -91,10 +91,20 @@
     .tabs {
         padding: 24px 32px 32px;
     }
+    .home__tab{
+        display: none;
+    }
+    .tabs .tab__item{
+        display: none;
+    }
+    .tabs .dots__item,.tabs .tab__item:last-child{
+        display: flex;
+    }
 }
 
 @media screen and (max-width: 576px) {
     .tabs {
         padding: 24px 16px 32px;
     }
+
 }

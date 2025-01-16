@@ -29,6 +29,11 @@ const Tabs: React.FC = () => {
                         fill="#717680"/>
                 </svg>
             </div>
+            <div className="tab__item dots__item">
+                <Link href={'/' + tabsPathArray.slice(0,tabsPathArray.length-1).join('/')}>
+                    <small style={{textTransform: 'capitalize'}}>...</small>
+                </Link>
+            </div>
             {tabsArray.map((tabItem, index) => {
                 return (
                     <div key={index} className="tab__item">
@@ -37,7 +42,7 @@ const Tabs: React.FC = () => {
                                   fill="#535862"/>
                         </svg>
                         <Link href={'/' + tabsPathArray.slice(0, index + 1).join('/')}>
-                            <small style={{textTransform:'capitalize'}}>{tabItem}</small>
+                            <small style={{textTransform: 'capitalize'}}>{tabItem}</small>
                         </Link>
                     </div>
                 );

@@ -40,12 +40,15 @@ export default async function Home({
                         {
                             Array.from({length: 9}, (_, index) =>
                                 <CardCity key={index}
-                                             title='London'
-                                             imgPost={London}
-                                             description={'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.'}
-                                             link={'/'+slug+'/'+childId+'/london'}  buttonDetails={false}/>
+                                          title='London'
+                                          imgPost={London}
+                                          description={'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.'}
+                                          link={'/' + slug + '/' + childId + '/london'} buttonDetails={false}/>
                             )
                         }
+                    </div>
+                    <div className="page__country__schools__button__tablet">
+                        <Button label={'Show all cities'}/>
                     </div>
                     <div className="page__country__schools__country">
                         <div className="page__country__schools__country__info">
@@ -152,7 +155,7 @@ export default async function Home({
                             <Link href={'/smth'}><p>
                                 UK language schools</p>
                             </Link>
-                            <div style={{display: 'flex', flexDirection: 'row', gap: 4,cursor:"pointer"}}>
+                            <div style={{display: 'flex', flexDirection: 'row', gap: 4, cursor: "pointer"}}>
                                 <p style={{
                                     fontWeight: 600,
                                     color: 'var(--courses-brand-blue-400-brand, #2E90FA)'
@@ -165,7 +168,10 @@ export default async function Home({
                         </div>
                     </div>
                 </div>
-                <Button btnStyle={{marginRight:'Calc(25% + 10px)'}} label={'Show all cities'}/>
+                <div className="page__country__schools__button">
+                    <Button label={'Show all cities'}/>
+                </div>
+
             </div>
             <Subscribe/>
             <Footer/>
