@@ -53,12 +53,9 @@ const RelatedSchools =()=>{
         <div className="events" style={{marginBottom:64,marginTop:0,paddingTop:0}}>
             <div className="events__first">
                 <div className="events__header">
-                    <h2 style={{textAlign:'left'}}>
+                    <h2 style={{textAlign:'left',width:'100%'}}>
                         Related schools
                     </h2>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur. Sit vulputate sed iaculis nisi nulla phasellus massa nulla tellus.
-                    </p>
                 </div>
                 <p className="events__header__p">
                     Lorem ipsum dolor sit amet consectetur. Sit vulputate sed iaculis nisi nulla phasellus massa

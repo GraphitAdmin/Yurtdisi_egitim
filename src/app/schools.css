@@ -123,6 +123,12 @@
     background: var(--Courses-Brand-Blue-25, #EFF8FF);
     width: 100%;
 }
+.page__school__right__info img{
+    border-radius: 16px;
+    border: 1px solid var(--Courses-Brand-Blue-100, #B2DDFF);
+    background: #FFF;
+    padding: 16px;
+}
 .page__school__right__info div p:first-child{
     font-weight: 400;
     color: var(--Courses-Gray-Gray-500);
@@ -184,10 +190,32 @@
         margin-right: auto;
         margin-bottom: 16px;
     }
+    .page__school{
+        display: flex;
+        flex-direction: column;
+    }
+    .page__school__right{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .page__school__right__info{
+        align-items: center;
+        justify-content: flex-start;
+        text-align: left;
+    }
+    .page__school__right__info div{
+        width: 250px;
+        text-align: left;
+        align-items: flex-start;
+    }
 }
 @media screen and (max-width: 768px) {
     .about__school div{
         padding: 48px 32px;
+    }
+    .page__school__right{
+        display: flex;
+        flex-direction: column;
     }
 }
 
@@ -208,5 +236,11 @@
     }
     .page__country__schools__button__tablet{
         width: 100%;
+    }
+    .page__school__right{
+        max-width: calc(100vw - 32px);;
+    }
+    .page__school__right__info{
+        align-items: flex-start;
     }
 }
