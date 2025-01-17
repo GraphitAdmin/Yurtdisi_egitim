@@ -125,7 +125,17 @@ const SchoolInfo = () => {
                             </defs>
                         </svg>}
                 </div>
-                {isOpenVideo && <p>{schoolInfo.description}</p>}
+                {isOpenVideo && <>
+                <iframe
+                        src="https://www.youtube.com/embed/fZI47lyocSQ?si=Livmosvb_52jeKy8"
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                />
+                </>
+                }
             </div>
 
             <div className="page__school__info__block">

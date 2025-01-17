@@ -81,6 +81,9 @@
     color: var(--Courses-Brand-Blue-500);
 }
 
+.tabs .dots__item{
+    display: none;
+}
 @media screen and (max-width: 992px) {
     .tabs {
         padding: 24px 64px 32px;
