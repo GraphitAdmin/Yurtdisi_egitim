@@ -29,21 +29,21 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId}) 
             title: 'Oxford',
             imgPost: Oxford,
             description: 'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.',
-            link: '/' + slug + '/' + childId + '/london',
+            link: '/' + slug + '/' + childId + '/oxford',
             buttonDetails: false
         },
         {
             title: 'Sevenoaks',
             imgPost: Sevenoaks,
             description: 'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.',
-            link: '/' + slug + '/' + childId + '/london',
+            link: '/' + slug + '/' + childId + '/sevenoaks',
             buttonDetails: false
         },
         {
             title: 'Sevenoaks',
             imgPost: Sevenoaks,
             description: 'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.',
-            link: '/' + slug + '/' + childId + '/london',
+            link: '/' + slug + '/' + childId + '/sevenoaks',
             buttonDetails: false
         },
         {
@@ -57,28 +57,28 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId}) 
             title: 'Oxford',
             imgPost: Oxford,
             description: 'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.',
-            link: '/' + slug + '/' + childId + '/london',
+            link: '/' + slug + '/' + childId + '/oxford',
             buttonDetails: false
         },
         {
             title: 'Sevenoaks',
             imgPost: Sevenoaks,
             description: 'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.',
-            link: '/' + slug + '/' + childId + '/london',
+            link: '/' + slug + '/' + childId + '/sevenoaks',
             buttonDetails: false
         },
         {
             title: 'Oxford',
             imgPost: Oxford,
             description: 'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.',
-            link: '/' + slug + '/' + childId + '/london',
+            link: '/' + slug + '/' + childId + '/oxford',
             buttonDetails: false
         },
         {
             title: 'Sevenoaks',
             imgPost: Sevenoaks,
             description: 'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.',
-            link: '/' + slug + '/' + childId + '/london',
+            link: '/' + slug + '/' + childId + '/sevenoaks',
             buttonDetails: false
         },
         {
@@ -92,7 +92,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId}) 
             title: 'Oxford',
             imgPost: Oxford,
             description: 'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.',
-            link: '/' + slug + '/' + childId + '/london',
+            link: '/' + slug + '/' + childId + '/oxford',
             buttonDetails: false
         },
         {
