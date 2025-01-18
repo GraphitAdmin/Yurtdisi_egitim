@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import './Event.css';
 import Button from "@/components/UI/Button/Button";
-import {IEvent} from "@/interfaces/interfaces";
+import {IEvent} from "@/utils/interfaces";
 const Event: React.FC<IEvent> = ({imgPost,type, date, time, title, location,link, description}) => {
     return (
         <div className="events__post">

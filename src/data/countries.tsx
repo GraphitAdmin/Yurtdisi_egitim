@@ -1,6 +1,6 @@
 export const UK = {
-    name: 'UK language schools',
-    link: '/uk',
+    name: 'UK',
+    link: '/united-kingdom',
     svg: <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
     xmlns="http://www.w3.org/2000/svg">
     <g clipPath="url(#clip0_1953_10161)">
@@ -55,8 +55,8 @@ export const UK = {
     </svg>
 }
 export const US = {
-    name: 'US language schools',
-    link: '/us',
+    name: 'US',
+    link: '/united-states',
     svg: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_1987_70565)">
             <path
@@ -83,7 +83,7 @@ export const US = {
     </svg>
 }
 export const Canada = {
-    name: 'Canadian language schools',
+    name: 'Canadian',
     link: '/canada',
     svg: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_1987_70568)">
@@ -107,7 +107,7 @@ export const Canada = {
     </svg>
 }
 export const Malta = {
-    name: 'Malta language schools',
+    name: 'Malta',
     link: '/malta',
     svg: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_1987_70571)">
@@ -127,7 +127,7 @@ export const Malta = {
     </svg>
 }
 export const Irish = {
-    name: 'Irish language schools',
+    name: 'Irish',
     link: '/Irish',
     svg: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_1987_70574)">
@@ -148,7 +148,7 @@ export const Irish = {
     </svg>
 }
 export const Australian = {
-    name: 'Australian language schools',
+    name: 'Australian',
     link: '/Australian',
     svg: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_1987_70577)">
@@ -195,7 +195,7 @@ export const Australian = {
     </svg>
 }
 export const Germany = {
-    name: 'Germany language schools',
+    name: 'Germany',
     link: '/Germany',
     svg: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_1987_70580)">
@@ -219,8 +219,8 @@ export const Germany = {
 
 }
 export const allCountries = {
-    name: 'All countries',
-    link: '/all',
+    name: 'All Countries',
+    link: '/',
     svg: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
               fill="none">
         <g clipPath="url(#clip0_1953_10273)">

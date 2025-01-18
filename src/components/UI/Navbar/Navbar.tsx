@@ -29,16 +29,17 @@ const Dropdown: React.FC<NavbarProps> = ({home}) => {
 interface NavbarDropdownItemProps {
     name: string;
     link: string;
+    suffixName:string;
     svg: JSX.Element;
 }
 
-const DropdownItem: React.FC<NavbarDropdownItemProps> = ({name, svg, link}) => {
+const DropdownItem: React.FC<NavbarDropdownItemProps> = ({name,suffixName, svg, link}) => {
     return (
         <>
             <Link className="nav__dropdown__block__item" href={link}>
                 {svg}
                     <small>
-                        {name}
+                        {name}&nbsp;{!name.includes('All')&&<>{suffixName}</>}
                     </small>
             </Link>
         </>
@@ -148,11 +149,14 @@ const Navbar: React.FC<NavbarProps> = ({home}) => {
                     {navbarOptions.map(
                         (navbarOption, index) =>
                             <div className="nav__dropdown" key={index}>
-                                <sub>{navbarOption.name}</sub>
+                                <Link href={navbarOption.link}>
+                                    <sub>{navbarOption.name}</sub>
+                                </Link>
                                 <Dropdown home={home}/>
                                 <div className="nav__dropdown__block">
                                     {navbarOption.options.map((dropdownOption, index) =>
-                                        <DropdownItem key={index} link={dropdownOption.link} name={dropdownOption.name}
+                                        <DropdownItem key={index} link={navbarOption.link+dropdownOption.link} name={dropdownOption.name}
+                                                      suffixName={navbarOption.name.toLowerCase()}
                                                       svg={dropdownOption.svg}/>
                                     )}
                                 </div>
@@ -241,7 +245,8 @@ const Navbar: React.FC<NavbarProps> = ({home}) => {
                                     {navbarSelected === index &&
                                         <div className="nav__dropdown__block__mobile">
                                             {navbarOption.options.map((dropdownOption, index) =>
-                                                <DropdownItem key={index} link={dropdownOption.link}
+                                                <DropdownItem key={index} link={navbarOption.link+dropdownOption.link}
+                                                              suffixName={navbarOption.name.toLowerCase()}
                                                               name={dropdownOption.name} svg={dropdownOption.svg}/>
                                             )}
                                         </div>

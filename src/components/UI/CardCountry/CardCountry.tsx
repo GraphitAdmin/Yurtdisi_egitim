@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import './CardCountry.css';
 import Link from "next/link";
-import {CardCountryProps} from "@/interfaces/interfaces";
+import {CardCountryProps} from "@/utils/interfaces";
 
 const CardCountry: React.FC<CardCountryProps> = ({imgPost, title,link,capital,population,language}) => {
     return (

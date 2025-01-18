@@ -7,6 +7,7 @@ import UK from "@/assets/countries/UK.png"
 import React from "react";
 import Subscribe from "@/components/UI/FAQ/Subscribe";
 import Footer from "@/components/UI/Footer/Footer";
+import CountriesPageContent from "@/components/countriesPageContent/countriesPageContent";
 const slugsArray=[
     'language-schools',
     'high-schools',
@@ -28,31 +29,7 @@ export default async function Home({
             <Navbar home={false}/>
             {slugsArray.includes(slug)?<>
             <Tabs/>
-            <div className="page__container">
-                <div style={{width:'100%'}}>
-                    <h1 style={{textTransform:'capitalize'}}>{slug.replace(/-/g, ' ')}</h1>
-                    <p>
-                        You can find everything you want to know before you start researching&nbsp;
-                        <span style={{fontWeight: 600}}>
-                        language education abroad here.
-                    </span>
-                    </p>
-                </div>
-               <PageSearch/>
-                <div className="page__container__countries">
-                    {
-                        Array.from({length: 10}, (_, index) =>
-                            <CardCountry key={index}
-                                         title='United Kingdom'
-                                         capital='London'
-                                         imgPost={UK}
-                                         language='English'
-                                         link={'/'+slug+'/united-kingdom'} population='54 million (approx.)'/>
-                                )
-                    }
-                </div>
-                <Button label={'Show all countries'}/>
-            </div>
+                    <CountriesPageContent slug={slug}/>
                 </>:
                 <>
                 <h1>Error</h1>

@@ -1,11 +1,11 @@
 export const searchTypes = [
-    'Type 1','Type 2',
+    'Language schools','Summer schools',
 ]
 export const searchCountries = [
-    'Country 1','Country 2',
+    'United States','United Kingdom','Canada','Germany'
 ]
 export const searchCities = [
-    'City 1','City 2',
+    'London','Oxford',
 ]
 export const searchPrograms = [
     'Program 1','Program 2',

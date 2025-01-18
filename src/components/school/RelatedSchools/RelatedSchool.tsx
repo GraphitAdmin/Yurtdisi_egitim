@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import '../../UI/Event/Event.css';
-import {IRelated} from "@/interfaces/interfaces";
+import {IRelated} from "@/utils/interfaces";
 import Link from "next/link";
 import Button from "@/components/UI/Button/Button";
 

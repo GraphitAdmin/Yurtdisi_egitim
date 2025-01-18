@@ -1,7 +1,7 @@
 'use client'
 import Card from "@/components/UI/Card/Card";
 import React, {useRef} from "react";
-import {CardProps} from "@/interfaces/interfaces";
+import {CardProps} from "@/utils/interfaces";
 import './BlockCard.css'
 import Button from "@/components/UI/Button/Button";
 

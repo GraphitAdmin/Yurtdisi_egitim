@@ -4,7 +4,7 @@ import Button from "@/components/UI/Button/Button";
 import SchoolImage from "@/assets/home/Mill_School.png";
 import PopularSchoolCard from "@/components/UI/PopularSchoolCard/PopularSchoolCard";
 import {useEffect, useRef, useState} from "react";
-import {IPopularSchool} from "@/interfaces/interfaces";
+import {IPopularSchool} from "@/utils/interfaces";
 
 const Popular = () => {
     const schoolsRef = useRef(null);

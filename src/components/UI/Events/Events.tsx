@@ -4,7 +4,7 @@ import Button from "@/components/UI/Button/Button";
 import Event from "@/components/UI/Event/Event";
 import ImageEvent from "@/assets/home/Illustration.png"
 import {useEffect, useRef, useState} from "react";
-import {IEvent} from "@/interfaces/interfaces";
+import {IEvent} from "@/utils/interfaces";
 const Events =()=>{
     const eventsRef = useRef(null);
     const [events, setEvents] = useState<IEvent[]>([])

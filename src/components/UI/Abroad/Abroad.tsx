@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import '../Event/Event.css';
-import {IAbroad} from "@/interfaces/interfaces";
+import {IAbroad} from "@/utils/interfaces";
 import Link from "next/link";
 const Abroad: React.FC<IAbroad> = ({imgPost, date, time, title,link, description}) => {
     return (

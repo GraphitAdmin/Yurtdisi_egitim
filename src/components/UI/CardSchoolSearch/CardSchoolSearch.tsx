@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import '../CardCountry/CardCountry.css';
 import Link from "next/link";
-import {CardCityProps} from "@/interfaces/interfaces";
+import {CardCityProps} from "@/utils/interfaces";
 import Button from "@/components/UI/Button/Button";
 
 const CardSchoolSearch: React.FC<CardCityProps> = ({imgPost, title,link,description,buttonDetails}) => {

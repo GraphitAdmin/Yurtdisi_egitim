@@ -1,9 +1,9 @@
 'use client'
 import Image from "next/image";
 import Oxford from "@/assets/schools/Test.jpeg";
+import Sevenoaks from "@/assets/schools/Sevenoaks.jpg";
 import React, {useState} from "react";
 import './SchoolInfo.css';
-import Sevenoaks from "@/assets/schools/Sevenoaks.jpg";
 
 const SchoolInfo = () => {
     const images=[Oxford,Sevenoaks,Oxford,Sevenoaks]

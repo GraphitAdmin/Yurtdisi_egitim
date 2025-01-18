@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import './PopularSchoolCard.css';
 import Link from "next/link";
-import {PopularSchoolCardProps} from "@/interfaces/interfaces";
+import {PopularSchoolCardProps} from "@/utils/interfaces";
 import Button from "@/components/UI/Button/Button";
 
 const PopularSchoolCard: React.FC<PopularSchoolCardProps> = ({imgPost,link}) => {

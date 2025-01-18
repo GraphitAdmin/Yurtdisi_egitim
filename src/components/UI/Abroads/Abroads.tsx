@@ -3,7 +3,7 @@ import '../Events/Events.css'
 import Button from "@/components/UI/Button/Button";
 import ImageEvent from "@/assets/home/Illustration.png"
 import {useEffect, useRef, useState} from "react";
-import {IEvent} from "@/interfaces/interfaces";
+import {IEvent} from "@/utils/interfaces";
 import Abroad from "@/components/UI/Abroad/Abroad";
 const Abroads =()=>{
     const eventsRef = useRef(null);

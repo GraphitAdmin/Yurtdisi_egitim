@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import '../Event/Event.css';
 import Link from "next/link";
-import {CardProps} from "@/interfaces/interfaces";
+import {CardProps} from "@/utils/interfaces";
 
 const Card: React.FC<CardProps> = ({imgPost, time, title,link,date, description}) => {
     return (

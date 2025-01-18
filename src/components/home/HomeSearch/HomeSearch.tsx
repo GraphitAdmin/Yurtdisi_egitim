@@ -2,14 +2,34 @@
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import Button from "@/components/UI/Button/Button";
 import {searchCities, searchCountries, searchPrograms, searchTypes} from "@/data/search";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 const HomeSearch = () => {
     const [selectedType, setSelectedType] = useState<string>('');
     const [selectedCountry, setSelectedCountry] = useState<string>('');
     const [selectedCity, setSelectedCity] = useState<string>('');
     const [selectedProgram, setSelectedProgram] = useState<string>('');
+    const [hrefLink, setHrefLink] = useState<string>('/');
+    useEffect(() => {
+        let link='';
 
+        if (selectedType!=='') {
+            link+='/'+selectedType.replace(/ /g, '-').toLowerCase()
+            if (selectedCountry!=='') {
+                link+='/'+selectedCountry.replace(/ /g, '-').toLowerCase()
+                if (selectedCity!=='') {
+                    link+='/'+selectedCity.replace(/ /g, '-').toLowerCase()
+                    if (selectedProgram!=='') {
+                        link+='/'+selectedProgram.replace(/ /g, '-').toLowerCase()
+                    }
+                }
+            }
+        }
+
+        console.log(link)
+
+        setHrefLink(link);
+    }, [selectedCity, selectedType, selectedProgram, selectedCountry]);
     return (
         <div className="home__container__search">
             <h5>Search for a school abroad</h5>
@@ -30,7 +50,7 @@ const HomeSearch = () => {
                           selected={selectedProgram}
                           setSelected={setSelectedProgram}
                           variants={searchPrograms}/>
-                <Button href={selectedCity} label='Search' btnStyle={{maxWidth:'100%'}}/>
+                <Button href={hrefLink} label='Search' btnStyle={{maxWidth:'100%'}}/>
             </div>
         </div>
     )

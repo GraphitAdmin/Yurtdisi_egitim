@@ -2,7 +2,7 @@
 import '../../UI/Events/Events.css'
 import ImageEvent from "@/assets/home/Illustration.png"
 import {useEffect, useRef, useState} from "react";
-import {IRelated} from "@/interfaces/interfaces";
+import {IRelated} from "@/utils/interfaces";
 import RelatedSchool from "@/components/school/RelatedSchools/RelatedSchool";
 const RelatedSchools =()=>{
     const eventsRef = useRef(null);

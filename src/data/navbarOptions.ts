@@ -3,6 +3,7 @@ import {allCountries, Australian, Canada, Germany, Irish, Malta, UK, US} from "@
 export const navbarOptions = [
     {
         name: 'Language schools',
+        link:'/language-schools',
         options: [
             UK,
             US,
@@ -16,6 +17,7 @@ export const navbarOptions = [
     },
     {
         name: 'Summer schools',
+        link:'/summer-schools',
         options: [
             UK,
             allCountries
@@ -23,6 +25,7 @@ export const navbarOptions = [
     },
     {
         name: 'High schools',
+        link:'/high-schools',
         options: [
             UK,
             allCountries
@@ -30,6 +33,7 @@ export const navbarOptions = [
     },
     {
         name: 'University',
+        link:'/universities',
         options: [
             UK,
             allCountries
@@ -37,6 +41,7 @@ export const navbarOptions = [
     },
     {
         name: 'Foundation programs',
+        link:'/foundation-programs',
         options: [
             UK,
             allCountries
@@ -44,6 +49,7 @@ export const navbarOptions = [
     },
     {
         name: 'Certificate',
+        link:'/certificates',
         options: [
             UK,
             allCountries

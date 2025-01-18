@@ -5,6 +5,7 @@ import "./navbar.css";
 import "./footer.css";
 import "./layout.css"
 import React from "react";
+import { Toaster } from 'react-hot-toast';
 
 const urbanist = Urbanist({
     weight: ['200','300','400', '500', '600', '700', '800'],
@@ -28,6 +29,7 @@ export default function RootLayout({
         <body>
         <div>
             {children}
+            <Toaster />
         </div>
         </body>
         </html>
