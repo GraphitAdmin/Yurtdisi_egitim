@@ -44,7 +44,7 @@ export const navbarOptions = [
         ]
     },
     {
-        name: 'University',
+        name: 'Universities',
         link: '/universities',
         options: [
             UK,
@@ -72,7 +72,7 @@ export const navbarOptions = [
         ]
     },
     {
-        name: 'Certificate',
+        name: 'Certificates',
         link: '/certificates',
         options: [
             UK,
