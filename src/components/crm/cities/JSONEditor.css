@@ -1,0 +1,7 @@
+.image__input img{
+    min-width: auto;
+    min-height: auto;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+}

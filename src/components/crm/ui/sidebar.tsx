@@ -1,9 +1,10 @@
 import Link from "next/link"
-import { Home, Users, School, FileText, Calendar, Settings, Bell, BarChart, Globe } from 'lucide-react'
+import {Home, Users, School, FileText, Calendar, Settings, Bell, BarChart, Globe, Building} from 'lucide-react'
 
 const navigationItems = [
     { name: "Home page", icon: Home, href: "/" },
     { name: "Students", icon: Users, href: "/students" },
+    { name: "Cities", icon: Building, href: "/cities" },
     { name: "Schools", icon: School, href: "/schools" },
     { name: "Pages", icon: FileText, href: "/pages" },
     { name: "Events", icon: Calendar, href: "/events" },
@@ -21,10 +22,10 @@ export function Sidebar() {
                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                         <Globe className="w-5 h-5 text-primary-foreground" />
                     </div>
-                    <span className="font-semibold">GLOBAL</span>
+                    <span className="font-semibold">Eeeducation</span>
                 </div>
             </div>
-            <nav className="p-2">
+            <nav className="p-2" style={{alignItems: "flex-start"}}>
                 {navigationItems.map((item) => (
                     <Link
                         key={item.name}
@@ -36,12 +37,6 @@ export function Sidebar() {
                     </Link>
                 ))}
             </nav>
-            <div className="absolute bottom-0 w-64 p-4 border-t">
-                <div className="flex items-center gap-2 text-sm text-primary">
-                    <Globe className="w-4 h-4" />
-                    Global Study Abroad
-                </div>
-            </div>
         </aside>
     )
 }

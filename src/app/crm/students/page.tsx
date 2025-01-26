@@ -1,5 +1,5 @@
 'use client'
-import { Sidebar } from "@/components/crm/sidebar"
+import { Sidebar } from "@/components/crm/ui/sidebar"
 import {useState} from "react";
 import Image from 'next/image'
 import {uploadImage} from "@/app/crm/students/uploadImage";

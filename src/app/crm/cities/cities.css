@@ -1,0 +1,61 @@
+.cities__table {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    border-radius: 8px;
+}
+
+.cities__table thead tr, .cities__table tbody tr {
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.cities__table thead {
+    border: solid 1px gray;
+    background: rgba(243,244,246,0.8);
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+.cities__table tbody{
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom: solid 1px gray;
+}
+
+.cities__table thead tr th{
+    font-weight: 500;
+    padding: 0 1rem;
+    text-align: left;
+    height: 3rem;
+    vertical-align: middle;
+    line-height: 3rem;
+}
+
+.cities__table tbody {
+    border-right: solid 1px gray;
+    border-left: solid 1px gray;
+}
+
+.cities__table tbody tr th {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom: solid 1px gray;
+    height: 34px;
+    text-align: left;
+}
+.cities__table tbody tr:last-child th{
+    border-bottom: none;
+}
+
+.cities__table tbody tr h6 {
+    text-overflow: ellipsis;
+    max-height: 24px;
+    overflow: hidden;
+    text-align: left;
+    width: 100%;
+    padding: 0 1rem;
+}

@@ -4,7 +4,7 @@ import {revalidatePath} from "next/cache";
 
 export async function uploadImage(formData: FormData) {
     const file = formData.get('image') as File
-    const filename = `${Date.now()}-${file.name}`
+    const filename = `${file.name}`
 
     try {
         console.log('ok')
@@ -12,10 +12,11 @@ export async function uploadImage(formData: FormData) {
         console.log(file)
         const blob = await put(filename, file, {
             access: 'public',
+            addRandomSuffix: false
         })
         console.log('blob',blob)
         revalidatePath('/')
-        return { url: blob.url, success: true }
+        return { url: blob.url, success: true,filename }
     } catch (error) {
         console.log('not ok',error)
 

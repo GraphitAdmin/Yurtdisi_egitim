@@ -1,3 +1,5 @@
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 
 export const errorToasterStyles = {
     style: {
@@ -24,3 +26,8 @@ export const successToasterStyles = {
     },
     duration: 1500,
 };
+
+export function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs))
+}
+

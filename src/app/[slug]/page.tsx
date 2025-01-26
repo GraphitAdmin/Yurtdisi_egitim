@@ -4,7 +4,8 @@ import React from "react";
 import Subscribe from "@/components/UI/FAQ/Subscribe";
 import Footer from "@/components/UI/Footer/Footer";
 import CountriesPageContent from "@/components/countriesPageContent/countriesPageContent";
-const slugsArray=[
+
+const slugsArray = [
     'language-schools',
     'high-schools',
     'summer-schools',
@@ -23,12 +24,12 @@ export default async function Home({
     return (
         <div>
             <Navbar home={false}/>
-            {slugsArray.includes(slug)?<>
-            <Tabs/>
+            {slugsArray.includes(slug) ? <>
+                    <Tabs/>
                     <CountriesPageContent slug={slug}/>
-                </>:
+                </> :
                 <>
-                <h1>Error</h1>
+                    <h1>Error</h1>
                 </>
             }
             <Subscribe/>

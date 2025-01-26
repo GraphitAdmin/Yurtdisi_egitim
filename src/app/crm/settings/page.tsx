@@ -1,4 +1,4 @@
-import { Sidebar } from "@/components/crm/sidebar"
+import { Sidebar } from "@/components/crm/ui/sidebar"
 
 export default function AdminPanel() {
     return (
@@ -6,7 +6,7 @@ export default function AdminPanel() {
             <div className="flex">
                 <Sidebar />
                 <main className="flex-1 p-4">
-                   School
+                   Settings
                 </main>
             </div>
         </div>

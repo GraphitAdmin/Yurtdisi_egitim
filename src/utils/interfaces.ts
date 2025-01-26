@@ -54,3 +54,32 @@ export interface IPopularSchool {
     imgPost:StaticImageData;
     link:string;
 }
+export interface ICity {
+    name: string;
+    description: string;
+    country: string;
+    image: string;
+}
+export interface ISchool{
+    education_type: string;
+    title: string;
+    images: string[];
+    school_overview: string;
+    detailed_information: string;
+    why_block: string;
+    video_url: string;
+    coordinates_on_the_map: {
+        latitude: string;
+        longitude: string;
+    };
+    city: string;
+    country: string;
+    address: string;
+    website: string;
+    capacity: string;
+    age_group: string;
+    programs: string[];
+    accommodation: string;
+    meta_title: string;
+    meta_description: string;
+}
