@@ -31,7 +31,6 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
         lat: 37.7749,
         lng: -122.4194,
     };
-    console.log(process.env.NEXT_GOOGLE_API_KEY)
     return (
         <div className="page__school__info">
             <div className="image-container" key={imageIndex}>
