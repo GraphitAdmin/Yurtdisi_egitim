@@ -203,6 +203,7 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                             </defs>
                         </svg>}
                 </div>
+                {process.env.NEXT_GOOGLE_API_KEY&&
                 <LoadScript googleMapsApiKey={process.env.NEXT_GOOGLE_API_KEY}>
                     <GoogleMap mapContainerStyle={
                         isOpenMap ? {width: '100%', height: 500, display: 'block', maxHeight: '60vh',marginTop:32} :
@@ -216,6 +217,7 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                             position={coordinates}/>
                     </GoogleMap>
                 </LoadScript>
+                }
             </div>
 
             <div className="page__school__info__block">
