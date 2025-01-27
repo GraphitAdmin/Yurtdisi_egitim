@@ -26,6 +26,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    width: auto!important;
 }
 .events__post img{
     transition: scale 0.5s ease;

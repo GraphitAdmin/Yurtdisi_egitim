@@ -26,8 +26,8 @@ const Event: React.FC<IEvent> = ({imgPost,type, date, time, title, location,link
                 }}>{location}</p>
             </div>
             <div className="events__buttons">
-                <Button label='School details' href={link} btnStyle={{width:'100%'}}/>
-                <Button label='Book a meeting' btnStyle={{width:'100%'}} secondary={true}/>
+                <Button label='Book a meeting' btnStyle={{width:'100%'}}/>
+                <Button label='School details' href={link} btnStyle={{width:'100%'}} secondary={true}/>
             </div>
 
         </div>

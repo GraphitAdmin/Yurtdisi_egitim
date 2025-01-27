@@ -1,0 +1,35 @@
+.events__page{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 1600px;
+    gap: 48px 20px;
+}
+.events__page .events__post .events__buttons button{
+    width: 100%;
+    max-width: 100%;
+    padding:12px 0;
+    height: min-content;
+}
+.events__page .events__post .events__buttons a{
+    width: 100%;
+    max-width: 100%;
+    padding:0;
+}
+@media screen and (max-width: 1264px) {
+    .events__page {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (max-width: 850px) {
+    .events__page {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+    }
+    .events__page .events__post{
+        max-width: Calc(100vw - 32px);
+    }
+}
