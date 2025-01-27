@@ -29,7 +29,7 @@ export default function RootLayout({
         <body>
         <div>
             {children}
-            <Toaster />
+            <Toaster/>
         </div>
         </body>
         </html>

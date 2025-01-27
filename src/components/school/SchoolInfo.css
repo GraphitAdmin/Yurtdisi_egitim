@@ -6,6 +6,13 @@
     border-bottom: 1px solid var(--Courses-Gray-Gray-300);
     padding-top: 32px;
 }
+.page__school__info__block div ul li{
+    color: var(--Courses-Gray-Gray-600);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
 .page__school__info__block:last-child{
     border-bottom: none;
 }
@@ -21,8 +28,26 @@
     text-align: justify;
     color: var(--Courses-Gray-Gray-600);
     margin-top: 8px;
+    white-space: pre-line;
+    position: relative;
 }
-.page__school__info img{
+.page__school__info__blur{
+    backdrop-filter: blur(2px);
+    height: 65%;
+    min-height: 65%;
+    width: Calc(100% + 16px);
+    left: -8px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.page__school__info__blur button{
+    width: 320px;
+    max-width: Calc(100vw - 16px);
+}
+.page__school__info__img{
     height: 480px;
     max-height: 480px;
     border-radius: 24px;
@@ -69,8 +94,11 @@
         transform: translateX(0);
     }
 }
+#map * {
+    overflow:visible;
+}
 @media screen and (max-width: 992px) {
-    .page__school__info img {
+    .page__school__info__img {
         height: 360px;
         max-height: 360px;
     }
@@ -80,7 +108,7 @@
     }
 }
 @media screen and (max-width: 576px) {
-    .page__school__info img {
+    .page__school__info__img {
         height: 240px;
         max-height: 240px;
     }
