@@ -1,6 +1,7 @@
+'use client'
 import Navbar from "@/components/UI/Navbar/Navbar";
 import Tabs from "@/components/UI/Tabs/Tabs";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import '@/app/schools.css'
 import Image from "next/image"
 import Link from "next/link";
@@ -9,17 +10,24 @@ import Footer from "@/components/UI/Footer/Footer";
 import MillSchool from "@/assets/home/Mill_School.png"
 import SchoolInfo from "@/components/school/SchoolInfo";
 import RelatedSchools from "@/components/school/RelatedSchools/RelatedSchools";
+import Modal from "@/components/UI/Modal/Modal";
 type paramsType = Promise<{ slug: string, childId: string, subChildId: string, subUniChildId: string }>;
-export default async function Home({
+interface paramsI{
+    slug: string, childId: string, subChildId: string, subUniChildId: string
+}
+export default function Home({
                                        params,
                                    }: {
     params: paramsType;
 }) {
-    const {slug, childId, subChildId, subUniChildId} = await params
-    console.log(slug)
-    console.log(childId)
-    console.log(subChildId)
-    console.log(subUniChildId)
+    const [paramsData,setParamsData]=useState<paramsI|null>(null)
+    useEffect(() => {
+        const loadParams = async () => {
+            setParamsData(await params)
+        }
+        loadParams().then()
+    },[])
+    const [modal, setModal] = useState<boolean>(false);
     const school={
         school:'Kaplan International Colleges',
         city:'Oxford',
@@ -32,14 +40,19 @@ export default async function Home({
     }
     return (
         <div>
+            {modal&&
+                <Modal closeModal={()=>setModal(false)}/>
+            }
             <Navbar home={false}/>
             <Tabs/>
             <div className="page__container">
+                {paramsData&&
                 <div style={{width: '100%'}}>
-                    <h1 style={{textTransform: 'capitalize'}}>{subUniChildId.replace(/-/g, ' ')} {subChildId.replace(/-/g, ' ')} {slug.replace(/-/g, ' ')}</h1>
+                    <h1 style={{textTransform: 'capitalize'}}>{paramsData.subUniChildId.replace(/-/g, ' ')}</h1>
                 </div>
+                }
                 <div className="page__school">
-                    <SchoolInfo/>
+                    <SchoolInfo openModal={()=>setModal(true)}/>
                     <div className="page__school__right">
                         <div className="page__school__right__info">
                             <Image src={MillSchool} alt="MillSchool"/>

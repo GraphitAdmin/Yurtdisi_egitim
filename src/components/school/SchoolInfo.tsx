@@ -6,8 +6,10 @@ import React, {useState} from "react";
 import './SchoolInfo.css';
 import Button from "@/components/UI/Button/Button";
 import {GoogleMap, LoadScript, MarkerF} from "@react-google-maps/api";
-
-const SchoolInfo = () => {
+interface SchoolInfoProps{
+    openModal:()=>void
+}
+const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
     const images = [Oxford, Sevenoaks, Oxford, Sevenoaks]
     const [isOpenOverview, setIsOpenOverview] = useState(true);
     const [isOpenDetails, setIsOpenDetails] = useState(false);
@@ -29,7 +31,7 @@ const SchoolInfo = () => {
         lat: 37.7749,
         lng: -122.4194,
     };
-    const apiKey = 'AIzaSyA0Oy5hjNS3BZnt_rMorqlhBNfGX2UCn3A'
+    console.log(process.env.NEXT_GOOGLE_API_KEY)
     return (
         <div className="page__school__info">
             <div className="image-container" key={imageIndex}>
@@ -76,7 +78,7 @@ const SchoolInfo = () => {
                 </div>
                 <p style={isOpenOverview ? {display: 'block'} : {display: 'none'}}>
                     <span className="page__school__info__blur">
-                        <Button label='I want more info'/>
+                        <Button label='I want more info' onClick={openModal}/>
                     </span>
                     {schoolInfo.description}
                 </p>
@@ -201,7 +203,7 @@ const SchoolInfo = () => {
                             </defs>
                         </svg>}
                 </div>
-                <LoadScript googleMapsApiKey={apiKey}>
+                <LoadScript googleMapsApiKey={process.env.NEXT_GOOGLE_API_KEY}>
                     <GoogleMap mapContainerStyle={
                         isOpenMap ? {width: '100%', height: 500, display: 'block', maxHeight: '60vh',marginTop:32} :
                             {width: '100%', height: 500, display: 'none', maxHeight: '60vh',marginTop:32}}

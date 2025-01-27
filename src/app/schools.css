@@ -4,7 +4,9 @@
     max-width: 1600px;
     gap: 20px
 }
-
+.page__school__info{
+    position: relative;
+}
 .page__country__schools__schools {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -102,9 +104,6 @@
     display: grid;
     grid-template-columns: 3.5fr 1fr;
     gap: 20px;
-}
-.page__school__info{
-
 }
 .page__school__right{
     display: flex;
