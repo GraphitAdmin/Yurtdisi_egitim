@@ -13,27 +13,27 @@ const Popular = () => {
         setPopularSchools([
             {
                 imgPost: SchoolImage,
-                link: '/event'
+                link: '/summer-schools/united-kingdom/london/london-economy-summer-school'
             },
             {
                 imgPost: SchoolImage,
-                link: '/event'
+                link: '/summer-schools/united-kingdom/london/london-economy-summer-school'
             },
             {
                 imgPost: SchoolImage,
-                link: '/event'
+                link: '/summer-schools/united-kingdom/london/london-economy-summer-school'
             },
             {
                 imgPost: SchoolImage,
-                link: '/event'
+                link: '/summer-schools/united-kingdom/london/london-economy-summer-school'
             },
             {
                 imgPost: SchoolImage,
-                link: '/event'
+                link: '/summer-schools/united-kingdom/london/london-economy-summer-school'
             },
             {
                 imgPost: SchoolImage,
-                link: '/event'
+                link: '/summer-schools/united-kingdom/london/london-economy-summer-school'
             },
         ])
     }, [])

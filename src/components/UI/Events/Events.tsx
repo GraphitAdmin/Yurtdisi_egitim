@@ -29,7 +29,7 @@ const Events =()=>{
                 date:'01.01.2025',
                 time:'10:00 - 15:00',
                 location:'Switzerland',
-                link:'/event'
+                link:'/our-event-calendar'
             },
             {
                 imgPost:ImageEvent,
@@ -39,7 +39,7 @@ const Events =()=>{
                 date:'01.01.2025',
                 time:'10:00 - 15:00',
                 location:'Switzerland',
-                link:'/event'
+                link:'/our-event-calendar'
             },{
                 imgPost:ImageEvent,
                 type:'Language education',
@@ -48,7 +48,7 @@ const Events =()=>{
                 date:'01.01.2025',
                 time:'10:00 - 15:00',
                 location:'Switzerland',
-                link:'/event'
+                link:'/our-event-calendar'
             },{
                 imgPost:ImageEvent,
                 type:'Language education',
@@ -57,7 +57,7 @@ const Events =()=>{
                 date:'01.01.2025',
                 time:'10:00 - 15:00',
                 location:'Switzerland',
-                link:'/event'
+                link:'/our-event-calendar'
             },{
                 imgPost:ImageEvent,
                 type:'Language education',
@@ -66,7 +66,7 @@ const Events =()=>{
                 date:'01.01.2025',
                 time:'10:00 - 15:00',
                 location:'Switzerland',
-                link:'/event'
+                link:'/our-event-calendar'
             },
         ])
     },[])
@@ -77,7 +77,7 @@ const Events =()=>{
                     <h2>
                         Upcoming events
                     </h2>
-                    <Button label="View more"/>
+                    <Button href='/our-event-calendar' label="View more"/>
                 </div>
                 <p className="events__header__p">
                     Lorem ipsum dolor sit amet consectetur. Sit vulputate sed iaculis nisi nulla phasellus massa

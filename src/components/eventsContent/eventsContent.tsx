@@ -221,7 +221,7 @@ const EventsContent = () => {
                 <Button onClick={() => {
                     setShowCountriesButton(true)
                     setShowEvents(events)
-                }} label={'Show all countries'}/>
+                }} label={'Show all events'}/>
             }
         </div>
     )

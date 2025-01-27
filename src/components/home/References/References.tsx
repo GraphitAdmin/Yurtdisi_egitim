@@ -50,7 +50,7 @@ const References = () => {
                 title='Our blog posts'
                 description='Lorem ipsum dolor sit amet consectetur. Sit vulputate sed iaculis nisi nulla phasellus massa nulla tellus.'
                 cards={references}
-                buttonText='View all references'
+                buttonText='View all blogs'
             />
         </>
 
