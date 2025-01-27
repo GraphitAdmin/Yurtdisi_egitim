@@ -76,7 +76,7 @@ const JSONCreator = () => {
         }
     }
 
-    const handleInputChange = (index: number, field: keyof ISchool, value: any) => {
+    const handleInputChange = (index: number, field: keyof ISchool, value: unknown) => {
         const updatedSchools = [...schools]
         updatedSchools[index] = {...updatedSchools[index], [field]: value}
         setSchools(updatedSchools)

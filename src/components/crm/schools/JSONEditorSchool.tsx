@@ -228,6 +228,8 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                         value={school.coordinates_on_the_map.latitude}
                                         onChange={(e) => handleInputChange(index, "coordinates_on_the_map", {
                                             ...school.coordinates_on_the_map,
+                                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                            // @ts-expect-error
                                             latitude: e.target.value
                                         })}
                                         placeholder="Latitude"
@@ -241,6 +243,8 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                         value={school.coordinates_on_the_map.longitude}
                                         onChange={(e) => handleInputChange(index, "coordinates_on_the_map", {
                                             ...school.coordinates_on_the_map,
+                                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                            // @ts-expect-error
                                             longitude: e.target.value
                                         })}
                                         placeholder="Longitude"
