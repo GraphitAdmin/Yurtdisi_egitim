@@ -88,7 +88,11 @@
     .home__container {
         padding-bottom: 360px;
     }
-
+    .home__container__search button{
+        width: 100%;
+        max-width: max-content;
+        padding: 12px 0;
+    }
     .home__container__search__dropdowns {
         flex-direction: column;
         min-width: 480px;
@@ -139,10 +143,6 @@
         max-width: Calc(100vw - 64px);
         /*min-width: unset;*/
         min-width: Calc(100vw - 64px);
-    }
-    .home__container__search button{
-        width: auto;
-        max-width: max-content;
     }
     .gallery__block{
         grid-template-columns: 1fr;

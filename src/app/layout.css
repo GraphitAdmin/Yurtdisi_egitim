@@ -124,7 +124,7 @@
     }
     .page__container button{
         max-width: 100%;
-        width: 100%;
+        width: 100% !important;
         padding: 12px 0!important;
     }
 }

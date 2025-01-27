@@ -48,7 +48,7 @@ const PageSearch = () => {
                       selected={selectedProgram}
                       setSelected={setSelectedProgram}
                       variants={searchPrograms}/>
-            <Button href={hrefLink} label='Search' btnStyle={{width: 100, maxWidth: 50}}/>
+            <Button href={hrefLink} label='Search' btnStyle={{width: 100}}/>
         </div>
     )
 }
