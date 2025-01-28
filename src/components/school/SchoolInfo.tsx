@@ -119,8 +119,10 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                         className={`w-2 h-2 rounded-full transition-colors duration-200 hover:opacity-75 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2`}
                         style={activeIndex === index ? {
                             borderRadius: 8,
-                            background: 'var(--courses-brand-blue-400-brand)'
-                        } : {borderRadius: 8, background: '#D5D7DA'}}
+                            background: 'var(--courses-brand-blue-400-brand)',
+                            maxWidth:8,maxHeight:8
+                        } : {borderRadius: 8, background: '#D5D7DA',
+                            maxWidth:8,maxHeight:8}}
                         aria-label={`Go to slide ${index + 1}`}
                         aria-current={activeIndex === index ? "true" : "false"}
                     />
