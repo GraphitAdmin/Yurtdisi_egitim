@@ -120,8 +120,10 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                         style={activeIndex === index ? {
                             borderRadius: 8,
                             background: 'var(--courses-brand-blue-400-brand)',
-                            maxWidth:8,maxHeight:8
+                            maxWidth:8,maxHeight:8,
+                            padding:'0!important',
                         } : {borderRadius: 8, background: '#D5D7DA',
+                            padding:'0!important',
                             maxWidth:8,maxHeight:8}}
                         aria-label={`Go to slide ${index + 1}`}
                         aria-current={activeIndex === index ? "true" : "false"}
