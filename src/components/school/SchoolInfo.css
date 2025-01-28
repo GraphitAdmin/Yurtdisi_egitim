@@ -94,6 +94,7 @@
 #map * {
     overflow:visible;
 }
+
 @media screen and (max-width: 992px) {
     .page__school__info__img {
         height: 360px;

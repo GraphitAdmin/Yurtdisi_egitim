@@ -122,6 +122,9 @@
     .page__container{
         padding: 0 16px 64px;
     }
+    .page__container .padding__fix{
+        padding: 0!important;
+    }
     .page__container button{
         max-width: 100%;
         width: 100% !important;
