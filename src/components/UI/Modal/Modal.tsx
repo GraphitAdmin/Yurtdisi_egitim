@@ -29,7 +29,7 @@ const Modal: React.FC<ModalProps> = ({closeModal}) => {
                     ullamcorper elementum faucibus.
                 </p>
                 <div className="w-full">
-                    <small style={{color: 'var(--Courses-Base-Black)',marginBottom:4}}>
+                    <small style={{color: 'var(--Courses-Base-Black)',marginBottom:4,textAlign:"left"}}>
                         Email
                     </small>
                     <Input placeholder='email@gmail.com' setValue={setEmail} value={email}/>
