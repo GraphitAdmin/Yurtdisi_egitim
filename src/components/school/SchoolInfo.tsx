@@ -2,13 +2,16 @@
 import Image from "next/image";
 import Oxford from "@/assets/schools/Test.jpeg";
 import Sevenoaks from "@/assets/schools/Sevenoaks.jpg";
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import './SchoolInfo.css';
 import Button from "@/components/UI/Button/Button";
 import {GoogleMap, LoadScript, MarkerF} from "@react-google-maps/api";
-interface SchoolInfoProps{
-    openModal:()=>void
+import {motion, AnimatePresence} from "framer-motion"
+
+interface SchoolInfoProps {
+    openModal: () => void
 }
+
 const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
     const images = [Oxford, Sevenoaks, Oxford, Sevenoaks]
     const [isOpenOverview, setIsOpenOverview] = useState(true);
@@ -16,36 +19,108 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
     const [isOpenVideo, setIsOpenVideo] = useState(false);
     const [isOpenMap, setIsOpenMap] = useState(false);
     const [isOpenRequest, setIsOpenRequest] = useState(false);
-    const [imageIndex, setImageIndex] = useState(0);
     const [zoom, setZoom] = useState(12);
-    const [center, setCenter] = useState({
-        lat: 37.7749,
-        lng: -122.4194,
-    });
     const schoolInfo = {
         description: "Reach Cambridge Summer School is ideal for students who want to prepare for university with English language skills!\n" +
             "Founded in 2005, Reach Cambridge is an educational institution that offers you the opportunity to study in interesting subjects in university-style classes on the campuses of Cambridge University , one of the world's leading and most prestigious universities , and provides you with a real university experience. You can see Reach Cambridge programs, offered to international students from all over the world between the ages of 14-18, as a preparation program for your university life" + "\n\nIn addition to many different and up-to-date educational programs; accommodation on the University of Cambridge campus under the supervision of university students, the opportunity to benefit from the university's social and sports facilities, the opportunity to attend conferences given by university academics, theater trips to London Global Theatre and Royal Shakespeare, the opportunity to see the most beautiful cities of England and get to know the city of Cambridge closely, this is a program where you will both learn and have an enjoyable and productive time.\n" +
             "Most of Reach Cambridge employees are students or graduates of Cambridge University. This gives our students the opportunity to experience university life up close, as well as to get more detailed information about not only Cambridge University but also university life in general, and to participate in workshops organized by the university. In addition, the points you should pay attention to in your university applications, the subtleties of preparing a high-level CV and essay, and job interview practices are among the topics you can benefit from. "
     }
+    const [center, setCenter] = useState({
+        lat: 37.7749,
+        lng: -122.4194,
+    });
     const coordinates = {
         lat: 37.7749,
         lng: -122.4194,
     };
+    const [activeIndex, setActiveIndex] = useState(0)
+    const [showTransition, setShowTransition] = useState(false)
+    const [transitionStart, setTransitionStart] = useState(0)
+
+    useEffect(() => {
+        if (showTransition) {
+            const timer = setTimeout(() => {
+                setShowTransition(false)
+            }, 500)
+            return () => clearTimeout(timer)
+        }
+    }, [showTransition])
+
+    const handleDotClick = (index: number) => {
+        if(index>activeIndex){
+            handleSlide(index)
+            setTransitionStart(activeIndex-1)
+            setActiveIndex(index)
+            setShowTransition(true)
+        }
+        else if(activeIndex>index){
+            handleSlide(index)
+            setTransitionStart(activeIndex-1)
+            setActiveIndex(index)
+            setShowTransition(true)
+        }
+    }
+    const imagesRef=useRef(null)
+    const handleSlide = (index: number) => {
+        if (imagesRef.current) {
+            const containerWidth = imagesRef.current.clientWidth
+            const scrollPosition = index * containerWidth
+            imagesRef.current.scrollTo({
+                left: scrollPosition,
+                behavior: "smooth",
+            })
+        }
+    };
+
     return (
         <div className="page__school__info">
-            <div className="image-container" key={imageIndex}>
-                <Image
-                    src={images[imageIndex]}
-                    alt="school"
-                    className="fade-image page__school__info__img"
-                />
+            <div className="image-container" ref={imagesRef}>
+                {images.map((image, index) => (
+                    <Image
+                        key={index}
+                        src={image}
+                        alt={`Image ${index + 1}`}
+                        className="page__school__info__img"
+                    />
+                ))}
             </div>
-            <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 12, marginTop: 24}}>
-                {images.map((_, index) =>
-                    <div className={imageIndex === index ? "active__selector" : "image__selector"}
-                         onClick={() => setImageIndex(index)} key={index}>
-                    </div>
-                )}
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 12, marginTop: 24,position:'relative'}} >
+                <AnimatePresence>
+                    {showTransition && (
+                        <motion.div
+                            className="absolute h-2 rounded-full"
+                            style={{maxWidth:28,
+                                width:28,
+                                background: 'var(--courses-brand-blue-400-brand)'
+                            }}
+                            initial={
+                                {x: transitionStart * 20}
+                            }
+                            animate={activeIndex>transitionStart?{x: (activeIndex-2)* 20}:{x: (activeIndex-1)* 20}}
+                            exit={{opacity: 0}}
+                            transition={{
+                                type: "spring",
+                                stiffness: 700,
+                                damping: 40,
+                                opacity: {duration: 0.4}
+                            }}
+                        />
+                    )}
+                </AnimatePresence>
+
+                {Array.from({length: images.length}).map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handleDotClick(index)}
+                        className={`w-2 h-2 rounded-full transition-colors duration-200 hover:opacity-75 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2`}
+                        style={activeIndex === index ? {
+                            borderRadius: 8,
+                            background: 'var(--courses-brand-blue-400-brand)'
+                        } : {borderRadius: 8, background: '#D5D7DA'}}
+                        aria-label={`Go to slide ${index + 1}`}
+                        aria-current={activeIndex === index ? "true" : "false"}
+                    />
+                ))}
             </div>
             <div className="page__school__info__block">
                 <div className="page__school__info__block__header" onClick={() => setIsOpenOverview(!isOpenOverview)}>
@@ -202,20 +277,26 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                             </defs>
                         </svg>}
                 </div>
-                {process.env.NEXT_GOOGLE_API_KEY&&
-                <LoadScript googleMapsApiKey={process.env.NEXT_GOOGLE_API_KEY}>
-                    <GoogleMap mapContainerStyle={
-                        isOpenMap ? {width: '100%', height: 500, display: 'block', maxHeight: '60vh',marginTop:32} :
-                            {width: '100%', height: 500, display: 'none', maxHeight: '60vh',marginTop:32}}
-                               center={center} zoom={zoom}>
-                        <MarkerF
-                            onClick={() => {
-                                setZoom(18)
-                                setCenter(coordinates)
-                            }}
-                            position={coordinates}/>
-                    </GoogleMap>
-                </LoadScript>
+                {process.env.NEXT_GOOGLE_API_KEY &&
+                    <LoadScript googleMapsApiKey={process.env.NEXT_GOOGLE_API_KEY}>
+                        <GoogleMap mapContainerStyle={
+                            isOpenMap ? {
+                                    width: '100%',
+                                    height: 500,
+                                    display: 'block',
+                                    maxHeight: '60vh',
+                                    marginTop: 32
+                                } :
+                                {width: '100%', height: 500, display: 'none', maxHeight: '60vh', marginTop: 32}}
+                                   center={center} zoom={zoom}>
+                            <MarkerF
+                                onClick={() => {
+                                    setZoom(18)
+                                    setCenter(coordinates)
+                                }}
+                                position={coordinates}/>
+                        </GoogleMap>
+                    </LoadScript>
                 }
             </div>
 
