@@ -28,6 +28,10 @@
     color:var(--Courses-Base-Black)!important;
     text-align: left;
 }
+.test__markdown p{
+    color: var(--Courses-Gray-Gray-600) !important;
+    font-weight:400!important;
+}
 .test__markdown img{
     width: 720px!important;
     max-width: Calc(100vw - 32px);
