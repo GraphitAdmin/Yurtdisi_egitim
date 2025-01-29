@@ -83,3 +83,14 @@ export interface ISchool{
     meta_title: string;
     meta_description: string;
 }
+
+export interface IBlog{
+    title: string;
+    image: string;
+    description: string;
+    "minutes_to_read": string,
+    "meta_title": string,
+    "meta_description": string,
+    "content":string,
+    "date":string
+}

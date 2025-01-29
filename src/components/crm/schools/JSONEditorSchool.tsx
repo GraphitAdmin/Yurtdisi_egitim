@@ -28,7 +28,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
     useEffect(() => {
-        fetch(`${blobUrl}jsons/schools.json`, {
+        fetch(`${blobUrl}jsons/blogs.json`, {
             cache: "no-store",
             next: {revalidate: 1},
         })
