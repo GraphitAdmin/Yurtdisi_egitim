@@ -95,6 +95,10 @@
     overflow:visible;
 }
 
+.page__school__info__block .contact__us__form{
+    background: none!important;
+    padding: 32px;
+}
 @media screen and (max-width: 992px) {
     .page__school__info__img {
         height: 360px;
@@ -113,5 +117,8 @@
     .page__school__info__block iframe{
         width: 100%;
         height: 240px;
+    }
+    .page__school__info__block .contact__us__form{
+        padding: 16px 0;
     }
 }

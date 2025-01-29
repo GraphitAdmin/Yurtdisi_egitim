@@ -28,6 +28,9 @@
 .contact__us__form .dropdown p {
     width: 100%;
     max-width: Calc(100% - 32px);
+    max-height: 24px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .contact__us__form .dropdown {
@@ -49,6 +52,40 @@
     flex-direction: column;
     gap: 6px;
 }
+.contact__us__info{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+}
+.contact__us__info div{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+.contact__us__info div div{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+.contact__us__info div p {
+    max-width: 50%;
+    cursor: pointer;
+    text-align: center;
+}
+.contact__us__info div div p{
+    max-width: none;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+    cursor: default;
+}
 
 @media screen and (max-width: 992px) {
     .contact__us__form__block {
@@ -68,6 +105,9 @@
     .contact__us__form {
         padding: 64px 32px;
     }
+    .contact__us__info{
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -76,5 +116,8 @@
     }
     .contact__us__form div{
         flex-direction: column;
+    }
+    .contact__us__info div p {
+        max-width: Calc(100vw - 64px);
     }
 }

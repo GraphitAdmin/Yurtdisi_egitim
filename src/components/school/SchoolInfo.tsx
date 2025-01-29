@@ -7,6 +7,10 @@ import './SchoolInfo.css';
 import Button from "@/components/UI/Button/Button";
 import {GoogleMap, LoadScript, MarkerF} from "@react-google-maps/api";
 import {motion, AnimatePresence} from "framer-motion"
+import Input from "@/components/UI/Input/Input";
+import Dropdown from "@/components/UI/Dropdown/Dropdown";
+import Textarea from "@/components/UI/TextArea/TextArea";
+import '../ContactUs/ContactUs.css'
 
 interface SchoolInfoProps {
     openModal: () => void
@@ -19,6 +23,14 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
     const [isOpenVideo, setIsOpenVideo] = useState(false);
     const [isOpenMap, setIsOpenMap] = useState(false);
     const [isOpenRequest, setIsOpenRequest] = useState(false);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [program, setProgram] = useState("");
+    const [city, setCity] = useState("");
+    const [country, setCountry] = useState("");
+    const [message, setMessage] = useState("");
     const schoolInfo = {
         description: "Reach Cambridge Summer School is ideal for students who want to prepare for university with English language skills!\n" +
             "Founded in 2005, Reach Cambridge is an educational institution that offers you the opportunity to study in interesting subjects in university-style classes on the campuses of Cambridge University , one of the world's leading and most prestigious universities , and provides you with a real university experience. You can see Reach Cambridge programs, offered to international students from all over the world between the ages of 14-18, as a preparation program for your university life" + "\n\nIn addition to many different and up-to-date educational programs; accommodation on the University of Cambridge campus under the supervision of university students, the opportunity to benefit from the university's social and sports facilities, the opportunity to attend conferences given by university academics, theater trips to London Global Theatre and Royal Shakespeare, the opportunity to see the most beautiful cities of England and get to know the city of Cambridge closely, this is a program where you will both learn and have an enjoyable and productive time.\n" +
@@ -47,20 +59,19 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
     }, [showTransition])
 
     const handleDotClick = (index: number) => {
-        if(index>activeIndex){
+        if (index > activeIndex) {
             handleSlide(index)
-            setTransitionStart(activeIndex-1)
+            setTransitionStart(activeIndex - 1)
             setActiveIndex(index)
             setShowTransition(true)
-        }
-        else if(activeIndex>index){
+        } else if (activeIndex > index) {
             handleSlide(index)
-            setTransitionStart(activeIndex-1)
+            setTransitionStart(activeIndex - 1)
             setActiveIndex(index)
             setShowTransition(true)
         }
     }
-    const imagesRef=useRef(null)
+    const imagesRef = useRef(null)
     const handleSlide = (index: number) => {
         if (imagesRef.current) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -88,19 +99,27 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                     />
                 ))}
             </div>
-            <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 12, marginTop: 24,position:'relative'}} >
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 12,
+                marginTop: 24,
+                position: 'relative'
+            }}>
                 <AnimatePresence>
                     {showTransition && (
                         <motion.div
                             className="absolute h-2 rounded-full"
-                            style={{maxWidth:28,
-                                width:28,
+                            style={{
+                                maxWidth: 28,
+                                width: 28,
                                 background: 'var(--courses-brand-blue-400-brand)'
                             }}
                             initial={
                                 {x: transitionStart * 20}
                             }
-                            animate={activeIndex>transitionStart?{x: (activeIndex-2)* 20}:{x: (activeIndex-1)* 20}}
+                            animate={activeIndex > transitionStart ? {x: (activeIndex - 2) * 20} : {x: (activeIndex - 1) * 20}}
                             exit={{opacity: 0}}
                             transition={{
                                 type: "spring",
@@ -120,9 +139,11 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                         style={activeIndex === index ? {
                             borderRadius: 8,
                             background: 'var(--courses-brand-blue-400-brand)',
-                            maxWidth:8,maxHeight:8
-                        } : {borderRadius: 8, background: '#D5D7DA',
-                            maxWidth:8,maxHeight:8}}
+                            maxWidth: 8, maxHeight: 8
+                        } : {
+                            borderRadius: 8, background: '#D5D7DA',
+                            maxWidth: 8, maxHeight: 8
+                        }}
                         aria-label={`Go to slide ${index + 1}`}
                         aria-current={activeIndex === index ? "true" : "false"}
                     />
@@ -334,7 +355,53 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                             </defs>
                         </svg>}
                 </div>
-                {isOpenRequest && <p>{schoolInfo.description}</p>}
+                <div className="contact__us__form"
+                     style={isOpenRequest ?
+                         {display:'flex'} :
+                         {display:'none'}
+                     }>
+                    <div>
+                        <div>
+                            <small>First name</small>
+                            <Input placeholder="First name" setValue={setFirstName} value={firstName}/>
+                        </div>
+                        <div>
+                            <small>Last name</small>
+                            <Input placeholder="Last name" setValue={setLastName} value={lastName}/>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <small>Email</small>
+                            <Input placeholder="mail@gmail.com" setValue={setEmail} value={email}/>
+                        </div>
+                        <div>
+                            <small>Phone number</small>
+                            <Input placeholder="Phone number" setValue={setPhone} value={phone}/>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <small>Your city</small>
+                            <Input placeholder="Your city" setValue={setCity} value={city}/>
+                        </div>
+                        <div>
+                            <small>Program(s) you are interested in</small>
+                            <Input placeholder="Program(s) you are interested in" setValue={setProgram}
+                                   value={program}/>
+                        </div>
+                    </div>
+                    <div style={{flexDirection: 'column'}}>
+                        <small>
+                            Country(ies) you are interested in
+                        </small>
+                        <Dropdown label='Select country(ies) you are interested in' setSelected={setCountry}
+                                  variants={['USA', 'UK']} selected={country}/>
+                    </div>
+                    <Textarea value={message} setValue={setMessage} placeholder='Message'/>
+                    <Button label='Send message' btnStyle={{width: '100%', padding: '12px 0', textAlign: 'center'}}
+                            btnDivStyle={{justifyContent: 'center'}}/>
+                </div>
             </div>
         </div>
     )
