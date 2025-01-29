@@ -11,7 +11,7 @@ const Abroad: React.FC<IAbroad> = ({imgPost, date, time, title,link, description
                 width: '100%',alignItems:"center",
             marginTop:12}}>
                 <p style={{
-                    color: 'var(--courses-brand-blue-400-brand)',
+                    color: 'var(--Courses-Brand-Blue-500)',
                     fontWeight: 600,
                     fontSize: '14px',
                 }}>{date}</p>
@@ -19,7 +19,7 @@ const Abroad: React.FC<IAbroad> = ({imgPost, date, time, title,link, description
                     <circle cx="2" cy="2" r="2" fill="#2E90FA"/>
                 </svg>
                 <p style={{
-                    color: 'var(--courses-brand-blue-400-brand)',
+                    color: 'var(--Courses-Brand-Blue-500)',
                     fontWeight: 600,
                     fontSize: '14px',
                 }}>{time} min read</p>

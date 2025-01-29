@@ -51,10 +51,10 @@
     gap: 6px;
 }
 .events__post:hover div svg path{
-    fill:var(--courses-brand-blue-400-brand);
+    fill:var(--Courses-Brand-Blue-500);
 }
 .abroad__post:hover div svg path{
-    fill:var(--courses-brand-blue-400-brand) !important;
+    fill:var(--Courses-Brand-Blue-500) !important;
 }
 .events__buttons{
     display:flex;
