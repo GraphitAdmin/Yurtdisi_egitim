@@ -109,7 +109,7 @@ const CRM = () => {
                                     vitae praesent placerat venenatis ac.
                                 </p>
                             </div>
-                            <Button href='/universities' label='Learn more'
+                            <Button href='/summer-schools' label='Learn more'
                                     btnStyle={{padding: '12px 24px'}}/>
                         </div>
                     </div>
@@ -151,7 +151,7 @@ const CRM = () => {
                                     vitae praesent placerat venenatis ac.
                                 </p>
                             </div>
-                            <Button href='/universities' label='Learn more'/>
+                            <Button href='/summer-schools' label='Learn more'/>
                         </div>
                     </div>
 
@@ -192,7 +192,7 @@ const CRM = () => {
                                     vitae praesent placerat venenatis ac.
                                 </p>
                             </div>
-                            <Button href='/universities' label='Learn more'/>
+                            <Button href='/summer-schools' label='Learn more'/>
                         </div>
                     </div>
                     {/* Block 4 */}
@@ -233,7 +233,7 @@ const CRM = () => {
                                     vitae praesent placerat venenatis ac.
                                 </p>
                             </div>
-                            <Button href='/universities' label='Learn more'/>
+                            <Button href='/summer-schools' label='Learn more'/>
                         </div>
                     </div>
                 </div>
