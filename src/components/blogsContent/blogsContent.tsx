@@ -1,140 +1,41 @@
 'use client'
 import Button from "@/components/UI/Button/Button";
 import React, {useEffect, useState} from "react";
-import {CardProps} from "@/utils/interfaces";
+import {IBlog} from "@/utils/interfaces";
 import '../eventsContent/eventsContent.css'
-import ImageCard from "@/assets/home/Illustration.png";
 import Card from "@/components/UI/Card/Card";
+import {Loader2} from "lucide-react";
 
 const BlogsContent = () => {
-    const blogs = [
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        }, {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        }, {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-        {
-            imgPost: ImageCard,
-            title: "What are TOEFL and IELTS and what are they not?",
-            description: "An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date: "13 January 2024",
-            time: '8',
-            link: "",
-        },
-
-
-    ]
+    const [blogs,setBlogs]=useState<IBlog[]>([]);
     const [showCountriesButton, setShowCountriesButton] = useState(false)
+    const [loading,setLoading]=useState(true);
+    const [showEvents, setShowEvents] = useState<IBlog[]>()
+    const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
-    const [showEvents, setShowEvents] = useState<CardProps[]>()
     useEffect(() => {
-        setShowEvents(blogs.slice(0, 9))
-    }, [])
+        fetch(`${blobUrl}jsons/blogs.json`, {
+            cache: "no-store",
+            next: {revalidate: 1},
+        })
+            .then((response) => response.json())
+            .then((data: IBlog[]) => {
+                setBlogs(data);
+                setShowEvents(data.slice(0, 9))
+                setLoading(false)
+            })
+            .catch((err) => {
+                setLoading(false)
+                console.error(err);
+            });
+    }, []);
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-64">
+                <Loader2 className="h-8 w-8 animate-spin text-primary"/>
+            </div>
+        )
+    }
     return (
         <div className="page__container">
             <div style={{width: '100%'}}>

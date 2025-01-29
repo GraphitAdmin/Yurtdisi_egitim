@@ -53,9 +53,10 @@ const Blog: React.FC<BlogProps> = ({title}) => {
             </div>
         )
     }
+    console.log('title',blog?.title)
 
-    if (error) {
-        return <p className="text-red-500 text-center">{error}</p>
+    if (error||blog?.title===undefined) {
+        return <h1>Error</h1>
     }
 
     return (
