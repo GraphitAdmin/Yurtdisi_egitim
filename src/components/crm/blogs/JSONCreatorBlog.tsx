@@ -105,7 +105,7 @@ const JSONCreator = () => {
 
             if (!response.ok) throw new Error("Failed to save")
             toast.success("Saved successfully!", successToasterStyles)
-            window.location.href = "/crm/blog/" + blogs[blogs.length - 1].title.replace(/ /g, '-').toLowerCase()
+            window.location.href = "/crm/blog/" + blogs[blogs.length - 1].title.replace(/ /g, '-').replace(/[^a-zA-Z0-9 ]/g, '') .toLowerCase()
         } catch (err) {
             setError("Failed to save data")
             console.log(err)

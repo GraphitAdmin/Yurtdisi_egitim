@@ -20,14 +20,26 @@
     width: 100%;
 }
 .test__markdown{
-    margin-left: auto;
     width: 100%;
+    max-width:720px;
+    margin-top: 96px;
 }
 .test__markdown > *{
     color:var(--Courses-Base-Black)!important;
     text-align: left;
 }
+.test__markdown img{
+    width: 720px!important;
+    max-width: Calc(100vw - 32px);
+    border-radius: 16px;
+    background: lightgray 50% / cover no-repeat;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
 @media screen and (max-width: 992px) {
+    .test__markdown{
+        margin-top: 64px;
+    }
     .blog__header{
         display: flex;
         max-width: 100vw;

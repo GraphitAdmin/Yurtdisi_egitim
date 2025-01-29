@@ -10,8 +10,8 @@ interface BlogProps {
 }
 
 const Blog: React.FC<BlogProps> = ({title}) => {
-    const [loading,setLoading]=useState(true)
-    const [error,setError]=useState(false)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
 
     const [blog, setBlog] = useState<IBlog>()
     const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
@@ -24,7 +24,17 @@ const Blog: React.FC<BlogProps> = ({title}) => {
             .then((response) => response.json())
             .then((data: IBlog[]) => {
                 data.forEach((blog) => {
-                    if (blog.title.toLowerCase() === title.replace(/-/g, ' ').replace(/^\w/, (char) => char.toLowerCase())) {
+                    const cleanedName = title
+                        .replace(/[^a-zA-Z0-9 ]/g, '')
+                        .replace(/-/g, '')
+                        .replace(/^\w/, (char) => char.toLowerCase());
+                    const cleanedTitle = blog.title
+                        .replace(/[^a-zA-Z0-9 ]/g, '')
+                        .replace(/-/g, '')
+                        .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
+                    console.log('name', cleanedName)
+                    console.log('title', cleanedTitle)
+                    if (cleanedTitle.toLowerCase() === cleanedName.toLowerCase()) {
                         setBlog(blog)
                     }
                 });
@@ -39,7 +49,7 @@ const Blog: React.FC<BlogProps> = ({title}) => {
     if (loading) {
         return (
             <div className="flex justify-center items-center h-64">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                <Loader2 className="h-8 w-8 animate-spin text-primary"/>
             </div>
         )
     }
@@ -74,15 +84,15 @@ const Blog: React.FC<BlogProps> = ({title}) => {
                         }
                     </div>
                 </div>
-                <Image   width={720}
-                         height={572}
-                         layout="responsive" src={blobUrl+blog?.image} alt='Passport'/>
+                <Image width={720}
+                       height={572}
+                       layout="responsive" src={blobUrl + blog?.image} alt='Passport'/>
             </div>
 
-            <div className="page__container">
+            <div className="page__container" style={{justifyContent: 'center'}}>
                 <div
                     className="test__markdown"
-                    dangerouslySetInnerHTML={{__html: blog?.content?blog.content:''}}
+                    dangerouslySetInnerHTML={{__html: blog?.content ? blog.content : ''}}
                 >
                 </div>
             </div>

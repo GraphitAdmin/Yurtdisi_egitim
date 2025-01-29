@@ -33,10 +33,20 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
             .then((response) => response.json())
             .then((data: IBlog[]) => {
                 setBlogs(data);
-                data.forEach((school, index) => {
-                    if (school.title.toLowerCase() === name.replace(/-/g, ' ').replace(/^\w/, (char) => char.toLowerCase())) {
+                data.forEach((blog, index) => {
+                    const cleanedName = name
+                        .replace(/[^a-zA-Z0-9 ]/g, '')
+                        .replace(/-/g, '')
+                        .replace(/^\w/, (char) => char.toLowerCase());
+                    const cleanedTitle = blog.title
+                        .replace(/[^a-zA-Z0-9 ]/g, '')
+                        .replace(/-/g, '')
+                        .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
+                    console.log('name',cleanedName)
+                    console.log('title',cleanedTitle)
+                    if (cleanedTitle.toLowerCase() === cleanedName.toLowerCase()) {
                         setBlogIndex(index);
-                        setStartValue(school.content)
+                        setStartValue(blog.content)
                     }
                 });
                 setLoading(false);
@@ -51,7 +61,6 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const handleInputChange = (index: number, field: keyof IBlog, value: string | string[]) => {
         const updatedSchools = [...blogs];
         updatedSchools[index] = {...updatedSchools[index], [field]: value};
-        console.log(updatedSchools[index]);
         setBlogs(updatedSchools);
     };
 
