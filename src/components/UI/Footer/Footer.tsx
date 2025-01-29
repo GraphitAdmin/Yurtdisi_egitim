@@ -9,7 +9,7 @@ const Footer = () => {
                 <div className="footer__main">
                     <div className="footer__header">
                         <div>
-                            <Logo color='var(--courses-brand-blue-400-brand)'/>
+                            <Logo color='var(--Courses-Brand-Blue-500)'/>
                         </div>
                         <div>
                             <div className="social__circle">
