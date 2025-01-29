@@ -95,6 +95,7 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                         key={index}
                         src={image}
                         alt={`Image ${index + 1}`}
+                        loading="lazy"
                         className="page__school__info__img"
                     />
                 ))}
