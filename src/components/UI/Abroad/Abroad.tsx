@@ -11,15 +11,15 @@ const Abroad: React.FC<IAbroad> = ({imgPost, date, time, title,link, description
                 width: '100%',alignItems:"center",
             marginTop:12}}>
                 <p style={{
-                    color: 'var(--Courses-Brand-Blue-500)',
+                    color: 'var(--Courses-Brand-Blue-600)',
                     fontWeight: 600,
                     fontSize: '14px',
                 }}>{date}</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">
-                    <circle cx="2" cy="2" r="2" fill="#2E90FA"/>
+                    <circle cx="2" cy="2" r="2" fill="var(--Courses-Brand-Blue-600)"/>
                 </svg>
                 <p style={{
-                    color: 'var(--Courses-Brand-Blue-500)',
+                    color: 'var(--Courses-Brand-Blue-600)',
                     fontWeight: 600,
                     fontSize: '14px',
                 }}>{time} min read</p>
