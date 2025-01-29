@@ -25,7 +25,7 @@
     width: 100%;
 }
 
-.contact__us__form .dropdown p {
+.contact__us__form .dropdown > p {
     width: 100%;
     max-width: Calc(100% - 32px);
     max-height: 24px;
@@ -71,7 +71,7 @@
     flex-direction: row;
     gap: 8px;
 }
-.contact__us__info div p {
+.contact__us__info div > p {
     max-width: 50%;
     cursor: pointer;
     text-align: center;
