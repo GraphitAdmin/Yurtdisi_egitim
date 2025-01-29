@@ -67,7 +67,6 @@ const Footer = () => {
                         </div>
                         <div>
                             <Link href='/text'><h6>Company</h6></Link>
-                            <Link href='/about-us'><p>About us</p></Link>
                             <Link href='/contact-us'><p>Contact us</p></Link>
                         </div>
 

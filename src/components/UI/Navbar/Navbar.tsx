@@ -93,11 +93,6 @@ const Navbar: React.FC<NavbarProps> = ({home}) => {
                         </div>
 
                         <div className="nav__us">
-                            <Link href="/about-us">
-                                <h6>
-                                    About Us
-                                </h6>
-                            </Link>
                             <Link href="/contact-us">
                                 <h6>
                                     Contact Us
