@@ -270,6 +270,7 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                     style={isOpenVideo ? {display: 'block'} : {display: 'none'}}
                     src="https://www.youtube.com/embed/fZI47lyocSQ?si=Livmosvb_52jeKy8"
                     title="YouTube video player"
+                    loading="lazy"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
@@ -357,8 +358,8 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                 </div>
                 <div className="contact__us__form"
                      style={isOpenRequest ?
-                         {display:'flex'} :
-                         {display:'none'}
+                         {display: 'flex'} :
+                         {display: 'none'}
                      }>
                     <div>
                         <div>
@@ -391,14 +392,19 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                                    value={program}/>
                         </div>
                     </div>
-                    <div style={{flexDirection: 'column'}}>
+                    <div style={{flexDirection: 'column', gap: 0}}>
                         <small>
                             Country(ies) you are interested in
                         </small>
                         <Dropdown label='Select country(ies) you are interested in' setSelected={setCountry}
                                   variants={['USA', 'UK']} selected={country}/>
                     </div>
-                    <Textarea value={message} setValue={setMessage} placeholder='Message'/>
+                    <div style={{flexDirection: 'column', gap: 0}}>
+                        <small>
+                            Message
+                        </small>
+                        <Textarea value={message} setValue={setMessage} placeholder='Message'/>
+                    </div>
                     <Button label='Send message' btnStyle={{width: '100%', padding: '12px 0', textAlign: 'center'}}
                             btnDivStyle={{justifyContent: 'center'}}/>
                 </div>

@@ -240,14 +240,19 @@ const ContactUs = () => {
                                    value={program}/>
                         </div>
                     </div>
-                    <div style={{flexDirection: 'column'}}>
+                    <div style={{flexDirection: 'column', gap: 0}}>
                         <small>
                             Country(ies) you are interested in
                         </small>
                         <Dropdown label='Select country(ies) you are interested in' setSelected={setCountry}
                                   variants={['USA', 'UK']} selected={country}/>
                     </div>
-                    <Textarea value={message} setValue={setMessage} placeholder='Message'/>
+                    <div style={{flexDirection: 'column', gap: 0}}>
+                        <small>
+                            Message
+                        </small>
+                        <Textarea value={message} setValue={setMessage} placeholder='Message'/>
+                    </div>
                     <Button label='Send message' btnStyle={{width: '100%', padding: '12px 0'}}
                             btnDivStyle={{justifyContent: 'center'}}
                     />
