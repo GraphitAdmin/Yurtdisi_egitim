@@ -1,14 +1,14 @@
 'use client'
 import Card from "@/components/UI/Card/Card";
 import React, {useRef} from "react";
-import {CardProps} from "@/utils/interfaces";
+import {IBlog} from "@/utils/interfaces";
 import './BlockCard.css'
 import Button from "@/components/UI/Button/Button";
 
 interface BlockCardProps {
     title: string;
     description: string;
-    cards: CardProps[];
+    cards: IBlog[];
     buttonText:string;
 }
 

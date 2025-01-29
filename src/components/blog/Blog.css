@@ -34,7 +34,7 @@
 }
 .test__markdown img{
     width: 720px!important;
-    max-width: Calc(100vw - 64px);
+    max-width: 100%!important;
     border-radius: 16px;
     background: lightgray 50% / cover no-repeat;
     margin-top: 32px;

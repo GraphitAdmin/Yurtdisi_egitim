@@ -1,32 +1,26 @@
+'use client'
 import AbroadCard from "@/components/home/AbroadPrograms/AbroadCard";
 import ImageProgram from "@/assets/home/program.jpg";
 import BlockCard from "@/components/home/BlockCard/BlockCard";
-import ImageCard from "@/assets/home/Illustration.png";
-
+import {useEffect, useState} from "react";
+import {IBlog} from "@/utils/interfaces"
 const References = () => {
-    const references=[
-        {imgPost:ImageCard,
-            title:"What are TOEFL and IELTS and what are they not?",
-            description:"An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date:"13 January 2024",
-            time:'8',
-            link:"",
-        },
-        {imgPost:ImageCard,
-            title:"What are TOEFL and IELTS and what are they not?",
-            description:"An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date:"13 January 2024",
-            time:'8',
-            link:"",
-        },
-        {imgPost:ImageCard,
-            title:"What are TOEFL and IELTS and what are they not?",
-            description:"An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.",
-            date:"13 January 2024",
-            time:'8',
-            link:"",
-        }
-    ]
+    const [blogs,setBlogs]=useState<IBlog[]>([])
+    const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
+
+    useEffect(() => {
+        fetch(`${blobUrl}jsons/blogs.json`, {
+            cache: "no-store",
+            next: {revalidate: 1},
+        })
+            .then((response) => response.json())
+            .then((data: IBlog[]) => {
+                setBlogs(data.slice(0, 3))
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }, []);
     return (
         <>
             <div className="abroad__programs">
@@ -43,13 +37,13 @@ const References = () => {
             <BlockCard
                 title='Useful information'
                 description='Lorem ipsum dolor sit amet consectetur. Sit vulputate sed iaculis nisi nulla phasellus massa nulla tellus.'
-                cards={references}
+                cards={blogs}
                 buttonText='View all information'
             />
             <BlockCard
                 title='Our blog posts'
                 description='Lorem ipsum dolor sit amet consectetur. Sit vulputate sed iaculis nisi nulla phasellus massa nulla tellus.'
-                cards={references}
+                cards={blogs}
                 buttonText='View all blogs'
             />
         </>
