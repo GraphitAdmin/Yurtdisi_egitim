@@ -15,7 +15,7 @@ const References = () => {
         })
             .then((response) => response.json())
             .then((data: IBlog[]) => {
-                setBlogs(data.slice(0, 3))
+                setBlogs(data.reverse().slice(0, 3))
             })
             .catch((err) => {
                 console.error(err);
