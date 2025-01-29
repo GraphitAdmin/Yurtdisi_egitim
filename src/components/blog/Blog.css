@@ -34,7 +34,7 @@
 }
 .test__markdown img{
     width: 720px!important;
-    max-width: Calc(100vw - 32px);
+    max-width: Calc(100vw - 64px);
     border-radius: 16px;
     background: lightgray 50% / cover no-repeat;
     margin-top: 32px;
@@ -62,5 +62,8 @@
 @media screen and (max-width: 576px) {
     .blog__header > div{
         padding: 0 16px;
+    }
+    .test__markdown img{
+        max-width: Calc(100vw - 32px);
     }
 }

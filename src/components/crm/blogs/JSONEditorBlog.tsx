@@ -80,6 +80,29 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
             console.error(err);
         }
     };
+    const handleDelete = async () => {
+        if (blogIndex === null) return
+
+        const confirmDelete = window.confirm("Are you sure you want to delete this blog post?")
+        if (!confirmDelete) return
+
+        try {
+            const updatedBlogs = blogs.filter((_, index) => index !== blogIndex)
+            const response = await fetch("/api/save-blogs", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedBlogs),
+            })
+            if (!response.ok) throw new Error("Failed to delete")
+            toast.success("Blog deleted successfully!", successToasterStyles)
+            window.location.href='/crm/blogs'
+        } catch (err) {
+            setError("Failed to delete blog")
+            console.error(err)
+        }
+    }
 
     async function handleSubmit(formData: FormData) {
         setIsUploading(true);
@@ -240,9 +263,15 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                     {/*</div>*/}
                                 </div>
                         ))}
-            <div className="w-full flex justify-center">
+            <div className="w-full flex justify-center gap-4">
                 <Button onClick={handleSave} className="w-36 border-2 border-black">
                     Save Changes
+                </Button>
+                <Button
+                    onClick={handleDelete}
+                    className="w-36 border-2 border-red-400  hover:bg-red-500 hover:text-white"
+                >
+                    Delete Blog
                 </Button>
             </div>
         </div>
