@@ -5,7 +5,7 @@ import {Button} from "@/components/crm/ui/button";
 import {Input} from "@/components/crm/ui/input";
 import {Textarea} from "@/components/crm/ui/textarea";
 import Image from "next/image";
-import {uploadImage} from "@/app/crm/students/uploadImage";
+import {uploadImage} from "@/app/crm/uploadImage";
 import './JSONEditor.css'
 import {successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
@@ -28,7 +28,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
     useEffect(() => {
-        fetch(`${blobUrl}jsons/blogs.json`, {
+        fetch(`${blobUrl}jsons/schools.json`, {
             cache: "no-store",
             next: {revalidate: 1},
         })
@@ -52,6 +52,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const handleInputChange = (index: number, field: keyof ISchool, value: string | string[]) => {
         const updatedSchools = [...schools];
         updatedSchools[index] = {...updatedSchools[index], [field]: value};
+        console.log(updatedSchools[index]);
         setSchools(updatedSchools);
     };
 
@@ -103,7 +104,6 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
         await handleSubmit(formData);
     };
 
-
     const handleRemoveImage = async (schoolId: number, imageID: string) => {
         const updatedSchools = schools.map((school, id) => {
             if (id === schoolId) {
@@ -117,7 +117,35 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
 
         setSchools(updatedSchools)
     }
-
+    const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
+        if (!event.target.files || event.target.files.length === 0) {
+            return
+        }
+        const file = event.target.files[0]
+        console.log(file)
+        const formData = new FormData()
+        formData.append("image", file)
+        await handleFileSubmit(formData)
+    }
+    async function handleFileSubmit(formData: FormData) {
+        setIsUploading(true)
+        setError(null)
+        try {
+            const result = await uploadImage(formData)
+            console.log(result)
+            console.log(schoolIndex)
+            if (result.success && result.url&&schoolIndex!==null) {
+                handleInputChange(schoolIndex, "image_right", result.filename)
+            } else {
+                setError("Upload failed. Please try again.")
+            }
+        } catch (e) {
+            setError("Something went wrong. Please try again.")
+            console.error("error", e)
+        } finally {
+            setIsUploading(false)
+        }
+    }
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
 
@@ -148,6 +176,19 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                               setSelected={(value) => {
                                                   handleInputChange(index, "education_type", value)
                                               }}/>
+                                </div>
+                            </div>
+                            <div className="flex flex-row justify-between gap-2">
+                                <div className="w-full">
+                                    <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
+                                        Website Active
+                                    </h6>
+                                    <Dropdown label='Website Active' selected={school.website_active}
+                                              setSelected={(value) => handleInputChange(index, "website_active", value)}
+                                              variants={['Active','Disabled']}
+                                    />
+                                </div>
+                                <div className="w-full">
                                 </div>
                             </div>
                             <div className="flex flex-row justify-between gap-2">
@@ -328,6 +369,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                                 width={250}
                                                 height={250}
                                                 alt={school.title}
+                                                style={{maxHeight:'-webkit-fill-available'}}
                                             />
                                             <XIcon onClick={() => handleRemoveImage(index, image)}
                                                    className="image__crm__x" style={{width: 125, height: 125}}/>
@@ -343,6 +385,26 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                     className="max-w-sm mt-2"
                                     onChange={handleFileChange}
                                 />
+                                <div>
+                                    <h6>Image Right</h6>
+                                    <div className="flex flex-wrap gap-2">
+                                        <Image
+                                            src={blobUrl + school.image_right}
+                                            alt={`School image`}
+                                            width={100}
+                                            height={100}
+                                        />
+                                    </div>
+                                    <input
+                                        id="image"
+                                        name="image"
+                                        type="file"
+                                        accept="image/*"
+                                        disabled={isUploading}
+                                        className="max-w-sm mt-2"
+                                        onChange={handleImageChange}
+                                    />
+                                </div>
                             </div>
                         </div>
                     )

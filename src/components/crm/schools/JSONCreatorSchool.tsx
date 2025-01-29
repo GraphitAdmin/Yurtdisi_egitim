@@ -5,7 +5,7 @@ import {Button} from "@/components/crm/ui/button"
 import {Input} from "@/components/crm/ui/input"
 import {Textarea} from "@/components/crm/ui/textarea"
 import Image from "next/image"
-import {uploadImage} from "@/app/crm/students/uploadImage"
+import {uploadImage} from "@/app/crm/uploadImage"
 import toast from "react-hot-toast"
 import {errorToasterStyles, successToasterStyles} from "@/utils/utils"
 import type {ISchool} from "@/utils/interfaces"
@@ -47,6 +47,8 @@ const JSONCreator = () => {
                     accommodation: "",
                     meta_title: "",
                     meta_description: "",
+                    image_right:"",
+                    website_active:"Active"
                 }
                 setSchools([...data, newSchool])
                 setLoading(false)
@@ -91,6 +93,32 @@ const JSONCreator = () => {
         formData.append("image", file)
         await handleSubmit(formData)
     }
+    async function handleFileSubmit(formData: FormData) {
+        setIsUploading(true)
+        setError(null)
+        try {
+            const result = await uploadImage(formData)
+            if (result.success && result.url) {
+                handleInputChange(schools.length - 1, "image_right", result.filename)
+            } else {
+                setError("Upload failed. Please try again.")
+            }
+        } catch (e) {
+            setError("Something went wrong. Please try again.")
+            console.error("error", e)
+        } finally {
+            setIsUploading(false)
+        }
+    }
+    const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
+        if (!event.target.files || event.target.files.length === 0) {
+            return
+        }
+        const file = event.target.files[0]
+        const formData = new FormData()
+        formData.append("image", file)
+        await handleFileSubmit(formData)
+    }
 
     const handleSave = async () => {
         const newSchool = schools[schools.length - 1]
@@ -117,7 +145,7 @@ const JSONCreator = () => {
 
             if (!response.ok) throw new Error("Failed to save")
             toast.success("Saved successfully!", successToasterStyles)
-            window.location.href = "/crm/school/" + schools[schools.length - 1].title
+            window.location.href = "/crm/school/" + schools[schools.length - 1].title.replace(/-/g, ' ')
         } catch (err) {
             setError("Failed to save data")
             console.log(err)
@@ -176,6 +204,19 @@ const JSONCreator = () => {
                                 onChange={(e) => handleInputChange(index, "meta_description", e.target.value)}
                                 placeholder="Meta Description"
                             />
+                        </div>
+                    </div>
+                    <div className="flex flex-row justify-between gap-2">
+                        <div className="w-full">
+                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
+                                Website Active
+                            </h6>
+                            <Dropdown label='Website Active' selected={school.website_active}
+                                      setSelected={(value) => handleInputChange(index, "website_active", value)}
+                                      variants={['Active', 'Disabled']}
+                            />
+                        </div>
+                        <div className="w-full">
                         </div>
                     </div>
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
@@ -327,6 +368,7 @@ const JSONCreator = () => {
                                     alt={`School image ${imgIndex + 1}`}
                                     width={100}
                                     height={100}
+                                    style={{maxHeight:'-webkit-fill-available'}}
                                 />
                             ))}
                         </div>
@@ -338,6 +380,26 @@ const JSONCreator = () => {
                             disabled={isUploading}
                             className="max-w-sm mt-2"
                             onChange={handleFileChange}
+                        />
+                    </div>
+                    <div>
+                        <h6>Image Right</h6>
+                        <div className="flex flex-wrap gap-2">
+                            <Image
+                                src={`https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/${school.image_right}`}
+                                alt={`School image`}
+                                width={100}
+                                height={100}
+                            />
+                        </div>
+                        <input
+                            id="image"
+                            name="image"
+                            type="file"
+                            accept="image/*"
+                            disabled={isUploading}
+                            className="max-w-sm mt-2"
+                            onChange={handleImageChange}
                         />
                     </div>
                 </div>

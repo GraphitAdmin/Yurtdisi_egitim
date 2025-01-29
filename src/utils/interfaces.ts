@@ -82,6 +82,8 @@ export interface ISchool{
     accommodation: string;
     meta_title: string;
     meta_description: string;
+    image_right:string;
+    website_active:string;
 }
 
 export interface IBlog{

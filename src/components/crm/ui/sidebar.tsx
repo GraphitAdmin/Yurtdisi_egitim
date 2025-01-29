@@ -1,17 +1,15 @@
 import Link from "next/link"
-import {Home, Users, School, FileText, Calendar, Settings, Bell, BarChart, Globe, Building} from 'lucide-react'
+import {Home, Users, School, FileText, Calendar, Settings, Globe, Building,NotebookPen} from 'lucide-react'
 
 const navigationItems = [
     { name: "Home page", icon: Home, href: "/" },
     { name: "Students", icon: Users, href: "/students" },
     { name: "Cities", icon: Building, href: "/cities" },
     { name: "Schools", icon: School, href: "/schools" },
+    { name: "Blogs", icon: NotebookPen, href: "/blogs" },
     { name: "Pages", icon: FileText, href: "/pages" },
     { name: "Events", icon: Calendar, href: "/events" },
     { name: "General Settings", icon: Settings, href: "/settings" },
-    { name: "Reminders", icon: Bell, href: "/reminders" },
-    { name: "Reports", icon: BarChart, href: "/reports" },
-    { name: "Site Settings", icon: Settings, href: "/site-settings" },
 ]
 
 export function Sidebar() {

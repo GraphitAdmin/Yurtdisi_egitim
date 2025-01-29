@@ -5,7 +5,7 @@ import {Button} from "@/components/crm/ui/button";
 import {Input} from "@/components/crm/ui/input";
 import {Textarea} from "@/components/crm/ui/textarea";
 import Image from "next/image";
-import {uploadImage} from "@/app/crm/students/uploadImage";
+import {uploadImage} from "@/app/crm/uploadImage";
 import './JSONEditor.css'
 import {successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";

@@ -9,7 +9,7 @@
     gap: 8px;
     border-radius: 8px;
     padding: 12px 24px;
-    background: var(--courses-brand-blue-400-brand);
+    background: var(--Courses-Brand-Blue-500);
 }
 
 .myBtn .myBtn__label {
@@ -24,7 +24,7 @@
 
 .myBtn:hover {
     transition: 150ms;
-    background: var(--Courses-Brand-Blue-500);
+    background: var(--Courses-Brand-Blue-600);
 }
 
 .myBtn:hover .myBtn__label{
@@ -33,7 +33,7 @@
 .myBtn:active{
     transition: 150ms;
     border-radius: 8px;
-    background: var(--Courses-Brand-Blue-600);
+    background: var(--Courses-Brand-Blue-700);
 }
 .myBtn:active .myBtn__label{
     color: #FFFFFF;
