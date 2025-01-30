@@ -11,21 +11,27 @@ import MillSchool from "@/assets/home/Mill_School.png"
 import SchoolInfo from "@/components/school/SchoolInfo";
 import RelatedSchools from "@/components/school/RelatedSchools/RelatedSchools";
 import {ISchool} from "@/utils/interfaces";
+
 type paramsType = Promise<{ slug: string, childId: string, subChildId: string, subUniChildId: string }>;
-interface paramsI{
-    slug: string, childId: string, subChildId: string, subUniChildId: string
+
+interface paramsI {
+    slug: string,
+    childId: string,
+    subChildId: string,
+    subUniChildId: string
 }
+
 export default function Home({
-                                       params,
-                                   }: {
+                                 params,
+                             }: {
     params: paramsType;
 }) {
-    const [paramsData,setParamsData]=useState<paramsI|null>(null)
-    const [school,setSchool]=useState<ISchool|null>(null)
+    const [paramsData, setParamsData] = useState<paramsI | null>(null)
+    const [school, setSchool] = useState<ISchool | null>(null)
     useEffect(() => {
         const loadParams = async () => {
             setParamsData(await params)
-            const {subUniChildId}=await params
+            const {subUniChildId} = await params
             try {
                 const blobUrl = 'https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/jsons/schools.json';
                 const response = await fetch(blobUrl, {
@@ -35,7 +41,7 @@ export default function Home({
                     throw new Error('Failed to fetch JSON');
                 }
                 const jsonData = await response.json();
-                jsonData.map((school:ISchool)=>{
+                jsonData.map((school: ISchool) => {
                     const cleanedName = subUniChildId
                         .replace(/[^a-zA-Z0-9 ]/g, '')
                         .replace(/-/g, '')
@@ -56,30 +62,30 @@ export default function Home({
             }
         }
         loadParams().then()
-    },[])
+    }, [])
     return (
         <div>
             <Navbar home={false}/>
             <Tabs/>
             <div className="page__container">
-                {paramsData&&
-                <div style={{width: '100%'}}>
-                    <h1 style={{textTransform: 'capitalize'}}>{paramsData.subUniChildId.replace(/-/g, ' ')}</h1>
-                </div>
+                {paramsData &&
+                    <div style={{width: '100%'}}>
+                        <h1 style={{textTransform: 'capitalize'}}>{paramsData.subUniChildId.replace(/-/g, ' ')}</h1>
+                    </div>
                 }
-                {school!==null &&
+                {school !== null &&
                     <div className="page__school">
                         <SchoolInfo school={school}/>
                         <div className="page__school__right">
                             <div className="page__school__right__info">
                                 <Image src={MillSchool} alt="MillSchool"/>
-                                {school.title&&
+                                {school.title &&
                                     <div>
                                         <p>School</p>
                                         <p>{school.title}</p>
                                     </div>
                                 }
-                                {school.city&&
+                                {school.city &&
                                     <div>
                                         <p>City</p>
                                         <p>{school.city}</p>
@@ -94,7 +100,8 @@ export default function Home({
                                 {school.website &&
                                     <div>
                                         <p>Website</p>
-                                        <a style={{color: 'var(--courses-brand-blue-400-brand)'}} href={school.website}>{school.website.replace('https://','')}</a>
+                                        <a style={{color: 'var(--courses-brand-blue-400-brand)'}}
+                                           href={school.website}>{school.website.replace('https://', '')}</a>
                                     </div>
                                 }
                                 {school.capacity &&
@@ -123,39 +130,41 @@ export default function Home({
                                 }
                             </div>
 
-                        <div className="page__country__schools__country__recommendations">
-                        <h5 style={{marginBottom: 4}}>Foreign language schools</h5>
-                            <Link href={'/smth'}><p>
-                                UK language schools</p>
-                            </Link>
-                            <Link href={'/smth'}><p>
-                                UK language schools</p>
-                            </Link>
-                            <Link href={'/smth'}><p>
-                                UK language schools</p>
-                            </Link>
-                            <Link href={'/smth'}><p>
-                                UK language schools</p>
-                            </Link>
-                            <Link href={'/smth'}><p>
-                                UK language schools</p>
-                            </Link>
-                            <div style={{display: 'flex', flexDirection: 'row', gap: 4, cursor: "pointer"}}>
-                                <p style={{
-                                    fontWeight: 600,
-                                    color: 'var(--courses-brand-blue-400-brand, #2E90FA)'
-                                }}>Show more</p>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none">
-                                    <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z" fill="#2E90FA"/>
-                                </svg>
+                            <div className="page__country__schools__country__recommendations">
+                                <h5 style={{marginBottom: 4}}>Foreign language schools</h5>
+                                <Link href={'/smth'}><p>
+                                    UK language schools</p>
+                                </Link>
+                                <Link href={'/smth'}><p>
+                                    UK language schools</p>
+                                </Link>
+                                <Link href={'/smth'}><p>
+                                    UK language schools</p>
+                                </Link>
+                                <Link href={'/smth'}><p>
+                                    UK language schools</p>
+                                </Link>
+                                <Link href={'/smth'}><p>
+                                    UK language schools</p>
+                                </Link>
+                                <div style={{display: 'flex', flexDirection: 'row', gap: 4, cursor: "pointer"}}>
+                                    <p style={{
+                                        fontWeight: 600,
+                                        color: 'var(--courses-brand-blue-400-brand, #2E90FA)'
+                                    }}>Show more</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none">
+                                        <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z" fill="#2E90FA"/>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 }
             </div>
-            <RelatedSchools/>
+            {school !== null &&
+                <RelatedSchools/>
+            }
             <Subscribe/>
             <Footer/>
         </div>
