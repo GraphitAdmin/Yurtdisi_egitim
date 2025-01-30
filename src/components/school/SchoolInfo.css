@@ -24,6 +24,9 @@
     align-items: center;
     cursor: pointer;
 }
+.page__school__info__block__header h4{
+    color: var(--Courses-Base-Black);
+}
 .page__school__info__block p{
     text-align: justify;
     color: var(--Courses-Gray-Gray-600);

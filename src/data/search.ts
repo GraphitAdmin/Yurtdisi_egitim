@@ -22,5 +22,5 @@ export const searchCities = [
     'London', 'Oxford',
 ]
 export const searchPrograms = [
-    'Program 1', 'Program 2',
+    'Example International Academy', 'Example International Academy',
 ]

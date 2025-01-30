@@ -8,19 +8,19 @@ import {GoogleMap, LoadScript, MarkerF} from "@react-google-maps/api";
 import {motion, AnimatePresence} from "framer-motion"
 import '../ContactUs/ContactUs.css'
 import ContactUsForm from "@/components/ContactUs/ContactUsForm/ContactUsForm";
+import {ISchool} from "@/utils/interfaces";
 
-const SchoolInfo = () => {
+interface SchoolInfoSchool {
+    school: ISchool;
+}
+
+const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
     const images = [Oxford, Sevenoaks, Oxford, Sevenoaks]
     const [isOpenOverview, setIsOpenOverview] = useState(true);
     const [isOpenDetails, setIsOpenDetails] = useState(false);
     const [isOpenVideo, setIsOpenVideo] = useState(false);
     const [isOpenMap, setIsOpenMap] = useState(false);
     const [isOpenRequest, setIsOpenRequest] = useState(false);
-    const schoolInfo = {
-        description: "Reach Cambridge Summer School is ideal for students who want to prepare for university with English language skills!\n" +
-            "Founded in 2005, Reach Cambridge is an educational institution that offers you the opportunity to study in interesting subjects in university-style classes on the campuses of Cambridge University , one of the world's leading and most prestigious universities , and provides you with a real university experience. You can see Reach Cambridge programs, offered to international students from all over the world between the ages of 14-18, as a preparation program for your university life" + "\n\nIn addition to many different and up-to-date educational programs; accommodation on the University of Cambridge campus under the supervision of university students, the opportunity to benefit from the university's social and sports facilities, the opportunity to attend conferences given by university academics, theater trips to London Global Theatre and Royal Shakespeare, the opportunity to see the most beautiful cities of England and get to know the city of Cambridge closely, this is a program where you will both learn and have an enjoyable and productive time.\n" +
-            "Most of Reach Cambridge employees are students or graduates of Cambridge University. This gives our students the opportunity to experience university life up close, as well as to get more detailed information about not only Cambridge University but also university life in general, and to participate in workshops organized by the university. In addition, the points you should pay attention to in your university applications, the subtleties of preparing a high-level CV and essay, and job interview practices are among the topics you can benefit from. "
-    }
     const [zoom, setZoom] = useState(12);
     const [center, setCenter] = useState({
         lat: 37.7749,
@@ -71,7 +71,7 @@ const SchoolInfo = () => {
             })
         }
     };
-
+    console.log(school)
     return (
         <div className="page__school__info">
             <div className="image-container" ref={imagesRef}>
@@ -163,24 +163,20 @@ const SchoolInfo = () => {
                             </defs>
                         </svg>}
                 </div>
-                <p style={isOpenOverview ? {display: 'block'} : {display: 'none'}}>
-                    {schoolInfo.description}
-                </p>
                 <div style={isOpenOverview ? {display: 'block'} : {display: 'none'}}>
-                    <h5 style={{textAlign: 'left', color: 'var(--Courses-Base-Black'}}>Why School Name?</h5>
-                    <ul>
-                        <li> • In addition to many different and up-to-date educational programs;</li>
-                        <li> • accommodation on the University of Cambridge campus under the supervision of university
-                            students
-                        </li>
-                        <li> • the opportunity to benefit from the university&#39;s social and sports facilities, the
-                            opportunity to attend conferences given by university academics, theater trips to London
-                            Global Theatre and Royal Shakespeare,
-                        </li>
-                        <li> • the opportunity to see the most beautiful cities of England and get to know the city of
-                            Cambridge closely, this is a program where you will both learn and have an enjoyable and
-                            productive time.
-                        </li>
+                    <h5 style={{textAlign: 'left', color: 'var(--Courses-Base-Black)',marginTop:12}}>Why {school.title}?</h5>
+                    <p>
+                        {school.school_overview}
+                    </p>
+                </div>
+
+                <div style={isOpenOverview ? {display: 'block'} : {display: 'none'}}>
+                    <h5 style={{textAlign: 'left', color: 'var(--Courses-Base-Black)',marginTop:12}}>Why {school.title}?</h5>
+                    <ul style={{marginTop:8}}>
+                        {school.why_block
+                            .split("\n").map((group, index) => (
+                                <li key={index}>&nbsp;•&nbsp;{group}</li>
+                            ))}
                     </ul>
                 </div>
             </div>
@@ -218,7 +214,9 @@ const SchoolInfo = () => {
                 </div>
                 <p
                     style={isOpenDetails ? {display: 'block'} : {display: 'none'}}
-                >{schoolInfo.description}</p>
+                    dangerouslySetInnerHTML={{__html: school.detailed_information}}
+
+                ></p>
             </div>
 
             <div className="page__school__info__block">
