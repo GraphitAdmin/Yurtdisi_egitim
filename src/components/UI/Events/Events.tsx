@@ -77,7 +77,7 @@ const Events =()=>{
                     <h2>
                         Upcoming events
                     </h2>
-                    <Button href='/our-event-calendar' label="View more"/>
+                    <Button href='/our-event-calendar' label="View all events"/>
                 </div>
                 <p className="events__header__p">
                     Lorem ipsum dolor sit amet consectetur. Sit vulputate sed iaculis nisi nulla phasellus massa
