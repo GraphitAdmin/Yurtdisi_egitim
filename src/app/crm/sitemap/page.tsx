@@ -6,7 +6,7 @@ export default function AdminPanel() {
             <div className="flex">
                 <Sidebar />
                 <main className="flex-1 p-4">
-                   Pages
+                   Settings
                 </main>
             </div>
         </div>

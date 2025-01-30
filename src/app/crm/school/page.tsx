@@ -90,7 +90,7 @@ export default function AdminPanel() {
                                         className="w-full md:w-64 bg-white/50 backdrop-blur-sm"
                                     />
                                     <Button onClick={() => {
-                                        window.location.href = '/crm/schools/new'
+                                        window.location.href = '/crm/school/new'
                                     }} className="w-48 border-2 border-black">
                                         <PlusCircle className="mr-2 h-4 w-4"/> Add New School
                                     </Button>

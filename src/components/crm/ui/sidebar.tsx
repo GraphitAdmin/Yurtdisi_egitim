@@ -1,14 +1,13 @@
 import Link from "next/link"
-import {Home, Users, School, FileText, Calendar, Settings, Globe, Building,NotebookPen} from 'lucide-react'
+import {Users, School, FileText, Calendar, Settings, Globe, Building,NotebookPen} from 'lucide-react'
 
 const navigationItems = [
-    { name: "Home page", icon: Home, href: "/" },
     { name: "Students", icon: Users, href: "/students" },
-    { name: "Cities", icon: Building, href: "/cities" },
-    { name: "Schools", icon: School, href: "/schools" },
-    { name: "Blogs", icon: NotebookPen, href: "/blogs" },
-    { name: "Pages", icon: FileText, href: "/pages" },
-    { name: "Events", icon: Calendar, href: "/events" },
+    { name: "Cities", icon: Building, href: "/city" },
+    { name: "Schools", icon: School, href: "/school" },
+    { name: "Blogs", icon: NotebookPen, href: "/blog" },
+    { name: "Events", icon: Calendar, href: "/event" },
+    { name: "Sitemap", icon: FileText, href: "/sitemap" },
     { name: "General Settings", icon: Settings, href: "/settings" },
 ]
 
