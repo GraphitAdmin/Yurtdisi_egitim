@@ -16,8 +16,8 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-    title: "Global Yurtdisi egitim",
-    description: "Global Yurtdisi egitim",
+    title: "Eeeeducation",
+    description: "Eeeeducation",
 };
 
 export default function RootLayout({
