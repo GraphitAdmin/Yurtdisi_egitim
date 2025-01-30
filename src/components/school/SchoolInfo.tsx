@@ -11,6 +11,7 @@ import Input from "@/components/UI/Input/Input";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import Textarea from "@/components/UI/TextArea/TextArea";
 import '../ContactUs/ContactUs.css'
+import ContactUsForm from "@/components/ContactUs/ContactUsForm/ContactUsForm";
 
 interface SchoolInfoProps {
     openModal: () => void
@@ -23,14 +24,6 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
     const [isOpenVideo, setIsOpenVideo] = useState(false);
     const [isOpenMap, setIsOpenMap] = useState(false);
     const [isOpenRequest, setIsOpenRequest] = useState(false);
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [program, setProgram] = useState("");
-    const [city, setCity] = useState("");
-    const [country, setCountry] = useState("");
-    const [message, setMessage] = useState("");
     const schoolInfo = {
         description: "Reach Cambridge Summer School is ideal for students who want to prepare for university with English language skills!\n" +
             "Founded in 2005, Reach Cambridge is an educational institution that offers you the opportunity to study in interesting subjects in university-style classes on the campuses of Cambridge University , one of the world's leading and most prestigious universities , and provides you with a real university experience. You can see Reach Cambridge programs, offered to international students from all over the world between the ages of 14-18, as a preparation program for your university life" + "\n\nIn addition to many different and up-to-date educational programs; accommodation on the University of Cambridge campus under the supervision of university students, the opportunity to benefit from the university's social and sports facilities, the opportunity to attend conferences given by university academics, theater trips to London Global Theatre and Royal Shakespeare, the opportunity to see the most beautiful cities of England and get to know the city of Cambridge closely, this is a program where you will both learn and have an enjoyable and productive time.\n" +
@@ -357,58 +350,8 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                             </defs>
                         </svg>}
                 </div>
-                <div className="contact__us__form"
-                     style={isOpenRequest ?
-                         {display: 'flex'} :
-                         {display: 'none'}
-                     }>
-                    <div>
-                        <div>
-                            <small>First name</small>
-                            <Input placeholder="First name" setValue={setFirstName} value={firstName}/>
-                        </div>
-                        <div>
-                            <small>Last name</small>
-                            <Input placeholder="Last name" setValue={setLastName} value={lastName}/>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <small>Email</small>
-                            <Input placeholder="mail@gmail.com" setValue={setEmail} value={email}/>
-                        </div>
-                        <div>
-                            <small>Phone number</small>
-                            <Input placeholder="Phone number" setValue={setPhone} value={phone}/>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <small>Your city</small>
-                            <Input placeholder="Your city" setValue={setCity} value={city}/>
-                        </div>
-                        <div>
-                            <small>Program(s) you are interested in</small>
-                            <Input placeholder="Program(s) you are interested in" setValue={setProgram}
-                                   value={program}/>
-                        </div>
-                    </div>
-                    <div style={{flexDirection: 'column', gap: 0}}>
-                        <small>
-                            Country(ies) you are interested in
-                        </small>
-                        <Dropdown label='Select country(ies) you are interested in' setSelected={setCountry}
-                                  variants={['USA', 'UK']} selected={country}/>
-                    </div>
-                    <div style={{flexDirection: 'column', gap: 0}}>
-                        <small>
-                            Message
-                        </small>
-                        <Textarea value={message} setValue={setMessage} placeholder='Message'/>
-                    </div>
-                    <Button label='Send message' btnStyle={{width: '100%', padding: '12px 0', textAlign: 'center'}}
-                            btnDivStyle={{justifyContent: 'center'}}/>
-                </div>
+                {isOpenRequest &&
+                    <ContactUsForm/>}
             </div>
         </div>
     )
