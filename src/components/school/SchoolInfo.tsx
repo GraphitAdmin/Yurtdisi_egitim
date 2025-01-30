@@ -7,9 +7,6 @@ import './SchoolInfo.css';
 import Button from "@/components/UI/Button/Button";
 import {GoogleMap, LoadScript, MarkerF} from "@react-google-maps/api";
 import {motion, AnimatePresence} from "framer-motion"
-import Input from "@/components/UI/Input/Input";
-import Dropdown from "@/components/UI/Dropdown/Dropdown";
-import Textarea from "@/components/UI/TextArea/TextArea";
 import '../ContactUs/ContactUs.css'
 import ContactUsForm from "@/components/ContactUs/ContactUsForm/ContactUsForm";
 
