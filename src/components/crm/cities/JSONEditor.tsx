@@ -103,6 +103,30 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
         await handleSubmit(formData);
     };
 
+    const handleDelete = async () => {
+        if (cityIndex === null) return
+
+        const confirmDelete = window.confirm("Are you sure you want to delete this city?")
+        if (!confirmDelete) return
+
+        try {
+            const updatedCities = cities.filter((_, index) => index !== cityIndex)
+            const response = await fetch("/api/save-cities", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedCities),
+            })
+            if (!response.ok) throw new Error("Failed to delete")
+            toast.success("City deleted successfully!", successToasterStyles)
+            window.location.href='/crm/city'
+        } catch (err) {
+            setError("Failed to delete blog")
+            console.error(err)
+        }
+    }
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
 
@@ -165,9 +189,15 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                         </div>
                     )
             )}
-            <div className="w-full flex justify-center">
+            <div className="w-full flex justify-center gap-4">
                 <Button onClick={handleSave} className="w-36 border-2 border-black">
                     Save Changes
+                </Button>
+                <Button
+                    onClick={handleDelete}
+                    className="w-36 border-2 border-red-400  hover:bg-red-500 hover:text-white"
+                >
+                    Delete City
                 </Button>
             </div>
         </div>

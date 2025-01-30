@@ -97,7 +97,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
             })
             if (!response.ok) throw new Error("Failed to delete")
             toast.success("Blog deleted successfully!", successToasterStyles)
-            window.location.href='/crm/blogs'
+            window.location.href='/crm/blog'
         } catch (err) {
             setError("Failed to delete blog")
             console.error(err)
