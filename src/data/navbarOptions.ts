@@ -1,4 +1,4 @@
-import {allCountries, Australian, Canada, Germany, Irish, Malta, UK, US} from "@/data/countries";
+import {allCountries, Germany,Malta, UK, US, Austria, Italy, France, Portugal, Spain, Switzerland} from "@/data/countries";
 
 export const navbarOptions = [
     {
@@ -7,11 +7,14 @@ export const navbarOptions = [
         options: [
             UK,
             US,
-            Canada,
             Malta,
-            Irish,
-            Australian,
             Germany,
+            Austria,
+            Italy,
+            France,
+            Portugal,
+            Spain,
+            Switzerland,
             allCountries
         ]
     },
@@ -19,13 +22,16 @@ export const navbarOptions = [
         name: 'Summer schools',
         link: '/summer-schools',
         options: [
-            UK,
+          UK,
             US,
-            Canada,
             Malta,
-            Irish,
-            Australian,
             Germany,
+            Austria,
+            Italy,
+            France,
+            Portugal,
+            Spain,
+            Switzerland,
             allCountries
         ]
     },
@@ -33,13 +39,16 @@ export const navbarOptions = [
         name: 'High schools',
         link: '/high-schools',
         options: [
-            UK,
+          UK,
             US,
-            Canada,
             Malta,
-            Irish,
-            Australian,
             Germany,
+            Austria,
+            Italy,
+            France,
+            Portugal,
+            Spain,
+            Switzerland,
             allCountries
         ]
     },
@@ -47,13 +56,16 @@ export const navbarOptions = [
         name: 'Universities',
         link: '/universities',
         options: [
-            UK,
+          UK,
             US,
-            Canada,
             Malta,
-            Irish,
-            Australian,
             Germany,
+            Austria,
+            Italy,
+            France,
+            Portugal,
+            Spain,
+            Switzerland,
             allCountries
         ]
     },
@@ -61,13 +73,16 @@ export const navbarOptions = [
         name: 'Foundation programs',
         link: '/foundation-programs',
         options: [
-            UK,
+          UK,
             US,
-            Canada,
             Malta,
-            Irish,
-            Australian,
             Germany,
+            Austria,
+            Italy,
+            France,
+            Portugal,
+            Spain,
+            Switzerland,
             allCountries
         ]
     },
@@ -75,13 +90,16 @@ export const navbarOptions = [
         name: 'Certificates',
         link: '/certificates',
         options: [
-            UK,
+          UK,
             US,
-            Canada,
             Malta,
-            Irish,
-            Australian,
             Germany,
+            Austria,
+            Italy,
+            France,
+            Portugal,
+            Spain,
+            Switzerland,
             allCountries
         ]
     }

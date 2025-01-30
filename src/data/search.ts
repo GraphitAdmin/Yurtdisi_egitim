@@ -1,12 +1,26 @@
 export const searchTypes = [
-    'Language schools','Summer schools','High Schools','Universities','Foundation programs','Certificates'
+    'Language schools',
+    'Summer schools',
+    'High Schools',
+    'Universities',
+    'Foundation programs',
+    'Certificates'
 ]
 export const searchCountries = [
-    'United States','United Kingdom','Canada','Germany'
+    'United Kingdom',
+    'United States',
+    'Malta',
+    'Germany',
+    'Austria',
+    'Italy',
+    'France',
+    'Portugal',
+    'Spain',
+    'Switzerland'
 ]
 export const searchCities = [
-    'London','Oxford',
+    'London', 'Oxford',
 ]
 export const searchPrograms = [
-    'Program 1','Program 2',
+    'Program 1', 'Program 2',
 ]

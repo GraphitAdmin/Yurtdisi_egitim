@@ -11,6 +11,7 @@ import {successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
 import {IBlog} from "@/utils/interfaces";
 import { Editor } from '@tinymce/tinymce-react';
+import Dropdown from "@/components/UI/Dropdown/Dropdown";
 
 interface IJsonEditor {
     name: string;
@@ -153,26 +154,15 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                                 style={{height: 49}}
                                             />
                                         </div>
-                                    </div>
-                                    <div className="flex flex-row justify-between gap-2">
                                         <div className="w-full">
                                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                                Meta Title
+                                                Type
                                             </h6>
-                                            <Input
-                                                value={blog.meta_title}
-                                                onChange={(e) => handleInputChange(index, "meta_title", e.target.value)}
-                                                placeholder="Meta Title"
-                                            />
-                                        </div>
-                                        <div className="w-full">
-                                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                                Meta Description
-                                            </h6>
-                                            <Input
-                                                value={blog.meta_description}
-                                                onChange={(e) => handleInputChange(index, "meta_description", e.target.value)}
-                                                placeholder="Meta Description"
+                                            <Dropdown
+                                                selected={blog.type}
+                                                label="Type"
+                                                setSelected={(value) => handleInputChange(index, "type", value)}
+                                                variants={["Blog", "Useful Information"]}
                                             />
                                         </div>
                                     </div>

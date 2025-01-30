@@ -10,6 +10,7 @@ import {errorToasterStyles, successToasterStyles} from "@/utils/utils"
 import type {IBlog} from "@/utils/interfaces"
 import './JSONEditor.css'
 import {Editor} from "@tinymce/tinymce-react";
+import Dropdown from "@/components/UI/Dropdown/Dropdown";
 
 const JSONCreator = () => {
     const [blogs, setBlogs] = useState<IBlog[]>([])
@@ -28,12 +29,11 @@ const JSONCreator = () => {
                 const newBlog: IBlog = {
                     title: "new",
                     image: "",
-                    meta_title: "",
-                    meta_description: "",
                     description: "",
                     minutes_to_read: "",
                     content: "",
-                    date:""
+                    date:"",
+                    type:"Blog"
                 }
                 setStartValue("")
                 setBlogs([...data, newBlog])
@@ -132,26 +132,15 @@ const JSONCreator = () => {
                                 style={{height: 49}}
                             />
                         </div>
-                    </div>
-                    <div className="flex flex-row justify-between gap-2">
                         <div className="w-full">
                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                Meta Title
+                                Type
                             </h6>
-                            <Input
-                                value={blog.meta_title}
-                                onChange={(e) => handleInputChange(index, "meta_title", e.target.value)}
-                                placeholder="Meta Title"
-                            />
-                        </div>
-                        <div className="w-full">
-                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                Meta Description
-                            </h6>
-                            <Input
-                                value={blog.meta_description}
-                                onChange={(e) => handleInputChange(index, "meta_description", e.target.value)}
-                                placeholder="Meta Description"
+                            <Dropdown
+                                selected={blog.type}
+                                label="Type"
+                                setSelected={(value) => handleInputChange(index, "type", value)}
+                                variants={["Blog", "Useful Information"]}
                             />
                         </div>
                     </div>

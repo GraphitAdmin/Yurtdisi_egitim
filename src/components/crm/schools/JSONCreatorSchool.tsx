@@ -11,6 +11,7 @@ import {errorToasterStyles, successToasterStyles} from "@/utils/utils"
 import type {ISchool} from "@/utils/interfaces"
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import {searchTypes} from "@/data/search";
+import {Editor} from "@tinymce/tinymce-react";
 
 const JSONCreator = () => {
     const [schools, setSchools] = useState<ISchool[]>([])
@@ -45,8 +46,6 @@ const JSONCreator = () => {
                     age_group: "",
                     programs: [],
                     accommodation: "",
-                    meta_title: "",
-                    meta_description: "",
                     image_right:"",
                     website_active:"Active"
                 }
@@ -187,28 +186,6 @@ const JSONCreator = () => {
                     <div className="flex flex-row justify-between gap-2">
                         <div className="w-full">
                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                Meta Title
-                            </h6>
-                            <Input
-                                value={school.meta_title}
-                                onChange={(e) => handleInputChange(index, "meta_title", e.target.value)}
-                                placeholder="Meta Title"
-                            />
-                        </div>
-                        <div className="w-full">
-                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                Meta Description
-                            </h6>
-                            <Input
-                                value={school.meta_description}
-                                onChange={(e) => handleInputChange(index, "meta_description", e.target.value)}
-                                placeholder="Meta Description"
-                            />
-                        </div>
-                    </div>
-                    <div className="flex flex-row justify-between gap-2">
-                        <div className="w-full">
-                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                                 Website Active
                             </h6>
                             <Dropdown label='Website Active' selected={school.website_active}
@@ -230,10 +207,31 @@ const JSONCreator = () => {
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                         Detailed Information
                     </h6>
-                    <Textarea
-                        value={school.detailed_information}
-                        onChange={(e) => handleInputChange(index, 'detailed_information', e.target.value)}
-                        placeholder="Detailed Information"
+                    <Editor
+                        key={index}
+                        apiKey='q662md15li9b5x4ik1he15mkqnu12n32bhitaaulz2efbig4'
+                        init={{
+                            plugins: [
+                                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'table', 'wordcount',
+                                'checklist', 'mediaembed', 'casechange', 'export', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen',
+                                'powerpaste', 'advtable', 'advcode', 'editimage', 'tinycomments', 'tableofcontents',
+                                'footnotes', 'mergetags', 'autocorrect', 'typography', 'importword', 'exportword', 'exportpdf'
+                            ],
+                            toolbar: 'undo redo | blocks | underline strikethrough | link media table | bullist',
+                            tinycomments_mode: 'embedded',
+                            tinycomments_author: 'Author name',
+                            mergetags_list: [
+                                {value: 'First.Name', title: 'First Name'},
+                                {value: 'Email', title: 'Email'},
+                            ],
+                            ai_request: () => {
+                            },
+                        }}
+
+                        initialValue={''}
+                        onEditorChange={(content) => {
+                            handleInputChange(index, 'detailed_information', content)
+                        }}
                     />
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                         Why Choose Us

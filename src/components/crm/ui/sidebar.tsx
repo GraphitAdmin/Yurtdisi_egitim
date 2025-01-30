@@ -3,8 +3,7 @@ import {Users, School, Calendar, Settings, Building,NotebookPen} from 'lucide-re
 import React from "react";
 
 const navigationItems = [
-    { name: "Students PDF requests", icon: Users, href: "/students" },
-    { name: "Students from Forms", icon: Users, href: "/students" },
+    { name: "Students", icon: Users, href: "/students" },
     { name: "Cities", icon: Building, href: "/city" },
     { name: "Schools", icon: School, href: "/school" },
     { name: "Blogs", icon: NotebookPen, href: "/blog" },

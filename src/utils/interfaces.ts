@@ -80,8 +80,6 @@ export interface ISchool{
     age_group: string;
     programs: string[];
     accommodation: string;
-    meta_title: string;
-    meta_description: string;
     image_right:string;
     website_active:string;
 }
@@ -91,8 +89,7 @@ export interface IBlog{
     image: string;
     description: string;
     "minutes_to_read": string,
-    "meta_title": string,
-    "meta_description": string,
     "content":string,
-    "date":string
+    "date":string,
+    "type":string
 }
