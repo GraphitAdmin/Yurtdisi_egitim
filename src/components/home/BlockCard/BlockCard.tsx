@@ -52,7 +52,7 @@ const BlockCard: React.FC<BlockCardProps> = ({title, description, cards,buttonTe
                     </svg>
                 </div>
             </div>
-            <Button label={buttonText}/>
+            <Button href='/blog' label={buttonText}/>
         </div>
     );
 };
