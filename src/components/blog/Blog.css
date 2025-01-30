@@ -32,6 +32,11 @@
     color: var(--Courses-Gray-Gray-600) !important;
     font-weight:400!important;
 }
+.test__markdown a{
+    color: var(--Courses-Gray-Gray-600) !important;
+    font-weight:400!important;
+    text-decoration: underline;
+}
 .test__markdown img{
     width: 720px!important;
     max-width: 100%!important;
