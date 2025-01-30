@@ -15,7 +15,34 @@ const EventsContent = () => {
             date: '01.01.2025',
             time: '10:00 - 15:00',
             location: 'Switzerland',
-            link: '/event'
+            link: '/language-schools/united-kingdom/oxford/school'
+        }, {
+            imgPost: ImageEvent,
+            type: 'Language education',
+            title: 'College Alpin Beau Soleil',
+            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
+            date: '01.01.2025',
+            time: '10:00 - 15:00',
+            location: 'Switzerland',
+            link: '/language-schools/united-kingdom/oxford/school'
+        }, {
+            imgPost: ImageEvent,
+            type: 'Language education',
+            title: 'College Alpin Beau Soleil',
+            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
+            date: '01.01.2025',
+            time: '10:00 - 15:00',
+            location: 'Switzerland',
+            link: '/language-schools/united-kingdom/oxford/school'
+        }, {
+            imgPost: ImageEvent,
+            type: 'Language education',
+            title: 'College Alpin Beau Soleil',
+            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
+            date: '01.01.2025',
+            time: '10:00 - 15:00',
+            location: 'Switzerland',
+            link: '/language-schools/united-kingdom/oxford/school'
         },
         {
             imgPost: ImageEvent,
@@ -25,34 +52,7 @@ const EventsContent = () => {
             date: '01.01.2025',
             time: '10:00 - 15:00',
             location: 'Switzerland',
-            link: '/event'
-        }, {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
-        }, {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
-        }, {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
+            link: '/language-schools/united-kingdom/oxford/school'
         },
         {
             imgPost: ImageEvent,
@@ -62,7 +62,34 @@ const EventsContent = () => {
             date: '01.01.2025',
             time: '10:00 - 15:00',
             location: 'Switzerland',
-            link: '/event'
+            link: '/language-schools/united-kingdom/oxford/school'
+        }, {
+            imgPost: ImageEvent,
+            type: 'Language education',
+            title: 'College Alpin Beau Soleil',
+            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
+            date: '01.01.2025',
+            time: '10:00 - 15:00',
+            location: 'Switzerland',
+            link: '/language-schools/united-kingdom/oxford/school'
+        }, {
+            imgPost: ImageEvent,
+            type: 'Language education',
+            title: 'College Alpin Beau Soleil',
+            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
+            date: '01.01.2025',
+            time: '10:00 - 15:00',
+            location: 'Switzerland',
+            link: '/language-schools/united-kingdom/oxford/school'
+        }, {
+            imgPost: ImageEvent,
+            type: 'Language education',
+            title: 'College Alpin Beau Soleil',
+            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
+            date: '01.01.2025',
+            time: '10:00 - 15:00',
+            location: 'Switzerland',
+            link: '/language-schools/united-kingdom/oxford/school'
         },
         {
             imgPost: ImageEvent,
@@ -72,34 +99,7 @@ const EventsContent = () => {
             date: '01.01.2025',
             time: '10:00 - 15:00',
             location: 'Switzerland',
-            link: '/event'
-        }, {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
-        }, {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
-        }, {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
+            link: '/language-schools/united-kingdom/oxford/school'
         },
         {
             imgPost: ImageEvent,
@@ -109,17 +109,7 @@ const EventsContent = () => {
             date: '01.01.2025',
             time: '10:00 - 15:00',
             location: 'Switzerland',
-            link: '/event'
-        },
-        {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
+            link: '/language-schools/united-kingdom/oxford/school'
         }, {
             imgPost: ImageEvent,
             type: 'Language education',
@@ -128,7 +118,7 @@ const EventsContent = () => {
             date: '01.01.2025',
             time: '10:00 - 15:00',
             location: 'Switzerland',
-            link: '/event'
+            link: '/language-schools/united-kingdom/oxford/school'
         }, {
             imgPost: ImageEvent,
             type: 'Language education',
@@ -137,7 +127,7 @@ const EventsContent = () => {
             date: '01.01.2025',
             time: '10:00 - 15:00',
             location: 'Switzerland',
-            link: '/event'
+            link: '/language-schools/united-kingdom/oxford/school'
         }, {
             imgPost: ImageEvent,
             type: 'Language education',
@@ -146,54 +136,7 @@ const EventsContent = () => {
             date: '01.01.2025',
             time: '10:00 - 15:00',
             location: 'Switzerland',
-            link: '/event'
-        },
-        {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
-        },
-        {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
-        }, {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
-        }, {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
-        }, {
-            imgPost: ImageEvent,
-            type: 'Language education',
-            title: 'College Alpin Beau Soleil',
-            description: 'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-            date: '01.01.2025',
-            time: '10:00 - 15:00',
-            location: 'Switzerland',
-            link: '/event'
+            link: '/language-schools/united-kingdom/oxford/school'
         },
     ]
     const [showCountriesButton, setShowCountriesButton] = useState(false)

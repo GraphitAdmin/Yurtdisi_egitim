@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={`${urbanist.variable}`}>
-        <body>
+        <body id="__next">
         <div>
             <Analytics/>
             <SpeedInsights/>

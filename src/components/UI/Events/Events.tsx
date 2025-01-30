@@ -29,7 +29,7 @@ const Events =()=>{
                 date:'01.01.2025',
                 time:'10:00 - 15:00',
                 location:'Switzerland',
-                link:'/our-event-calendar'
+                link:'/language-schools/Germany/london/school'
             },
             {
                 imgPost:ImageEvent,
@@ -39,7 +39,7 @@ const Events =()=>{
                 date:'01.01.2025',
                 time:'10:00 - 15:00',
                 location:'Switzerland',
-                link:'/our-event-calendar'
+                link:'/language-schools/Germany/london/school'
             },{
                 imgPost:ImageEvent,
                 type:'Language education',
@@ -48,7 +48,7 @@ const Events =()=>{
                 date:'01.01.2025',
                 time:'10:00 - 15:00',
                 location:'Switzerland',
-                link:'/our-event-calendar'
+                link:'/language-schools/Germany/london/school'
             },{
                 imgPost:ImageEvent,
                 type:'Language education',
@@ -57,7 +57,7 @@ const Events =()=>{
                 date:'01.01.2025',
                 time:'10:00 - 15:00',
                 location:'Switzerland',
-                link:'/our-event-calendar'
+                link:'/language-schools/Germany/london/school'
             },{
                 imgPost:ImageEvent,
                 type:'Language education',
@@ -66,7 +66,7 @@ const Events =()=>{
                 date:'01.01.2025',
                 time:'10:00 - 15:00',
                 location:'Switzerland',
-                link:'/our-event-calendar'
+                link:'/language-schools/Germany/london/school'
             },
         ])
     },[])

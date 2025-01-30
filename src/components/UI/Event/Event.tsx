@@ -1,9 +1,22 @@
+'use client'
 import Image from "next/image";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './Event.css';
 import Button from "@/components/UI/Button/Button";
 import {IEvent} from "@/utils/interfaces";
+import { PopupButton } from "react-calendly";
+
 const Event: React.FC<IEvent> = ({imgPost,type, date, time, title, location,link, description}) => {
+    const [rootElement, setRootElement] = useState(null);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            setRootElement(document.getElementById("__next"))
+        }
+    }, [])
+
     return (
         <div className="events__post">
             <Image className="w-full" src={imgPost} alt="Post"/>
@@ -26,7 +39,25 @@ const Event: React.FC<IEvent> = ({imgPost,type, date, time, title, location,link
                 }}>{location}</p>
             </div>
             <div className="events__buttons">
-                <Button label='Book a meeting' btnStyle={{width:'100%'}}/>
+                <PopupButton
+                    url="https://calendly.com/bozhovskiy18/test"
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-expect-error
+                    rootElement={rootElement}
+                    text="Book a meeting"
+                    styles={{
+                    width:'100%',
+                        cursor: 'pointer',
+                        borderRadius: 8,
+                        padding: '12px 24px',
+                        background: 'var(--Courses-Brand-Blue-500)',
+                        color:'white',
+                        whiteSpace:'nowrap',
+                        fontWeight:600,fontSize:16,
+                        fontFamily: 'var(--font-urbanist)'
+                    }}
+                />
+                {/*<Button label='Book a meeting' btnStyle={{width:'100%'}}/>*/}
                 <Button label='School details' href={link} btnStyle={{width:'100%'}} secondary={true}/>
             </div>
 

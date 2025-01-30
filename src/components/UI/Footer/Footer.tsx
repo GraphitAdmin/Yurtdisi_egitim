@@ -66,10 +66,14 @@ const Footer = () => {
                             <Link href='/text'><p>UK Language schools</p></Link>
                         </div>
                         <div>
+                            <Link href='/blog'><h6>Blogs</h6></Link>
+                            <Link href='/our-events-calendar'><p>Events</p></Link>
+                        </div>
+
+                        <div>
                             <Link href='/text'><h6>Company</h6></Link>
                             <Link href='/contact-us'><p>Contact us</p></Link>
                         </div>
-
                     </div>
                 </div>
                 <span style={{
@@ -79,7 +83,7 @@ const Footer = () => {
                     maxWidth: 1600
                 }}/>
                 <div className="footer__bottom">
-                    <p>Copyright 2022</p>
+                    <p>Copyright 2025</p>
                     <div>
                         <p>Privacy policy</p>
                         <p>Cookies</p>
