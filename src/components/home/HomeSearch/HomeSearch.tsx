@@ -30,6 +30,18 @@ const HomeSearch = () => {
 
         setHrefLink(link);
     }, [selectedCity, selectedType, selectedProgram, selectedCountry]);
+    useEffect(() => {
+        setSelectedCity('')
+        setSelectedCountry('')
+        setSelectedProgram('')
+    }, [selectedType]);
+    useEffect(() => {
+        setSelectedCity('')
+        setSelectedProgram('')
+    }, [selectedCountry]);
+    useEffect(() => {
+        setSelectedProgram('')
+    }, [selectedCity]);
     return (
         <div className="home__container__search">
             <h5>Search for a school abroad</h5>
@@ -41,14 +53,20 @@ const HomeSearch = () => {
                 <Dropdown label='Select country'
                           selected={selectedCountry}
                           setSelected={setSelectedCountry}
+                          disabled={selectedType===''}
+                          textDisabled='Choose Type First'
                           variants={searchCountries}/>
                 <Dropdown label='Select city'
                           selected={selectedCity}
                           setSelected={setSelectedCity}
+                          disabled={selectedCountry===''}
+                          textDisabled='Choose Country First'
                           variants={searchCities}/>
                 <Dropdown label='Program type'
                           selected={selectedProgram}
                           setSelected={setSelectedProgram}
+                          disabled={selectedCity===''}
+                          textDisabled='Choose City First'
                           variants={searchPrograms}/>
                 <Button href={hrefLink} label='Search' btnStyle={{maxWidth:'100%'}}/>
             </div>
