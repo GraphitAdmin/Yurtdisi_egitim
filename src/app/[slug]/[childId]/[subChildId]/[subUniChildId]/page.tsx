@@ -10,7 +10,6 @@ import Footer from "@/components/UI/Footer/Footer";
 import MillSchool from "@/assets/home/Mill_School.png"
 import SchoolInfo from "@/components/school/SchoolInfo";
 import RelatedSchools from "@/components/school/RelatedSchools/RelatedSchools";
-import Modal from "@/components/UI/Modal/Modal";
 type paramsType = Promise<{ slug: string, childId: string, subChildId: string, subUniChildId: string }>;
 interface paramsI{
     slug: string, childId: string, subChildId: string, subUniChildId: string
@@ -27,7 +26,6 @@ export default function Home({
         }
         loadParams().then()
     },[])
-    const [modal, setModal] = useState<boolean>(false);
     const school={
         school:'Kaplan International Colleges',
         city:'Oxford',
@@ -40,9 +38,6 @@ export default function Home({
     }
     return (
         <div>
-            {modal&&
-                <Modal closeModal={()=>setModal(false)}/>
-            }
             <Navbar home={false}/>
             <Tabs/>
             <div className="page__container">
@@ -52,7 +47,7 @@ export default function Home({
                 </div>
                 }
                 <div className="page__school">
-                    <SchoolInfo openModal={()=>setModal(true)}/>
+                    <SchoolInfo/>
                     <div className="page__school__right">
                         <div className="page__school__right__info">
                             <Image src={MillSchool} alt="MillSchool"/>

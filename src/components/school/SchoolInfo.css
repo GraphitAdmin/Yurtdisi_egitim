@@ -31,22 +31,7 @@
     white-space: pre-line;
     position: relative;
 }
-.page__school__info__blur{
-    backdrop-filter: blur(2px);
-    height: 65%;
-    min-height: 65%;
-    width: Calc(100% + 16px);
-    left: -8px;
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.page__school__info__blur button{
-    width: 320px;
-    max-width: Calc(100vw - 16px);
-}
+
 .page__school__info__img{
     height: 480px;
     max-height: 480px;

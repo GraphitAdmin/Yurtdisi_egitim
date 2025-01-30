@@ -4,17 +4,12 @@ import Oxford from "@/assets/schools/Test.jpeg";
 import Sevenoaks from "@/assets/schools/Sevenoaks.jpg";
 import React, {useEffect, useRef, useState} from "react";
 import './SchoolInfo.css';
-import Button from "@/components/UI/Button/Button";
 import {GoogleMap, LoadScript, MarkerF} from "@react-google-maps/api";
 import {motion, AnimatePresence} from "framer-motion"
 import '../ContactUs/ContactUs.css'
 import ContactUsForm from "@/components/ContactUs/ContactUsForm/ContactUsForm";
 
-interface SchoolInfoProps {
-    openModal: () => void
-}
-
-const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
+const SchoolInfo = () => {
     const images = [Oxford, Sevenoaks, Oxford, Sevenoaks]
     const [isOpenOverview, setIsOpenOverview] = useState(true);
     const [isOpenDetails, setIsOpenDetails] = useState(false);
@@ -169,9 +164,6 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({openModal}) => {
                         </svg>}
                 </div>
                 <p style={isOpenOverview ? {display: 'block'} : {display: 'none'}}>
-                    <span className="page__school__info__blur">
-                        <Button label='I want more info' onClick={openModal}/>
-                    </span>
                     {schoolInfo.description}
                 </p>
                 <div style={isOpenOverview ? {display: 'block'} : {display: 'none'}}>
