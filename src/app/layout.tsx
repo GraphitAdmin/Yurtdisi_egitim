@@ -6,6 +6,7 @@ import "./footer.css";
 import "./layout.css"
 import React from "react";
 import { Toaster } from 'react-hot-toast';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const urbanist = Urbanist({
     weight: ['200','300','400', '500', '600', '700', '800'],
@@ -28,6 +29,7 @@ export default function RootLayout({
         <html lang="en" className={`${urbanist.variable}`}>
         <body>
         <div>
+            <SpeedInsights/>
             {children}
             <Toaster/>
         </div>
