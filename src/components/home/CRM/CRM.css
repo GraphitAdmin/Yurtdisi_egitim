@@ -92,7 +92,7 @@
 
 .CRM__block__description div p {
     width: 90%;
-    color: var(--Courses-Gray-Gray-500);
+    color: var(--Courses-Gray-Gray-600);
     text-overflow: ellipsis;
     text-align: left;
     margin-top: 8px;
