@@ -23,14 +23,17 @@ const Tabs: React.FC = () => {
     return (
         <div className="tabs">
             <div className="home__tab">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                        d="M5.00016 15.8333H7.50016V10.8333H12.5002V15.8333H15.0002V8.33333L10.0002 4.58333L5.00016 8.33333V15.8333ZM3.3335 17.5V7.5L10.0002 2.5L16.6668 7.5V17.5H10.8335V12.5H9.16683V17.5H3.3335Z"
-                        fill="#717680"/>
-                </svg>
+                <Link href='/'>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path
+                            d="M5.00016 15.8333H7.50016V10.8333H12.5002V15.8333H15.0002V8.33333L10.0002 4.58333L5.00016 8.33333V15.8333ZM3.3335 17.5V7.5L10.0002 2.5L16.6668 7.5V17.5H10.8335V12.5H9.16683V17.5H3.3335Z"
+                            fill="#717680"/>
+                    </svg>
+                </Link>
+
             </div>
             <div className="tab__item dots__item">
-                <Link href={'/' + tabsPathArray.slice(0,tabsPathArray.length-1).join('/')}>
+                <Link href={'/' + tabsPathArray.slice(0, tabsPathArray.length - 1).join('/')}>
                     <small style={{textTransform: 'capitalize'}}>...</small>
                 </Link>
             </div>
