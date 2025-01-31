@@ -9,7 +9,6 @@ import {blobUrl} from "@/utils/utils";
 
 const BlogsContent = () => {
     const [blogs,setBlogs]=useState<IBlog[]>([]);
-    const [showCountriesButton, setShowCountriesButton] = useState(false)
     const [loading,setLoading]=useState(true);
     const [showEvents, setShowEvents] = useState<IBlog[]>()
 
@@ -28,6 +27,7 @@ const BlogsContent = () => {
                 setLoading(false)
                 console.error(err);
             });
+        console.log(blogs)
     }, []);
     if (loading) {
         return (
@@ -51,12 +51,6 @@ const BlogsContent = () => {
                     )
                 }
             </div>
-            {!showCountriesButton &&
-                <Button onClick={() => {
-                    setShowCountriesButton(true)
-                    setShowEvents(blogs)
-                }} label={'Show all blogs'}/>
-            }
         </div>
     )
 }
