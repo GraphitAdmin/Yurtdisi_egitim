@@ -4,11 +4,10 @@ import ImageProgram from "@/assets/home/program.jpg";
 import BlockCard from "@/components/home/BlockCard/BlockCard";
 import {useEffect, useState} from "react";
 import {IBlog} from "@/utils/interfaces"
+import {blobUrl} from "@/utils/utils";
 const References = () => {
     const [blogs,setBlogs]=useState<IBlog[]>([])
     const [useful,setUseful]=useState<IBlog[]>([])
-
-    const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
     useEffect(() => {
         fetch(`${blobUrl}jsons/blogs.json`, {

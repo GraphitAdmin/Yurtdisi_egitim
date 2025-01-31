@@ -4,6 +4,7 @@ import Button from "@/components/UI/Button/Button";
 import React, {useEffect, useRef, useState} from "react";
 import {IBlog} from "@/utils/interfaces";
 import Card from "@/components/UI/Card/Card";
+import {blobUrl} from "@/utils/utils";
 const Abroads =()=>{
     const eventsRef = useRef(null);
     const [blogs, setBlogs] = useState<IBlog[]>([])
@@ -18,7 +19,6 @@ const Abroads =()=>{
             });
         }
     };
-    const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
     useEffect(() => {
         fetch(`${blobUrl}jsons/blogs.json`, {

@@ -1,10 +1,12 @@
 'use client'
 import '../Events/Events.css'
-import React, { useRef} from "react";
-import UK from "@/assets/countries/UK.webp";
+import React, {useRef} from "react";
 import CardSchoolSearch from "@/components/UI/CardSchoolSearch/CardSchoolSearch";
-
-const RecommendationsSearch = () => {
+import {ISchool} from "@/utils/interfaces";
+interface ISchools {
+    schools:ISchool[]
+}
+const RecommendationsSearch: React.FC<ISchools> = ({schools}) => {
     const eventsRef = useRef(null);
     const scroll = (direction: string) => {
         const scrollAmount = 413;
@@ -17,17 +19,15 @@ const RecommendationsSearch = () => {
             });
         }
     };
+
     return (
         <div className="events search__recommendations">
             <div className="events__block schools__recommendations" ref={eventsRef}>
                 <span style={{height: "auto"}}/>
-                {Array.from({length: 9}, ((_, index) => (
+                {schools.map((school, index) => (
                     <CardSchoolSearch key={index}
-                              title='London School'
-                              imgPost={UK}
-                              description={'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.'}
-                              link={'/language-schools/united-kingdom/london'} buttonDetails={true}/>
-                )))
+                        {...school}/>
+                ))
                 }
                 <span style={{height: "auto"}}/>
             </div>

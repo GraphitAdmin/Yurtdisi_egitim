@@ -1,10 +1,11 @@
 'use client'
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import RecommendationsSearch from "@/components/UI/RecommendationsSearch/RecommendationsSearch";
 import Logo from "@/components/UI/Logo/Logo";
-import UK from "@/assets/countries/UK.webp";
 import '@/app/schools.css'
 import CardSchoolSearchResults from "@/components/UI/CardSchoolSearchResults/CardSchoolSearchResults";
+import {ISchool} from "@/utils/interfaces";
+import {blobUrl} from "@/utils/utils";
 
 interface SearchComponentProps {
     closeSearch: () => void;
@@ -36,6 +37,30 @@ const SearchInput: React.FC<SearchInputProps> = ({mobile, inputValue, setInputVa
 }
 const SearchComponent: React.FC<SearchComponentProps> = ({closeSearch}) => {
     const [inputValue, setInputValue] = useState('');
+    const [schools, setSchools] = useState<ISchool[]>([]);
+    const [schoolsSearchResults, setSchoolsSearchResults] = useState<ISchool[]>([]);
+    useEffect(() => {
+        const fetchJson = async () => {
+            try {
+                const schoolsUrl = blobUrl+'jsons/schools.json';
+                const response = await fetch(schoolsUrl, {
+                    cache: 'no-store',
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch JSON');
+                }
+                const jsonData = await response.json();
+                setSchools(jsonData);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchJson().then();
+    }, []);
+    useEffect(() => {
+        setSchoolsSearchResults(schools.filter((school)=>school.title.toLowerCase().includes(inputValue.toLowerCase())));
+    }, [inputValue]);
     return (
         <div
             className="navbar__search"
@@ -61,13 +86,13 @@ const SearchComponent: React.FC<SearchComponentProps> = ({closeSearch}) => {
                         <h4>Most Popular Searches</h4>
                         : <>
                             <h4>“{inputValue}”</h4>
-                            <p style={{color: 'var(--Courses-Brand-Blue-800)'}}>{inputValue.length} results</p>
+                            <p style={{color: 'var(--Courses-Brand-Blue-800)'}}>{schoolsSearchResults.length} results</p>
                         </>
                     }
                 </div>
             </div>
             {inputValue === ''&&
-                <RecommendationsSearch/>
+                <RecommendationsSearch schools={schools} />
             }
             <div className="page__container__countries search__paddings" style={inputValue === '' ? {opacity: 0} : {
                 gap: '20px!important',
@@ -76,12 +101,9 @@ const SearchComponent: React.FC<SearchComponentProps> = ({closeSearch}) => {
                 opacity: 1,
                 transition: 'opacity 1s ease-in-out'
             }}>{
-                Array.from({length: 9}, (_, index) =>
+                schoolsSearchResults.map((school, index) =>
                     <CardSchoolSearchResults key={index}
-                                             title='London School'
-                                             imgPost={UK}
-                                             description={'Located in the southeast of England, Oxford is home to the world\'s most famous university, Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day, Oxford is the center of cultural activity in England with a student population of 30%. The historic buildings of Oxford University, spread throughout the city, attract tens of thousands of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many language schools for English language education, is a great destination for those who want to study in England.'}
-                                             link={'/london'} buttonDetails={true}/>
+                        {...school}/>
                 )
             }
             </div>

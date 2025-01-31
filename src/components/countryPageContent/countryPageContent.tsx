@@ -91,7 +91,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId,co
                         )
                     }
                 </div>
-                {!showCitiesButton &&
+                {!showCitiesButton&&cities.length>9 &&
                     <div className="page__country__schools__button__tablet">
                         <Button onClick={() => {
                             setShowCitiesButton(true)
@@ -217,7 +217,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId,co
                     </div>
                 </div>
             </div>
-            {!showCitiesButton &&
+            {!showCitiesButton&&cities.length>9 &&
                 <div className="page__country__schools__button">
                     <Button onClick={() => {
                         setShowCitiesButton(true)

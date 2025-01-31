@@ -6,7 +6,7 @@ import {Textarea} from "@/components/crm/ui/textarea"
 import Image from "next/image"
 import {uploadImage} from "@/app/crm/uploadImage"
 import toast from "react-hot-toast"
-import {errorToasterStyles, successToasterStyles} from "@/utils/utils"
+import {blobUrl, errorToasterStyles, successToasterStyles} from "@/utils/utils"
 import type {IBlog} from "@/utils/interfaces"
 import './JSONEditor.css'
 import {Editor} from "@tinymce/tinymce-react";
@@ -20,7 +20,7 @@ const JSONCreator = () => {
     const [startValue, setStartValue] = useState<string>('');
     const [contentBlog, setContentBlog] = useState<string>('')
     useEffect(() => {
-        fetch("https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/jsons/blogs.json", {
+        fetch(`${blobUrl}jsons/blogs.json`, {
             cache: "no-store",
             next: {revalidate: 1},
         })
@@ -191,7 +191,7 @@ const JSONCreator = () => {
                         <div className="flex flex-wrap gap-2">
                             {blog.image &&
                                 <Image
-                                    src={`https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/${blog.image}`}
+                                    src={blobUrl+blog.image}
                                     alt={`Blog`}
                                     width={100}
                                     height={100}

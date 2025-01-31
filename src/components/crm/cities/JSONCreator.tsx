@@ -7,7 +7,7 @@ import {Textarea} from "@/components/crm/ui/textarea";
 import Image from "next/image";
 import {uploadImage} from "@/app/crm/uploadImage";
 import toast from "react-hot-toast";
-import {errorToasterStyles, successToasterStyles} from "@/utils/utils";
+import {blobUrl, errorToasterStyles, successToasterStyles} from "@/utils/utils";
 import {ICity} from "@/utils/interfaces";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 
@@ -19,7 +19,7 @@ const JSONCreator = () => {
     const [isUploading, setIsUploading] = useState(false);
 
     useEffect(() => {
-        fetch('https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/jsons/cities.json', {
+        fetch(blobUrl+'jsons/cities.json', {
             cache: 'no-store',
             next: {revalidate: 1}
         })

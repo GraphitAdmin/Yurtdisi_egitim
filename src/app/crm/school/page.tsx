@@ -15,14 +15,15 @@ import {Input} from "@/components/crm/ui/input"
 import {ArrowUpDown, Building, Map, PlusCircle, School} from 'lucide-react'
 import {Button} from "@/components/crm/ui/button";
 import {ISchool} from "@/utils/interfaces";
+import {blobUrl} from "@/utils/utils";
 
 export default function AdminPanel() {
     const [schools, setSchools] = useState<ISchool[]>([]);
     useEffect(() => {
         const fetchJson = async () => {
             try {
-                const blobUrl = 'https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/jsons/schools.json';
-                const response = await fetch(blobUrl, {
+                const schoolsUrl = blobUrl+'jsons/schools.json';
+                const response = await fetch(schoolsUrl, {
                     cache: 'no-store',
                 });
                 if (!response.ok) {

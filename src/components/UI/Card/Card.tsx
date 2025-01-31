@@ -3,10 +3,9 @@ import React from "react";
 import '../Event/Event.css';
 import Link from "next/link";
 import {IBlog} from "@/utils/interfaces";
+import {blobUrl} from "@/utils/utils";
 
 const Card: React.FC<IBlog> = ({image, minutes_to_read, title, date, description}) => {
-    const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
-
     return (
         <Link className="events__post"
               href={'/blog/' + title.replace(/ /g, '-').toLowerCase()}>

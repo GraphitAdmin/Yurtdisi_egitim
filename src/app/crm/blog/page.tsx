@@ -15,14 +15,15 @@ import {Input} from "@/components/crm/ui/input"
 import {ArrowUpDown, Building, PlusCircle, NotebookPen} from 'lucide-react'
 import {Button} from "@/components/crm/ui/button";
 import {IBlog} from "@/utils/interfaces";
+import {blobUrl} from "@/utils/utils";
 
 export default function AdminPanel() {
     const [blogs, setBlogs] = useState<IBlog[]>([]);
     useEffect(() => {
         const fetchJson = async () => {
             try {
-                const blobUrl = 'https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/jsons/blogs.json';
-                const response = await fetch(blobUrl, {
+                const blogsUrl = blobUrl+'jsons/blogs.json';
+                const response = await fetch(blogsUrl, {
                     cache: 'no-store',
                 });
                 if (!response.ok) {

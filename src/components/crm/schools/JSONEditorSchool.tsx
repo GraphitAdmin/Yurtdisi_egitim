@@ -7,11 +7,11 @@ import {Textarea} from "@/components/crm/ui/textarea";
 import Image from "next/image";
 import {uploadImage} from "@/app/crm/uploadImage";
 import './JSONEditor.css'
-import {successToasterStyles} from "@/utils/utils";
+import {blobUrl, successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
 import {ISchool} from "@/utils/interfaces";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
-import {searchTypes} from "@/data/search";
+import {searchCountries, searchTypes} from "@/data/search";
 import {XIcon} from "lucide-react";
 import {Editor} from "@tinymce/tinymce-react";
 
@@ -26,7 +26,6 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const [error, setError] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
     const [startValue,setStartValue] = useState<string>('');
-    const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
     useEffect(() => {
         fetch(`${blobUrl}jsons/schools.json`, {
@@ -335,7 +334,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                     </h6>
                                     <Dropdown label={'Country'} selected={school.country}
                                               setSelected={(value) => handleInputChange(index, 'country', value)}
-                                              variants={['United Kingdom', 'Spain']}/>
+                                              variants={searchCountries}/>
                                 </div>
                             </div>
                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>

@@ -7,7 +7,7 @@ import {Textarea} from "@/components/crm/ui/textarea";
 import Image from "next/image";
 import {uploadImage} from "@/app/crm/uploadImage";
 import './JSONEditor.css'
-import {successToasterStyles} from "@/utils/utils";
+import {blobUrl, successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
 import {ICity} from "@/utils/interfaces";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
@@ -24,7 +24,6 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const [isUploading, setIsUploading] = useState(false);
     const [preview, setPreview] = useState<string | null>(null);
 
-    const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
     useEffect(() => {
         fetch(`${blobUrl}jsons/cities.json`, {

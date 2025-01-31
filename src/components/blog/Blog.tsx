@@ -4,6 +4,7 @@ import Image from "next/image";
 import "./Blog.css"
 import {IBlog} from "@/utils/interfaces";
 import {Loader2} from "lucide-react";
+import {blobUrl} from "@/utils/utils";
 
 interface BlogProps {
     title: string;
@@ -15,7 +16,6 @@ const Blog: React.FC<BlogProps> = ({title}) => {
 
     const [blog, setBlog] = useState<IBlog>()
     const [contentBlog, setContentBlog] = useState<string>('')
-    const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
     useEffect(() => {
         fetch(`${blobUrl}jsons/blogs.json`, {

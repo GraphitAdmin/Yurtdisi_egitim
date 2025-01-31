@@ -3,14 +3,6 @@ export interface PopularSchoolCardProps {
     imgPost:StaticImageData;
     link:string;
 }
-export interface CardProps {
-    imgPost:StaticImageData;
-    title:string;
-    description:string;
-    time:string;
-    link:string;
-    date:string;
-}
 export interface IEvent {
     imgPost:StaticImageData;
     type:string;
@@ -19,14 +11,6 @@ export interface IEvent {
     date:string;
     time:string;
     location:string;
-    link:string;
-}
-export interface IAbroad {
-    imgPost:StaticImageData;
-    title:string;
-    description:string;
-    date:string;
-    time:string;
     link:string;
 }
 export interface IRelated {

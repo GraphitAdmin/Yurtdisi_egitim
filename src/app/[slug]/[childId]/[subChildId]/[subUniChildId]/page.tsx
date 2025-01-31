@@ -11,6 +11,7 @@ import MillSchool from "@/assets/home/Mill_School.png"
 import SchoolInfo from "@/components/school/SchoolInfo";
 import RelatedSchools from "@/components/school/RelatedSchools/RelatedSchools";
 import {ISchool} from "@/utils/interfaces";
+import {blobUrl} from "@/utils/utils";
 
 type paramsType = Promise<{ slug: string, childId: string, subChildId: string, subUniChildId: string }>;
 
@@ -33,8 +34,8 @@ export default function Home({
             setParamsData(await params)
             const {subUniChildId} = await params
             try {
-                const blobUrl = 'https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/jsons/schools.json';
-                const response = await fetch(blobUrl, {
+                const schoolsUrl = blobUrl+'jsons/schools.json';
+                const response = await fetch(schoolsUrl, {
                     cache: 'no-store',
                 });
                 if (!response.ok) {

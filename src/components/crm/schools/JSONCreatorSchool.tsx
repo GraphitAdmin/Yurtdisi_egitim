@@ -7,10 +7,10 @@ import {Textarea} from "@/components/crm/ui/textarea"
 import Image from "next/image"
 import {uploadImage} from "@/app/crm/uploadImage"
 import toast from "react-hot-toast"
-import {errorToasterStyles, successToasterStyles} from "@/utils/utils"
+import {blobUrl, errorToasterStyles, successToasterStyles} from "@/utils/utils"
 import type {ISchool} from "@/utils/interfaces"
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
-import {searchTypes} from "@/data/search";
+import {searchCountries, searchTypes} from "@/data/search";
 import {Editor} from "@tinymce/tinymce-react";
 
 const JSONCreator = () => {
@@ -20,7 +20,7 @@ const JSONCreator = () => {
     const [isUploading, setIsUploading] = useState(false)
 
     useEffect(() => {
-        fetch("https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/jsons/schools.json", {
+        fetch(blobUrl+"/jsons/schools.json", {
             cache: "no-store",
             next: {revalidate: 1},
         })
@@ -306,7 +306,7 @@ const JSONCreator = () => {
                             </h6>
                             <Dropdown label={'Country'} selected={school.country}
                                       setSelected={(value) => handleInputChange(index, 'country', value)}
-                                      variants={['United Kingdom', 'Spain']}/>
+                                      variants={searchCountries}/>
                         </div>
                     </div>
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
@@ -362,7 +362,7 @@ const JSONCreator = () => {
                             {school.images.map((image, imgIndex) => (
                                 <Image
                                     key={imgIndex}
-                                    src={`https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/${image}`}
+                                    src={blobUrl+image}
                                     alt={`School image ${imgIndex + 1}`}
                                     width={100}
                                     height={100}
@@ -384,7 +384,7 @@ const JSONCreator = () => {
                         <h6>Image Right</h6>
                         <div className="flex flex-wrap gap-2">
                             <Image
-                                src={`https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/${school.image_right}`}
+                                src={blobUrl+school.image_right}
                                 alt={`School image`}
                                 width={100}
                                 height={100}

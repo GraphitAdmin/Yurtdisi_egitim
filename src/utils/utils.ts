@@ -30,4 +30,4 @@ export const successToasterStyles = {
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
-
+export const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";

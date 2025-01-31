@@ -15,14 +15,15 @@ import { Input } from "@/components/crm/ui/input"
 import {ArrowUpDown, Building, Map, PlusCircle} from 'lucide-react'
 import {Button} from "@/components/crm/ui/button";
 import {ICity} from "@/utils/interfaces";
+import {blobUrl} from "@/utils/utils";
 
 export default function AdminPanel() {
     const [cities, setCities] = useState<ICity[]>([]);
     useEffect(() => {
         const fetchJson = async () => {
             try {
-                const blobUrl = 'https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/jsons/cities.json';
-                const response = await fetch(blobUrl, {
+                const citiesUrl = blobUrl+'jsons/cities.json';
+                const response = await fetch(citiesUrl, {
                     cache: 'no-store',
                 });
                 if (!response.ok) {

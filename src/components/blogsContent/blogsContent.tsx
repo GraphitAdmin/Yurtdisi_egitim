@@ -5,13 +5,13 @@ import {IBlog} from "@/utils/interfaces";
 import '../eventsContent/eventsContent.css'
 import Card from "@/components/UI/Card/Card";
 import {Loader2} from "lucide-react";
+import {blobUrl} from "@/utils/utils";
 
 const BlogsContent = () => {
     const [blogs,setBlogs]=useState<IBlog[]>([]);
     const [showCountriesButton, setShowCountriesButton] = useState(false)
     const [loading,setLoading]=useState(true);
     const [showEvents, setShowEvents] = useState<IBlog[]>()
-    const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
     useEffect(() => {
         fetch(`${blobUrl}jsons/blogs.json`, {
