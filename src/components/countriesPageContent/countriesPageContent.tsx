@@ -1,8 +1,7 @@
 import PageSearch from "@/components/UI/PageSearch/PageSearch";
 import React from "react";
 import CardCountry from "@/components/UI/CardCountry/CardCountry";
-import {UK, US} from "@/data/countries_json";
-import {Austria, France, Germany, Italy, Malta, Portugal, Spain, Switzerland} from "@/data/countries_json";
+import {UK, US,Austria, France, Germany, Italy, Malta, Portugal, Spain, Switzerland} from "@/data/countries_json";
 
 interface CountriesPageContentProps {
     slug: string;

@@ -2,9 +2,9 @@ import Image from "next/image";
 import React from "react";
 import './CardCountry.css';
 import Link from "next/link";
-import {CardCountryProps} from "@/utils/interfaces";
+import {ICountry} from "@/utils/interfaces";
 
-const CardCountry: React.FC<CardCountryProps> = ({imgPost, name,link,capital,population,language}) => {
+const CardCountry: React.FC<ICountry> = ({imgPost, name,link,capital,population,language}) => {
     return (
         <Link className="card__country" href={link}>
             <Image className="w-full" src={imgPost} alt="Country"/>

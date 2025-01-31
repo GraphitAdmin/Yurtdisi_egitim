@@ -9,14 +9,15 @@ import Image from "next/image";
 import UK from "@/assets/countries/UK.webp";
 import Link from "next/link";
 import React, {useEffect, useState} from "react";
-import {CardCityProps} from "@/utils/interfaces";
+import {CardCityProps, ICountry} from "@/utils/interfaces";
 
 interface CountryPageContentProps {
     slug: string;
     childId: string;
+    country:ICountry;
 }
 
-const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId}) => {
+const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId,country}) => {
     const cities = [
         {
             title: 'London',
@@ -154,7 +155,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId}) 
                         <p
                             style={{color: 'var(--Courses-Base-Black)'}}
                         >
-                            United Kingdom
+                            {country.name}
                         </p>
                         <p style={{
                             fontWeight: 400,
@@ -166,7 +167,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId}) 
                         <p
                             style={{color: 'var(--Courses-Base-Black)'}}
                         >
-                            London
+                            {country.capital}
                         </p>
                         <p style={{
                             fontWeight: 400,
@@ -190,7 +191,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId}) 
                         <p
                             style={{color: 'var(--Courses-Base-Black)'}}
                         >
-                            54 million (approx.)
+                            {country.population}
                         </p>
                         <p style={{
                             fontWeight: 400,
@@ -202,7 +203,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId}) 
                         <p
                             style={{color: 'var(--Courses-Base-Black)'}}
                         >
-                            English
+                            {country.language}
                         </p>
                         <p style={{
                             fontWeight: 400,

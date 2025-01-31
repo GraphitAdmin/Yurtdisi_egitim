@@ -35,13 +35,16 @@ export interface IRelated {
     description:string;
     link:string;
 }
-export interface CardCountryProps {
+export interface ICountry {
     imgPost:StaticImageData;
     name:string;
     link:string;
     capital:string;
     population:string;
     language:string;
+    faceMeasurement:string;
+    currency:string;
+    telephoneCode:string;
 }
 export interface CardCityProps {
     imgPost:StaticImageData;
