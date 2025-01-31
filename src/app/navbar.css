@@ -314,7 +314,7 @@ nav .nav__links .nav__dropdown sub, nav .nav__links a {
     align-items: center;
 }
 
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1200px) {
     .nav__links .nav__dropdown {
         display: none;
     }
