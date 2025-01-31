@@ -33,6 +33,10 @@
     overflow-x: auto;
     scroll-behavior: smooth;
 }
+.events__block div{
+    max-width: 413px;
+    min-width: 413px;
+}
 .events__block::-webkit-scrollbar{
     width: 0;
     height: 0;

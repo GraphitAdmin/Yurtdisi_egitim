@@ -1,13 +1,12 @@
 'use client'
 import '../Events/Events.css'
 import Button from "@/components/UI/Button/Button";
-import ImageEvent from "@/assets/home/Illustration.png"
-import {useEffect, useRef, useState} from "react";
-import {IEvent} from "@/utils/interfaces";
-import Abroad from "@/components/UI/Abroad/Abroad";
+import React, {useEffect, useRef, useState} from "react";
+import {IBlog} from "@/utils/interfaces";
+import Card from "@/components/UI/Card/Card";
 const Abroads =()=>{
     const eventsRef = useRef(null);
-    const [events, setEvents] = useState<IEvent[]>([])
+    const [blogs, setBlogs] = useState<IBlog[]>([])
     const scroll = (direction:string) => {
         const scrollAmount = 413;
         if (eventsRef.current) {
@@ -19,57 +18,21 @@ const Abroads =()=>{
             });
         }
     };
-    useEffect(()=>{
-        setEvents([
-            {
-                imgPost:ImageEvent,
-                type:'Language education',
-                title:'College Alpin Beau Soleil',
-                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                date:'01.01.2025',
-                time:'10:00 - 15:00',
-                location:'Switzerland',
-                link:'/our-event-calendar'
-            },
-            {
-                imgPost:ImageEvent,
-                type:'Language education',
-                title:'College Alpin Beau Soleil',
-                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                date:'01.01.2025',
-                time:'10:00 - 15:00',
-                location:'Switzerland',
-                link:'/our-event-calendar'
-            },{
-                imgPost:ImageEvent,
-                type:'Language education',
-                title:'College Alpin Beau Soleil',
-                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                date:'01.01.2025',
-                time:'10:00 - 15:00',
-                location:'Switzerland',
-                link:'/our-event-calendar'
-            },{
-                imgPost:ImageEvent,
-                type:'Language education',
-                title:'College Alpin Beau Soleil',
-                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                date:'01.01.2025',
-                time:'10:00 - 15:00',
-                location:'Switzerland',
-                link:'/our-event-calendar'
-            },{
-                imgPost:ImageEvent,
-                type:'Language education',
-                title:'College Alpin Beau Soleil',
-                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                date:'01.01.2025',
-                time:'10:00 - 15:00',
-                location:'Switzerland',
-                link:'/our-event-calendar'
-            },
-        ])
-    },[])
+    const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
+
+    useEffect(() => {
+        fetch(`${blobUrl}jsons/blogs.json`, {
+            cache: "no-store",
+            next: {revalidate: 1},
+        })
+            .then((response) => response.json())
+            .then((data: IBlog[]) => {
+                setBlogs(data.slice(0, 9));
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }, []);
     return(
         <div className="events" style={{marginBottom:64}}>
             <div className="events__first">
@@ -77,7 +40,7 @@ const Abroads =()=>{
                     <h2 style={{textAlign:'left'}}>
                         About language schools abroad
                     </h2>
-                    <Button label="View all events"/>
+                    <Button label="View all blogs"/>
                 </div>
                 <p className="events__header__p">
                     Lorem ipsum dolor sit amet consectetur. Sit vulputate sed iaculis nisi nulla phasellus massa
@@ -85,8 +48,8 @@ const Abroads =()=>{
             </div>
             <div className="events__block" ref={eventsRef}>
                 <span style={{height: "auto"}}/>
-                {events.map((event, index) => (
-                    <Abroad key={index} {...event}/>
+                {blogs.map((blog, index) => (
+                    <Card key={index} {...blog} />
                 ))}
                 <span style={{height: "auto"}}/>
             </div>
