@@ -5,9 +5,9 @@ import { useState, useEffect, useRef } from "react"
 
 interface BasicDropdownProps {
     selected:string;
-    options: string[]
-    onSelect: (value: string) => void
-    placeholder?: string
+    options: string[];
+    onSelect: (value: string) => void;
+    placeholder?: string;
 }
 
 export function Dropdown({ selected,options, onSelect, placeholder = "Select an option..." }: BasicDropdownProps) {

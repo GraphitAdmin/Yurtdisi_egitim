@@ -25,6 +25,7 @@ const EventsContent = () => {
             }
         };
         fetchJson().then()
+        console.log(events)
     }, [])
     return (
         <div className="page__container">
