@@ -17,12 +17,10 @@
     grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
     gap: 20px;
-    max-width: 1600px;
+    max-width: 1760px;
 }
 
 .block__card__cards a {
-    /*max-width: 480px !important;*/
-    /*width: 480px !important;*/
     min-width: 100%;
     max-width: none!important;
 }
@@ -38,15 +36,6 @@
 .block__card .rounded__buttons {
     display: none;
 }
-
-/*@media screen and (max-width: 1440px) {*/
-/*    .block__card__cards a {*/
-/*        max-width: 413px!important;*/
-/*        width: 100% !important;*/
-/*        min-width: 100% !important;*/
-/*    }*/
-
-/*}*/
 
 @media screen and (max-width: 992px) {
     .block__card__cards{
