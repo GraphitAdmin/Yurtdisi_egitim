@@ -22,7 +22,7 @@ export const UK = {
 };
 
 export const US = {
-    name: 'United States of America',
+    name: 'United States',
     link: '/united-states',
     capital: 'Washington, D.C.',
     imgPost: USImage,
