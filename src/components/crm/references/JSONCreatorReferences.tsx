@@ -10,7 +10,6 @@ import {blobUrl, errorToasterStyles, successToasterStyles} from "@/utils/utils"
 import type {IBlog} from "@/utils/interfaces"
 import '../JSONEditor.css'
 import {Editor} from "@tinymce/tinymce-react";
-import Dropdown from "@/components/UI/Dropdown/Dropdown";
 
 const JSONCreator = () => {
     const [blogs, setBlogs] = useState<IBlog[]>([])
@@ -20,7 +19,7 @@ const JSONCreator = () => {
     const [startValue, setStartValue] = useState<string>('');
     const [contentBlog, setContentBlog] = useState<string>('')
     useEffect(() => {
-        fetch(`${blobUrl}jsons/blogs.json`, {
+        fetch(`${blobUrl}jsons/references.json`, {
             cache: "no-store",
             next: {revalidate: 1},
         })
@@ -32,7 +31,7 @@ const JSONCreator = () => {
                     description: "",
                     minutes_to_read: "",
                     date: "",
-                    type: "Blog"
+                    type: ""
                 }
                 setStartValue("")
                 setBlogs([...data, newBlog])
@@ -89,7 +88,7 @@ const JSONCreator = () => {
         const schoolsToCheck = blogs.slice(0, blogs.length - 1)
         const hasDuplicates = schoolsToCheck.some((school) => school.title === newSchool.title)
         if (hasDuplicates) {
-            toast.error("Blog with this title already exists!", errorToasterStyles)
+            toast.error("Reference with this title already exists!", errorToasterStyles)
             return
         }
 
@@ -98,7 +97,7 @@ const JSONCreator = () => {
                 .replace(/[^a-zA-Z0-9 ]/g, '')
                 .replace(/-/g, '')
                 .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
-            const responseTxt = await fetch("/api/save-blog-content", {
+            const responseTxt = await fetch("/api/save-references-content", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -107,7 +106,7 @@ const JSONCreator = () => {
             });
             if (!responseTxt.ok) throw new Error("Failed to save")
 
-            const response = await fetch("/api/save-blogs", {
+            const response = await fetch("/api/save-references", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -117,7 +116,7 @@ const JSONCreator = () => {
 
             if (!response.ok) throw new Error("Failed to save")
             toast.success("Saved successfully!", successToasterStyles)
-            window.location.href = "/crm/blog/" + blogs[blogs.length - 1].title.replace(/ /g, '-').toLowerCase()
+            window.location.href = "/crm/reference/" + blogs[blogs.length - 1].title.replace(/ /g, '-').toLowerCase()
         } catch (err) {
             setError("Failed to save data")
             console.log(err)
@@ -135,24 +134,13 @@ const JSONCreator = () => {
                     <div className="flex flex-row justify-between gap-2">
                         <div className="w-full">
                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                Blog Title
+                                Reference Title
                             </h6>
                             <Input
                                 value={blog.title}
                                 onChange={(e) => handleInputChange(index, "title", e.target.value)}
                                 placeholder="Title"
                                 style={{height: 49}}
-                            />
-                        </div>
-                        <div className="w-full">
-                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                Type
-                            </h6>
-                            <Dropdown
-                                selected={blog.type}
-                                label="Type"
-                                setSelected={(value) => handleInputChange(index, "type", value)}
-                                variants={["Blog", "Useful Information"]}
                             />
                         </div>
                     </div>
@@ -192,7 +180,7 @@ const JSONCreator = () => {
                             {blog.image &&
                                 <Image
                                     src={blobUrl+blog.image}
-                                    alt={`Blog`}
+                                    alt={`References`}
                                     width={100}
                                     height={100}
                                 />
@@ -235,15 +223,10 @@ const JSONCreator = () => {
                             setContentBlog(content)
                         }}
                     />
-                    {/*<div*/}
-                    {/*    className="test__markdown"*/}
-                    {/*    dangerouslySetInnerHTML={{__html: blog.content}}*/}
-                    {/*>*/}
-                    {/*</div>*/}
                 </div>
             ))}
             <div className="w-full flex justify-center">
-                <Button onClick={handleSave} className="w-36 border-2 border-black">Save Blog</Button>
+                <Button onClick={handleSave} className="w-36 border-2 border-black">Save Reference</Button>
             </div>
 
         </div>

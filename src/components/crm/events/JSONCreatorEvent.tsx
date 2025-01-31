@@ -8,7 +8,7 @@ import {uploadImage} from "@/app/crm/uploadImage"
 import toast from "react-hot-toast"
 import {blobUrl, errorToasterStyles, successToasterStyles} from "@/utils/utils"
 import type {IEvent, ISchool} from "@/utils/interfaces"
-import './JSONEditor.css'
+import '../JSONEditor.css'
 import {Dropdown} from "@/components/crm/ui/dropdown";
 import DropdownDefault from "@/components/UI/Dropdown/Dropdown";
 

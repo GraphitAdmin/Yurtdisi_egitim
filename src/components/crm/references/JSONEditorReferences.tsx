@@ -11,8 +11,6 @@ import {blobUrl, successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
 import {IBlog} from "@/utils/interfaces";
 import { Editor } from '@tinymce/tinymce-react';
-import Dropdown from "@/components/UI/Dropdown/Dropdown";
-
 interface IJsonEditor {
     name: string;
 }
@@ -26,7 +24,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const [startValue,setStartValue] = useState<string>('');
     const [contentBlog, setContentBlog] = useState<string>('');
     useEffect(() => {
-        fetch(`${blobUrl}jsons/blogs.json`, {
+        fetch(`${blobUrl}jsons/references.json`, {
             cache: "no-store",
             next: {revalidate: 1},
         })
@@ -46,7 +44,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                     console.log('title',cleanedTitle)
                     if (cleanedTitle.toLowerCase() === cleanedName.toLowerCase()) {
                         setBlogIndex(index);
-                        fetch(`${blobUrl}blogs/${cleanedTitle}.txt`, {
+                        fetch(`${blobUrl}references/${cleanedTitle}.txt`, {
                             cache: "no-store",
                             next: {revalidate: 1},
                         })
@@ -86,7 +84,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                     .replace(/-/g, '')
                     .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
                 console.log(cleanedTitle)
-                const responseTxt= await fetch("/api/save-blog-content", {
+                const responseTxt= await fetch("/api/save-references-content", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -94,7 +92,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                     body: JSON.stringify({content:contentBlog,title:cleanedTitle}),
                 });
                 if (!responseTxt.ok) throw new Error("Failed to save");
-                const response = await fetch("/api/save-blogs", {
+                const response = await fetch("/api/save-references", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -121,7 +119,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
 
         try {
             const updatedBlogs = blogs.filter((_, index) => index !== blogIndex)
-            const response = await fetch("/api/save-blogs", {
+            const response = await fetch("/api/save-references", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -129,10 +127,10 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                 body: JSON.stringify(updatedBlogs),
             })
             if (!response.ok) throw new Error("Failed to delete")
-            toast.success("Blog deleted successfully!", successToasterStyles)
-            window.location.href='/crm/blog'
+            toast.success("Reference deleted successfully!", successToasterStyles)
+            window.location.href='/crm/references'
         } catch (err) {
-            setError("Failed to delete blog")
+            setError("Failed to delete reference")
             console.error(err)
         }
     }
@@ -177,24 +175,13 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                     <div className="flex flex-row justify-between gap-2">
                                         <div className="w-full">
                                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                                Blog Title
+                                                Reference Title
                                             </h6>
                                             <Input
                                                 value={blog.title}
                                                 onChange={(e) => handleInputChange(index, "title", e.target.value)}
                                                 placeholder="Title"
                                                 style={{height: 49}}
-                                            />
-                                        </div>
-                                        <div className="w-full">
-                                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                                Type
-                                            </h6>
-                                            <Dropdown
-                                                selected={blog.type}
-                                                label="Type"
-                                                setSelected={(value) => handleInputChange(index, "type", value)}
-                                                variants={["Blog", "Useful Information"]}
                                             />
                                         </div>
                                     </div>
@@ -235,7 +222,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                             {blog.image &&
                                                 <Image
                                                     src={blobUrl+blog.image}
-                                                    alt={`Blog`}
+                                                    alt={`Reference`}
                                                     width={100}
                                                     height={100}
                                                 />
@@ -278,11 +265,6 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                             setContentBlog(content)
                                         }}
                                     />
-                                    {/*<div*/}
-                                    {/*    className="test__markdown"*/}
-                                    {/*    dangerouslySetInnerHTML={{__html: blog.content}}*/}
-                                    {/*>*/}
-                                    {/*</div>*/}
                                 </div>
                         ))}
             <div className="w-full flex justify-center gap-4">
@@ -293,7 +275,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                     onClick={handleDelete}
                     className="w-36 border-2 border-red-400  hover:bg-red-500 hover:text-white"
                 >
-                    Delete Blog
+                    Delete Reference
                 </Button>
             </div>
         </div>

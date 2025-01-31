@@ -2,17 +2,17 @@
 import React, {useEffect, useState} from "react";
 import {IBlog} from "@/utils/interfaces";
 import '../eventsContent/eventsContent.css'
-import Card from "@/components/UI/Card/Card";
 import {Loader2} from "lucide-react";
 import {blobUrl} from "@/utils/utils";
+import CardReference from "@/components/UI/CardReference/CardReference";
 
-const BlogsContent = () => {
+const ReferencesContent = () => {
     const [blogs,setBlogs]=useState<IBlog[]>([]);
     const [loading,setLoading]=useState(true);
     const [showEvents, setShowEvents] = useState<IBlog[]>()
 
     useEffect(() => {
-        fetch(`${blobUrl}jsons/blogs.json`, {
+        fetch(`${blobUrl}jsons/references.json`, {
             cache: "no-store",
             next: {revalidate: 1},
         })
@@ -38,19 +38,19 @@ const BlogsContent = () => {
     return (
         <div className="page__container">
             <div style={{width: '100%'}}>
-                <h1>Our blog posts</h1>
+                <h1>Our student references</h1>
                 <p>
-                    All the topics you are curious about about education abroad are on this page.
+                    Our students who studied abroad have listed their experiences abroad, their education and their comments about Global Overseas Education.
                 </p>
             </div>
             <div className="events__page">
                 {
                     showEvents && showEvents.map((blog, index) =>
-                        <Card key={index} {...blog} />
+                        <CardReference key={index} {...blog} />
                     )
                 }
             </div>
         </div>
     )
 }
-export default BlogsContent;
+export default ReferencesContent;

@@ -10,7 +10,7 @@ interface BlogProps {
     title: string;
 }
 
-const Blog: React.FC<BlogProps> = ({title}) => {
+const Reference: React.FC<BlogProps> = ({title}) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
@@ -18,7 +18,7 @@ const Blog: React.FC<BlogProps> = ({title}) => {
     const [contentBlog, setContentBlog] = useState<string>('')
 
     useEffect(() => {
-        fetch(`${blobUrl}jsons/blogs.json`, {
+        fetch(`${blobUrl}jsons/references.json`, {
             cache: "no-store",
             next: {revalidate: 1},
         })
@@ -37,7 +37,7 @@ const Blog: React.FC<BlogProps> = ({title}) => {
                     console.log('title', cleanedTitle)
                     if (cleanedTitle.toLowerCase() === cleanedName.toLowerCase()) {
                         setBlog(blog)
-                        fetch(`${blobUrl}blogs/${cleanedTitle}.txt`, {
+                        fetch(`${blobUrl}references/${cleanedTitle}.txt`, {
                             cache: "no-store",
                             next: {revalidate: 1},
                         })
@@ -113,4 +113,4 @@ const Blog: React.FC<BlogProps> = ({title}) => {
         </div>
     )
 }
-export default Blog
+export default Reference

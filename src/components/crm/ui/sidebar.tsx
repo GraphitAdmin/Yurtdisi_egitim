@@ -8,6 +8,7 @@ const navigationItems = [
     { name: "Schools", icon: School, href: "/school" },
     { name: "Blogs", icon: NotebookPen, href: "/blog" },
     { name: "Events", icon: Calendar, href: "/event" },
+    { name: "References", icon: NotebookPen, href: "/reference" },
     { name: "General Settings", icon: Settings, href: "/settings" },
 ]
 

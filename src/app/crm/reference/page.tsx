@@ -14,15 +14,15 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/components/crm/ui/card
 import {Input} from "@/components/crm/ui/input"
 import {ArrowUpDown, Building, PlusCircle, NotebookPen} from 'lucide-react'
 import {Button} from "@/components/crm/ui/button";
-import {IEvent} from "@/utils/interfaces";
+import {IBlog} from "@/utils/interfaces";
 import {blobUrl} from "@/utils/utils";
 
 export default function AdminPanel() {
-    const [events, setEvents] = useState<IEvent[]>([]);
+    const [blogs, setBlogs] = useState<IBlog[]>([]);
     useEffect(() => {
         const fetchJson = async () => {
             try {
-                const blogsUrl = blobUrl+'jsons/events.json';
+                const blogsUrl = blobUrl+'jsons/references.json';
                 const response = await fetch(blogsUrl, {
                     cache: 'no-store',
                 });
@@ -30,7 +30,7 @@ export default function AdminPanel() {
                     throw new Error('Failed to fetch JSON');
                 }
                 const jsonData = await response.json();
-                setEvents(jsonData);
+                setBlogs(jsonData);
             } catch (err) {
                 console.log(err);
             }
@@ -40,10 +40,10 @@ export default function AdminPanel() {
     }, []);
 
     const [searchTerm, setSearchTerm] = useState('')
-    const [sortColumn, setSortColumn] = useState<keyof IEvent>('title')
+    const [sortColumn, setSortColumn] = useState<keyof IBlog>('title')
     const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
 
-    const handleSort = (column: keyof IEvent) => {
+    const handleSort = (column: keyof IBlog) => {
         if (column === sortColumn) {
             setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
         } else {
@@ -52,13 +52,13 @@ export default function AdminPanel() {
         }
     }
     const filteredCities = useMemo(() => {
-        return events.filter(event =>
-            event.title.toLowerCase().includes(searchTerm.toLowerCase())
+        return blogs.filter(blog =>
+            blog.title.toLowerCase().includes(searchTerm.toLowerCase())
 
         )
-    }, [searchTerm, events])
+    }, [searchTerm, blogs])
 
-    const sortedEvents = useMemo(() => {
+    const sortedBlogs = useMemo(() => {
         return [...filteredCities].sort((a, b) => {
             if (a[sortColumn] < b[sortColumn]) return sortDirection === 'asc' ? -1 : 1
             if (a[sortColumn] > b[sortColumn]) return sortDirection === 'asc' ? 1 : -1
@@ -76,7 +76,7 @@ export default function AdminPanel() {
                         <CardHeader className="p-6">
                             <CardTitle className="text-3xl font-bold flex items-center text-black">
                                 <NotebookPen className="w-8 h-8 mr-2"/>
-                                Events
+                                References
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="p-6">
@@ -90,9 +90,9 @@ export default function AdminPanel() {
                                         className="w-full md:w-64 bg-white/50 backdrop-blur-sm"
                                     />
                                     <Button onClick={() => {
-                                        window.location.href = '/crm/event/new'
+                                        window.location.href = '/crm/reference/new'
                                     }} className="w-48 border-2 border-black">
-                                        <PlusCircle className="mr-2 h-4 w-4"/> Add New Event
+                                        <PlusCircle className="mr-2 h-4 w-4"/> Add New Reference
                                     </Button>
                                 </div>
                             </div>
@@ -108,23 +108,14 @@ export default function AdminPanel() {
                                                     <ArrowUpDown className="w-4 h-4 ml-1"/>
                                                 </div>
                                             </TableHead>
-                                            <TableHead onClick={() => handleSort('title')}
-                                                       className="cursor-pointer hover:bg-gray-200">
-                                                <div className="flex items-center">
-                                                    <Building className="w-4 h-4 mr-2"/>
-                                                    Date
-                                                    <ArrowUpDown className="w-4 h-4 ml-1"/>
-                                                </div>
-                                            </TableHead>
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
-                                        {sortedEvents.map((event, index) => (
+                                        {sortedBlogs.map((blog, index) => (
                                             <TableRow
-                                                onClick={() => window.location.href = `/crm/event/${event.title.replace(/ /g, '-').toLowerCase()}`}
+                                                onClick={() => window.location.href = `/crm/reference/${blog.title.replace(/ /g, '-').toLowerCase()}`}
                                                 key={index} className="hover:bg-gray-50">
-                                                <TableCell className="font-medium">{event.title}</TableCell>
-                                                <TableCell className="font-medium">{event.date}</TableCell>
+                                                <TableCell className="font-medium">{blog.title}</TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>

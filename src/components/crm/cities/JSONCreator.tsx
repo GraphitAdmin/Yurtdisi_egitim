@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import {blobUrl, errorToasterStyles, successToasterStyles} from "@/utils/utils";
 import {ICity} from "@/utils/interfaces";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
+import '../JSONEditor.css'
 
 const JSONCreator = () => {
     const [cities, setCities] = useState<ICity[]>([])
