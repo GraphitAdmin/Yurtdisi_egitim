@@ -5,6 +5,9 @@
     max-width: 1600px;
     gap: 48px 20px;
 }
+.events__page div{
+    max-width: none;;
+}
 .events__page .events__post .events__buttons button{
     width: 100%;
     max-width: 100%;
