@@ -5,8 +5,9 @@ import './Event.css';
 import Button from "@/components/UI/Button/Button";
 import {IEvent} from "@/utils/interfaces";
 import { PopupButton } from "react-calendly";
+import {blobUrl} from "@/utils/utils";
 
-const Event: React.FC<IEvent> = ({imgPost,type, date, time, title, location,link, description}) => {
+const Event: React.FC<IEvent> = ({image,type, date, timeStart,timeEnd, title, location,link, description}) => {
     const [rootElement, setRootElement] = useState(null);
 
     useEffect(() => {
@@ -19,7 +20,7 @@ const Event: React.FC<IEvent> = ({imgPost,type, date, time, title, location,link
 
     return (
         <div className="events__post">
-            <Image className="w-full" src={imgPost} alt="Post"/>
+            <Image className="w-full" src={blobUrl+image} alt="Post"/>
             <small style={{marginTop:12}}>{type}</small>
             <h5 style={{textAlign: 'left',marginTop:8}}>{title}</h5>
             <p style={{textAlign: 'left'}}>{description}</p>
@@ -31,7 +32,7 @@ const Event: React.FC<IEvent> = ({imgPost,type, date, time, title, location,link
                     color: 'var(--Courses-Base-Black)',
                     fontWeight:600
                 }}>{date}</p>
-                <p>{time}</p>
+                <p>{timeStart}-{timeEnd}</p>
                 <p style={{
                     color: 'var(--Courses-Base-Black)',
                     fontWeight:600,

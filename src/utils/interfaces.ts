@@ -3,16 +3,6 @@ export interface PopularSchoolCardProps {
     imgPost:StaticImageData;
     link:string;
 }
-export interface IEvent {
-    imgPost:StaticImageData;
-    type:string;
-    title:string;
-    description:string;
-    date:string;
-    time:string;
-    location:string;
-    link:string;
-}
 export interface IRelated {
     imgPost:StaticImageData;
     title:string;
@@ -78,4 +68,15 @@ export interface IBlog{
     "minutes_to_read": string,
     "date":string,
     "type":string
+}
+export interface IEvent{
+    type:string;
+    title:string;
+    description:string;
+    date:string;
+    timeStart:string;
+    timeEnd:string;
+    location:string;
+    link:string;
+    image:string;
 }

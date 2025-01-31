@@ -182,7 +182,7 @@ const JSONCreator = () => {
                             <Input
                                 value={blog.date}
                                 onChange={(e) => handleInputChange(index, "date", e.target.value)}
-                                placeholder="Date(example: 13 january 2024)"
+                                placeholder="Date(example: 13 january 2025)"
                             />
                         </div>
                     </div>
