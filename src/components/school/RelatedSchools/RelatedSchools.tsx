@@ -24,28 +24,28 @@ const RelatedSchools =()=>{
                 imgPost:ImageEvent,
                 title:'College Alpin Beau Soleil',
                 description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                link:'/event'
+                link:'/our-event-calendar'
             },
             {
                 imgPost:ImageEvent,
                 title:'College Alpin Beau Soleil',
                 description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                link:'/event'
+                link:'/our-event-calendar'
             },{
                 imgPost:ImageEvent,
                 title:'College Alpin Beau Soleil',
                 description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                link:'/event'
+                link:'/our-event-calendar'
             },{
                 imgPost:ImageEvent,
                 title:'College Alpin Beau Soleil',
                 description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                link:'/event'
+                link:'/our-event-calendar'
             },{
                 imgPost:ImageEvent,
                 title:'College Alpin Beau Soleil',
                 description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                link:'/event'
+                link:'/our-event-calendar'
             },
         ])
     },[])
