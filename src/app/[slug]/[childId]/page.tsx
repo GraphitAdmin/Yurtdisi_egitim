@@ -30,7 +30,6 @@ export default async function Home({
 }) {
     const { slug, childId } = await params;
 
-    // Map of childId to corresponding country data
     const countryMap: Record<string, ICountry> = {
         'united-kingdom': UK,
         'united-states': US,

@@ -37,6 +37,7 @@
     border: 1px solid var(--Courses-Gray-Gray-200, #E9EAEB);
     background: lightgray 50% / cover no-repeat;
     height: 152px;
+    object-fit: cover;
 }
 
 .page__country__schools__country__recommendations {
