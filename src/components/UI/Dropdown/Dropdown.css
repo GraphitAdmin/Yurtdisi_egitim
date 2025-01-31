@@ -14,6 +14,7 @@
 .dropdown p{
     text-align: left;
     width: Calc(100% - 32px);
+    min-width: 150px;
     color: var(--Courses-Gray-Gray-500);
     margin: 0!important;
     white-space: nowrap;
