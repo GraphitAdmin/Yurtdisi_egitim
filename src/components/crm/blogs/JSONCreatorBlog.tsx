@@ -31,7 +31,6 @@ const JSONCreator = () => {
                     image: "",
                     description: "",
                     minutes_to_read: "",
-                    content: "",
                     date: "",
                     type: "Blog"
                 }
