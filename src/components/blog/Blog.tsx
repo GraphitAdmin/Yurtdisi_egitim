@@ -88,7 +88,7 @@ const Blog: React.FC<BlogProps> = ({title}) => {
                         marginTop: 12,
                         alignItems: "center"
                     }}>
-                        <p style={{color: 'var(--courses-brand-blue-400-brand)'}}>13 January 2024</p>
+                        <p style={{color: 'var(--courses-brand-blue-400-brand)'}}>13 January 2025</p>
                         <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">
                             <circle cx="2" cy="2" r="2" fill="#2E90FA"/>
                         </svg>

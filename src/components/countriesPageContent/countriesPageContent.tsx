@@ -37,12 +37,9 @@ const CountriesPageContent: React.FC<CountriesPageContentProps> = ({slug}) => {
                 {
                     countries.map((country, index) =>
                         <CardCountry key={index}
-                                     name={country.name}
-                                     capital={country.capital}
-                                     imgPost={country.imgPost}
-                                     language={country.language}
-                                     link={`/${slug}/${country.link}`}
-                                     population={country.population}/>
+                                     {...country}
+                                     link={`/${slug}${country.link}`}
+                        />
                     )
                 }
             </div>

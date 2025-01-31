@@ -1,16 +1,30 @@
 'use client'
-import Button from "@/components/UI/Button/Button";
 import React, {useEffect, useState} from "react";
 import {IEvent} from "@/utils/interfaces";
 import Event from "@/components/UI/Event/Event";
 import './eventsContent.css'
+import {blobUrl} from "@/utils/utils";
 const EventsContent = () => {
     const [events,setEvents] = useState<IEvent[]>([])
-    const [showCountriesButton, setShowCountriesButton] = useState(false)
-
     const [showEvents, setShowEvents] = useState<IEvent[]>()
     useEffect(() => {
-        setShowEvents(events.slice(0, 9))
+        const fetchJson = async () => {
+            try {
+                const schoolsUrl = blobUrl + 'jsons/events.json';
+                const response = await fetch(schoolsUrl, {
+                    cache: 'no-store',
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch JSON');
+                }
+                const jsonData = await response.json();
+                setEvents(jsonData);
+                setShowEvents(jsonData.slice(0, 9))
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchJson().then()
     }, [])
     return (
         <div className="page__container">
@@ -27,12 +41,6 @@ const EventsContent = () => {
                     )
                 }
             </div>
-            {!showCountriesButton &&
-                <Button onClick={() => {
-                    setShowCountriesButton(true)
-                    setShowEvents(events)
-                }} label={'Show all events'}/>
-            }
         </div>
     )
 }

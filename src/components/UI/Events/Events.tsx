@@ -4,6 +4,7 @@ import Button from "@/components/UI/Button/Button";
 import Event from "@/components/UI/Event/Event";
 import {useEffect, useRef, useState} from "react";
 import {IEvent} from "@/utils/interfaces";
+import {blobUrl} from "@/utils/utils";
 const Events =()=>{
     const eventsRef = useRef(null);
     const [events, setEvents] = useState<IEvent[]>([])
@@ -18,7 +19,23 @@ const Events =()=>{
             });
         }
     };
-    useEffect(()=>{
+    useEffect(() => {
+        const fetchJson = async () => {
+            try {
+                const schoolsUrl = blobUrl + 'jsons/events.json';
+                const response = await fetch(schoolsUrl, {
+                    cache: 'no-store',
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch JSON');
+                }
+                const jsonData = await response.json();
+                setEvents(jsonData);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchJson().then()
     },[])
     return(
         <div className="events">

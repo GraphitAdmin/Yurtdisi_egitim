@@ -9,9 +9,10 @@ import {uploadImage} from "@/app/crm/uploadImage";
 import './JSONEditor.css'
 import {blobUrl, successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
-import {IEvent} from "@/utils/interfaces";
+import {IEvent, ISchool} from "@/utils/interfaces";
 import {Dropdown} from "@/components/crm/ui/dropdown";
 import DropdownDefault from "@/components/UI/Dropdown/Dropdown"
+
 interface IJsonEditor {
     name: string;
 }
@@ -21,8 +22,10 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const [eventIndex, setEventIndex] = useState<null | number>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [schoolTitle, setSchoolTitle] = useState<string>('');
     const [isUploading, setIsUploading] = useState(false);
+    const [schoolTitle, setSchoolTitle] = useState<string>('');
+    const [schools, setSchools] = useState<ISchool[]>([])
+    const [schoolsTitles, setSchoolsTitles] = useState<string[]>([])
     useEffect(() => {
         fetch(`${blobUrl}jsons/events.json`, {
             cache: "no-store",
@@ -52,7 +55,51 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                 console.error(err);
             });
     }, [name]);
+    useEffect(() => {
+        if (document.readyState === 'complete') {
+            handleLoad();
+        } else {
+            window.addEventListener('load', handleLoad);
+        }
 
+        function handleLoad() {
+            console.log("Page fully loaded");
+            fetch(`${blobUrl}jsons/schools.json`, {
+                cache: "no-store",
+                next: {revalidate: 1},
+            })
+                .then((response) => response.json())
+                .then((data: ISchool[]) => {
+                    setSchools(data)
+                    const titles = data.map(school => school.title);
+                    setSchoolsTitles(titles);
+                    setLoading(false)
+                })
+                .catch((err) => {
+                    setError("Failed to load data")
+                    setLoading(false)
+                    console.error(err)
+                })
+        }
+
+        return () => window.removeEventListener('load', handleLoad);
+    }, []);
+    useEffect(() => {
+        console.log(schools)
+        console.log(eventIndex)
+        if (schools && (eventIndex||eventIndex===0)) {
+            console.log('here')
+            schools.map(
+                (school) => {
+                    console.log(events[eventIndex].link.replace(/-/g, ''))
+                    console.log(school.title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/-/g, '').toLowerCase().replace(/ /g, ''))
+                    if (events[eventIndex].link.replace(/-/g, '').toLowerCase().includes(school.title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/-/g, '').toLowerCase().replace(/ /g, ''))) {
+                        setSchoolTitle(school.title)
+                    }
+                }
+            )
+        }
+    }, [schools, eventIndex]);
     const handleInputChange = (index: number, field: keyof IEvent, value: string | string[]) => {
         const updatedSchools = [...events];
         updatedSchools[index] = {...updatedSchools[index], [field]: value};
@@ -79,7 +126,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const handleDelete = async () => {
         if (eventIndex === null) return
 
-        const confirmDelete = window.confirm("Are you sure you want to delete this blog post?")
+        const confirmDelete = window.confirm("Are you sure you want to delete this event?")
         if (!confirmDelete) return
 
         try {
@@ -92,7 +139,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                 body: JSON.stringify(updatedBlogs),
             })
             if (!response.ok) throw new Error("Failed to delete")
-            toast.success("Blog deleted successfully!", successToasterStyles)
+            toast.success("Event deleted successfully!", successToasterStyles)
             window.location.href = '/crm/event'
         } catch (err) {
             setError("Failed to delete event")
@@ -184,7 +231,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                             <Input
                                 value={event.date}
                                 onChange={(e) => handleInputChange(index, "date", e.target.value)}
-                                placeholder="Date(example: 13 January 2025)"
+                                placeholder="Date(example: 01.01.2025)"
                             />
                         </div>
                         <div className="w-full">
@@ -211,26 +258,25 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                     <div className="flex flex-row justify-between gap-2">
                         <div className="w-full">
                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                Location
-                            </h6>
-                            <Input
-                                value={event.location}
-                                onChange={(e) => handleInputChange(index, "location", e.target.value)}
-                                placeholder="Date(example: 13 January 2025)"
-                            />
-                        </div>
-                        <div className="w-full">
-                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                                 School
                             </h6>
                             <Dropdown
                                 selected={schoolTitle}
                                 onSelect={(e) => {
-                                    handleInputChange(index, "location", e)
-                                    setSchoolTitle(e)
+                                    console.log(e)
+                                    const eventSchool = schools.find((school) => e === school.title);
+                                    const link = '/' + eventSchool?.education_type.replace(/ /g, '-').toLowerCase()
+                                        + '/' + eventSchool?.country.replace(/ /g, '-').toLowerCase()
+                                        + '/' + eventSchool?.city.replace(/ /g, '-').toLowerCase()
+                                        + '/' + eventSchool?.title.replace(/ /g, '-').toLowerCase()
+                                    if (eventSchool) {
+                                        handleInputChange(index, "location", eventSchool?.country)
+                                        handleInputChange(index, "link", link)
+                                        setSchoolTitle(e)
+                                    }
                                 }
                                 }
-                                placeholder='Select School' options={[]}/>
+                                placeholder='Select School' options={schoolsTitles}/>
                         </div>
                     </div>
                     <div>
@@ -265,7 +311,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                     onClick={handleDelete}
                     className="w-36 border-2 border-red-400  hover:bg-red-500 hover:text-white"
                 >
-                    Delete Blog
+                    Delete Event
                 </Button>
             </div>
         </div>

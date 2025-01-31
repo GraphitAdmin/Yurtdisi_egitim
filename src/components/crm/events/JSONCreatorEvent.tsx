@@ -33,7 +33,7 @@ const JSONCreator = () => {
                     image: "",
                     description: "",
                     date: "",
-                    type: "Event",
+                    type: "Language Education",
                     timeEnd: '',
                     timeStart: '',
                     location: '',
@@ -197,7 +197,7 @@ const JSONCreator = () => {
                             <Input
                                 value={event.date}
                                 onChange={(e) => handleInputChange(index, "date", e.target.value)}
-                                placeholder="Date(example: 13 January 2025)"
+                                placeholder="Date(example: 01.01.2025)"
                             />
                         </div>
                         <div className="w-full">

@@ -20,11 +20,12 @@ const Event: React.FC<IEvent> = ({image,type, date, timeStart,timeEnd, title, lo
 
     return (
         <div className="events__post">
-            <Image className="w-full" src={blobUrl+image} alt="Post"/>
+            <Image  width={381}
+                   height={224} className="w-full" src={blobUrl+image} alt="Post"/>
             <small style={{marginTop:12}}>{type}</small>
             <h5 style={{textAlign: 'left',marginTop:8}}>{title}</h5>
             <p style={{textAlign: 'left'}}>{description}</p>
-            <svg style={{marginTop:8,marginBottom:8,maxWidth:'100%'}} xmlns="http://www.w3.org/2000/svg" height="2" viewBox="0 0 381 2" fill="none">
+            <svg style={{marginBottom:8,maxWidth:'100%',marginTop:'auto'}} xmlns="http://www.w3.org/2000/svg" height="2" viewBox="0 0 381 2" fill="none">
                 <path d="M0 1H381" stroke="#E9EAEB"/>
             </svg>
             <div style={{display: 'flex', flexDirection: 'row',gap:12,width:'100%'}}>

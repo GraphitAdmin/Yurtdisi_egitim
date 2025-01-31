@@ -5,6 +5,7 @@ import Link from "next/link";
 import {ICountry} from "@/utils/interfaces";
 
 const CardCountry: React.FC<ICountry> = ({imgPost, name,link,capital,population,language}) => {
+    console.log(link)
     return (
         <Link className="card__country" href={link}>
             <Image className="w-full" src={imgPost} alt="Country"/>
