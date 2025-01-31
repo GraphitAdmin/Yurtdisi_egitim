@@ -7,35 +7,61 @@
     gap: 48px;
     align-self: stretch;
 }
-.block__card__header{
+
+.block__card__header {
     padding: 0 80px;
 }
-.block__card__cards{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+
+.block__card__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
     gap: 20px;
     max-width: 1600px;
 }
-.block__card__cards a{
-    max-width: 480px;
-    width: 480px;
+
+.block__card__cards a {
+    /*max-width: 480px !important;*/
+    /*width: 480px !important;*/
+    min-width: 100%;
+    max-width: none!important;
 }
-.block__card__cards span{
+
+.block__card__cards span {
     display: none;
 }
-.block__card__cards{
+
+.block__card__cards {
     padding: 0 80px;
 }
-.block__card .rounded__buttons{
+
+.block__card .rounded__buttons {
     display: none;
 }
+
+/*@media screen and (max-width: 1440px) {*/
+/*    .block__card__cards a {*/
+/*        max-width: 413px!important;*/
+/*        width: 100% !important;*/
+/*        min-width: 100% !important;*/
+/*    }*/
+
+/*}*/
+
 @media screen and (max-width: 992px) {
+    .block__card__cards{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    .block__card__cards a{
+        min-width: 330px;
+    }
     .block__card {
         padding-top: 64px;
     }
-    .block__card__header{
+
+    .block__card__header {
         padding: 0 64px;
     }
 
@@ -49,7 +75,8 @@
         width: 0;
         height: 0;
     }
-    .block__card__cards span{
+
+    .block__card__cards span {
         display: block;
         min-width: 44px;
     }
@@ -60,33 +87,40 @@
         max-width: 330px;
     }
 
-    .block__card__cards a img{
+    .block__card__cards a img {
         height: 176px;
     }
-    .block__card .rounded__buttons{
+
+    .block__card .rounded__buttons {
         display: flex;
         padding-left: 64px;
     }
 }
+
 @media screen and (max-width: 768px) {
-    .block__card__header{
+    .block__card__header {
         padding: 0 32px;
     }
-    .block__card .rounded__buttons{
+
+    .block__card .rounded__buttons {
         padding-left: 32px;
     }
-    .block__card__cards span{
+
+    .block__card__cards span {
         min-width: 12px;
     }
 }
+
 @media screen and (max-width: 576px) {
-    .block__card__header{
+    .block__card__header {
         padding: 0 16px;
     }
-    .block__card .rounded__buttons{
+
+    .block__card .rounded__buttons {
         padding-left: 16px;
     }
-    .block__card__cards span{
+
+    .block__card__cards span {
         min-width: 1px;
     }
 }

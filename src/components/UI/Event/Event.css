@@ -12,6 +12,10 @@
     background: var(--Courses-Gray-Gray-50, #FAFAFA);
     min-width: min-content;
 }
+.events__post{
+    max-width: 413px;
+    min-width: 413px;
+}
 .abroad__post{
     min-width: 413px;
 }
@@ -57,16 +61,19 @@
     fill:var(--Courses-Brand-Blue-500) !important;
 }
 .events__buttons{
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
+    display:grid;
+    grid-template-columns:1fr 1fr;
     gap:12px;
     width:100%;
     margin-top:16px;
 }
-.events__buttons button,.events__buttons a{
+.events__buttons button{
     /*padding: 12px!important;*/
-    max-width: fit-content;
+    max-width: 100%;
+    padding: 12px 0;
+}
+.events__buttons a{
+    max-width: 100%;
 }
 
 @media screen and (max-width: 576px) {
@@ -78,10 +85,6 @@
         min-width: Calc(100vw - 64px);
     }
     .events__buttons {
-        flex-direction: column;
-    }
-    .events__buttons button,.events__buttons a{
-        padding: 12px 0!important;
-        max-width: 100%;
+        grid-template-columns: 1fr;
     }
 }

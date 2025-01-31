@@ -7,7 +7,7 @@ import Button from "@/components/UI/Button/Button";
 
 const RelatedSchool: React.FC<IRelated> = ({imgPost,title, link, description}) => {
     return (
-        <Link href={link} className="events__post abroad__post">
+        <Link href={link} className="events__post">
             <Image className="w-full" src={imgPost} alt="Post"/>
             <h5 style={{textAlign: 'left',marginTop:12}}>{title}</h5>
             <p style={{textAlign: 'left'}}>{description}</p>
