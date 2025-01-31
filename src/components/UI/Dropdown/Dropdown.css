@@ -15,7 +15,12 @@
     text-align: left;
     width: 150px;
     color: var(--Courses-Gray-Gray-500);
-    margin-top: 0!important;
+    margin: 0!important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0!important;
+    max-height: 24px;
 }
 
 .dropdown__select {
@@ -30,13 +35,14 @@
     border-radius: 8px;
     padding: 4px 6px;
     width: 100%;
+    min-width: max-content;
     z-index: 9;
     border: 1px solid var(--Courses-Gray-Gray-200, #E9EAEB);
     background: #FFF;
 }
 
 .dropdown__select__item{
-    width: 100% !important;
+    width: 100%!important;
     display: flex!important;
     flex-direction: row!important;
     justify-content: space-between!important;
@@ -45,9 +51,12 @@
     height: 40px!important;
     padding: 8px!important;
     border-radius: 8px!important;
-    min-width: 100% !important;
+    min-width: max-content!important;
 }
-
+.dropdown__select__item p{
+    width: 100%;
+    white-space: nowrap;
+}
 .dropdown__select div small {
     height: 40px;
     line-height: 40px;
