@@ -14,6 +14,7 @@ const Blog: React.FC<BlogProps> = ({title}) => {
     const [error, setError] = useState(false)
 
     const [blog, setBlog] = useState<IBlog>()
+    const [contentBlog, setContentBlog] = useState<string>('')
     const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
     useEffect(() => {
@@ -37,6 +38,18 @@ const Blog: React.FC<BlogProps> = ({title}) => {
                     if (cleanedTitle.toLowerCase() === cleanedName.toLowerCase()) {
                         setBlog(blog)
                     }
+                    fetch(`${blobUrl}blogs/${cleanedTitle}.txt`, {
+                        cache: "no-store",
+                        next: {revalidate: 1},
+                    })
+                        .then((response) => response.json())
+                        .then((contentTXT: string) => {
+                            setContentBlog(contentTXT)
+                        })
+                        .catch((err) => {
+                            setLoading(false);
+                            console.error(err);
+                        });
                 });
                 setLoading(false)
             })
@@ -93,7 +106,7 @@ const Blog: React.FC<BlogProps> = ({title}) => {
             <div className="page__container" style={{justifyContent: 'center'}}>
                 <div
                     className="test__markdown"
-                    dangerouslySetInnerHTML={{__html: blog?.content ? blog.content : ''}}
+                    dangerouslySetInnerHTML={{__html: contentBlog ? contentBlog : ''}}
                 >
                 </div>
             </div>

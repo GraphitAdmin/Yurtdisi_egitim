@@ -89,7 +89,6 @@ export interface IBlog{
     image: string;
     description: string;
     "minutes_to_read": string,
-    "content":string,
     "date":string,
     "type":string
 }

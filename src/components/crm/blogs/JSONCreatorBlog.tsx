@@ -17,8 +17,8 @@ const JSONCreator = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const [isUploading, setIsUploading] = useState(false)
-    const [startValue,setStartValue] = useState<string>('');
-
+    const [startValue, setStartValue] = useState<string>('');
+    const [contentBlog, setContentBlog] = useState<string>('')
     useEffect(() => {
         fetch("https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/jsons/blogs.json", {
             cache: "no-store",
@@ -32,8 +32,8 @@ const JSONCreator = () => {
                     description: "",
                     minutes_to_read: "",
                     content: "",
-                    date:"",
-                    type:"Blog"
+                    date: "",
+                    type: "Blog"
                 }
                 setStartValue("")
                 setBlogs([...data, newBlog])
@@ -95,6 +95,19 @@ const JSONCreator = () => {
         }
 
         try {
+            const cleanedTitle = blogs[blogs.length-1].title
+                .replace(/[^a-zA-Z0-9 ]/g, '')
+                .replace(/-/g, '')
+                .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
+            const responseTxt = await fetch("/api/save-blog-content", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({content: contentBlog, title: cleanedTitle}),
+            });
+            if (!responseTxt.ok) throw new Error("Failed to save")
+
             const response = await fetch("/api/save-blogs", {
                 method: "POST",
                 headers: {
@@ -220,7 +233,7 @@ const JSONCreator = () => {
 
                         initialValue={startValue}
                         onEditorChange={(content) => {
-                            handleInputChange(index, 'content', content)
+                            setContentBlog(content)
                         }}
                     />
                     {/*<div*/}

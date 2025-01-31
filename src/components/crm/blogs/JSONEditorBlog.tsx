@@ -24,6 +24,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const [error, setError] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
     const [startValue,setStartValue] = useState<string>('');
+    const [contentBlog, setContentBlog] = useState<string>('');
     const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
     useEffect(() => {
@@ -47,7 +48,20 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                     console.log('title',cleanedTitle)
                     if (cleanedTitle.toLowerCase() === cleanedName.toLowerCase()) {
                         setBlogIndex(index);
-                        setStartValue(blog.content)
+                        fetch(`${blobUrl}blogs/${cleanedTitle}.txt`, {
+                            cache: "no-store",
+                            next: {revalidate: 1},
+                        })
+                            .then((response) => response.json())
+                            .then((contentTXT: string) => {
+                                setStartValue(contentTXT)
+                                setContentBlog(contentTXT)
+                            })
+                            .catch((err) => {
+                                setError("Failed to load data");
+                                setLoading(false);
+                                console.error(err);
+                            });
                     }
                 });
                 setLoading(false);
@@ -67,15 +81,35 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
 
     const handleSave = async () => {
         try {
-            const response = await fetch("/api/save-blogs", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(blogs),
-            });
-            if (!response.ok) throw new Error("Failed to save");
-            toast.success('Saved successfully!', successToasterStyles);
+            console.log(blogIndex)
+            if(blogIndex||blogIndex===0){
+                const cleanedTitle = blogs[blogIndex].title
+                    .replace(/[^a-zA-Z0-9 ]/g, '')
+                    .replace(/-/g, '')
+                    .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
+                console.log(cleanedTitle)
+                const responseTxt= await fetch("/api/save-blog-content", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({content:contentBlog,title:cleanedTitle}),
+                });
+                if (!responseTxt.ok) throw new Error("Failed to save");
+                const response = await fetch("/api/save-blogs", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(blogs),
+                });
+                if (!response.ok) throw new Error("Failed to save");
+                toast.success('Saved successfully!', successToasterStyles);
+            }
+            else {
+                throw new Error("Failed to save");
+            }
+
         } catch (err) {
             setError("Failed to save data");
             console.error(err);
@@ -243,7 +277,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
 
                                         initialValue={startValue}
                                         onEditorChange={(content) => {
-                                            handleInputChange(blogIndex, 'content', content)
+                                            setContentBlog(content)
                                         }}
                                     />
                                     {/*<div*/}
