@@ -1,13 +1,8 @@
-'use client'
 import PageSearch from "@/components/UI/PageSearch/PageSearch";
-import Button from "@/components/UI/Button/Button";
-import UK from "@/assets/countries/UK.png";
-import US from "@/assets/countries/US.png";
-import Canada from "@/assets/countries/Canada.png";
-import Germany from "@/assets/countries/Germany.webp";
-import React, {useEffect, useState} from "react";
-import {CardCountryProps} from "@/utils/interfaces";
+import React from "react";
 import CardCountry from "@/components/UI/CardCountry/CardCountry";
+import {UK, US} from "@/data/countries_json";
+import {Austria, France, Germany, Italy, Malta, Portugal, Spain, Switzerland} from "@/data/countries_json";
 
 interface CountriesPageContentProps {
     slug: string;
@@ -15,109 +10,18 @@ interface CountriesPageContentProps {
 
 const CountriesPageContent: React.FC<CountriesPageContentProps> = ({slug}) => {
     const countries = [
-        {
-            title: 'United Kingdom',
-            capital: 'London',
-            imgPost: UK,
-            language: 'English',
-            link: '/' + slug + '/united-kingdom',
-            population: '54 million (approx.)'
-        },
-        {
-            title: 'United States',
-            capital: 'Washington',
-            imgPost: US,
-            language: 'English',
-            link: '/' + slug + '/united-states',
-            population: '335 million (approx.)'
-        },
-        {
-            title: 'Canada',
-            capital: 'Ottawa',
-            imgPost: Canada,
-            language: 'English',
-            link: '/' + slug + '/canada',
-            population: '40 million (approx.)'
-        },
-        {
-            title: 'Germany',
-            capital: 'Berlin',
-            imgPost: Germany,
-            language: 'Germany',
-            link: '/' + slug + '/germany',
-            population: '85 million (approx.)'
-        },
-        {
-            title: 'United Kingdom',
-            capital: 'London',
-            imgPost: UK,
-            language: 'English',
-            link: '/' + slug + '/united-kingdom',
-            population: '54 million (approx.)'
-        },
-        {
-            title: 'United States',
-            capital: 'Washington',
-            imgPost: US,
-            language: 'English',
-            link: '/' + slug + '/united-states',
-            population: '335 million (approx.)'
-        },
-        {
-            title: 'Canada',
-            capital: 'Ottawa',
-            imgPost: Canada,
-            language: 'English',
-            link: '/' + slug + '/canada',
-            population: '40 million (approx.)'
-        },
-        {
-            title: 'Germany',
-            capital: 'Berlin',
-            imgPost: Germany,
-            language: 'Germany',
-            link: '/' + slug + '/germany',
-            population: '85 million (approx.)'
-        },
-        {
-            title: 'United Kingdom',
-            capital: 'London',
-            imgPost: UK,
-            language: 'English',
-            link: '/' + slug + '/united-kingdom',
-            population: '54 million (approx.)'
-        },
-        {
-            title: 'United States',
-            capital: 'Washington',
-            imgPost: US,
-            language: 'English',
-            link: '/' + slug + '/united-states',
-            population: '335 million (approx.)'
-        },
-        {
-            title: 'Canada',
-            capital: 'Ottawa',
-            imgPost: Canada,
-            language: 'English',
-            link: '/' + slug + '/canada',
-            population: '40 million (approx.)'
-        },
-        {
-            title: 'Germany',
-            capital: 'Berlin',
-            imgPost: Germany,
-            language: 'Germany',
-            link: '/' + slug + '/germany',
-            population: '85 million (approx.)'
-        },
+        UK,
+        US,
+        Malta,
+        Germany,
+        Austria,
+        Italy,
+        France,
+        Portugal,
+        Spain,
+        Switzerland,
     ]
-    const [showCountriesButton, setShowCountriesButton] = useState(false)
 
-    const [showCountries, setShowCountries] = useState<CardCountryProps[]>()
-    useEffect(() => {
-        setShowCountries(countries.slice(0, 8))
-    }, [])
     return (
         <div className="page__container">
             <div style={{width: '100%'}}>
@@ -132,22 +36,17 @@ const CountriesPageContent: React.FC<CountriesPageContentProps> = ({slug}) => {
             <PageSearch/>
             <div className="page__container__countries">
                 {
-                    showCountries&&showCountries.map((country, index) =>
+                    countries.map((country, index) =>
                         <CardCountry key={index}
-                                     title={country.title}
+                                     name={country.name}
                                      capital={country.capital}
                                      imgPost={country.imgPost}
                                      language={country.language}
-                                     link={country.link} population={country.population}/>
+                                     link={`/${slug}/${country.link}`}
+                                     population={country.population}/>
                     )
                 }
             </div>
-            {!showCountriesButton &&
-                <Button onClick={() => {
-                    setShowCountriesButton(true)
-                    setShowCountries(countries)
-                }} label={'Show all countries'}/>
-            }
         </div>
     )
 }

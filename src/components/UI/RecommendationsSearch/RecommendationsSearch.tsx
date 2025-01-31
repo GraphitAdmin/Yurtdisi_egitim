@@ -1,7 +1,7 @@
 'use client'
 import '../Events/Events.css'
 import React, { useRef} from "react";
-import UK from "@/assets/countries/UK.png";
+import UK from "@/assets/countries/UK.webp";
 import CardSchoolSearch from "@/components/UI/CardSchoolSearch/CardSchoolSearch";
 
 const RecommendationsSearch = () => {

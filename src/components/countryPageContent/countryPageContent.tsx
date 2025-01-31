@@ -6,7 +6,7 @@ import Oxford from "@/assets/schools/Test.jpeg";
 import Sevenoaks from "@/assets/schools/Sevenoaks.jpg";
 import Button from "@/components/UI/Button/Button";
 import Image from "next/image";
-import UK from "@/assets/countries/UK.png";
+import UK from "@/assets/countries/UK.webp";
 import Link from "next/link";
 import React, {useEffect, useState} from "react";
 import {CardCityProps} from "@/utils/interfaces";

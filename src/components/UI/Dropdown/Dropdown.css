@@ -13,14 +13,12 @@
 }
 .dropdown p{
     text-align: left;
-    width: 150px;
+    width: Calc(100% - 32px);
     color: var(--Courses-Gray-Gray-500);
     margin: 0!important;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    padding: 0!important;
-    max-height: 24px;
 }
 
 .dropdown__select {

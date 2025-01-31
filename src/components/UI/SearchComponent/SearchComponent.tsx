@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import RecommendationsSearch from "@/components/UI/RecommendationsSearch/RecommendationsSearch";
 import Logo from "@/components/UI/Logo/Logo";
-import UK from "@/assets/countries/UK.png";
+import UK from "@/assets/countries/UK.webp";
 import '@/app/schools.css'
 import CardSchoolSearchResults from "@/components/UI/CardSchoolSearchResults/CardSchoolSearchResults";
 

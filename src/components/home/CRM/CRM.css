@@ -146,7 +146,6 @@
         gap: 128px;
     }
     .CRM__block__description {
-        padding: 0 40px;
         flex-direction: column;
         gap:24px
     }
@@ -166,6 +165,9 @@
 }
 
 @media screen and (max-width: 768px) {
+    .CRM {
+        padding:64px 32px 0;
+    }
     .CRM__block img {
         height: 300px;
     }

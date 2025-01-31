@@ -37,7 +37,7 @@ export interface IRelated {
 }
 export interface CardCountryProps {
     imgPost:StaticImageData;
-    title:string;
+    name:string;
     link:string;
     capital:string;
     population:string;
