@@ -69,6 +69,9 @@ const Events =()=>{
                     </svg>
                 </div>
             </div>
+            <div className="mobile">
+                <Button href='/our-event-calendar' label="View all events"/>
+            </div>
         </div>
     )
 }
