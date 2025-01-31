@@ -6,6 +6,8 @@ import {useEffect, useState} from "react";
 import {IBlog} from "@/utils/interfaces"
 const References = () => {
     const [blogs,setBlogs]=useState<IBlog[]>([])
+    const [useful,setUseful]=useState<IBlog[]>([])
+
     const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 
     useEffect(() => {
@@ -15,7 +17,8 @@ const References = () => {
         })
             .then((response) => response.json())
             .then((data: IBlog[]) => {
-                setBlogs(data.reverse().slice(0, 3))
+                setUseful(data.reverse().filter((blog)=>blog.type==='Useful Information').slice(0, 3))
+                setBlogs(data.reverse().filter((blog)=>blog.type==='Blog').slice(0, 3))
             })
             .catch((err) => {
                 console.error(err);
@@ -37,7 +40,7 @@ const References = () => {
             <BlockCard
                 title='Useful information'
                 description='Lorem ipsum dolor sit amet consectetur. Sit vulputate sed iaculis nisi nulla phasellus massa nulla tellus.'
-                cards={blogs}
+                cards={useful}
                 buttonText='View all information'
             />
             <BlockCard
