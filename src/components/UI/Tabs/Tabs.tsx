@@ -19,7 +19,6 @@ const Tabs: React.FC = () => {
         }
     }, []);
 
-    console.log(tabsArray);
     return (
         <div className="tabs">
             <div className="home__tab">

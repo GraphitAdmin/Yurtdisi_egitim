@@ -6,7 +6,6 @@ import {CardCityProps} from "@/utils/interfaces";
 import Button from "@/components/UI/Button/Button";
 
 const CardCity: React.FC<CardCityProps> = ({imgPost, title, link, description, buttonDetails}) => {
-    console.log(link)
     return (
         <Link className={buttonDetails ? "card__country card__school" : "card__country"} style={{gap: '8px!important'}}
               href={link}>

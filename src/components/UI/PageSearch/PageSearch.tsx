@@ -62,9 +62,9 @@ const PageSearch = () => {
 
         fetchJson().then();
     }, []);
+
     useEffect(() => {
         let link='';
-
         if (selectedType!=='') {
             link+='/'+selectedType.replace(/ /g, '-').toLowerCase()
             if (selectedCountry!=='') {
@@ -77,9 +77,6 @@ const PageSearch = () => {
                 }
             }
         }
-
-        console.log(link)
-
         setHrefLink(link);
     }, [selectedCity, selectedType, selectedProgram, selectedCountry]);
     useEffect(() => {

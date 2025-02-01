@@ -1,9 +1,9 @@
 export const searchTypes = [
-    'Language schools',
-    'Summer schools',
+    'Language Schools',
+    'Summer Schools',
     'High Schools',
     'Universities',
-    'Foundation programs',
+    'Foundation Programs',
     'Certificates'
 ]
 export const searchCountries = [
