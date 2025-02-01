@@ -12,11 +12,12 @@ export async function uploadImage(formData: FormData) {
         console.log(file)
         const blob = await put(filename, file, {
             access: 'public',
-            addRandomSuffix: false
+            addRandomSuffix: true
         })
         console.log('blob',blob)
+        const filenameReturn = blob.url.split('/').pop();
         revalidatePath('/')
-        return { url: blob.url, success: true,filename }
+        return { url: blob.url, success: true,filename:filenameReturn }
     } catch (error) {
         console.log('not ok',error)
 
