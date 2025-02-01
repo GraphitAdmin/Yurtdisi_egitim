@@ -80,3 +80,14 @@ export interface IEvent{
     link:string;
     image:string;
 }
+export interface IStudent{
+    firstName:string;
+    lastName:string;
+    email:string;
+    phone:string;
+    programs:string;
+    city:string;
+    country:string;
+    message:string;
+    isContacted:boolean;
+}
