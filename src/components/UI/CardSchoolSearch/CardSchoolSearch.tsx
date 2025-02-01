@@ -22,6 +22,7 @@ const CardSchoolSearch: React.FC<ISchool> = ({images, title, country,city,educat
                 color: 'var(--Courses-Gray-Gray-500)',
                 textOverflow: 'ellipsis',
                 maxHeight: 72,
+                minHeight:72,
                 overflow: 'hidden',
                 textAlign: 'left'
             }}>
