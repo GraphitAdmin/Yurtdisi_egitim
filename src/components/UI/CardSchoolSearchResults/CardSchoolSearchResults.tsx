@@ -17,11 +17,11 @@ const CardSchoolSearchResults: React.FC<ISchool> = ({images, title, country,city
             <Image className="w-full"
                    width={720}
                    height={572} src={blobUrl + images[0]} alt="School"/>
-            <h4 style={{marginTop:12,textAlign:"left"}}>{title}</h4>
-            <p style={{color: 'var(--Courses-Gray-Gray-500)',textOverflow:'ellipsis',maxHeight:48,overflow:'hidden',textAlign:'left'}}>
+            <h4 style={{marginTop:12,textAlign:"left",maxHeight:64,minHeight:64}}>{title}</h4>
+            <p style={{color: 'var(--Courses-Gray-Gray-500)',textOverflow:'ellipsis',maxHeight:48,minHeight:48,overflow:'hidden',textAlign:'left'}}>
                 {school_overview}
             </p>
-            <Button label={'School details'} btnStyle={{marginTop:"auto",width:'100%',padding:'12px 0'}}/>
+            <Button label={'School details'} btnStyle={{marginTop:"12",width:'100%',padding:'12px 0'}}/>
         </Link>
     )
 }
