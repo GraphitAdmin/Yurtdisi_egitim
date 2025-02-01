@@ -34,7 +34,6 @@ const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChil
                 const jsonData = await response.json();
                 const filteredSchools = jsonData.filter((school: ISchool) => cleanTitle(school.city) === cleanTitle(subChildId) && cleanTitle(slug) === cleanTitle(school.education_type));
                 setSchools(filteredSchools);
-                console.log(filteredSchools)
                 localStorage.setItem('schools', JSON.stringify(jsonData));
             } catch (err) {
                 console.log(err);
@@ -94,8 +93,8 @@ const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChil
                         <p>
                             {city.description}
                         </p>
-                        <h5>
-                            {childId}&nbsp;{slug}
+                        <h5 style={{textTransform:'capitalize'}}>
+                            {childId.replace(/-/g, ' ')}&nbsp;{slug.replace(/-/g, ' ')}
                         </h5>
                         <Link href={'/smth'}>
                             Bath Language Schools
