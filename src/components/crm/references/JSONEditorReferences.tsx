@@ -7,7 +7,7 @@ import {Textarea} from "@/components/crm/ui/textarea";
 import Image from "next/image";
 import {uploadImage} from "@/app/crm/uploadImage";
 import '../JSONEditor.css'
-import {blobUrl, successToasterStyles} from "@/utils/utils";
+import {blobUrl, cleanTitle, successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
 import {IBlog} from "@/utils/interfaces";
 import { Editor } from '@tinymce/tinymce-react';
@@ -32,17 +32,11 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
             .then((data: IBlog[]) => {
                 setBlogs(data);
                 data.forEach((blog, index) => {
-                    const cleanedName = name
-                        .replace(/[^a-zA-Z0-9 ]/g, '')
-                        .replace(/-/g, '')
-                        .replace(/^\w/, (char) => char.toLowerCase());
-                    const cleanedTitle = blog.title
-                        .replace(/[^a-zA-Z0-9 ]/g, '')
-                        .replace(/-/g, '')
-                        .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
+                    const cleanedName = cleanTitle(name)
+                    const cleanedTitle = cleanTitle(blog.title)
                     console.log('name',cleanedName)
                     console.log('title',cleanedTitle)
-                    if (cleanedTitle.toLowerCase() === cleanedName.toLowerCase()) {
+                    if (cleanedTitle === cleanedName) {
                         setBlogIndex(index);
                         fetch(`${blobUrl}references/${cleanedTitle}.txt`, {
                             cache: "no-store",
@@ -79,10 +73,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
         try {
             console.log(blogIndex)
             if(blogIndex||blogIndex===0){
-                const cleanedTitle = blogs[blogIndex].title
-                    .replace(/[^a-zA-Z0-9 ]/g, '')
-                    .replace(/-/g, '')
-                    .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
+                const cleanedTitle = cleanTitle(blogs[blogIndex].title)
                 console.log(cleanedTitle)
                 const responseTxt= await fetch("/api/save-references-content", {
                     method: "POST",

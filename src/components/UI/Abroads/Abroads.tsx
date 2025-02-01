@@ -21,17 +21,27 @@ const Abroads =()=>{
     };
 
     useEffect(() => {
-        fetch(`${blobUrl}jsons/blogs.json`, {
-            cache: "no-store",
-            next: {revalidate: 1},
-        })
-            .then((response) => response.json())
-            .then((data: IBlog[]) => {
-                setBlogs(data.slice(0, 9));
-            })
-            .catch((err) => {
-                console.error(err);
-            });
+        const fetchJson = async () => {
+            const localSchools=localStorage.getItem('blogs')
+            if(localSchools!==undefined&&localSchools!==null) {
+                setBlogs(JSON.parse(localSchools).slice(0,9));
+            }
+            try {
+                const schoolsUrl = blobUrl + 'jsons/blogs.json';
+                const response = await fetch(schoolsUrl, {
+                    cache: 'no-store',
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch JSON');
+                }
+                const jsonData = await response.json();
+                setBlogs(jsonData.slice(0, 9));
+                localStorage.setItem('blogs', JSON.stringify(jsonData));
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchJson().then()
     }, []);
     return(
         <div className="events" style={{marginBottom:64}}>

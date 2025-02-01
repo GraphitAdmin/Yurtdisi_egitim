@@ -22,8 +22,8 @@ export default function AdminPanel() {
     useEffect(() => {
         const fetchJson = async () => {
             try {
-                const blogsUrl = blobUrl+'jsons/events.json';
-                const response = await fetch(blogsUrl, {
+                const eventsUrl = blobUrl+'jsons/events.json';
+                const response = await fetch(eventsUrl, {
                     cache: 'no-store',
                 });
                 if (!response.ok) {

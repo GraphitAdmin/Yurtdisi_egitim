@@ -11,7 +11,7 @@ import MillSchool from "@/assets/home/Mill_School.png"
 import SchoolInfo from "@/components/school/SchoolInfo";
 import RelatedSchools from "@/components/school/RelatedSchools/RelatedSchools";
 import {ISchool} from "@/utils/interfaces";
-import {blobUrl} from "@/utils/utils";
+import {blobUrl, cleanTitle} from "@/utils/utils";
 
 type paramsType = Promise<{ slug: string, childId: string, subChildId: string, subUniChildId: string }>;
 
@@ -33,6 +33,20 @@ export default function Home({
         const loadParams = async () => {
             setParamsData(await params)
             const {subUniChildId} = await params
+            const localSchools=localStorage.getItem('schools')
+            let localSchoolStringify=''
+            const cleanedName = cleanTitle(subUniChildId)
+            if(localSchools!==undefined&&localSchools!==null){
+                JSON.parse(localSchools).map((school: ISchool) => {
+                    const cleanedTitle = cleanTitle(school.title)
+                    console.log('name', cleanedName)
+                    console.log('title', cleanedTitle)
+                    if (cleanedTitle === cleanedName) {
+                        setSchool(school)
+                        localSchoolStringify=JSON.stringify(school)
+                    }
+                })
+            }
             try {
                 const schoolsUrl = blobUrl+'jsons/schools.json';
                 const response = await fetch(schoolsUrl, {
@@ -42,22 +56,18 @@ export default function Home({
                     throw new Error('Failed to fetch JSON');
                 }
                 const jsonData = await response.json();
-                jsonData.map((school: ISchool) => {
-                    const cleanedName = subUniChildId
-                        .replace(/[^a-zA-Z0-9 ]/g, '')
-                        .replace(/-/g, '')
-                        .replace(/^\w/, (char) => char.toLowerCase());
-                    const cleanedTitle = school.title
-                        .replace(/[^a-zA-Z0-9 ]/g, '')
-                        .replace(/-/g, '')
-                        .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
+                localStorage.setItem('schools', JSON.stringify(jsonData));
+                for (const school of jsonData) {
+                    const cleanedTitle = cleanTitle(school.title)
                     console.log('name', cleanedName)
                     console.log('title', cleanedTitle)
-                    if (cleanedTitle.toLowerCase() === cleanedName.toLowerCase()) {
-                        setSchool(school)
+                    if (cleanedTitle === cleanedName) {
+                        if (JSON.stringify(school) !== localSchoolStringify) {
+                            setSchool(school)
+                        }
+                        break;
                     }
-                })
-
+                }
             } catch (err) {
                 console.log(err);
             }

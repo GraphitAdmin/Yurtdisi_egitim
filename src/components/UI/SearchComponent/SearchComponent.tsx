@@ -41,6 +41,10 @@ const SearchComponent: React.FC<SearchComponentProps> = ({closeSearch}) => {
     const [schoolsSearchResults, setSchoolsSearchResults] = useState<ISchool[]>([]);
     useEffect(() => {
         const fetchJson = async () => {
+            const localSchools=localStorage.getItem('schools')
+            if(localSchools!==undefined&&localSchools!==null) {
+                setSchools(JSON.parse(localSchools));
+            }
             try {
                 const schoolsUrl = blobUrl+'jsons/schools.json';
                 const response = await fetch(schoolsUrl, {
@@ -51,6 +55,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({closeSearch}) => {
                 }
                 const jsonData = await response.json();
                 setSchools(jsonData);
+                localStorage.setItem('schools', JSON.stringify(jsonData));
             } catch (err) {
                 console.log(err);
             }

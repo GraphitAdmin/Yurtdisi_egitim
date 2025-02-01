@@ -18,9 +18,3 @@ export const searchCountries = [
     'Spain',
     'Switzerland'
 ]
-export const searchCities = [
-    'London', 'Oxford',
-]
-export const searchPrograms = [
-    'Example International Academy', 'Example International Academy',
-]

@@ -9,15 +9,29 @@ const References = () => {
     const [blogs, setBlogs] = useState<IBlog[]>([])
     const [useful, setUseful] = useState<IBlog[]>([])
     const [references, setReferences] = useState<IBlog[]>([])
+    const setAll=(data:IBlog[])=>{
+        setUseful(data.reverse().filter((blog) => blog.type === 'Useful Information').slice(0, 3))
+        setBlogs(data.reverse().filter((blog) => blog.type === 'Blog').slice(0, 3))
+    }
     useEffect(() => {
+        const localSchools = localStorage.getItem('blogs')
+        if (localSchools !== undefined && localSchools !== null) {
+            const localArray: IBlog[] = JSON.parse(localSchools);
+            setAll(localArray)
+        }
+        const localReferences = localStorage.getItem('references')
+        if (localReferences !== undefined && localReferences !== null) {
+            const localArray: IBlog[] = JSON.parse(localReferences);
+            setReferences(localArray.reverse().slice(0, 4))
+        }
         fetch(`${blobUrl}jsons/blogs.json`, {
             cache: "no-store",
             next: {revalidate: 1},
         })
             .then((response) => response.json())
             .then((data: IBlog[]) => {
-                setUseful(data.reverse().filter((blog) => blog.type === 'Useful Information').slice(0, 3))
-                setBlogs(data.reverse().filter((blog) => blog.type === 'Blog').slice(0, 3))
+                setAll(data)
+                localStorage.setItem('blogs', JSON.stringify(data))
             })
             .catch((err) => {
                 console.error(err);
@@ -29,6 +43,7 @@ const References = () => {
             .then((response) => response.json())
             .then((data: IBlog[]) => {
                 setReferences(data.reverse().slice(0, 4))
+                localStorage.setItem('references', JSON.stringify(data))
             })
             .catch((err) => {
                 console.error(err);

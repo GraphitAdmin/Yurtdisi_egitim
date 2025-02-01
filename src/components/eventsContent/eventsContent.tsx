@@ -9,6 +9,12 @@ const EventsContent = () => {
     const [showEvents, setShowEvents] = useState<IEvent[]>()
     useEffect(() => {
         const fetchJson = async () => {
+            const localSchools = localStorage.getItem('events')
+            if (localSchools !== undefined && localSchools !== null) {
+                const localArray: IEvent[] = JSON.parse(localSchools);
+                setEvents(localArray)
+                setShowEvents(localArray.slice(0, 9))
+            }
             try {
                 const schoolsUrl = blobUrl + 'jsons/events.json';
                 const response = await fetch(schoolsUrl, {
@@ -20,6 +26,7 @@ const EventsContent = () => {
                 const jsonData = await response.json();
                 setEvents(jsonData);
                 setShowEvents(jsonData.slice(0, 9))
+                localStorage.setItem('events', JSON.stringify(jsonData));
             } catch (err) {
                 console.log(err);
             }

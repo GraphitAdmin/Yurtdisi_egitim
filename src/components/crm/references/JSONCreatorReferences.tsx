@@ -6,7 +6,7 @@ import {Textarea} from "@/components/crm/ui/textarea"
 import Image from "next/image"
 import {uploadImage} from "@/app/crm/uploadImage"
 import toast from "react-hot-toast"
-import {blobUrl, errorToasterStyles, successToasterStyles} from "@/utils/utils"
+import {blobUrl, cleanTitle, errorToasterStyles, successToasterStyles} from "@/utils/utils"
 import type {IBlog} from "@/utils/interfaces"
 import '../JSONEditor.css'
 import {Editor} from "@tinymce/tinymce-react";
@@ -93,10 +93,7 @@ const JSONCreator = () => {
         }
 
         try {
-            const cleanedTitle = blogs[blogs.length-1].title
-                .replace(/[^a-zA-Z0-9 ]/g, '')
-                .replace(/-/g, '')
-                .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
+            const cleanedTitle = cleanTitle(blogs[blogs.length-1].title)
             const responseTxt = await fetch("/api/save-references-content", {
                 method: "POST",
                 headers: {

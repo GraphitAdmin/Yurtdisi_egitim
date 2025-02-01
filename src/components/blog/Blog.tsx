@@ -4,7 +4,7 @@ import Image from "next/image";
 import "./Blog.css"
 import {IBlog} from "@/utils/interfaces";
 import {Loader2} from "lucide-react";
-import {blobUrl} from "@/utils/utils";
+import {blobUrl, cleanTitle} from "@/utils/utils";
 
 interface BlogProps {
     title: string;
@@ -18,43 +18,63 @@ const Blog: React.FC<BlogProps> = ({title}) => {
     const [contentBlog, setContentBlog] = useState<string>('')
 
     useEffect(() => {
+        const cleanedTitle = cleanTitle(title)
+        const localSchools = localStorage.getItem('blogs')
+        let localblog = ''
+        if (localSchools !== undefined && localSchools !== null) {
+            const localArray: IBlog[] = JSON.parse(localSchools);
+            for (const blogItem of localArray) {
+                if (cleanedTitle === cleanTitle(blogItem.title)) {
+                    localblog = JSON.stringify(blogItem);
+                    setBlog(blogItem)
+                    fetch(`${blobUrl}blogs/${cleanedTitle}.txt`, {
+                        cache: "no-store",
+                        next: {revalidate: 1},
+                    })
+                        .then((response) => response.json())
+                        .then((contentTXT: string) => {
+                            setContentBlog(contentTXT)
+
+                        })
+                        .catch((err) => {
+                            setLoading(false);
+                            console.error(err);
+                        });
+                    setLoading(false);
+                    break;
+                }
+            }
+        }
         fetch(`${blobUrl}jsons/blogs.json`, {
             cache: "no-store",
             next: {revalidate: 1},
         })
             .then((response) => response.json())
             .then((data: IBlog[]) => {
-                data.forEach((blog) => {
-                    const cleanedName = title
-                        .replace(/[^a-zA-Z0-9 ]/g, '')
-                        .replace(/-/g, '')
-                        .replace(/^\w/, (char) => char.toLowerCase());
-                    const cleanedTitle = blog.title
-                        .replace(/[^a-zA-Z0-9 ]/g, '')
-                        .replace(/-/g, '')
-                        .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
-                    console.log('name', cleanedName)
-                    console.log('title', cleanedTitle)
-                    if (cleanedTitle.toLowerCase() === cleanedName.toLowerCase()) {
-                        setBlog(blog)
-                        fetch(`${blobUrl}blogs/${cleanedTitle}.txt`, {
-                            cache: "no-store",
-                            next: {revalidate: 1},
-                        })
-                            .then((response) => response.json())
-                            .then((contentTXT: string) => {
-                                setContentBlog(contentTXT)
+                localStorage.setItem('blogs', JSON.stringify(data))
+                for (const blogItem of data) {
+                    if (cleanTitle(blogItem.title) === cleanedTitle) {
+                        if (localblog !== JSON.stringify(blogItem)) {
+                            setBlog(blogItem)
+                            fetch(`${blobUrl}blogs/${cleanedTitle}.txt`, {
+                                cache: "no-store",
+                                next: {revalidate: 1},
                             })
-                            .catch((err) => {
-                                setLoading(false);
-                                console.error(err);
-                            });
+                                .then((response) => response.json())
+                                .then((contentTXT: string) => {
+                                    setContentBlog(contentTXT)
+                                    setLoading(false);
+                                })
+                                .catch((err) => {
+                                    setLoading(false);
+                                    console.error(err);
+                                });
+                        }
                     }
-                });
-                setLoading(false)
+                    break;
+                }
             })
             .catch((err) => {
-                setLoading(false)
                 setError(true)
                 console.error(err);
             });
@@ -66,9 +86,9 @@ const Blog: React.FC<BlogProps> = ({title}) => {
             </div>
         )
     }
-    console.log('title',blog?.title)
+    console.log('title', blog?.title)
 
-    if (error||blog?.title===undefined) {
+    if (error || blog?.title === undefined) {
         return <h1>Error</h1>
     }
 

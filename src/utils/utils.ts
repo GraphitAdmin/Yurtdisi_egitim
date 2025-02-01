@@ -31,3 +31,10 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
 export const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
+export function cleanTitle(title:string){
+    return title
+        .replace(/[^a-zA-Z0-9 ]/g, '')
+        .replace(/-/g, '')
+        .replace(/ /g, '')
+        .toLowerCase();
+}

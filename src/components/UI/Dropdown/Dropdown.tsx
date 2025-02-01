@@ -48,32 +48,36 @@ const Dropdown: React.FC<DropdownProps> = ({label, selected, setSelected, varian
                 </svg>}
             {isOpen && (
                 <div className="dropdown__select">{
-                    disabled&&textDisabled ? <p style={{padding:'8px 0'}}>{textDisabled}</p> :
-                        variants.map((variant, index) => (
-                            <div
-                                className="dropdown__select__item"
-                                key={index}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    if (selected === variant) {
-                                        setSelected('');
-                                    } else {
-                                        setSelected(variant);
+                    disabled && textDisabled ? <p style={{padding: '8px 0'}}>{textDisabled}</p> :
+                        variants.length > 0 ?
+                            variants.map((variant, index) => (
+                                <div
+                                    className="dropdown__select__item"
+                                    key={index}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        if (selected === variant) {
+                                            setSelected('');
+                                        } else {
+                                            setSelected(variant);
+                                        }
+                                        setIsOpen(false);
+                                    }}
+                                >
+                                    <p>{variant}</p>
+                                    {selected === variant &&
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"
+                                             fill="none">
+                                            <path
+                                                d="M9.5501 18.0001L3.8501 12.3001L5.2751 10.8751L9.5501 15.1501L18.7251 5.9751L20.1501 7.4001L9.5501 18.0001Z"
+                                                fill="#2E90FA"/>
+                                        </svg>
                                     }
-                                    setIsOpen(false);
-                                }}
-                            >
-                                <p>{variant}</p>
-                                {selected === variant &&
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none">
-                                        <path
-                                            d="M9.5501 18.0001L3.8501 12.3001L5.2751 10.8751L9.5501 15.1501L18.7251 5.9751L20.1501 7.4001L9.5501 18.0001Z"
-                                            fill="#2E90FA"/>
-                                    </svg>
-                                }
-                            </div>
-                        ))}
+                                </div>
+                            ))
+                            : <p style={{padding: '8px 0'}}>No matches</p>
+                }
                 </div>
             )}
         </div>

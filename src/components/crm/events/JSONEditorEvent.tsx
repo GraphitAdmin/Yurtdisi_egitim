@@ -7,7 +7,7 @@ import {Textarea} from "@/components/crm/ui/textarea";
 import Image from "next/image";
 import {uploadImage} from "@/app/crm/uploadImage";
 import '../JSONEditor.css'
-import {blobUrl, successToasterStyles} from "@/utils/utils";
+import {blobUrl, cleanTitle, successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
 import {IEvent, ISchool} from "@/utils/interfaces";
 import {Dropdown} from "@/components/crm/ui/dropdown";
@@ -35,15 +35,9 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
             .then((data: IEvent[]) => {
                 setEvents(data);
                 data.forEach((event, index) => {
-                    const cleanedName = name
-                        .replace(/[^a-zA-Z0-9 ]/g, '')
-                        .replace(/-/g, '')
-                        .replace(/^\w/, (char) => char.toLowerCase());
-                    const cleanedTitle = event.title
-                        .replace(/[^a-zA-Z0-9 ]/g, '')
-                        .replace(/-/g, '')
-                        .replace(/^\w/, (char) => char.toLowerCase()).replace(/ /g, '')
-                    if (cleanedTitle.toLowerCase() === cleanedName.toLowerCase()) {
+                    const cleanedName = cleanTitle(name)
+                    const cleanedTitle = cleanTitle(event.title)
+                    if (cleanedTitle=== cleanedName) {
                         setEventIndex(index);
                     }
                 });

@@ -3,10 +3,10 @@ import { NextResponse } from 'next/server';
 import {revalidatePath} from "next/cache";
 
 export async function POST(request: Request) {
-    const cities = await request.json();
+    const schools = await request.json();
 
     try {
-        const { url } = await put('jsons/schools.json', JSON.stringify(cities,null,2), {
+        const { url } = await put('jsons/schools.json', JSON.stringify(schools,null,2), {
             access: 'public',
             addRandomSuffix: false,
             cacheControlMaxAge: 0

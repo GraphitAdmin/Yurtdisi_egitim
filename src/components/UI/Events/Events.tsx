@@ -21,6 +21,10 @@ const Events =()=>{
     };
     useEffect(() => {
         const fetchJson = async () => {
+            const localSchools=localStorage.getItem('events')
+            if(localSchools!==undefined&&localSchools!==null) {
+                setEvents(JSON.parse(localSchools));
+            }
             try {
                 const schoolsUrl = blobUrl + 'jsons/events.json';
                 const response = await fetch(schoolsUrl, {
@@ -31,6 +35,7 @@ const Events =()=>{
                 }
                 const jsonData = await response.json();
                 setEvents(jsonData);
+                localStorage.setItem('events', JSON.stringify(jsonData));
             } catch (err) {
                 console.log(err);
             }

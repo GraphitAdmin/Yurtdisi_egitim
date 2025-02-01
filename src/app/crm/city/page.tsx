@@ -21,6 +21,10 @@ export default function AdminPanel() {
     const [cities, setCities] = useState<ICity[]>([]);
     useEffect(() => {
         const fetchJson = async () => {
+            const localCities=localStorage.getItem('cities')
+            if(localCities!==undefined&&localCities!==null){
+                setCities(JSON.parse(localCities));
+            }
             try {
                 const citiesUrl = blobUrl+'jsons/cities.json';
                 const response = await fetch(citiesUrl, {
@@ -31,6 +35,7 @@ export default function AdminPanel() {
                 }
                 const jsonData = await response.json();
                 setCities(jsonData);
+                localStorage.setItem('cities', JSON.stringify(jsonData));
             } catch (err) {
                 console.log(err);
             }

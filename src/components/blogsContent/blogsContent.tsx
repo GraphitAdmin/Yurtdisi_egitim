@@ -12,6 +12,13 @@ const BlogsContent = () => {
     const [showEvents, setShowEvents] = useState<IBlog[]>()
 
     useEffect(() => {
+        const localBlogs = localStorage.getItem('blogs')
+        if (localBlogs !== undefined && localBlogs !== null) {
+            const localArray: IBlog[] = JSON.parse(localBlogs);
+            setBlogs(localArray)
+            setShowEvents(localArray.slice(0, 9))
+            setLoading(false)
+        }
         fetch(`${blobUrl}jsons/blogs.json`, {
             cache: "no-store",
             next: {revalidate: 1},
@@ -20,6 +27,7 @@ const BlogsContent = () => {
             .then((data: IBlog[]) => {
                 setBlogs(data);
                 setShowEvents(data.slice(0, 9))
+                localStorage.setItem('blogs', JSON.stringify(blogs));
                 setLoading(false)
             })
             .catch((err) => {
