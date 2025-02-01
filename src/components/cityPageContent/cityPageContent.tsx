@@ -1,12 +1,11 @@
 'use client'
 import PageSearch from "@/components/UI/PageSearch/PageSearch";
 import CardCity from "@/components/UI/CardCity/CardCity";
-import Oxford from "@/assets/schools/Test.jpeg";
 import Image from "next/image";
 import Link from "next/link";
 import React, {useEffect, useState} from "react";
-import {ISchool} from "@/utils/interfaces";
-import {blobUrl} from "@/utils/utils";
+import {ICity, ISchool} from "@/utils/interfaces";
+import {blobUrl, cleanTitle} from "@/utils/utils";
 
 interface CityPageContentProps {
     slug: string;
@@ -16,14 +15,16 @@ interface CityPageContentProps {
 
 const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChildId}) => {
     const [schools, setSchools] = useState<ISchool[]>([]);
+    const [city, setCity] = useState<ICity>();
     useEffect(() => {
         const fetchJson = async () => {
-            const localSchools=localStorage.getItem('schools')
-            if(localSchools!==undefined&&localSchools!==null) {
-                setSchools(JSON.parse(localSchools));
+            const localSchools = localStorage.getItem('schools')
+            if (localSchools !== undefined && localSchools !== null) {
+                const filteredSchools = JSON.parse(localSchools).filter((school: ISchool) => cleanTitle(school.city) === cleanTitle(subChildId) && cleanTitle(slug) === cleanTitle(school.education_type));
+                setSchools(filteredSchools);
             }
             try {
-                const schoolsUrl = blobUrl+'jsons/schools.json';
+                const schoolsUrl = blobUrl + 'jsons/schools.json';
                 const response = await fetch(schoolsUrl, {
                     cache: 'no-store',
                 });
@@ -31,15 +32,33 @@ const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChil
                     throw new Error('Failed to fetch JSON');
                 }
                 const jsonData = await response.json();
-                setSchools(jsonData);
+                const filteredSchools = jsonData.filter((school: ISchool) => cleanTitle(school.city) === cleanTitle(subChildId) && cleanTitle(slug) === cleanTitle(school.education_type));
+                setSchools(filteredSchools);
+                console.log(filteredSchools)
                 localStorage.setItem('schools', JSON.stringify(jsonData));
             } catch (err) {
                 console.log(err);
             }
         };
-
         fetchJson().then();
+        fetch(`${blobUrl}jsons/cities.json`, {
+            cache: "no-store",
+            next: {revalidate: 1},
+        })
+            .then((response) => response.json())
+            .then((data: ICity[]) => {
+                for (const cityMap of data) {
+                    if (cleanTitle(cityMap.name) === cleanTitle(subChildId)) {
+                        setCity(cityMap);
+                        break;
+                    }
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }, []);
+
     return (
         <>
             <div className="page__container">
@@ -59,46 +78,41 @@ const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChil
                             <CardCity key={index}
                                       title={school.title}
                                       description={school.school_overview}
-                                      link={'/'+slug+'/'+childId+'/'+subChildId+'/'+school.title.replace(/ /g, '-').toLowerCase()}
+                                      link={'/' + slug + '/' + childId + '/' + subChildId + '/' + school.title.replace(/ /g, '-').toLowerCase()}
                                       buttonDetails={true}
                                       image_string={school.image_right}/>
                         )
                     }
                 </div>
             </div>
-            <div className="about__school">
-                <div>
-                    <h2>
-                        About Oxford
-                    </h2>
-                    <p>
-                        Located in the southeast of England, Oxford is home to the world&#39;s most famous university,
-                        Oxford University. Located 80 kilometers from the capital London and accessible 24 hours a day,
-                        Oxford is the center of cultural activity in England with a student population of 30%. The
-                        historic buildings of Oxford University, spread throughout the city, attract tens of thousands
-                        of tourists to Oxford every year. The many parks in the city allow the greenery to merge with a
-                        historical texture and create fascinating, peaceful landscapes. Oxford, which also hosts many
-                        language schools for English language education, is a great destination for those who want to
-                        study in England.
-                    </p>
-                    <h5>
-                        UK language schools
-                    </h5>
-                    <Link href={'/smth'}>
-                        Bath Language Schools
-                    </Link>
-                    <Link href={'/smth'}>
-                        Belfast | Northern Ireland Language Schools
-                    </Link>
-                    <Link href={'/smth'}>
-                        Birmingham Language Schools
-                    </Link>
-                    <Link href={'/smth'}>
-                        Bournemouth Language Schools
-                    </Link>
+            {city &&
+                <div className="about__school">
+                    <div>
+                        <h2>
+                            About {city.name}
+                        </h2>
+                        <p>
+                            {city.description}
+                        </p>
+                        <h5>
+                            {childId}&nbsp;{slug}
+                        </h5>
+                        <Link href={'/smth'}>
+                            Bath Language Schools
+                        </Link>
+                        <Link href={'/smth'}>
+                            Belfast | Northern Ireland Language Schools
+                        </Link>
+                        <Link href={'/smth'}>
+                            Birmingham Language Schools
+                        </Link>
+                        <Link href={'/smth'}>
+                            Bournemouth Language Schools
+                        </Link>
+                    </div>
+                    <Image width={720} height={756} src={blobUrl + city.image} alt="school"/>
                 </div>
-                <Image src={Oxford} alt="school"/>
-            </div>
+            }
         </>
     )
 }
