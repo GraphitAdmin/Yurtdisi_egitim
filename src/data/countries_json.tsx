@@ -62,7 +62,7 @@ export const Switzerland = {
     link: '/switzerland',
     capital: 'Bern',
     imgPost: SwitzerlandImage,
-    language: 'German, French, Italian',
+    language: 'Romansh, German, French, Italian',
     population: '8.6 million (approx.)',
     faceMeasurement: '41285',
     currency: 'Swiss Franc (CHF)',
