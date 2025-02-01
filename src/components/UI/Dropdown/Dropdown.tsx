@@ -15,7 +15,6 @@ const Dropdown: React.FC<DropdownProps> = ({label, selected, setSelected, varian
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // Закриття дропдауну при кліку поза ним
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {

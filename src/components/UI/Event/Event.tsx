@@ -59,7 +59,6 @@ const Event: React.FC<IEvent> = ({image,type, date, timeStart,timeEnd, title, lo
                         fontFamily: 'var(--font-urbanist)'
                     }}
                 />
-                {/*<Button label='Book a meeting' btnStyle={{width:'100%'}}/>*/}
                 <Button label='School details' href={link} btnStyle={{width:'100%'}} secondary={true}/>
             </div>
 

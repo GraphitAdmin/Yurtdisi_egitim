@@ -48,7 +48,7 @@ const JSONCreator = () => {
         try {
             const result = await uploadImage(formData);
             console.log(result)
-            if (result.success && result.url) {
+            if (result.success && result.url&&result.filename) {
                 setPreview(result.url);
                 handleInputChange(cities.length - 1, "image", result.filename);
             } else {

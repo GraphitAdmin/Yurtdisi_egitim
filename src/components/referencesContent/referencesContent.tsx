@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {IBlog} from "@/utils/interfaces";
 import '../eventsContent/eventsContent.css'
 import {Loader2} from "lucide-react";
@@ -7,27 +7,34 @@ import {blobUrl} from "@/utils/utils";
 import CardReference from "@/components/UI/CardReference/CardReference";
 
 const ReferencesContent = () => {
-    const [blogs,setBlogs]=useState<IBlog[]>([]);
+    const [references,setReferences]=useState<IBlog[]>([]);
     const [loading,setLoading]=useState(true);
-    const [showEvents, setShowEvents] = useState<IBlog[]>()
 
     useEffect(() => {
+        const localReferences = localStorage.getItem('references')
+        if (localReferences !== undefined && localReferences !== null) {
+            const localArray: IBlog[] = JSON.parse(localReferences);
+            setReferences(localArray.reverse().slice(0, 9))
+            setLoading(false)
+        }
         fetch(`${blobUrl}jsons/references.json`, {
             cache: "no-store",
             next: {revalidate: 1},
         })
             .then((response) => response.json())
             .then((data: IBlog[]) => {
-                setBlogs(data);
-                setShowEvents(data.slice(0, 9))
+                setReferences(data);
                 setLoading(false)
             })
             .catch((err) => {
                 setLoading(false)
                 console.error(err);
             });
-        console.log(blogs)
     }, []);
+    const showReferences = useMemo(() => {
+        return references.reverse().slice(0,9)
+    }, [references])
+
     if (loading) {
         return (
             <div className="flex justify-center items-center h-64">
@@ -45,7 +52,7 @@ const ReferencesContent = () => {
             </div>
             <div className="events__page">
                 {
-                    showEvents && showEvents.map((blog, index) =>
+                    showReferences.map((blog, index) =>
                         <CardReference key={index} {...blog} />
                     )
                 }

@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import RecommendationsSearch from "@/components/UI/RecommendationsSearch/RecommendationsSearch";
 import Logo from "@/components/UI/Logo/Logo";
 import '@/app/schools.css'
@@ -38,7 +38,6 @@ const SearchInput: React.FC<SearchInputProps> = ({mobile, inputValue, setInputVa
 const SearchComponent: React.FC<SearchComponentProps> = ({closeSearch}) => {
     const [inputValue, setInputValue] = useState('');
     const [schools, setSchools] = useState<ISchool[]>([]);
-    const [schoolsSearchResults, setSchoolsSearchResults] = useState<ISchool[]>([]);
     useEffect(() => {
         const fetchJson = async () => {
             const localSchools=localStorage.getItem('schools')
@@ -63,9 +62,10 @@ const SearchComponent: React.FC<SearchComponentProps> = ({closeSearch}) => {
 
         fetchJson().then();
     }, []);
-    useEffect(() => {
-        setSchoolsSearchResults(schools.filter((school)=>school.title.toLowerCase().includes(inputValue.toLowerCase())));
-    }, [inputValue]);
+    const schoolsSearchResults=useMemo(() => {
+        return schools.filter((school)=>school.title.toLowerCase().includes(inputValue.toLowerCase()))
+    }, [schools, inputValue])
+
     return (
         <div
             className="navbar__search"
