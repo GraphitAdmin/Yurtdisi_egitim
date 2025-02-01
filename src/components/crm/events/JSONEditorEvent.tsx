@@ -146,7 +146,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
         setError(null);
         try {
             const result = await uploadImage(formData);
-            if (result.success && result.url) {
+            if (result.success && result.url&&result.filename) {
                 if (eventIndex !== null) {
                     handleInputChange(eventIndex, "image", result.filename);
                 }

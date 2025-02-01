@@ -82,7 +82,7 @@ const JSONCreator = () => {
         setError(null)
         try {
             const result = await uploadImage(formData)
-            if (result.success && result.url) {
+            if (result.success && result.url&&result.filename) {
                 handleInputChange(events.length - 1, "image", result.filename)
             } else {
                 setError("Upload failed. Please try again.")
