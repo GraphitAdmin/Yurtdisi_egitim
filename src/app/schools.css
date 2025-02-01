@@ -129,7 +129,9 @@
     border-radius: 16px;
     border: 1px solid var(--Courses-Brand-Blue-100, #B2DDFF);
     background: #FFF;
-    padding: 16px;
+    height: 152px;
+    width: 273px;
+    object-fit: cover;
 }
 .page__school__right__info div p:first-child{
     font-weight: 400;
@@ -230,19 +232,28 @@
         gap: 36px;
     }
 
-    .about__school div{
+    .about__school div {
         padding: 48px 16px;
     }
-    .about__school img{
+
+    .about__school img {
         height: 240px;
     }
-    .page__country__schools__button__tablet{
+
+    .page__country__schools__button__tablet {
         width: 100%;
     }
-    .page__school__right{
+
+    .page__school__right {
         max-width: calc(100vw - 32px);;
     }
-    .page__school__right__info{
+
+    .page__school__right__info {
         align-items: flex-start;
+    }
+
+    .page__school__right__info img {
+        width: 100%;
+
     }
 }

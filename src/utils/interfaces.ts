@@ -21,7 +21,7 @@ export interface ICountry {
     telephoneCode:string;
 }
 export interface CardCityProps {
-    imgPost:StaticImageData;
+    image_string:string;
     title:string;
     link:string;
     description:string;

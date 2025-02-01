@@ -6,7 +6,7 @@ import {ISchool} from "@/utils/interfaces";
 import Button from "@/components/UI/Button/Button";
 import {blobUrl} from "@/utils/utils";
 
-const CardSchoolSearchResults: React.FC<ISchool> = ({images, title, country,city,education_type, school_overview}) => {
+const CardSchoolSearchResults: React.FC<ISchool> = ({image_right, title, country,city,education_type, school_overview}) => {
     return (
         <Link className="card__country" style={{gap:'8px!important'}} href={
             '/'+education_type.replace(/ /g, '-').toLowerCase()+'/'+
@@ -16,7 +16,7 @@ const CardSchoolSearchResults: React.FC<ISchool> = ({images, title, country,city
         }>
             <Image className="w-full"
                    width={720}
-                   height={572} src={blobUrl + images[0]} alt="School"/>
+                   height={572} src={blobUrl + image_right} alt="School"/>
             <h4 style={{marginTop:12,textAlign:"left",maxHeight:64,minHeight:64}}>{title}</h4>
             <p style={{color: 'var(--Courses-Gray-Gray-500)',textOverflow:'ellipsis',maxHeight:48,minHeight:48,overflow:'hidden',textAlign:'left'}}>
                 {school_overview}

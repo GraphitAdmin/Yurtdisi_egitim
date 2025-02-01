@@ -7,7 +7,6 @@ import Image from "next/image"
 import Link from "next/link";
 import Subscribe from "@/components/UI/FAQ/Subscribe";
 import Footer from "@/components/UI/Footer/Footer";
-import MillSchool from "@/assets/home/Mill_School.png"
 import SchoolInfo from "@/components/school/SchoolInfo";
 import RelatedSchools from "@/components/school/RelatedSchools/RelatedSchools";
 import {ISchool} from "@/utils/interfaces";
@@ -89,7 +88,7 @@ export default function Home({
                         <SchoolInfo school={school}/>
                         <div className="page__school__right">
                             <div className="page__school__right__info">
-                                <Image src={MillSchool} alt="MillSchool"/>
+                                <Image width='273' height={152} src={blobUrl+school.image_right} alt="MillSchool"/>
                                 {school.title &&
                                     <div>
                                         <p>School</p>
