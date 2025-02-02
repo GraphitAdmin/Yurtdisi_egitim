@@ -39,12 +39,6 @@
 .card__country p span{
     color: var(--Courses-Gray-Gray-500, #717680);
 }
-@media screen and (max-width: 768px) {
-    .card__country img {
-        height: 176px;
-        max-height: 176px;
-    }
-}
 @media screen and (max-width: 576px) {
     .card__school__search {
         max-width: Calc(100vw - 64px);
