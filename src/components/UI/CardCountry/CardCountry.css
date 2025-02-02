@@ -21,6 +21,10 @@
 .card__country:hover img{
     scale: 1.05;
 }
+.card__city img{
+    height: 152px;
+    max-height: 152px;
+}
 .card__school img{
     height: 224px;
     max-height: 224px;

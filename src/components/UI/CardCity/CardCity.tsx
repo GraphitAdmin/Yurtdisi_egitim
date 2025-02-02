@@ -8,7 +8,7 @@ import {blobUrl} from "@/utils/utils";
 
 const CardCity: React.FC<CardCityProps> = ({image_string, title, link, description, buttonDetails}) => {
     return (
-        <Link className={buttonDetails ? "card__country card__school" : "card__country"} style={{gap: '8px!important'}}
+        <Link className={buttonDetails ? "card__country card__school" : "card__country card__city"} style={{gap: '8px!important'}}
               href={link}>
             <Image width={273} height={152} className="w-full" src={blobUrl+image_string} alt="Country"/>
             <h4 style={{marginTop: 12}}>{title}</h4>
