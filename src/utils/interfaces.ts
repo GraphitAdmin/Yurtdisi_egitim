@@ -91,3 +91,8 @@ export interface IStudent{
     message:string;
     isContacted:boolean;
 }
+
+export interface ISubscriber{
+    name:string;
+    email:string;
+}
