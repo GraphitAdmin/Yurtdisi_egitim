@@ -90,6 +90,7 @@ export interface IStudent{
     country:string;
     message:string;
     isContacted:boolean;
+    id:string;
 }
 
 export interface ISubscriber{

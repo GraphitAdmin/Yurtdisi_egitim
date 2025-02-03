@@ -4,7 +4,7 @@ import React from "react";
 
 const navigationItems = [
     { name: "Subscribers", icon: LucideMail, href: "/subscribers" },
-    { name: "Students", icon: Users, href: "/students" },
+    { name: "Students", icon: Users, href: "/student" },
     { name: "Cities", icon: Building, href: "/city" },
     { name: "Schools", icon: School, href: "/school" },
     { name: "Blogs", icon: NotebookPen, href: "/blog" },

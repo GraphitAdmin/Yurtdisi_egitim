@@ -91,7 +91,7 @@ export default function AdminPanel() {
                                     <Button onClick={() => {
                                         window.location.href = '/crm/student/new'
                                     }} className="w-48 border-2 border-black">
-                                        <PlusCircle className="mr-2 h-4 w-4"/> Add New Student
+                                        <PlusCircle className="mr-2 h-4 w-4"/> Add Student
                                     </Button>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@ export default function AdminPanel() {
                                     <TableBody>
                                         {sortedStudents.map((student, index) => (
                                             <TableRow
-                                                // onClick={() => window.location.href = `/crm/event/${event.title.replace(/ /g, '-').toLowerCase()}`}
+                                                onClick={() => window.location.href = `/crm/student/${student.id}`}
                                                 key={index} className="hover:bg-gray-50">
                                                 <TableCell className="font-medium">{student.firstName}</TableCell>
                                                 <TableCell className="font-medium">{student.lastName}</TableCell>

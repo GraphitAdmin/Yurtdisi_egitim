@@ -42,7 +42,8 @@ const ContactUsForm: React.FC<ContactUsFormProps>  = ({isContactUs}) => {
                 city: city,
                 country: countries.join(', '),
                 message: message,
-                isContacted: false
+                isContacted: false,
+                id:jsonData.length.toString()
             }
             const students=[newStudent,...jsonData]
             try {
