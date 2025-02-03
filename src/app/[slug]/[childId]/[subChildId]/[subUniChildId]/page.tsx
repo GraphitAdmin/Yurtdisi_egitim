@@ -8,7 +8,7 @@ import {notFound} from "next/navigation";
 import React from "react";
 import SchoolPageContent from "@/components/schoolPageContent/schoolPageContent";
 
-const fetchSchool = async (subUniChildId: string) => {
+const fetchSchool = async (subUniChildId: string,subChildId:string) => {
     const cleanedName = cleanTitle(subUniChildId)
     try {
         const schoolsUrl = blobUrl + 'jsons/schools.json';
@@ -18,13 +18,18 @@ const fetchSchool = async (subUniChildId: string) => {
         if (!response.ok) {
             throw new Error('Failed to fetch JSON');
         }
-        const jsonData = await response.json();
+        const jsonData:ISchool[] = await response.json();
+        console.log(jsonData)
+        console.log(subChildId)
+        let relatedSchools= jsonData.filter((school: ISchool) => cleanTitle(school.city)===cleanTitle(subChildId));
+        console.log(relatedSchools)
         for (const school of jsonData) {
             const cleanedTitle = cleanTitle(school.title)
             console.log('name', cleanedName)
             console.log('title', cleanedTitle)
             if (cleanedTitle === cleanedName) {
-                return school;
+                relatedSchools=relatedSchools.filter((relatedSchool)=>relatedSchool.title!==cleanedTitle)
+                return {school,relatedSchools};
             }
         }
     } catch (err) {
@@ -38,16 +43,16 @@ export default async function Home({
                                    }: {
     params: paramsType;
 }) {
-    const {subUniChildId} = await params
-    const school:ISchool = await fetchSchool(subUniChildId)
-    if(!school){
+    const {subUniChildId,subChildId} = await params
+    const data = await fetchSchool(subUniChildId,subChildId)
+    if(!data||!data.school){
         notFound()
     }
     return (
         <div>
             <Navbar home={false}/>
             <Tabs/>
-            <SchoolPageContent subUniChildId={subUniChildId} school={school}/>
+            <SchoolPageContent subUniChildId={subUniChildId} school={data.school} relatedSchools={data.relatedSchools}/>
             <Subscribe/>
             <Footer/>
         </div>

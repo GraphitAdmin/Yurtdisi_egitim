@@ -3,7 +3,6 @@ import {Input} from "@/components/crm/ui/input";
 import {Button} from "@/components/crm/ui/button";
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
-import {checkLogged} from "@/utils/utils";
 
 export default function AdminPanel() {
     const [username, setUsername] = useState("")
@@ -18,7 +17,10 @@ export default function AdminPanel() {
         }
     }
     useEffect(() => {
-        checkLogged();
+        const checkLogged=sessionStorage.getItem('isLoggedIn')
+        if (checkLogged&&checkLogged==='true'){
+            window.location.href='/crm/subscribers'
+        }
     }, []);
 
     return (

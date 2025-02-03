@@ -10,9 +10,11 @@ import RelatedSchools from "@/components/school/RelatedSchools/RelatedSchools";
 interface SchoolPageContentProps {
     subUniChildId: string;
     school: ISchool;
+    relatedSchools:ISchool[];
 }
 
-const SchoolPageContent: React.FC<SchoolPageContentProps> = ({ subUniChildId, school}) => {
+const SchoolPageContent: React.FC<SchoolPageContentProps> = ({ subUniChildId, school,relatedSchools}) => {
+    console.log(relatedSchools)
     return (
         <>
             <div className="page__container">
@@ -111,7 +113,7 @@ const SchoolPageContent: React.FC<SchoolPageContentProps> = ({ subUniChildId, sc
                 }
             </div>
             {school !== null &&
-                <RelatedSchools/>
+                <RelatedSchools relatedSchools={relatedSchools}/>
             }
         </>
 

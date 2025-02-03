@@ -1,12 +1,13 @@
 'use client'
 import '../../UI/Events/Events.css'
-import ImageEvent from "@/assets/home/Illustration.png"
-import {useEffect, useRef, useState} from "react";
-import {IRelated} from "@/utils/interfaces";
+import React, {useRef} from "react";
+import {ISchool} from "@/utils/interfaces";
 import RelatedSchool from "@/components/school/RelatedSchools/RelatedSchool";
-const RelatedSchools =()=>{
+interface IRelatedSchools {
+    relatedSchools:ISchool[];
+}
+const RelatedSchools: React.FC<IRelatedSchools> =({relatedSchools})=>{
     const eventsRef = useRef(null);
-    const [events, setEvents] = useState<IRelated[]>([])
     const scroll = (direction:string) => {
         const scrollAmount = 413;
         if (eventsRef.current) {
@@ -18,37 +19,9 @@ const RelatedSchools =()=>{
             });
         }
     };
-    useEffect(()=>{
-        setEvents([
-            {
-                imgPost:ImageEvent,
-                title:'College Alpin Beau Soleil',
-                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                link:'/our-event-calendar'
-            },
-            {
-                imgPost:ImageEvent,
-                title:'College Alpin Beau Soleil',
-                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                link:'/our-event-calendar'
-            },{
-                imgPost:ImageEvent,
-                title:'College Alpin Beau Soleil',
-                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                link:'/our-event-calendar'
-            },{
-                imgPost:ImageEvent,
-                title:'College Alpin Beau Soleil',
-                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                link:'/our-event-calendar'
-            },{
-                imgPost:ImageEvent,
-                title:'College Alpin Beau Soleil',
-                description:'An official from College Alpin Beau Soleil, one of the most prestigious colleges in Switzerland, founded in 1910, is coming to our office. Interested parents and students can attend the meeting by making an appointment.',
-                link:'/our-event-calendar'
-            },
-        ])
-    },[])
+    if(relatedSchools.length === 0){
+        return(<></>)
+    }
     return(
         <div className="events" style={{marginBottom:64,marginTop:0,paddingTop:0}}>
             <div className="events__first">
@@ -63,8 +36,12 @@ const RelatedSchools =()=>{
             </div>
             <div className="events__block" ref={eventsRef}>
                 <span style={{height: "auto"}}/>
-                {events.map((event, index) => (
-                    <RelatedSchool key={index} {...event}/>
+                {relatedSchools.map((relatedSchool, index) => (
+                    <RelatedSchool key={index}
+                                   imgPost={relatedSchool.image_right}
+                                   title={relatedSchool.title}
+                                   description={relatedSchool.school_overview}
+                                   link={'/' + relatedSchool.education_type.replace(/ /g, '-').toLowerCase() + '/' + relatedSchool.country.replace(/ /g, '-').toLowerCase() + '/' + relatedSchool.city.replace(/ /g, '-').toLowerCase() + '/' + relatedSchool.title.replace(/ /g, '-').toLowerCase()}/>
                 ))}
                 <span style={{height: "auto"}}/>
             </div>

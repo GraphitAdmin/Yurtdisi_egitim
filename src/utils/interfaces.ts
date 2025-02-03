@@ -4,7 +4,7 @@ export interface PopularSchoolCardProps {
     link:string;
 }
 export interface IRelated {
-    imgPost:StaticImageData;
+    imgPost:string;
     title:string;
     description:string;
     link:string;
