@@ -17,13 +17,14 @@ interface CountryPageContentProps {
 const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId, country}) => {
     const [cities, setCities] = useState<ICity[]>([])
     const [showCitiesButton, setShowCitiesButton] = useState(false)
-    const [showCities,setShowCities] = useState<ICity[]>([])
+    const [showCities, setShowCities] = useState<ICity[]>([])
     useEffect(() => {
         const fetchJson = async () => {
             const localCities = localStorage.getItem('cities')
             if (localCities !== undefined && localCities !== null) {
-                const filteredCities = JSON.parse(localCities).filter((city:ICity)=>cleanTitle(childId)===cleanTitle(city.country));
+                const filteredCities = JSON.parse(localCities).filter((city: ICity) => cleanTitle(childId) === cleanTitle(city.country));
                 setCities(filteredCities);
+                console.log('here')
                 setShowCities(filteredCities.slice(0, 9))
             }
             try {
@@ -35,7 +36,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId, c
                     throw new Error('Failed to fetch JSON');
                 }
                 const jsonData = await response.json();
-                const filteredCities = jsonData.filter((city:ICity)=>cleanTitle(childId)===cleanTitle(city.country));
+                const filteredCities = jsonData.filter((city: ICity) => cleanTitle(childId) === cleanTitle(city.country));
                 setCities(filteredCities);
                 setShowCities(filteredCities.slice(0, 9))
                 localStorage.setItem('cities', JSON.stringify(jsonData));
@@ -59,17 +60,23 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId, c
             </div>
             <PageSearch/>
             <div className="page__country__schools">
-                <div className="page__country__schools__schools">
-                    {
-                        showCities && showCities.map((city, index) =>
+                {
+                    showCities.length > 0 ?
+                        <div className="page__country__schools__schools">
+                            {showCities.map((city, index) =>
                             <CardCity key={index}
                                       title={city.name}
                                       image_string={city.image}
                                       description={city.description}
-                                      link={'/'+slug+'/'+'/'+childId+'/'+city.name.replace(/ /g, '-').toLowerCase()} buttonDetails={false}/>
-                        )
-                    }
-                </div>
+                                      link={'/' + slug + '/' + '/' + childId + '/' + city.name.replace(/ /g, '-').toLowerCase()}
+                                      buttonDetails={false}/>
+                            )}
+                        </div> :
+                        <h3 style={{color: 'var(--Courses-Base-Black)', width: '100%'}}>
+                            Oops! Soon new cities will appear here.
+                            Try returning to the homepage or using the menu to find what you need.
+                        </h3>
+                }
                 {!showCitiesButton && cities.length > 9 &&
                     <div className="page__country__schools__button__tablet">
                         <Button onClick={() => {
@@ -196,7 +203,8 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId, c
                     </div>
                 </div>
             </div>
-            {!showCitiesButton && cities.length > 9 &&
+            {
+                !showCitiesButton && cities.length > 9 &&
                 <div className="page__country__schools__button">
                     <Button onClick={() => {
                         setShowCitiesButton(true)

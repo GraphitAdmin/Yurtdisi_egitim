@@ -11,17 +11,17 @@ interface CityPageContentProps {
     slug: string;
     childId: string;
     subChildId: string;
-    initialCity:ICity;
+    initialCity: ICity;
 }
 
-const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChildId,initialCity}) => {
+const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChildId, initialCity}) => {
     const [schools, setSchools] = useState<ISchool[]>([]);
     const [city] = useState<ICity>(initialCity);
     useEffect(() => {
         const fetchJson = async () => {
             const localSchools = localStorage.getItem('schools')
             if (localSchools !== undefined && localSchools !== null) {
-                const filteredSchools = JSON.parse(localSchools).filter((school: ISchool) => cleanTitle(school.city) === cleanTitle(subChildId) && cleanTitle(slug) === cleanTitle(school.education_type)&&school.website_active==='Active');
+                const filteredSchools = JSON.parse(localSchools).filter((school: ISchool) => cleanTitle(school.city) === cleanTitle(subChildId) && cleanTitle(slug) === cleanTitle(school.education_type) && school.website_active === 'Active');
                 setSchools(filteredSchools);
             }
             try {
@@ -56,18 +56,23 @@ const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChil
                     </p>
                 </div>
                 <PageSearch/>
-                <div className="page__country__schools__schools">
-                    {
-                        schools.map((school, index) =>
-                            <CardCity key={index}
-                                      title={school.title}
-                                      description={school.school_overview}
-                                      link={'/' + slug + '/' + childId + '/' + subChildId + '/' + school.title.replace(/ /g, '-').toLowerCase()}
-                                      buttonDetails={true}
-                                      image_string={school.image_right}/>
-                        )
-                    }
-                </div>
+                {
+                    schools.length > 0 ?
+                        <div className="page__country__schools__schools">
+                            {
+                                schools.map((school, index) =>
+                                    <CardCity key={index}
+                                              title={school.title}
+                                              description={school.school_overview}
+                                              link={'/' + slug + '/' + childId + '/' + subChildId + '/' + school.title.replace(/ /g, '-').toLowerCase()}
+                                              buttonDetails={true}
+                                              image_string={school.image_right}/>
+                                )
+                            }
+                        </div> : <h3 style={{color: 'var(--Courses-Base-Black)', width: '100%'}}>
+                            Oops! Soon new schools will appear here.
+                            Try returning to the homepage or using the menu to find what you need.
+                        </h3>}
             </div>
             <div className="about__school">
                 {city &&
