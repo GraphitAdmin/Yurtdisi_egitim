@@ -244,7 +244,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
 
                                     <Editor
                                         key={index}
-                                        apiKey='q662md15li9b5x4ik1he15mkqnu12n32bhitaaulz2efbig4'
+                                        apiKey='difgncbkx5a7mg2y90vo8lfzwsxo4pjfwpt9dlrspcwx98zu'
                                         init={{
                                             plugins: [
                                                 'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'table', 'wordcount',
