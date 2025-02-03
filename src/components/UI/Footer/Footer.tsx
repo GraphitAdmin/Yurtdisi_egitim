@@ -1,6 +1,8 @@
 'use client'
 import Link from "next/link";
 import Logo from "@/components/UI/Logo/Logo";
+import {navbarOptions} from "@/data/navbarOptions";
+import React from "react";
 
 const Footer = () => {
     return (
@@ -32,41 +34,17 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="footer__body">
+                        {navbarOptions.map(
+                            (navbarOption, index) =>
+                                <div key={index}>
+                                    <Link href={navbarOption.link}><h6>Language schools</h6></Link>
+                                    {navbarOption.options.map((dropdownOption, index) =>
+                                        <Link href={navbarOption.link+dropdownOption.link} key={index}><p>{dropdownOption.name} {navbarOption.name}</p></Link>
+                                    )}
+                                </div>)}
                         <div>
-                            <Link href='/text'><h6>Language schools</h6></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                        </div>
-                        <div>
-                            <Link href='/text'><h6>Language schools</h6></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                        </div>
-                        <div>
-                            <Link href='/text'><h6>Language schools</h6></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                        </div>
-                        <div>
-                            <Link href='/text'><h6>Language schools</h6></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                        </div>
-                        <div>
-                            <Link href='/text'><h6>Language schools</h6></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                            <Link href='/text'><p>UK Language schools</p></Link>
-                        </div>
-                        <div>
-                            <Link href='/blog'><h6>Blogs</h6></Link>
+                            <h6 style={{color: 'var(--Courses-Base-Black)'}}>Useful information</h6>
+                            <Link href='/blog'><p>Blogs</p></Link>
                             <Link href='/our-events-calendar'><p>Events</p></Link>
                         </div>
 
