@@ -38,3 +38,9 @@ export function cleanTitle(title:string){
         .replace(/ /g, '')
         .toLowerCase();
 }
+export function checkLogged(){
+    const checkLogged=sessionStorage.getItem('isLoggedIn')
+    if (checkLogged==='false'||!checkLogged){
+        window.location.href='/crm/'
+    }
+}

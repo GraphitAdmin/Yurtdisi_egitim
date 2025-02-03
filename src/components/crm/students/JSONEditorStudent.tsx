@@ -5,7 +5,7 @@ import {Button} from "@/components/crm/ui/button";
 import {Input} from "@/components/crm/ui/input";
 import TextArea from "@/components/UI/TextArea/TextArea";
 import '../JSONEditor.css'
-import {blobUrl, successToasterStyles} from "@/utils/utils";
+import {blobUrl, checkLogged, successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
 import {IStudent} from "@/utils/interfaces";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
@@ -15,6 +15,7 @@ interface IJsonEditor {
 }
 
 const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
+    checkLogged();
     const [students, setStudents] = useState<IStudent[]>([]);
     const [schoolIndex, setSchoolIndex] = useState<null | number>(null);
     const [loading, setLoading] = useState(true);

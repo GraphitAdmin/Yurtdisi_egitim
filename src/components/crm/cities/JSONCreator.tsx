@@ -7,12 +7,13 @@ import {Textarea} from "@/components/crm/ui/textarea";
 import Image from "next/image";
 import {uploadImage} from "@/app/crm/uploadImage";
 import toast from "react-hot-toast";
-import {blobUrl, errorToasterStyles, successToasterStyles} from "@/utils/utils";
+import {blobUrl, checkLogged, errorToasterStyles, successToasterStyles} from "@/utils/utils";
 import {ICity} from "@/utils/interfaces";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import '../JSONEditor.css'
 
 const JSONCreator = () => {
+    checkLogged();
     const [cities, setCities] = useState<ICity[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

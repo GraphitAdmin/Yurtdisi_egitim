@@ -1,6 +1,7 @@
 import {Sidebar} from "@/components/crm/ui/sidebar"
 import JSONCreatorSchool from "@/components/crm/schools/JSONCreatorSchool";
 export default async function Home() {
+
     return (
         <div className="min-h-screen bg-background">
             <div className="flex"><Sidebar/>

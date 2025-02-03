@@ -84,7 +84,7 @@ export default function AdminPanel() {
                                 className="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
                                 <div className="flex items-center justify-between w-full">
                                     <Input
-                                        placeholder="Search school..."
+                                        placeholder="Search reference..."
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value)}
                                         className="w-full md:w-64 bg-white/50 backdrop-blur-sm"

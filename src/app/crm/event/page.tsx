@@ -15,9 +15,10 @@ import {Input} from "@/components/crm/ui/input"
 import {ArrowUpDown, Building, PlusCircle, NotebookPen} from 'lucide-react'
 import {Button} from "@/components/crm/ui/button";
 import {IEvent} from "@/utils/interfaces";
-import {blobUrl} from "@/utils/utils";
+import {blobUrl, checkLogged} from "@/utils/utils";
 
 export default function AdminPanel() {
+    checkLogged();
     const [events, setEvents] = useState<IEvent[]>([]);
     useEffect(() => {
         const fetchJson = async () => {
@@ -84,7 +85,7 @@ export default function AdminPanel() {
                                 className="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
                                 <div className="flex items-center justify-between w-full">
                                     <Input
-                                        placeholder="Search school..."
+                                        placeholder="Search event..."
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value)}
                                         className="w-full md:w-64 bg-white/50 backdrop-blur-sm"

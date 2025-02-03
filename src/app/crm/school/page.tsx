@@ -15,9 +15,10 @@ import {Input} from "@/components/crm/ui/input"
 import {ArrowUpDown, Building, Map, PlusCircle, School} from 'lucide-react'
 import {Button} from "@/components/crm/ui/button";
 import {ISchool} from "@/utils/interfaces";
-import {blobUrl} from "@/utils/utils";
+import {blobUrl, checkLogged} from "@/utils/utils";
 
 export default function AdminPanel() {
+    checkLogged();
     const [schools, setSchools] = useState<ISchool[]>([]);
     useEffect(() => {
         const fetchJson = async () => {

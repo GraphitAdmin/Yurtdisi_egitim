@@ -7,7 +7,7 @@ import {Textarea} from "@/components/crm/ui/textarea";
 import Image from "next/image";
 import {uploadImage} from "@/app/crm/uploadImage";
 import '../JSONEditor.css'
-import {blobUrl, successToasterStyles} from "@/utils/utils";
+import {blobUrl, checkLogged, successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
 import {ICity} from "@/utils/interfaces";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
@@ -17,6 +17,7 @@ interface IJsonEditor {
 }
 
 const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
+    checkLogged();
     const [cities, setCities] = useState<ICity[]>([]);
     const [cityIndex, setCityIndex] = useState<null | number>(null);
     const [loading, setLoading] = useState(true);

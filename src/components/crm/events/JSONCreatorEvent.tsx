@@ -6,13 +6,14 @@ import {Textarea} from "@/components/crm/ui/textarea"
 import Image from "next/image"
 import {uploadImage} from "@/app/crm/uploadImage"
 import toast from "react-hot-toast"
-import {blobUrl, errorToasterStyles, successToasterStyles} from "@/utils/utils"
+import {blobUrl, checkLogged, errorToasterStyles, successToasterStyles} from "@/utils/utils"
 import type {IEvent, ISchool} from "@/utils/interfaces"
 import '../JSONEditor.css'
 import {Dropdown} from "@/components/crm/ui/dropdown";
 import DropdownDefault from "@/components/UI/Dropdown/Dropdown";
 
 const JSONCreator = () => {
+    checkLogged();
     const [events, setEvents] = useState<IEvent[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

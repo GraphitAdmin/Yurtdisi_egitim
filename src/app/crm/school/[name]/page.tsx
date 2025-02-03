@@ -7,6 +7,7 @@ export default async function Home({
                                    }: {
     params: paramsType;
 }) {
+
     const {name} = await params
     return (
         <div className="min-h-screen bg-background">

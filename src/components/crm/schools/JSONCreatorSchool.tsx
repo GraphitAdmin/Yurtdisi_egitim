@@ -7,13 +7,14 @@ import {Textarea} from "@/components/crm/ui/textarea"
 import Image from "next/image"
 import {uploadImage} from "@/app/crm/uploadImage"
 import toast from "react-hot-toast"
-import {blobUrl, cleanTitle, errorToasterStyles, successToasterStyles} from "@/utils/utils"
+import {blobUrl, checkLogged, cleanTitle, errorToasterStyles, successToasterStyles} from "@/utils/utils"
 import {ICity, ISchool} from "@/utils/interfaces"
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import {searchCountries, searchTypes} from "@/data/search";
 import {Editor} from "@tinymce/tinymce-react";
 
 const JSONCreator = () => {
+    checkLogged();
     const [schools, setSchools] = useState<ISchool[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

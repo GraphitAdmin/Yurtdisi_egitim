@@ -5,13 +5,14 @@ import {Button} from "@/components/crm/ui/button"
 import {Input} from "@/components/crm/ui/input"
 import Textarea from "@/components/UI/TextArea/TextArea"
 import toast from "react-hot-toast"
-import {blobUrl, errorToasterStyles, successToasterStyles} from "@/utils/utils"
+import {blobUrl, checkLogged, errorToasterStyles, successToasterStyles} from "@/utils/utils"
 import {IStudent} from "@/utils/interfaces"
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import {searchCountries} from "@/data/search";
 import '../JSONEditor.css'
 
 const JSONCreator = () => {
+    checkLogged();
     const [students, setStudents] = useState<IStudent[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

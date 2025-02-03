@@ -15,9 +15,11 @@ import { Input } from "@/components/crm/ui/input"
 import {ArrowUpDown, Building, Map, PlusCircle} from 'lucide-react'
 import {Button} from "@/components/crm/ui/button";
 import {ICity} from "@/utils/interfaces";
-import {blobUrl} from "@/utils/utils";
+import {blobUrl, checkLogged} from "@/utils/utils";
 
 export default function AdminPanel() {
+    checkLogged();
+
     const [cities, setCities] = useState<ICity[]>([]);
     useEffect(() => {
         const fetchJson = async () => {

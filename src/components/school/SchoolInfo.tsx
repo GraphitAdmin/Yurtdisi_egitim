@@ -1,7 +1,5 @@
 'use client'
 import Image from "next/image";
-import Oxford from "@/assets/schools/Test.jpeg";
-import Sevenoaks from "@/assets/schools/Sevenoaks.jpg";
 import React, {useEffect, useRef, useState} from "react";
 import './SchoolInfo.css';
 import {GoogleMap, LoadScript, MarkerF} from "@react-google-maps/api";
@@ -9,13 +7,13 @@ import {motion, AnimatePresence} from "framer-motion"
 import '../ContactUs/ContactUs.css'
 import ContactUsForm from "@/components/ContactUs/ContactUsForm/ContactUsForm";
 import {ISchool} from "@/utils/interfaces";
+import {blobUrl} from "@/utils/utils";
 
 interface SchoolInfoSchool {
     school: ISchool;
 }
 
 const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
-    const images = [Oxford, Sevenoaks, Oxford, Sevenoaks]
     const [isOpenOverview, setIsOpenOverview] = useState(true);
     const [isOpenDetails, setIsOpenDetails] = useState(false);
     const [isOpenVideo, setIsOpenVideo] = useState(false);
@@ -75,10 +73,12 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
     return (
         <div className="page__school__info">
             <div className="image-container" ref={imagesRef}>
-                {images.map((image, index) => (
+                {school.images.map((image, index) => (
                     <Image
                         key={index}
-                        src={image}
+                        src={blobUrl+image}
+                        height={480}
+                        width={955}
                         alt={`Image ${index + 1}`}
                         loading="lazy"
                         className="page__school__info__img"
@@ -117,7 +117,7 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                     )}
                 </AnimatePresence>
 
-                {Array.from({length: images.length}).map((_, index) => (
+                {Array.from({length: school.images.length}).map((_, index) => (
                     <button
                         key={index}
                         onClick={() => handleDotClick(index)}
@@ -212,11 +212,10 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                             </defs>
                         </svg>}
                 </div>
-                <p
+                <div
                     style={isOpenDetails ? {display: 'block'} : {display: 'none'}}
                     dangerouslySetInnerHTML={{__html: school.detailed_information}}
-
-                ></p>
+                ></div>
             </div>
 
             <div className="page__school__info__block">
