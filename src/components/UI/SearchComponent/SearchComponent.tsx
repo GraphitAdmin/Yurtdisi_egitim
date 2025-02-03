@@ -63,7 +63,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({closeSearch}) => {
         fetchJson().then();
     }, []);
     const schoolsSearchResults=useMemo(() => {
-        return schools.filter((school)=>school.title.toLowerCase().includes(inputValue.toLowerCase()))
+        return schools.filter((school)=>school.title.toLowerCase().includes(inputValue.toLowerCase())&&school.website_active==='Active')
     }, [schools, inputValue])
 
     return (

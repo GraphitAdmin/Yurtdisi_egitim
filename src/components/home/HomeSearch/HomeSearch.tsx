@@ -52,8 +52,8 @@ const HomeSearch = () => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch JSON');
                 }
-                const jsonData = await response.json();
-                setSchools(jsonData);
+                const jsonData:ISchool[] = await response.json();
+                setSchools(jsonData.filter(school=>school.website_active==='Active'));
                 localStorage.setItem('schools', JSON.stringify(jsonData));
             } catch (err) {
                 console.log(err);

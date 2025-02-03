@@ -42,7 +42,9 @@ const PageSearch = () => {
         const fetchJson = async () => {
             const localSchools=localStorage.getItem('schools')
             if(localSchools!==undefined&&localSchools!==null) {
-                setSchools(JSON.parse(localSchools));
+                const localSchoolJSON:ISchool[]=JSON.parse(localSchools);
+                const localSchoolsJSON=localSchoolJSON.filter(school=>school.website_active==='Active')
+                setSchools(localSchoolsJSON);
             }
             try {
                 const schoolsUrl = blobUrl+'jsons/schools.json';
@@ -52,8 +54,8 @@ const PageSearch = () => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch JSON');
                 }
-                const jsonData = await response.json();
-                setSchools(jsonData);
+                const jsonData:ISchool[] = await response.json();
+                setSchools(jsonData.filter(school=>school.website_active==='Active'));
                 localStorage.setItem('schools', JSON.stringify(jsonData));
             } catch (err) {
                 console.log(err);
