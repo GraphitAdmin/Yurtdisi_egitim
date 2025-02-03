@@ -61,7 +61,7 @@ const ReviewBlock = () => {
                           className={active === 3 ? 'review__block__main__span__active' : 'review__block__main__span'}/>
                   </div>
               </div>
-              <Image src={reviews[active].image} alt="Review Image"/>
+              <Image src={reviews[active].image} alt="Review schools abroad"/>
           </div>
       </div>
   )

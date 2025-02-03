@@ -446,7 +446,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                     <div className="flex flex-wrap gap-2">
                                         <Image
                                             src={blobUrl + school.image_right}
-                                            alt={`School image`}
+                                            alt={school.title}
                                             width={100}
                                             height={100}
                                         />

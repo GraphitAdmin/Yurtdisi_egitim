@@ -120,7 +120,7 @@ const Blog: React.FC<BlogProps> = ({title}) => {
                 </div>
                 <Image width={720}
                        height={572}
-                       layout="responsive" src={blobUrl + blog?.image} alt='Passport'/>
+                       layout="responsive" src={blobUrl + blog?.image} alt={blog?.title}/>
             </div>
 
             <div className="page__container" style={{justifyContent: 'center'}}>

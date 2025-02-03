@@ -389,7 +389,7 @@ const JSONCreator = () => {
                                 <Image
                                     key={imgIndex}
                                     src={blobUrl+image}
-                                    alt={`School image ${imgIndex + 1}`}
+                                    alt={school.title}
                                     width={100}
                                     height={100}
                                     style={{maxHeight:'-webkit-fill-available'}}
@@ -411,7 +411,7 @@ const JSONCreator = () => {
                         <div className="flex flex-wrap gap-2">
                             <Image
                                 src={blobUrl+school.image_right}
-                                alt={`School image`}
+                                alt={school.title}
                                 width={100}
                                 height={100}
                             />

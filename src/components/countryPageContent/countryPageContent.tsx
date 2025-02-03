@@ -87,7 +87,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId, c
                 }
                 <div className="page__country__schools__country">
                     <div className="page__country__schools__country__info">
-                        <Image src={country.imgPost} alt='UK'/>
+                        <Image src={country.imgPost} alt={country+" flag"}/>
                         <p style={{
                             fontWeight: 400,
                             color: 'var(--Courses-Gray-Gray-500)',

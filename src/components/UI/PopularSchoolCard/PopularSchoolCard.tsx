@@ -8,7 +8,7 @@ import Button from "@/components/UI/Button/Button";
 const PopularSchoolCard: React.FC<PopularSchoolCardProps> = ({imgPost,link}) => {
     return (
         <Link className="popular__school__card" href={link}>
-            <Image className="h-full" src={imgPost} alt="Post"/>
+            <Image className="h-full" src={imgPost} alt="Popular School"/>
             <div className="popular__school__card__button">
                 <Button label='Learn More'/>
             </div>

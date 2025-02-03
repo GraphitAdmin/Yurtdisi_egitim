@@ -100,7 +100,7 @@ const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChil
                                 Bournemouth Language Schools
                             </Link>
                         </div>
-                        <Image width={720} height={756} src={blobUrl + city.image} alt="school"/>
+                        <Image width={720} height={756} src={blobUrl + city.image} alt={city.name}/>
                     </>}
             </div>
         </>

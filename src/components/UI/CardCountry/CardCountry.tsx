@@ -8,7 +8,7 @@ const CardCountry: React.FC<ICountry> = ({imgPost, name,link,capital,population,
     console.log(link)
     return (
         <Link className="card__country" href={link}>
-            <Image className="w-full" src={imgPost} alt="Country"/>
+            <Image className="w-full" src={imgPost} alt={name+" flag"}/>
             <h4>{name}</h4>
             <div>
                 <p>Capital:&nbsp;<span>{capital}</span></p>
