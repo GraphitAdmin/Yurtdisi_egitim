@@ -46,6 +46,7 @@ const Footer = () => {
                             <h6 style={{color: 'var(--Courses-Base-Black)'}}>Useful information</h6>
                             <Link href='/blog'><p>Blogs</p></Link>
                             <Link href='/our-events-calendar'><p>Events</p></Link>
+                            <Link href='/our-student-references'><p>References</p></Link>
                         </div>
                         <div>
                             <h6 style={{color: 'var(--Courses-Base-Black)'}}>Company</h6>
