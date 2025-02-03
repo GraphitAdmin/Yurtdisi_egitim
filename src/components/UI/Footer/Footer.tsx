@@ -37,7 +37,7 @@ const Footer = () => {
                         {navbarOptions.map(
                             (navbarOption, index) =>
                                 <div key={index}>
-                                    <Link href={navbarOption.link}><h6>Language schools</h6></Link>
+                                    <Link href={navbarOption.link}><h6>{navbarOption.name}</h6></Link>
                                     {navbarOption.options.map((dropdownOption, index) =>
                                         <Link href={navbarOption.link+dropdownOption.link} key={index}><p>{dropdownOption.name} {navbarOption.name}</p></Link>
                                     )}
