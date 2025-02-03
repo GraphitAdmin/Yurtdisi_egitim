@@ -1,86 +1,62 @@
-'use client'
 import Navbar from "@/components/UI/Navbar/Navbar";
 import Tabs from "@/components/UI/Tabs/Tabs";
-import React, {useEffect, useState} from "react";
-import '@/app/schools.css'
-import Image from "next/image"
 import Link from "next/link";
+import Image from "next/image";
 import Subscribe from "@/components/UI/FAQ/Subscribe";
 import Footer from "@/components/UI/Footer/Footer";
 import SchoolInfo from "@/components/school/SchoolInfo";
 import RelatedSchools from "@/components/school/RelatedSchools/RelatedSchools";
 import {ISchool} from "@/utils/interfaces";
 import {blobUrl, cleanTitle} from "@/utils/utils";
+import {notFound} from "next/navigation";
+import React from "react";
 
-type paramsType = Promise<{ slug: string, childId: string, subChildId: string, subUniChildId: string }>;
-
-interface paramsI {
-    slug: string,
-    childId: string,
-    subChildId: string,
-    subUniChildId: string
-}
-
-export default function Home({
-                                 params,
-                             }: {
-    params: paramsType;
-}) {
-    const [paramsData, setParamsData] = useState<paramsI | null>(null)
-    const [school, setSchool] = useState<ISchool | null>(null)
-    useEffect(() => {
-        const loadParams = async () => {
-            setParamsData(await params)
-            const {subUniChildId} = await params
-            const localSchools=localStorage.getItem('schools')
-            let localSchoolStringify=''
-            const cleanedName = cleanTitle(subUniChildId)
-            if(localSchools!==undefined&&localSchools!==null){
-                JSON.parse(localSchools).map((school: ISchool) => {
-                    const cleanedTitle = cleanTitle(school.title)
-                    console.log('name', cleanedName)
-                    console.log('title', cleanedTitle)
-                    if (cleanedTitle === cleanedName) {
-                        setSchool(school)
-                        localSchoolStringify=JSON.stringify(school)
-                    }
-                })
-            }
-            try {
-                const schoolsUrl = blobUrl+'jsons/schools.json';
-                const response = await fetch(schoolsUrl, {
-                    cache: 'no-store',
-                });
-                if (!response.ok) {
-                    throw new Error('Failed to fetch JSON');
-                }
-                const jsonData = await response.json();
-                localStorage.setItem('schools', JSON.stringify(jsonData));
-                for (const school of jsonData) {
-                    const cleanedTitle = cleanTitle(school.title)
-                    console.log('name', cleanedName)
-                    console.log('title', cleanedTitle)
-                    if (cleanedTitle === cleanedName) {
-                        if (JSON.stringify(school) !== localSchoolStringify) {
-                            setSchool(school)
-                        }
-                        break;
-                    }
-                }
-            } catch (err) {
-                console.log(err);
+const fetchSchool = async (subUniChildId: string) => {
+    let schoolFinded = false;
+    const cleanedName = cleanTitle(subUniChildId)
+    try {
+        const schoolsUrl = blobUrl + 'jsons/schools.json';
+        const response = await fetch(schoolsUrl, {
+            cache: 'no-store',
+        });
+        if (!response.ok) {
+            throw new Error('Failed to fetch JSON');
+        }
+        const jsonData = await response.json();
+        localStorage.setItem('schools', JSON.stringify(jsonData));
+        for (const school of jsonData) {
+            const cleanedTitle = cleanTitle(school.title)
+            console.log('name', cleanedName)
+            console.log('title', cleanedTitle)
+            if (cleanedTitle === cleanedName) {
+                schoolFinded = true
+                return school;
             }
         }
-        loadParams().then()
-    }, [])
+        if (schoolFinded === false) {
+            notFound()
+        }
+    } catch (err) {
+        console.log(err);
+        notFound()
+    }
+}
+type paramsType = Promise<{ slug: string, childId: string, subChildId: string, subUniChildId: string }>;
+export default async function Home({
+                                       params,
+                                   }: {
+    params: paramsType;
+}) {
+    const {subUniChildId} = await params
+    const school:ISchool = await fetchSchool(subUniChildId)
     return (
         <div>
             <Navbar home={false}/>
             <Tabs/>
             <div className="page__container">
-                {paramsData &&
+                {subUniChildId &&
                     <div style={{width: '100%'}}>
-                        <h1 style={{textTransform: 'capitalize'}}>{paramsData.subUniChildId.replace(/-/g, ' ')}</h1>
+                        <h1 style={{textTransform: 'capitalize'}}>{subUniChildId.replace(/-/g, ' ')}</h1>
                     </div>
                 }
                 {school !== null &&
@@ -88,7 +64,7 @@ export default function Home({
                         <SchoolInfo school={school}/>
                         <div className="page__school__right">
                             <div className="page__school__right__info">
-                                <Image width='273' height={152} src={blobUrl+school.image_right} alt="MillSchool"/>
+                                <Image width='273' height={152} src={blobUrl + school.image_right} alt="MillSchool"/>
                                 {school.title &&
                                     <div>
                                         <p>School</p>

@@ -7,6 +7,7 @@ import Footer from "@/components/UI/Footer/Footer";
 import CountryPageContent from "@/components/countryPageContent/countryPageContent";
 import {UK,US,Austria, France, Germany, Italy, Malta, Portugal, Spain, Switzerland} from "@/data/countries_json";
 import {ICountry} from "@/utils/interfaces";
+import {notFound} from "next/navigation";
 
 const childIdArray = [
     'united-kingdom',
@@ -44,18 +45,16 @@ export default async function Home({
     };
 
     const countryData = countryMap[childId];
-
+    if (!childIdArray.includes(childId)) {
+        notFound()
+    }
     return (
         <div>
             <Navbar home={false} />
-            {childIdArray.includes(childId) && countryData ? (
+            {childIdArray.includes(childId) && countryData &&(
                 <>
                     <Tabs />
                     <CountryPageContent slug={slug} childId={childId} country={countryData} />
-                </>
-            ) : (
-                <>
-                    <h1>Error: Country not found</h1>
                 </>
             )}
             <Subscribe />

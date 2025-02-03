@@ -1,14 +1,14 @@
 "use client"
 
-import React, {useState, useEffect, type ChangeEvent} from "react"
+import React, {useState, useEffect, type ChangeEvent, useMemo} from "react"
 import {Button} from "@/components/crm/ui/button"
 import {Input} from "@/components/crm/ui/input"
 import {Textarea} from "@/components/crm/ui/textarea"
 import Image from "next/image"
 import {uploadImage} from "@/app/crm/uploadImage"
 import toast from "react-hot-toast"
-import {blobUrl, errorToasterStyles, successToasterStyles} from "@/utils/utils"
-import type {ISchool} from "@/utils/interfaces"
+import {blobUrl, cleanTitle, errorToasterStyles, successToasterStyles} from "@/utils/utils"
+import {ICity, ISchool} from "@/utils/interfaces"
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import {searchCountries, searchTypes} from "@/data/search";
 import {Editor} from "@tinymce/tinymce-react";
@@ -18,6 +18,7 @@ const JSONCreator = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const [isUploading, setIsUploading] = useState(false)
+    const [cities, setCities] = useState<ICity[]>([]);
 
     useEffect(() => {
         fetch(blobUrl+"/jsons/schools.json", {
@@ -57,6 +58,19 @@ const JSONCreator = () => {
                 setLoading(false)
                 console.error(err)
             })
+        fetch(`${blobUrl}jsons/cities.json`, {
+            cache: "no-store",
+            next: {revalidate: 1},
+        })
+            .then((response) => response.json())
+            .then((data: ICity[]) => {
+                setCities(data)
+            })
+            .catch((err) => {
+                setError("Failed to load data");
+                setLoading(false);
+                console.error(err);
+            });
     }, [])
 
     async function handleSubmit(formData: FormData) {
@@ -150,7 +164,16 @@ const JSONCreator = () => {
             console.log(err)
         }
     }
-
+    const filteredCities = useMemo(() => {
+        console.log(cities)
+        console.log(schools)
+        return cities.filter(city =>
+            schools[schools.length-1]&&schools[schools.length-1].country&&cleanTitle(city.country) === cleanTitle(schools[schools.length-1].country)
+        )
+    }, [schools,cities])
+    const filteredCitiesName = useMemo(() => {
+        return filteredCities.map(city => city.name)
+    }, [filteredCities])
     if (loading) return <div>Loading...</div>
     if (error) return <div>{error}</div>
 
@@ -294,19 +317,19 @@ const JSONCreator = () => {
                     <div className="flex flex-row justify-between gap-2">
                         <div className="w-full">
                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                City
-                            </h6>
-                            <Dropdown label={'City'} selected={school.city}
-                                      setSelected={(value) => handleInputChange(index, 'city', value)}
-                                      variants={['Barcelona', 'Madrid', 'Oxford', 'London',]}/>
-                        </div>
-                        <div className="w-full">
-                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                                 Country
                             </h6>
                             <Dropdown label={'Country'} selected={school.country}
                                       setSelected={(value) => handleInputChange(index, 'country', value)}
                                       variants={searchCountries}/>
+                        </div>
+                        <div className="w-full">
+                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
+                                City
+                            </h6>
+                            <Dropdown label={'City'} selected={school.city}
+                                      setSelected={(value) => handleInputChange(index, 'city', value)}
+                                      variants={filteredCitiesName}/>
                         </div>
                     </div>
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>

@@ -1,0 +1,37 @@
+.not__found{
+    display: flex;
+    height: 588px;
+    padding: 96px 80px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 64px;
+    align-self: stretch;
+}
+.not__found__block{
+    max-width: 60vw;
+}
+.not__found__block p{
+    margin-top: 16px;
+}
+
+@media screen and (max-width: 992px) {
+    .not__found{
+        padding: 64px;
+        height: auto;
+    }
+    .not__found__block{
+        max-width: 100%;
+    }
+}
+@media screen and (max-width: 768px) {
+    .not__found {
+        padding: 64px 32px;
+        gap: 32px;
+    }
+}
+@media screen and (max-width: 576px) {
+    .not__found {
+        padding: 64px 16px;
+    }
+}

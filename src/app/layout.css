@@ -8,6 +8,7 @@
     margin: 0 auto;
     gap: 32px;
     padding: 0 80px 96px;
+    animation: move 1s ease-out forwards;
 }
 
 .page__container h1, .page__container p {

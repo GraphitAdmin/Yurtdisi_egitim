@@ -1,7 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@keyframes move {
+    0% {
+        transform: translateY(50vh);
+        opacity: 0;
+    }
 
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes opacityAnimation {
+    0% {
+        opacity: 0;
+    }
+    60% {
+        opacity: 0;
+        transform: translateY(50vh);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 :root {
     --Courses-Base-Black: #1A1A1A;
     --Courses-Brand-Blue-25: #EFF8FF;

@@ -11,11 +11,12 @@ interface CityPageContentProps {
     slug: string;
     childId: string;
     subChildId: string;
+    initialCity:ICity;
 }
 
-const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChildId}) => {
+const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChildId,initialCity}) => {
     const [schools, setSchools] = useState<ISchool[]>([]);
-    const [city, setCity] = useState<ICity>();
+    const [city] = useState<ICity>(initialCity);
     useEffect(() => {
         const fetchJson = async () => {
             const localSchools = localStorage.getItem('schools')
@@ -40,22 +41,6 @@ const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChil
             }
         };
         fetchJson().then();
-        fetch(`${blobUrl}jsons/cities.json`, {
-            cache: "no-store",
-            next: {revalidate: 1},
-        })
-            .then((response) => response.json())
-            .then((data: ICity[]) => {
-                for (const cityMap of data) {
-                    if (cleanTitle(cityMap.name) === cleanTitle(subChildId)) {
-                        setCity(cityMap);
-                        break;
-                    }
-                }
-            })
-            .catch((err) => {
-                console.error(err);
-            });
     }, []);
 
     return (
@@ -84,34 +69,35 @@ const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChil
                     }
                 </div>
             </div>
-            {city &&
-                <div className="about__school">
-                    <div>
-                        <h2>
-                            About {city.name}
-                        </h2>
-                        <p>
-                            {city.description}
-                        </p>
-                        <h5 style={{textTransform:'capitalize'}}>
-                            {childId.replace(/-/g, ' ')}&nbsp;{slug.replace(/-/g, ' ')}
-                        </h5>
-                        <Link href={'/smth'}>
-                            Bath Language Schools
-                        </Link>
-                        <Link href={'/smth'}>
-                            Belfast | Northern Ireland Language Schools
-                        </Link>
-                        <Link href={'/smth'}>
-                            Birmingham Language Schools
-                        </Link>
-                        <Link href={'/smth'}>
-                            Bournemouth Language Schools
-                        </Link>
-                    </div>
-                    <Image width={720} height={756} src={blobUrl + city.image} alt="school"/>
-                </div>
-            }
+            <div className="about__school">
+                {city &&
+                    <>
+                        <div>
+                            <h2>
+                                About {city.name}
+                            </h2>
+                            <p>
+                                {city.description}
+                            </p>
+                            <h5 style={{textTransform: 'capitalize'}}>
+                                {childId.replace(/-/g, ' ')}&nbsp;{slug.replace(/-/g, ' ')}
+                            </h5>
+                            <Link href={'/smth'}>
+                                Bath Language Schools
+                            </Link>
+                            <Link href={'/smth'}>
+                                Belfast | Northern Ireland Language Schools
+                            </Link>
+                            <Link href={'/smth'}>
+                                Birmingham Language Schools
+                            </Link>
+                            <Link href={'/smth'}>
+                                Bournemouth Language Schools
+                            </Link>
+                        </div>
+                        <Image width={720} height={756} src={blobUrl + city.image} alt="school"/>
+                    </>}
+            </div>
         </>
     )
 }

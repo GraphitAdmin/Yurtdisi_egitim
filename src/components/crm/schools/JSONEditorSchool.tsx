@@ -1,15 +1,15 @@
 "use client";
 
-import React, {useState, useEffect, ChangeEvent} from "react";
+import React, {useState, useEffect, ChangeEvent, useMemo} from "react";
 import {Button} from "@/components/crm/ui/button";
 import {Input} from "@/components/crm/ui/input";
 import {Textarea} from "@/components/crm/ui/textarea";
 import Image from "next/image";
 import {uploadImage} from "@/app/crm/uploadImage";
 import './JSONEditor.css'
-import {blobUrl, successToasterStyles} from "@/utils/utils";
+import {blobUrl, cleanTitle, successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
-import {ISchool} from "@/utils/interfaces";
+import {ICity, ISchool} from "@/utils/interfaces";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import {searchCountries, searchTypes} from "@/data/search";
 import {XIcon} from "lucide-react";
@@ -25,8 +25,8 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
-    const [startValue,setStartValue] = useState<string>('');
-
+    const [startValue, setStartValue] = useState<string>('');
+    const [cities, setCities] = useState<ICity[]>([]);
     useEffect(() => {
         fetch(`${blobUrl}jsons/schools.json`, {
             cache: "no-store",
@@ -42,6 +42,19 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                     }
                 });
                 setLoading(false);
+            })
+            .catch((err) => {
+                setError("Failed to load data");
+                setLoading(false);
+                console.error(err);
+            });
+        fetch(`${blobUrl}jsons/cities.json`, {
+            cache: "no-store",
+            next: {revalidate: 1},
+        })
+            .then((response) => response.json())
+            .then((data: ICity[]) => {
+                setCities(data)
             })
             .catch((err) => {
                 setError("Failed to load data");
@@ -79,7 +92,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
         setError(null);
         try {
             const result = await uploadImage(formData);
-            if (result.success && result.url&&result.filename) {
+            if (result.success && result.url && result.filename) {
                 if (schoolIndex !== null) {
                     const updatedImages = [...schools[schoolIndex].images, result.filename];
                     handleInputChange(schoolIndex, "images", updatedImages);
@@ -128,6 +141,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
         formData.append("image", file)
         await handleFileSubmit(formData)
     }
+
     async function handleFileSubmit(formData: FormData) {
         setIsUploading(true)
         setError(null)
@@ -135,7 +149,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
             const result = await uploadImage(formData)
             console.log(result)
             console.log(schoolIndex)
-            if (result.success && result.url&&schoolIndex!==null&&result.filename) {
+            if (result.success && result.url && schoolIndex !== null && result.filename) {
                 handleInputChange(schoolIndex, "image_right", result.filename)
             } else {
                 setError("Upload failed. Please try again.")
@@ -166,13 +180,25 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
             })
             if (!response.ok) throw new Error("Failed to delete")
             toast.success("School deleted successfully!", successToasterStyles)
-            window.location.href='/crm/school'
+            window.location.href = '/crm/school'
         } catch (err) {
             setError("Failed to delete blog")
             console.error(err)
         }
     }
-
+    const filteredCities = useMemo(() => {
+        console.log(cities)
+        console.log(schools)
+        return cities.filter(city =>
+            (schoolIndex||schoolIndex===0)&&schools[schoolIndex].country&& cleanTitle(city.country) === cleanTitle(schools[schoolIndex].country)
+        )
+    }, [schools,cities,schoolIndex])
+    console.log(schoolIndex)
+    console.log(filteredCities)
+    const filteredCitiesName = useMemo(() => {
+        return filteredCities.map(city => city.name)
+    }, [filteredCities])
+    console.log(filteredCitiesName)
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
@@ -213,7 +239,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                     </h6>
                                     <Dropdown label='Website Active' selected={school.website_active}
                                               setSelected={(value) => handleInputChange(index, "website_active", value)}
-                                              variants={['Active','Disabled']}
+                                              variants={['Active', 'Disabled']}
                                     />
                                 </div>
                                 <div className="w-full">
@@ -322,19 +348,19 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                             <div className="flex flex-row justify-between gap-2">
                                 <div className="w-full">
                                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                        City
-                                    </h6>
-                                    <Dropdown label={'City'} selected={school.city}
-                                              setSelected={(value) => handleInputChange(index, 'city', value)}
-                                              variants={['Barcelona', 'Madrid', 'Oxford', 'London',]}/>
-                                </div>
-                                <div className="w-full">
-                                    <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                                         Country
                                     </h6>
                                     <Dropdown label={'Country'} selected={school.country}
                                               setSelected={(value) => handleInputChange(index, 'country', value)}
                                               variants={searchCountries}/>
+                                </div>
+                                <div className="w-full">
+                                    <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
+                                        City
+                                    </h6>
+                                    <Dropdown label={'City'} selected={school.city}
+                                              setSelected={(value) => handleInputChange(index, 'city', value)}
+                                              variants={filteredCitiesName}/>
                                 </div>
                             </div>
                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
@@ -346,7 +372,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 placeholder="Address"
                             />
                             <div className="flex flex-row justify-between gap-2">
-                                <div className="w-full">
+                            <div className="w-full">
                                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                                         Capacity
                                     </h6>
@@ -396,7 +422,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                                 width={250}
                                                 height={250}
                                                 alt={school.title}
-                                                style={{maxHeight:'-webkit-fill-available'}}
+                                                style={{maxHeight: '-webkit-fill-available'}}
                                             />
                                             <XIcon onClick={() => handleRemoveImage(index, image)}
                                                    className="image__crm__x" style={{width: 125, height: 125}}/>

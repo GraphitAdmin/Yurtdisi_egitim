@@ -4,6 +4,7 @@ import React from "react";
 import Subscribe from "@/components/UI/FAQ/Subscribe";
 import Footer from "@/components/UI/Footer/Footer";
 import CountriesPageContent from "@/components/countriesPageContent/countriesPageContent";
+import {notFound} from "next/navigation";
 
 const slugsArray = [
     'language-schools',
@@ -21,17 +22,16 @@ export default async function Home({
 }) {
     const {slug} = await params
     console.log(slug)
+    if (!slugsArray.includes(slug)) {
+        notFound()
+    }
     return (
         <div>
             <Navbar home={false}/>
-            {slugsArray.includes(slug) ? <>
+            {slugsArray.includes(slug) && <>
                     <Tabs/>
                     <CountriesPageContent slug={slug}/>
-                </> :
-                <>
-                    <h1>Error</h1>
-                </>
-            }
+                </>}
             <Subscribe/>
             <Footer/>
         </div>

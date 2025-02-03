@@ -9,6 +9,7 @@
     align-self: stretch;
     margin-left: auto;
     margin-right: auto;
+    animation: move 1s ease-out forwards;
 }
 .events__first{
     width: 100%;

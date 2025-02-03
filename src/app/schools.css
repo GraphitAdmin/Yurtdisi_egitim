@@ -66,6 +66,8 @@
     max-width: 1600px;
     margin-left: auto;
     margin-right: auto;
+    animation: opacityAnimation 1.5s ease-out forwards;
+    min-height: 20vh;
 }
 
 .about__school div {
