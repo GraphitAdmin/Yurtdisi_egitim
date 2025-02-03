@@ -122,7 +122,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId, c
                         <p
                             style={{color: 'var(--Courses-Base-Black)'}}
                         >
-                            130,279 km²
+                            {country.faceMeasurement} km²
                         </p>
                         <p style={{
                             fontWeight: 400,
@@ -158,7 +158,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId, c
                         <p
                             style={{color: 'var(--Courses-Base-Black)'}}
                         >
-                            GBP (Pound)
+                            {country.currency}
                         </p>
                         <p style={{
                             fontWeight: 400,
@@ -170,7 +170,7 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId, c
                         <p
                             style={{color: 'var(--Courses-Base-Black)'}}
                         >
-                            +44
+                            {country.telephoneCode}
                         </p>
                     </div>
                     <div className="page__country__schools__country__recommendations">
