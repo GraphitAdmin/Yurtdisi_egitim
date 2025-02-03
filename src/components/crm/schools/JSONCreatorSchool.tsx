@@ -21,7 +21,7 @@ const JSONCreator = () => {
     const [cities, setCities] = useState<ICity[]>([]);
 
     useEffect(() => {
-        fetch(blobUrl+"/jsons/schools.json", {
+        fetch(blobUrl+"jsons/schools.json", {
             cache: "no-store",
             next: {revalidate: 1},
         })
