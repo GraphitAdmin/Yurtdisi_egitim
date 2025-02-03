@@ -21,7 +21,7 @@ const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChil
         const fetchJson = async () => {
             const localSchools = localStorage.getItem('schools')
             if (localSchools !== undefined && localSchools !== null) {
-                const filteredSchools = JSON.parse(localSchools).filter((school: ISchool) => cleanTitle(school.city) === cleanTitle(subChildId) && cleanTitle(slug) === cleanTitle(school.education_type));
+                const filteredSchools = JSON.parse(localSchools).filter((school: ISchool) => cleanTitle(school.city) === cleanTitle(subChildId) && cleanTitle(slug) === cleanTitle(school.education_type)&&school.website_active==='Active');
                 setSchools(filteredSchools);
             }
             try {
