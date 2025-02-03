@@ -29,7 +29,6 @@ const fetchSchool = async (subUniChildId: string) => {
         }
     } catch (err) {
         console.log(err);
-        notFound()
     }
 }
 type paramsType = Promise<{ slug: string, childId: string, subChildId: string, subUniChildId: string }>;
@@ -40,9 +39,9 @@ export default async function Home({
 }) {
     const {subUniChildId} = await params
     const school:ISchool = await fetchSchool(subUniChildId)
-    if(!school){
-        notFound()
-    }
+    // if(!school){
+        // notFound()
+    // }
     return (
         <div>
             <Navbar home={false}/>
