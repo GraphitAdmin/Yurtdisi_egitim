@@ -12,7 +12,9 @@ import {searchCountries} from "@/data/search";
 import '../JSONEditor.css'
 
 const JSONCreator = () => {
-    checkLogged();
+     useEffect(() => {
+        checkLogged();
+    }, []);
     const [students, setStudents] = useState<IStudent[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

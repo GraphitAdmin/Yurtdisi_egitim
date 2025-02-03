@@ -18,7 +18,9 @@ import {IEvent} from "@/utils/interfaces";
 import {blobUrl, checkLogged} from "@/utils/utils";
 
 export default function AdminPanel() {
-    checkLogged();
+     useEffect(() => {
+        checkLogged();
+    }, []);
     const [events, setEvents] = useState<IEvent[]>([]);
     useEffect(() => {
         const fetchJson = async () => {

@@ -13,7 +13,9 @@ import {Dropdown} from "@/components/crm/ui/dropdown";
 import DropdownDefault from "@/components/UI/Dropdown/Dropdown";
 
 const JSONCreator = () => {
-    checkLogged();
+     useEffect(() => {
+        checkLogged();
+    }, []);
     const [events, setEvents] = useState<IEvent[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

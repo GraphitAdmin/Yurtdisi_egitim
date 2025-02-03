@@ -12,7 +12,9 @@ import '../JSONEditor.css'
 import {Editor} from "@tinymce/tinymce-react";
 
 const JSONCreator = () => {
-    checkLogged();
+     useEffect(() => {
+        checkLogged();
+    }, []);
     const [blogs, setBlogs] = useState<IBlog[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

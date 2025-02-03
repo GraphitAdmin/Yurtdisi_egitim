@@ -13,7 +13,9 @@ import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import '../JSONEditor.css'
 
 const JSONCreator = () => {
-    checkLogged();
+     useEffect(() => {
+        checkLogged();
+    }, []);
     const [cities, setCities] = useState<ICity[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

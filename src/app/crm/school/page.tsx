@@ -18,7 +18,9 @@ import {ISchool} from "@/utils/interfaces";
 import {blobUrl, checkLogged} from "@/utils/utils";
 
 export default function AdminPanel() {
-    checkLogged();
+     useEffect(() => {
+        checkLogged();
+    }, []);
     const [schools, setSchools] = useState<ISchool[]>([]);
     useEffect(() => {
         const fetchJson = async () => {

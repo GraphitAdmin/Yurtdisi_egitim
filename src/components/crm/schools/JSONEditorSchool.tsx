@@ -20,7 +20,9 @@ interface IJsonEditor {
 }
 
 const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
-    checkLogged();
+     useEffect(() => {
+        checkLogged();
+    }, []);
     const [schools, setSchools] = useState<ISchool[]>([]);
     const [schoolIndex, setSchoolIndex] = useState<null | number>(null);
     const [loading, setLoading] = useState(true);

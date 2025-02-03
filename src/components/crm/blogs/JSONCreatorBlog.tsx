@@ -13,7 +13,9 @@ import {Editor} from "@tinymce/tinymce-react";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 
 const JSONCreator = () => {
-    checkLogged();
+     useEffect(() => {
+        checkLogged();
+    }, []);
     const [blogs, setBlogs] = useState<IBlog[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

@@ -14,7 +14,9 @@ import {searchCountries, searchTypes} from "@/data/search";
 import {Editor} from "@tinymce/tinymce-react";
 
 const JSONCreator = () => {
-    checkLogged();
+     useEffect(() => {
+        checkLogged();
+    }, []);
     const [schools, setSchools] = useState<ISchool[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

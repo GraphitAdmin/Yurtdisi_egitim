@@ -1,27 +1,25 @@
 'use client'
 import {Input} from "@/components/crm/ui/input";
 import {Button} from "@/components/crm/ui/button";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
+import {checkLogged} from "@/utils/utils";
 
 export default function AdminPanel() {
-    const checkLogged=sessionStorage.getItem('isLoggedIn')
-    const [isLoggedIn, setIsLoggedIn] = useState(checkLogged?checkLogged:false)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault()
         if (username === "Emir" && password === "secretpassword") {
             sessionStorage.setItem('isLoggedIn','true')
-            setIsLoggedIn(true)
             window.location.href='/crm/subscribers'
         } else {
             alert("Invalid credentials")
         }
     }
-    if (isLoggedIn==='true'){
-        window.location.href='/crm/subscribers'
-    }
+    useEffect(() => {
+        checkLogged();
+    }, []);
 
     return (
         <div className="min-h-screen bg-background">
