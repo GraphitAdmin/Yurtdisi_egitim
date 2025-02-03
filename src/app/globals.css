@@ -154,6 +154,9 @@ small {
     line-height: 20px;
     text-align: center;
 }
+.tox-menubar{
+    display: none!important;
+}
 
 table{
     max-width: 100%;
