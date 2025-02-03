@@ -47,9 +47,8 @@ const Footer = () => {
                             <Link href='/blog'><p>Blogs</p></Link>
                             <Link href='/our-events-calendar'><p>Events</p></Link>
                         </div>
-
                         <div>
-                            <Link href='/text'><h6>Company</h6></Link>
+                            <h6 style={{color: 'var(--Courses-Base-Black)'}}>Company</h6>
                             <Link href='/contact-us'><p>Contact us</p></Link>
                         </div>
                     </div>

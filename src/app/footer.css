@@ -39,6 +39,9 @@ footer {
     gap: 16px;
     align-items: flex-start;
 }
+.footer__body div a{
+    cursor: pointer;
+}
 .footer__body div a p,.footer__body div a h6{
     text-align: left;
 }
