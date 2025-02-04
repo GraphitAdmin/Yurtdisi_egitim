@@ -24,6 +24,7 @@
 }
 .events__post p{
     max-height: 48px;
+    min-height: 48px;
     overflow: hidden;
     color: var(--Courses-Gray-Gray-600);
     text-overflow: ellipsis;
