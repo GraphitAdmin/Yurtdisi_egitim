@@ -7,7 +7,7 @@ import Link from "next/link";
 import React, {useEffect, useState} from "react";
 import {ICity, ICountry} from "@/utils/interfaces";
 import {blobUrl, cleanTitle} from "@/utils/utils";
-
+import {navbarOptions} from "@/data/navbarOptions";
 interface CountryPageContentProps {
     slug: string;
     childId: string;
@@ -175,31 +175,8 @@ const CountryPageContent: React.FC<CountryPageContentProps> = ({slug, childId, c
                     </div>
                     <div className="page__country__schools__country__recommendations">
                         <h5 style={{marginBottom: 4}}>Foreign language schools</h5>
-                        <Link href={'/smth'}><p>
-                            UK language schools</p>
-                        </Link>
-                        <Link href={'/smth'}><p>
-                            UK language schools</p>
-                        </Link>
-                        <Link href={'/smth'}><p>
-                            UK language schools</p>
-                        </Link>
-                        <Link href={'/smth'}><p>
-                            UK language schools</p>
-                        </Link>
-                        <Link href={'/smth'}><p>
-                            UK language schools</p>
-                        </Link>
-                        <div style={{display: 'flex', flexDirection: 'row', gap: 4, cursor: "pointer"}}>
-                            <p style={{
-                                fontWeight: 600,
-                                color: 'var(--courses-brand-blue-400-brand, #2E90FA)'
-                            }}>Show more</p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none">
-                                <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z" fill="#2E90FA"/>
-                            </svg>
-                        </div>
+                        {navbarOptions[0].options.map((countryOption,index)=>
+                        !country.link.includes(countryOption.link)&& <Link key={index} href={'/'+slug+countryOption.link}><p>{countryOption.name}&nbsp;{slug.replace(/-/g, ' ')}</p></Link>)}
                     </div>
                 </div>
             </div>
