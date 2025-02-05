@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, {useMemo, useState} from "react";
 import {ISchool} from "@/utils/interfaces";
 import {blobUrl} from "@/utils/utils";
 import SchoolInfo from "@/components/school/SchoolInfo";
@@ -10,11 +10,20 @@ import RelatedSchools from "@/components/school/RelatedSchools/RelatedSchools";
 interface SchoolPageContentProps {
     subUniChildId: string;
     school: ISchool;
-    relatedSchools:ISchool[];
+    relatedSchools: ISchool[];
+    moreSchools: ISchool[];
 }
 
-const SchoolPageContent: React.FC<SchoolPageContentProps> = ({ subUniChildId, school,relatedSchools}) => {
+const SchoolPageContent: React.FC<SchoolPageContentProps> = ({subUniChildId, school, relatedSchools, moreSchools}) => {
     console.log(relatedSchools)
+    const [showMore, setShowMore] = useState(false);
+    const schoolsToShow = useMemo(() => {
+        if (showMore === true) {
+            return moreSchools
+        } else {
+            return moreSchools.slice(0, 7)
+        }
+    }, [showMore, moreSchools])
     return (
         <>
             <div className="page__container">
@@ -79,35 +88,34 @@ const SchoolPageContent: React.FC<SchoolPageContentProps> = ({ subUniChildId, sc
                                     </div>
                                 }
                             </div>
-
-                            <div className="page__country__schools__country__recommendations">
-                                <h5 style={{marginBottom: 4}}>Foreign language schools</h5>
-                                <Link href={'/smth'}><p>
-                                    UK language schools</p>
-                                </Link>
-                                <Link href={'/smth'}><p>
-                                    UK language schools</p>
-                                </Link>
-                                <Link href={'/smth'}><p>
-                                    UK language schools</p>
-                                </Link>
-                                <Link href={'/smth'}><p>
-                                    UK language schools</p>
-                                </Link>
-                                <Link href={'/smth'}><p>
-                                    UK language schools</p>
-                                </Link>
-                                <div style={{display: 'flex', flexDirection: 'row', gap: 4, cursor: "pointer"}}>
-                                    <p style={{
-                                        fontWeight: 600,
-                                        color: 'var(--courses-brand-blue-400-brand, #2E90FA)'
-                                    }}>Show more</p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none">
-                                        <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z" fill="#2E90FA"/>
-                                    </svg>
+                            {moreSchools && moreSchools.length > 0 &&
+                                <div className="page__country__schools__country__recommendations">
+                                    <h5 style={{
+                                        marginBottom: 4,
+                                        textAlign: "left"
+                                    }}>{school.country} {school.education_type.toLowerCase()}</h5>
+                                    {schoolsToShow.map((schoolMap, index) =>
+                                        <Link key={index} href={'/smth'}><p>
+                                            {school.title}</p>
+                                        </Link>)
+                                    }
+                                    {moreSchools.length > 7 &&
+                                        <div style={{display: 'flex', flexDirection: 'row', gap: 4, cursor: "pointer"}}>
+                                            <p style={{
+                                                fontWeight: 600,
+                                                color: 'var(--courses-brand-blue-400-brand, #2E90FA)'
+                                            }}
+                                               onClick={() => setShowMore(!showMore)}>{showMore ? "Show less" : "Show more"}</p>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none">
+                                                <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z"
+                                                      fill="#2E90FA"/>
+                                            </svg>
+                                        </div>
+                                    }
                                 </div>
-                            </div>
+                            }
                         </div>
                     </div>
                 }

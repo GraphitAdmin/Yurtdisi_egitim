@@ -8,7 +8,7 @@ import {notFound} from "next/navigation";
 import React from "react";
 import SchoolPageContent from "@/components/schoolPageContent/schoolPageContent";
 
-const fetchSchool = async (subUniChildId: string,subChildId:string) => {
+const fetchSchool = async (slug:string,childId:string,subUniChildId: string,subChildId:string) => {
     const cleanedName = cleanTitle(subUniChildId)
     try {
         const schoolsUrl = blobUrl + 'jsons/schools.json';
@@ -19,17 +19,15 @@ const fetchSchool = async (subUniChildId: string,subChildId:string) => {
             throw new Error('Failed to fetch JSON');
         }
         const jsonData:ISchool[] = await response.json();
-        console.log(jsonData)
-        console.log(subChildId)
-        let relatedSchools= jsonData.filter((school: ISchool) => cleanTitle(school.city)===cleanTitle(subChildId));
+        const relatedSchools= jsonData.filter((school: ISchool) => cleanTitle(school.city)===cleanTitle(subChildId)&&school.website_active.toLowerCase()==='true'&&cleanTitle(school.title)!==cleanedName);
+        const moreSchools= jsonData.filter((school: ISchool) => cleanTitle(school.country)===cleanTitle(childId)&&cleanTitle(school.education_type)===cleanTitle(slug)&&school.website_active.toLowerCase()==='true'&&cleanTitle(school.title)!==cleanedName);
         console.log(relatedSchools)
         for (const school of jsonData) {
             const cleanedTitle = cleanTitle(school.title)
             console.log('name', cleanedName)
             console.log('title', cleanedTitle)
             if (cleanedTitle === cleanedName) {
-                relatedSchools=relatedSchools.filter((relatedSchool)=>relatedSchool.title!==cleanedTitle)
-                return {school,relatedSchools};
+                return {school,relatedSchools,moreSchools};
             }
         }
     } catch (err) {
@@ -43,8 +41,8 @@ export default async function Home({
                                    }: {
     params: paramsType;
 }) {
-    const {subUniChildId,subChildId} = await params
-    const data = await fetchSchool(subUniChildId,subChildId)
+    const {slug,childId,subUniChildId,subChildId} = await params
+    const data = await fetchSchool(slug,childId,subUniChildId,subChildId)
     if(!data||!data.school){
         notFound()
     }
@@ -52,7 +50,7 @@ export default async function Home({
         <div>
             <Navbar home={false}/>
             <Tabs/>
-            <SchoolPageContent subUniChildId={subUniChildId} school={data.school} relatedSchools={data.relatedSchools}/>
+            <SchoolPageContent subUniChildId={subUniChildId} school={data.school} relatedSchools={data.relatedSchools} moreSchools={data.moreSchools}/>
             <Subscribe/>
             <Footer/>
         </div>

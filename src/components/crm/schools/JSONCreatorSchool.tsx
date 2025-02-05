@@ -161,7 +161,7 @@ const JSONCreator = () => {
 
             if (!response.ok) throw new Error("Failed to save")
             toast.success("Saved successfully!", successToasterStyles)
-            window.location.href = "/crm/school/" + schools[schools.length - 1].title.replace(/-/g, ' ')
+            window.location.href = "/crm/school/" + schools[schools.length - 1].title.replace(/ /g, '-')
         } catch (err) {
             setError("Failed to save data")
             console.log(err)
