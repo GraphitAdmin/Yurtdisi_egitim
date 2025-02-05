@@ -15,8 +15,8 @@ interface SchoolPageContentProps {
 }
 
 const SchoolPageContent: React.FC<SchoolPageContentProps> = ({subUniChildId, school, relatedSchools, moreSchools}) => {
-    console.log(relatedSchools)
     const [showMore, setShowMore] = useState(false);
+    console.log(moreSchools)
     const schoolsToShow = useMemo(() => {
         if (showMore === true) {
             return moreSchools
@@ -24,6 +24,7 @@ const SchoolPageContent: React.FC<SchoolPageContentProps> = ({subUniChildId, sch
             return moreSchools.slice(0, 7)
         }
     }, [showMore, moreSchools])
+    console.log(schoolsToShow)
     return (
         <>
             <div className="page__container">
@@ -95,8 +96,8 @@ const SchoolPageContent: React.FC<SchoolPageContentProps> = ({subUniChildId, sch
                                         textAlign: "left"
                                     }}>{school.country} {school.education_type.toLowerCase()}</h5>
                                     {schoolsToShow.map((schoolMap, index) =>
-                                        <Link key={index} href={'/smth'}><p>
-                                            {school.title}</p>
+                                        <Link key={index} href={'/' + schoolMap.education_type.toLowerCase().replace(/ /g, '-') + '/' + schoolMap.country.toLowerCase().replace(/ /g, '-') + '/' + schoolMap.city.toLowerCase().replace(/ /g, '-') + '/' + schoolMap.title.replace(/ /g, '-').toLowerCase()}><p>
+                                            {schoolMap.title}</p>
                                         </Link>)
                                     }
                                     {moreSchools.length > 7 &&
