@@ -12,9 +12,10 @@ interface CityPageContentProps {
     childId: string;
     subChildId: string;
     initialCity: ICity;
+    cities: ICity[];
 }
 
-const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChildId, initialCity}) => {
+const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChildId, initialCity, cities}) => {
     const [schools, setSchools] = useState<ISchool[]>([]);
     const [city] = useState<ICity>(initialCity);
     useEffect(() => {
@@ -84,21 +85,17 @@ const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChil
                             <p>
                                 {city.description}
                             </p>
-                            <h5 style={{textTransform: 'capitalize'}}>
-                                {childId.replace(/-/g, ' ')}&nbsp;{slug.replace(/-/g, ' ')}
-                            </h5>
-                            <Link href={'/smth'}>
-                                Bath Language Schools
-                            </Link>
-                            <Link href={'/smth'}>
-                                Belfast | Northern Ireland Language Schools
-                            </Link>
-                            <Link href={'/smth'}>
-                                Birmingham Language Schools
-                            </Link>
-                            <Link href={'/smth'}>
-                                Bournemouth Language Schools
-                            </Link>
+                            {cities.length > 0 && <>
+                                <h5 style={{textTransform: 'capitalize'}}>
+                                    {childId.replace(/-/g, ' ')}&nbsp;{slug.replace(/-/g, ' ')}
+                                </h5>
+                                {cities.map((cityMap, index) =>
+                                    <Link style={{textTransform: "capitalize"}}
+                                          href={'/' + slug + '/' + childId + '/' + cityMap.name.replace(/ /g, '-').toLowerCase()}
+                                          key={index}>
+                                        {cityMap.name}&nbsp;{slug.replace(/-/g, ' ')}
+                                    </Link>)}
+                            </>}
                         </div>
                         <Image width={720} height={756} src={blobUrl + city.image} alt={city.name}/>
                     </>}

@@ -21,10 +21,10 @@ async function fetchCityData(childId: string, subChildId: string) {
     }
 
     const data: ICity[] = await response.json();
-    return data.find(cityMap =>
+    return {city:data.find(cityMap =>
         cleanTitle(cityMap.name) === cleanTitle(subChildId) &&
         cleanTitle(cityMap.country) === cleanTitle(childId)
-    );
+    ),cities: data.filter((cityMap: ICity) => cleanTitle(cityMap.country) === cleanTitle(childId)&&cleanTitle(cityMap.name) !== cleanTitle(subChildId))}
 }
 export default async function Home({
                                        params,
@@ -35,15 +35,15 @@ export default async function Home({
     console.log(slug)
     console.log(childId)
     console.log(subChildId)
-    const city = await fetchCityData(childId, subChildId)
-    if (!city) {
+    const data = await fetchCityData(childId, subChildId)
+    if (!data||!data.city) {
         notFound()
     }
     return (
         <div>
             <Navbar home={false}/>
             <Tabs/>
-            <CityPageContent slug={slug} childId={childId} subChildId={subChildId} initialCity={city}/>
+            <CityPageContent slug={slug} childId={childId} subChildId={subChildId} initialCity={data.city} cities={data.cities?data.cities:[]}/>
             <Abroads/>
             <Subscribe/>
             <Footer/>
