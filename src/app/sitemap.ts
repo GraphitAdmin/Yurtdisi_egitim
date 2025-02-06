@@ -1,135 +1,78 @@
-import {MetadataRoute} from 'next'
-import {blobUrl} from "@/utils/utils";
-import {IBlog, ICity, IEvent, ISchool} from "@/utils/interfaces";
-import {notFound} from "next/navigation";
-import {searchCountries, searchTypes} from "@/data/search";
+import type { MetadataRoute } from "next"
+import { blobUrl } from "@/utils/utils"
+import type { IBlog, ICity, IEvent, ISchool } from "@/utils/interfaces"
+import { notFound } from "next/navigation"
+import { searchCountries, searchTypes } from "@/data/search"
 
-const fetchSchool = async () => {
+const fetchData = async (url: string) => {
     try {
-        const schoolsUrl = blobUrl + 'jsons/schools.json';
-        const response = await fetch(schoolsUrl, {
-            cache: 'no-store',
-        });
+        const response = await fetch(url, {
+            next: { revalidate: 3600 }, // Revalidate every hour
+        })
         if (!response.ok) {
-            throw new Error('Failed to fetch JSON');
+            throw new Error("Failed to fetch JSON")
         }
-        const jsonData: ISchool[] = await response.json();
-        return jsonData;
+        return await response.json()
     } catch (err) {
-        console.log(err);
-        notFound()
-    }
-}
-const fetchBlogs = async () => {
-    try {
-        const schoolsUrl = blobUrl + 'jsons/blogs.json';
-        const response = await fetch(schoolsUrl, {
-            cache: 'no-store',
-        });
-        if (!response.ok) {
-            throw new Error('Failed to fetch JSON');
-        }
-        const jsonData: IBlog[] = await response.json();
-        return jsonData;
-    } catch (err) {
-        console.log(err);
-        notFound()
-    }
-}
-const fetchEvents = async () => {
-    try {
-        const schoolsUrl = blobUrl + 'jsons/events.json';
-        const response = await fetch(schoolsUrl, {
-            cache: 'no-store',
-        });
-        if (!response.ok) {
-            throw new Error('Failed to fetch JSON');
-        }
-        const jsonData: IEvent[] = await response.json();
-        return jsonData;
-    } catch (err) {
-        console.log(err);
-        notFound()
-    }
-}
-const fetchCities = async () => {
-    try {
-        const schoolsUrl = blobUrl + 'jsons/cities.json';
-        const response = await fetch(schoolsUrl, {
-            cache: 'no-store',
-        });
-        if (!response.ok) {
-            throw new Error('Failed to fetch JSON');
-        }
-        const jsonData: ICity[] = await response.json();
-        return jsonData;
-    } catch (err) {
-        console.log(err);
+        console.log(err)
         notFound()
     }
 }
 
-const fetchReferences = async () => {
-    try {
-        const schoolsUrl = blobUrl + 'jsons/references.json';
-        const response = await fetch(schoolsUrl, {
-            cache: 'no-store',
-        });
-        if (!response.ok) {
-            throw new Error('Failed to fetch JSON');
-        }
-        const jsonData: IBlog[] = await response.json();
-        return jsonData;
-    } catch (err) {
-        console.log(err);
-        notFound()
-    }
-}
+const fetchSchool = () => fetchData(blobUrl + "jsons/schools.json")
+const fetchBlogs = () => fetchData(blobUrl + "jsons/blogs.json")
+const fetchEvents = () => fetchData(blobUrl + "jsons/events.json")
+const fetchCities = () => fetchData(blobUrl + "jsons/cities.json")
+const fetchReferences = () => fetchData(blobUrl + "jsons/references.json")
 
 function sanitizeURL(text: string): string {
     return text
-        .normalize("NFD") // Normalize accents (if any)
-        .replace(/[\u0300-\u036f]/g, "") // Remove diacritics
-        .replace(/[^\w\s-]/g, "") // Remove non-word characters except spaces and hyphens
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\w\s-]/g, "")
         .trim()
-        .replace(/\s+/g, '-') // Replace spaces with hyphens
-        .toLowerCase();
+        .replace(/\s+/g, "-")
+        .toLowerCase()
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const schools = await fetchSchool();
-    const blogs = await fetchBlogs();
-    const events = await fetchEvents();
-    const cities = await fetchCities();
-    const references = await fetchReferences();
+    const [schools, blogs, events, cities, references] = await Promise.all([
+        fetchSchool(),
+        fetchBlogs(),
+        fetchEvents(),
+        fetchCities(),
+        fetchReferences(),
+    ])
 
     const eventsUrl = events.map((event: IEvent) => ({
         url: `https://eeeducation.vercel.app/our-event-calendar/${sanitizeURL(event.title)}`,
         priority: 0.7,
-    }));
+    }))
     const referencesUrl = references.map((reference: IBlog) => ({
         url: `https://eeeducation.vercel.app/our-student-references/${sanitizeURL(reference.title)}`,
         priority: 0.7,
-    }));
+    }))
     const blogsUrls = blogs.map((blog: IBlog) => ({
         url: `https://eeeducation.vercel.app/blog/${sanitizeURL(blog.title)}`,
         priority: 0.7,
-    }));
+    }))
 
     const schoolUrls = schools.map((school: ISchool) => ({
-        url: `https://eeeducation.vercel.app/${school.education_type.replace(/ /g, '-').toLowerCase()}/${school.country.replace(/ /g, '-').toLowerCase()}/${school.city.replace(/ /g, '-').toLowerCase()}/${sanitizeURL(school.title)}`,
+        url: `https://eeeducation.vercel.app/${school.education_type.replace(/ /g, "-").toLowerCase()}/${school.country.replace(/ /g, "-").toLowerCase()}/${school.city.replace(/ /g, "-").toLowerCase()}/${sanitizeURL(school.title)}`,
         priority: 0.7,
-    }));
-    const citiesURL = searchTypes.flatMap((typeSearch) => cities.map((city: ICity) => ({
+    }))
+    const citiesURL = searchTypes.flatMap((typeSearch) =>
+        cities.map((city: ICity) => ({
             url: `https://eeeducation.vercel.app/${sanitizeURL(typeSearch)}/${sanitizeURL(city.country)}/${sanitizeURL(city.name)}`,
             priority: 0.7,
-        }))
-    );
-    const countriesURL = searchTypes.flatMap((typeSearch) => searchCountries.map((country) => ({
+        })),
+    )
+    const countriesURL = searchTypes.flatMap((typeSearch) =>
+        searchCountries.map((country) => ({
             url: `https://eeeducation.vercel.app/${sanitizeURL(typeSearch)}/${sanitizeURL(country)}`,
             priority: 0.7,
-        }))
-    );
+        })),
+    )
     const searchsUrl = searchTypes.map((typeSearch) => ({
         url: `https://eeeducation.vercel.app/${sanitizeURL(typeSearch)}`,
         priority: 0.8,
@@ -137,23 +80,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [
         {
-            url: 'https://eeeducation.vercel.app',
+            url: "https://eeeducation.vercel.app",
             priority: 1,
         },
         {
-            url: 'https://eeeducation.vercel.app/blog',
+            url: "https://eeeducation.vercel.app/blog",
             priority: 0.9,
         },
         {
-            url: 'https://eeeducation.vercel.app/contact-us',
+            url: "https://eeeducation.vercel.app/contact-us",
             priority: 0.9,
         },
         {
-            url: 'https://eeeducation.vercel.app/our-event-calendar',
+            url: "https://eeeducation.vercel.app/our-event-calendar",
             priority: 0.9,
         },
         {
-            url: 'https://eeeducation.vercel.app/our-student-references',
+            url: "https://eeeducation.vercel.app/our-student-references",
             priority: 0.9,
         },
         ...searchsUrl,
@@ -165,3 +108,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...referencesUrl,
     ]
 }
+
