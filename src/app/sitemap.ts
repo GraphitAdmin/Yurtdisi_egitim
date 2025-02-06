@@ -7,7 +7,7 @@ import { searchCountries, searchTypes } from "@/data/search"
 const fetchData = async (url: string) => {
     try {
         const response = await fetch(url, {
-            next: { revalidate: 3600 }, // Revalidate every hour
+            next: { revalidate: 600 },
         })
         if (!response.ok) {
             throw new Error("Failed to fetch JSON")
