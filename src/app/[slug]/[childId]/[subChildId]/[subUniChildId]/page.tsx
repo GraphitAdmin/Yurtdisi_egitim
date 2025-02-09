@@ -10,13 +10,6 @@ import type {Metadata} from "next"
 
 type paramsType = Promise<{ slug: string, childId: string, subChildId: string, subUniChildId: string }>;
 
-type Params = {
-    slug: string
-    childId: string
-    subChildId: string
-    subUniChildId: string
-}
-
 const fetchSchool = async (slug: string, childId: string, subUniChildId: string, subChildId: string) => {
     const cleanedName = cleanTitle(subUniChildId)
     try {
