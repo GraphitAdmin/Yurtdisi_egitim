@@ -54,6 +54,7 @@ const fetchSchool = async (slug: string, childId: string, subUniChildId: string,
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
     const { slug, childId, subUniChildId, subChildId } =await params
+    console.log(slug, childId, subUniChildId, subChildId)
     // const data = await fetchSchool(slug, childId, subUniChildId, subChildId)
 
     const title =
