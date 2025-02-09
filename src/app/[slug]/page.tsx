@@ -14,11 +14,8 @@ const slugsArray = [
     'certificates'
 ]
 type paramsType = Promise<{ slug: string }>;
-type Params = {
-    slug: string
-}
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-    const {slug} = params
+export async function generateMetadata({ params }: { params: paramsType }): Promise<Metadata> {
+    const {slug} = await params
     if(slugsArray.includes(slug)){
         return {
             title: slug.replace(/-/g, ' ').replace(/^\w/, (char) => char.toUpperCase()),

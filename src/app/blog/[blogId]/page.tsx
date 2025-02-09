@@ -6,11 +6,8 @@ import Blog from "@/components/blog/Blog";
 import type {Metadata} from "next";
 
 type paramsType = Promise<{ blogId: string }>;
-type Params = {
-    blogId: string
-}
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-    const {blogId} = params
+export async function generateMetadata({ params }: { params: paramsType }): Promise<Metadata> {
+    const {blogId} = await params
     if(blogId){
         return {
             title: blogId.replace(/-/g, ' ').replace(/^\w/, (char) => char.toUpperCase()),

@@ -12,11 +12,8 @@ import type {Metadata} from "next";
 
 type paramsType = Promise<{ slug: string, childId: string, subChildId: string }>;
 
-type Params = {
-    slug: string, subChildId: string
-}
-export async function generateMetadata({params}: { params: Params }): Promise<Metadata> {
-    const {slug, subChildId} = params
+export async function generateMetadata({params}: { params: paramsType }): Promise<Metadata> {
+    const {slug, subChildId} = await params
     return {
         title: subChildId.replace(/-/g, ' ')
                 .replace(/\b\w/g, (char) => char.toUpperCase()) + ' ' +

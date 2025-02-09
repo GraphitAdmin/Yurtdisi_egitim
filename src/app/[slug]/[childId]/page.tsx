@@ -23,11 +23,8 @@ const childIdArray = [
 ];
 
 type paramsType = Promise<{ slug: string, childId: string }>;
-type Params = {
-    slug: string, childId: string
-}
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-    const {slug,childId} = params
+export async function generateMetadata({ params }: { params: paramsType }): Promise<Metadata> {
+    const {slug,childId} = await params
     if(childIdArray.includes(childId)){
         return {
             title:childId.replace(/-/g, ' ')

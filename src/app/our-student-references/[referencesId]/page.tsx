@@ -6,11 +6,8 @@ import Reference from "@/components/blog/Reference";
 import type {Metadata} from "next";
 
 type paramsType = Promise<{ referencesId: string }>;
-type Params = {
-    referencesId: string
-}
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-    const {referencesId} = params
+export async function generateMetadata({ params }: { params: paramsType }): Promise<Metadata> {
+    const {referencesId} = await params
     if(referencesId){
         return {
             title: referencesId.replace(/-/g, ' ').replace(/^\w/, (char) => char.toUpperCase()),
