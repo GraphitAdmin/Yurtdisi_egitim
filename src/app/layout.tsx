@@ -4,7 +4,6 @@ import "./globals.css";
 import "./navbar.css";
 import "./footer.css";
 import "./layout.css"
-import React from "react";
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from "@vercel/analytics/react"
 const urbanist = Urbanist({

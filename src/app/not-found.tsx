@@ -3,7 +3,6 @@ import Navbar from "@/components/UI/Navbar/Navbar";
 import Subscribe from "@/components/UI/FAQ/Subscribe";
 import Footer from "@/components/UI/Footer/Footer";
 import Button from "@/components/UI/Button/Button";
-
 export default function Home() {
     return (
         <div>

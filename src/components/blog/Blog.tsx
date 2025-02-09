@@ -9,7 +9,6 @@ import {blobUrl, cleanTitle} from "@/utils/utils";
 interface BlogProps {
     title: string;
 }
-
 const Blog: React.FC<BlogProps> = ({title}) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)

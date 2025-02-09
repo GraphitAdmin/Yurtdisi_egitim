@@ -25,7 +25,7 @@ const ContactUs = () => {
                 <div style={{width: '100%'}}>
                     <h1>Overseas education consultancy</h1>
                     <p>As Global Overseas Education Consultancy, we have been providing free
-                        consultancy services to our students on overseas education consultancy since 1989 .</p>
+                        consultancy services to our students on overseas education consultancy since 1989.</p>
                 </div>
                 {process.env.NEXT_GOOGLE_API_KEY &&
                     <LoadScript googleMapsApiKey={process.env.NEXT_GOOGLE_API_KEY}>

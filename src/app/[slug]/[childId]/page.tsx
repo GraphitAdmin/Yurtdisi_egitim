@@ -1,6 +1,5 @@
 import Navbar from "@/components/UI/Navbar/Navbar";
 import Tabs from "@/components/UI/Tabs/Tabs";
-import React from "react";
 import '../../schools.css';
 import Subscribe from "@/components/UI/FAQ/Subscribe";
 import Footer from "@/components/UI/Footer/Footer";
@@ -8,6 +7,7 @@ import CountryPageContent from "@/components/countryPageContent/countryPageConte
 import {UK,US,Austria, France, Germany, Italy, Malta, Portugal, Spain, Switzerland} from "@/data/countries_json";
 import {ICountry} from "@/utils/interfaces";
 import {notFound} from "next/navigation";
+import type {Metadata} from "next";
 
 const childIdArray = [
     'united-kingdom',
@@ -23,6 +23,26 @@ const childIdArray = [
 ];
 
 type paramsType = Promise<{ slug: string, childId: string }>;
+type Params = {
+    slug: string, childId: string
+}
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+    const {slug,childId} = params
+    if(childIdArray.includes(childId)){
+        return {
+            title:childId.replace(/-/g, ' ')
+                    .replace(/\b\w/g, (char) => char.toUpperCase()) + ' ' +
+                slug.replace(/-/g, ' ')
+                    .replace(/\b\w/g, (char) => char.toUpperCase()),
+            description: "You can find everything you want to know before you start researching language education abroad here.",
+        }
+    }
+    else{
+        return {
+            title: 'Not Found'
+        }
+    }
+}
 
 export default async function Home({
                                        params,

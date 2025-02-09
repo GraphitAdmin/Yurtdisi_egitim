@@ -13,7 +13,6 @@ import Companies from "@/components/home/Companies/Companies";
 import References from "@/components/home/References/References";
 import Gallery from "@/components/home/Gallery/Gallery";
 import Footer from "@/components/UI/Footer/Footer";
-import React from "react";
 export default function Home() {
     return (
         <div>
