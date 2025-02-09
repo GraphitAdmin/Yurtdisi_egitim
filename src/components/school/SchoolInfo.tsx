@@ -213,7 +213,7 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                         </svg>}
                 </div>
                 <div
-                    style={isOpenDetails ? {display: 'block'} : {display: 'none'}}
+                    style={isOpenDetails ? {display: 'block',marginTop:16} : {display: 'none'}}
                     dangerouslySetInnerHTML={{__html: school.detailed_information}}
                 ></div>
             </div>
