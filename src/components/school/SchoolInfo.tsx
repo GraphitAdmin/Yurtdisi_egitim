@@ -170,12 +170,23 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                 </div>
 
                 <div style={isOpenOverview ? {display: 'block'} : {display: 'none'}}>
-                    <h5 style={{textAlign: 'left', color: 'var(--Courses-Base-Black)',marginTop:12}}>Why {school.title}?</h5>
-                    <ul style={{marginTop:8}}>
-                        {school.why_block
-                            .split("\n").map((group, index) => (
-                                <li key={index}>{group}</li>
-                            ))}
+                    <h5 style={{
+                        textAlign: 'left',
+                        color: 'var(--Courses-Base-Black)',
+                        marginTop: 12
+                    }}>Why {school.title}?</h5>
+                    <ul style={{marginTop: 8}}>
+                        {school.why_block && school.why_block.trim() !== "" && (
+                            school.why_block
+                                .split("\n")
+                                .map((group, index) => (
+                                    group.trim() === "" ? (
+                                        <p key={index}></p>
+                                    ) : (
+                                        <li key={index}>{group}</li>
+                                    )
+                                ))
+                        )}
                     </ul>
                 </div>
             </div>
@@ -187,7 +198,7 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                     {!isOpenDetails &&
                         <svg style={{cursor: "pointer", minHeight: 24, minWidth: 24}} xmlns="http://www.w3.org/2000/svg"
                              width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z" fill="#717680"/>
+                        <path d="M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z" fill="#717680"/>
                         </svg>}
 
                     {isOpenDetails &&
