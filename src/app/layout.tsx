@@ -16,6 +16,9 @@ const urbanist = Urbanist({
 export const metadata: Metadata = {
     title: "Eeeeducation",
     description: "Eeeeducation",
+    alternates: {
+        canonical: './',
+    }
 };
 
 export default function RootLayout({

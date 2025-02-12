@@ -201,7 +201,10 @@ table p{
     margin:0!important;
 }
 
-
+li{
+    list-style-type: disc;
+    margin-left: 18px;
+}
 .mobile {
     display: none !important;
 }

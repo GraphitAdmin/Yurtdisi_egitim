@@ -164,7 +164,6 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                         </svg>}
                 </div>
                 <div style={isOpenOverview ? {display: 'block'} : {display: 'none'}}>
-                    <h5 style={{textAlign: 'left', color: 'var(--Courses-Base-Black)',marginTop:12}}>Why {school.title}?</h5>
                     <p>
                         {school.school_overview}
                     </p>
@@ -175,7 +174,7 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                     <ul style={{marginTop:8}}>
                         {school.why_block
                             .split("\n").map((group, index) => (
-                                <li key={index}>&nbsp;•&nbsp;{group}</li>
+                                <li key={index}>{group}</li>
                             ))}
                     </ul>
                 </div>
