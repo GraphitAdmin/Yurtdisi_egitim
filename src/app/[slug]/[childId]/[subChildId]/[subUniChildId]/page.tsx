@@ -47,22 +47,22 @@ const fetchSchool = async (slug: string, childId: string, subUniChildId: string,
     }
 }
 
-export async function generateMetadata({params}: { params: paramsType }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: paramsType }): Promise<Metadata> {
     const {slug, childId, subUniChildId, subChildId} = await params
-    // const data = await fetchSchool(slug, childId, subUniChildId, subChildId)
+    const data = await fetchSchool(slug, childId, subUniChildId, subChildId)
 
-    const title =
-        subUniChildId.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase()) +
-        " - " +
-        childId.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())
-    console.log(slug, childId, subUniChildId, subChildId)
-    // const description = data?.school?.school_overview
+    if (!data) {
+        notFound()
+    }
+
+    const title = `${subUniChildId.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())} - ${childId.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())}`
+    const description = data.school.school_overview.slice(0,158) || `Learn about ${title}`
+
     return {
         title,
-        description: ''
+        description,
     }
 }
-
 export default async function Home({
                                        params,
                                    }: {
