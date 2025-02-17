@@ -12,7 +12,22 @@ import {blobUrl} from "@/utils/utils";
 interface SchoolInfoSchool {
     school: ISchool;
 }
+const convertToDecimal = (coordinateString:string) => {
+    console.log('coordinateString',coordinateString);
+    const regex = /([0-9.-]+)°\s*([NSEW])/;
+    const match = coordinateString.match(regex);
+    console.log('match',match)
+    if (!match) return Number(coordinateString);
+    console.log('match',match)
+    let degrees = parseFloat(match[1]);
+    const direction= match[2];
 
+    if (direction === 'S' || direction === 'W') {
+        degrees = -degrees;
+    }
+    console.log('degres',degrees)
+    return Number(degrees);
+};
 const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
     const [isOpenOverview, setIsOpenOverview] = useState(true);
     const [isOpenDetails, setIsOpenDetails] = useState(false);
@@ -21,12 +36,12 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
     const [isOpenRequest, setIsOpenRequest] = useState(false);
     const [zoom, setZoom] = useState(12);
     const [center, setCenter] = useState({
-        lat: 37.7749,
-        lng: -122.4194,
+        lat: convertToDecimal(school.coordinates_on_the_map.latitude),
+        lng: convertToDecimal(school.coordinates_on_the_map.longitude),
     });
     const coordinates = {
-        lat: 37.7749,
-        lng: -122.4194,
+        lat: convertToDecimal(school.coordinates_on_the_map.latitude),
+        lng: convertToDecimal(school.coordinates_on_the_map.longitude),
     };
     const [activeIndex, setActiveIndex] = useState(0)
     const [showTransition, setShowTransition] = useState(false)
@@ -258,7 +273,7 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                 </div>
                 <iframe
                     style={isOpenVideo ? {display: 'block'} : {display: 'none'}}
-                    src="https://www.youtube.com/embed/fZI47lyocSQ?si=Livmosvb_52jeKy8"
+                    src={school.video_url}
                     title="YouTube video player"
                     loading="lazy"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
