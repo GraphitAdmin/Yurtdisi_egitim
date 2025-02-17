@@ -248,6 +248,11 @@ const Navbar: React.FC<NavbarProps> = ({home}) => {
                                     }
                                 </div>
                         )}
+                        <Link href="/contact-us" className='nav__dropdown__mobile'>
+                            <h4 style={{marginRight:'auto'}}>
+                                Contact Us
+                            </h4>
+                        </Link>
                     </div>
                 }
             </nav>

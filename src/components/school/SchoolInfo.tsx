@@ -30,6 +30,8 @@ const convertToDecimal = (coordinateString:string) => {
 };
 const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
     const [isOpenOverview, setIsOpenOverview] = useState(true);
+    const [isOpenWhy, setIsOpenWhy] = useState(false);
+
     const [isOpenDetails, setIsOpenDetails] = useState(false);
     const [isOpenVideo, setIsOpenVideo] = useState(false);
     const [isOpenMap, setIsOpenMap] = useState(false);
@@ -91,7 +93,7 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                 {school.images.map((image, index) => (
                     <Image
                         key={index}
-                        src={blobUrl+image}
+                        src={blobUrl + image}
                         height={480}
                         width={955}
                         alt={`Image ${index + 1}`}
@@ -183,13 +185,37 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                         {school.school_overview}
                     </p>
                 </div>
+            </div>
+            <div className="page__school__info__block">
+                <div className="page__school__info__block__header" onClick={() => setIsOpenWhy(!isOpenWhy)}>
+                    <h4>Why {school.title}?</h4>
+                    {!isOpenWhy &&
+                        <svg style={{cursor: "pointer", minHeight: 24, minWidth: 24}} xmlns="http://www.w3.org/2000/svg"
+                             width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z" fill="#717680"/>
+                        </svg>}
+                    {isOpenWhy &&
+                        <svg onClick={() => setIsOpenWhy(false)}
+                             style={{cursor: "pointer", minHeight: 24, minWidth: 24}}
+                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <g clipPath="url(#clip0_1242_14090)">
+                                <mask id="mask0_1242_14090" maskUnits="userSpaceOnUse" x="0" y="0"
+                                      width="24" height="24">
+                                    <rect width="24" height="24" fill="#D9D9D9"/>
+                                </mask>
+                                <g mask="url(#mask0_1242_14090)">
+                                    <path d="M5 13V11H19V13H5Z" fill="#717680"/>
+                                </g>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_1242_14090">
+                                    <rect width="24" height="24" fill="#717680"/>
+                                </clipPath>
+                            </defs>
+                        </svg>}
+                </div>
 
-                <div style={isOpenOverview ? {display: 'block'} : {display: 'none'}}>
-                    <h5 style={{
-                        textAlign: 'left',
-                        color: 'var(--Courses-Base-Black)',
-                        marginTop: 12
-                    }}>Why {school.title}?</h5>
+                <div style={isOpenWhy ? {display: 'block'} : {display: 'none'}}>
                     <ul style={{marginTop: 8}}>
                         {school.why_block && school.why_block.trim() !== "" && (
                             school.why_block
@@ -213,7 +239,7 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                     {!isOpenDetails &&
                         <svg style={{cursor: "pointer", minHeight: 24, minWidth: 24}} xmlns="http://www.w3.org/2000/svg"
                              width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z" fill="#717680"/>
+                            <path d="M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z" fill="#717680"/>
                         </svg>}
 
                     {isOpenDetails &&
@@ -238,7 +264,7 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                         </svg>}
                 </div>
                 <div
-                    style={isOpenDetails ? {display: 'block',marginTop:16} : {display: 'none'}}
+                    style={isOpenDetails ? {display: 'block', marginTop: 16} : {display: 'none'}}
                     dangerouslySetInnerHTML={{__html: school.detailed_information}}
                 ></div>
             </div>

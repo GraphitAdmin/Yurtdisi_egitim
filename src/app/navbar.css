@@ -385,7 +385,7 @@ nav .nav__links .nav__dropdown sub, nav .nav__links a {
         gap: 0;
     }
 
-    .nav__us__social {
+    .nav__us a:first-child {
         display: none;
     }
 
