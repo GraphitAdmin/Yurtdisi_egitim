@@ -216,7 +216,24 @@ li{
 .phone {
     display: none !important;
 }
+.big__screens{
+    display: block !important;
+}
+.small__screens{
+    display: none !important;
+}
 
+@media screen and (max-width: 992px) {
+    .big__screens {
+        display: none !important;
+    }
+    .small__screens{
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        gap: 20px;
+    }
+}
 @media screen and (max-width: 768px) {
     .mobile {
         display: flex !important;
@@ -259,5 +276,10 @@ li{
 @media screen and (max-width: 576px) {
     .phone {
         display: flex !important;
+    }
+    .small__screens{
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 20px;
     }
 }

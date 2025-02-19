@@ -6,6 +6,7 @@ import {ISchool} from "@/utils/interfaces";
 import {blobUrl} from "@/utils/utils";
 import SchoolInfo from "@/components/school/SchoolInfo";
 import RelatedSchools from "@/components/school/RelatedSchools/RelatedSchools";
+import Button from "@/components/UI/Button/Button";
 
 interface SchoolPageContentProps {
     subUniChildId: string;
@@ -36,6 +37,16 @@ const SchoolPageContent: React.FC<SchoolPageContentProps> = ({subUniChildId, sch
                 {school !== null &&
                     <div className="page__school">
                         <SchoolInfo school={school}/>
+                        <div className="small__screens">
+                            {school.promotions_pdf &&
+                                <Button href={school.promotions_pdf} btnStyle={{width: '100%', padding: '12px 0'}}
+                                        label={'Schools promotion'} promotionSVG={true}/>}
+                            {school.discount_pdf &&
+                                <Button href={school.discount_pdf} secondary={true}
+                                        btnStyle={{width: '100%', padding: '12px 0'}} label={'Schools price list'}
+                                        priceSVG={true}/>
+                            }
+                        </div>
                         <div className="page__school__right">
                             <div className="page__school__right__info">
                                 <Image width='273' height={152} src={blobUrl + school.image_right} alt={school.title}/>
@@ -89,6 +100,20 @@ const SchoolPageContent: React.FC<SchoolPageContentProps> = ({subUniChildId, sch
                                     </div>
                                 }
                             </div>
+                            <div className="big__screens">
+                                {school.promotions_pdf &&
+                                    <Button href={school.promotions_pdf} btnStyle={{width: '100%', padding: '12px 0'}}
+                                            label={'Schools promotion'} promotionSVG={true}/>}
+                            </div>
+                            <div className="big__screens">
+                                {school.discount_pdf &&
+                                    <Button href={school.discount_pdf} secondary={true}
+                                            btnStyle={{width: '100%', padding: '12px 0'}} label={'Schools price list'}
+                                            priceSVG={true}/>
+                                }
+                            </div>
+
+
                             {moreSchools && moreSchools.length > 0 &&
                                 <div className="page__country__schools__country__recommendations">
                                     <h5 style={{
@@ -96,8 +121,10 @@ const SchoolPageContent: React.FC<SchoolPageContentProps> = ({subUniChildId, sch
                                         textAlign: "left"
                                     }}>{school.country} {school.education_type.toLowerCase()}</h5>
                                     {schoolsToShow.map((schoolMap, index) =>
-                                        <Link key={index} href={'/' + schoolMap.education_type.toLowerCase().replace(/ /g, '-') + '/' + schoolMap.country.toLowerCase().replace(/ /g, '-') + '/' + schoolMap.city.toLowerCase().replace(/ /g, '-') + '/' + schoolMap.title.replace(/ /g, '-').toLowerCase()}><p>
-                                            {schoolMap.title}</p>
+                                        <Link key={index}
+                                              href={'/' + schoolMap.education_type.toLowerCase().replace(/ /g, '-') + '/' + schoolMap.country.toLowerCase().replace(/ /g, '-') + '/' + schoolMap.city.toLowerCase().replace(/ /g, '-') + '/' + schoolMap.title.replace(/ /g, '-').toLowerCase()}>
+                                            <p>
+                                                {schoolMap.title}</p>
                                         </Link>)
                                     }
                                     {moreSchools.length > 7 &&
