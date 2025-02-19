@@ -59,6 +59,8 @@ export interface ISchool{
     accommodation: string;
     image_right:string;
     website_active:string;
+    discount_pdf: string;
+    promotions_pdf: string;
 }
 
 export interface IBlog{

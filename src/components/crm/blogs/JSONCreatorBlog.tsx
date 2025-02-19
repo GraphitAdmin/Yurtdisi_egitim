@@ -215,9 +215,9 @@ const JSONCreator = () => {
                         init={{
                             plugins: [
                                 'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'table', 'wordcount',
-                                'checklist', 'mediaembed', 'casechange', 'export', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen',
-                                'powerpaste', 'advtable', 'advcode', 'editimage', 'tinycomments', 'tableofcontents',
-                                'footnotes', 'mergetags', 'autocorrect', 'typography', 'importword', 'exportword', 'exportpdf'
+                                     
+                                    
+                                 
                             ],
                             toolbar: 'undo redo | blocks | underline strikethrough | link image media table | spellcheckdialog | bullist',
                             tinycomments_mode: 'embedded',

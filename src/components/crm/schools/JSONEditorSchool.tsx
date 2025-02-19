@@ -144,6 +144,34 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
         formData.append("image", file)
         await handleFileSubmit(formData)
     }
+    const handlePdfChange = async (event: ChangeEvent<HTMLInputElement>, field: "discount_pdf" | "promotions_pdf") => {
+        if (!event.target.files || event.target.files.length === 0) {
+            return
+        }
+        const file = event.target.files[0]
+        if (file.type !== "application/pdf") {
+            setError("Please upload a PDF file")
+            return
+        }
+        const formData = new FormData()
+        formData.append("file", file)
+        setError(null)
+        try {
+            const response = await fetch("/api/uploadPDF", {
+                method: "POST",
+                body: formData,
+            })
+            const result = await response.json()
+            if (result.success && result.url) {
+                handleInputChange(schools.length - 1, field, result.url)
+            } else {
+                setError("Upload failed. Please try again.")
+            }
+        } catch (e) {
+            setError("Something went wrong. Please try again.")
+            console.error("error", e)
+        }
+    }
 
     async function handleFileSubmit(formData: FormData) {
         setIsUploading(true)
@@ -265,9 +293,8 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 init={{
                                     plugins: [
                                         'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'table', 'wordcount',
-                                        'checklist', 'mediaembed', 'casechange', 'export', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen',
-                                        'powerpaste', 'advtable', 'advcode', 'editimage', 'tinycomments', 'tableofcontents',
-                                        'footnotes', 'mergetags', 'autocorrect', 'typography', 'importword', 'exportword', 'exportpdf'
+
+
                                     ],
                                     toolbar: 'undo redo | blocks | underline strikethrough | link media table | bullist',
                                     tinycomments_mode: 'embedded',
@@ -375,7 +402,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 placeholder="Address"
                             />
                             <div className="flex flex-row justify-between gap-2">
-                            <div className="w-full">
+                                <div className="w-full">
                                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                                         Capacity
                                     </h6>
@@ -459,6 +486,54 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                         disabled={isUploading}
                                         className="max-w-sm mt-2"
                                         onChange={handleImageChange}
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>Discount PDF</h6>
+                                <div className="flex items-center gap-2">
+                                    {school?.discount_pdf && (
+                                        <a
+                                            href={school.discount_pdf}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-blue-500 hover:underline"
+                                        >
+                                            View current PDF
+                                        </a>
+                                    )}
+                                    <input
+                                        id="discount_pdf"
+                                        name="discount_pdf"
+                                        type="file"
+                                        accept="application/pdf"
+                                        disabled={isUploading}
+                                        className="max-w-sm mt-2"
+                                        onChange={(e) => handlePdfChange(e, "discount_pdf")}
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>Promotions PDF</h6>
+                                <div className="flex items-center gap-2">
+                                    {school?.promotions_pdf && (
+                                        <a
+                                            href={school.promotions_pdf}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-blue-500 hover:underline"
+                                        >
+                                            View current PDF
+                                        </a>
+                                    )}
+                                    <input
+                                        id="promotions_pdf"
+                                        name="promotions_pdf"
+                                        type="file"
+                                        accept="application/pdf"
+                                        disabled={isUploading}
+                                        className="max-w-sm mt-2"
+                                        onChange={(e) => handlePdfChange(e, "promotions_pdf")}
                                     />
                                 </div>
                             </div>

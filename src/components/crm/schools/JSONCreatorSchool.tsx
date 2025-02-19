@@ -14,7 +14,7 @@ import {searchCountries, searchTypes} from "@/data/search";
 import {Editor} from "@tinymce/tinymce-react";
 
 const JSONCreator = () => {
-     useEffect(() => {
+    useEffect(() => {
         checkLogged();
     }, []);
     const [schools, setSchools] = useState<ISchool[]>([])
@@ -24,14 +24,14 @@ const JSONCreator = () => {
     const [cities, setCities] = useState<ICity[]>([]);
 
     useEffect(() => {
-        fetch(blobUrl+"jsons/schools.json", {
+        fetch(blobUrl + "jsons/schools.json", {
             cache: "no-store",
             next: {revalidate: 1},
         })
             .then((response) => response.json())
             .then((data: ISchool[]) => {
                 const newSchool: ISchool = {
-                    education_type: "",
+                    education_type: "Language Schools",
                     title: "new",
                     images: [],
                     school_overview: "",
@@ -50,8 +50,10 @@ const JSONCreator = () => {
                     age_group: "",
                     programs: [],
                     accommodation: "",
-                    image_right:"",
-                    website_active:"Active"
+                    image_right: "",
+                    website_active: "Active",
+                    discount_pdf: '',
+                    promotions_pdf: '',
                 }
                 setSchools([...data, newSchool])
                 setLoading(false)
@@ -81,7 +83,7 @@ const JSONCreator = () => {
         setError(null)
         try {
             const result = await uploadImage(formData)
-            if (result.success && result.url&&result.filename) {
+            if (result.success && result.url && result.filename) {
                 handleInputChange(schools.length - 1, "images", [...schools[schools.length - 1].images, result.filename])
             } else {
                 setError("Upload failed. Please try again.")
@@ -109,12 +111,13 @@ const JSONCreator = () => {
         formData.append("image", file)
         await handleSubmit(formData)
     }
+
     async function handleFileSubmit(formData: FormData) {
         setIsUploading(true)
         setError(null)
         try {
             const result = await uploadImage(formData)
-            if (result.success && result.url&&result.filename) {
+            if (result.success && result.url && result.filename) {
                 handleInputChange(schools.length - 1, "image_right", result.filename)
             } else {
                 setError("Upload failed. Please try again.")
@@ -126,6 +129,7 @@ const JSONCreator = () => {
             setIsUploading(false)
         }
     }
+
     const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files || event.target.files.length === 0) {
             return
@@ -134,6 +138,34 @@ const JSONCreator = () => {
         const formData = new FormData()
         formData.append("image", file)
         await handleFileSubmit(formData)
+    }
+    const handlePdfChange = async (event: ChangeEvent<HTMLInputElement>, field: "discount_pdf" | "promotions_pdf") => {
+        if (!event.target.files || event.target.files.length === 0) {
+            return
+        }
+        const file = event.target.files[0]
+        if (file.type !== "application/pdf") {
+            setError("Please upload a PDF file")
+            return
+        }
+        const formData = new FormData()
+        formData.append("file", file)
+        setError(null)
+        try {
+            const response = await fetch("/api/uploadPDF", {
+                method: "POST",
+                body: formData,
+            })
+            const result = await response.json()
+            if (result.success && result.url) {
+                handleInputChange(schools.length - 1, field, result.url)
+            } else {
+                setError("Upload failed. Please try again.")
+            }
+        } catch (e) {
+            setError("Something went wrong. Please try again.")
+            console.error("error", e)
+        }
     }
 
     const handleSave = async () => {
@@ -171,9 +203,9 @@ const JSONCreator = () => {
         console.log(cities)
         console.log(schools)
         return cities.filter(city =>
-            schools[schools.length-1]&&schools[schools.length-1].country&&cleanTitle(city.country) === cleanTitle(schools[schools.length-1].country)
+            schools[schools.length - 1] && schools[schools.length - 1].country && cleanTitle(city.country) === cleanTitle(schools[schools.length - 1].country)
         )
-    }, [schools,cities])
+    }, [schools, cities])
     const filteredCitiesName = useMemo(() => {
         return filteredCities.map(city => city.name)
     }, [filteredCities])
@@ -239,9 +271,6 @@ const JSONCreator = () => {
                         init={{
                             plugins: [
                                 'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'table', 'wordcount',
-                                'checklist', 'mediaembed', 'casechange', 'export', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen',
-                                'powerpaste', 'advtable', 'advcode', 'editimage', 'tinycomments', 'tableofcontents',
-                                'footnotes', 'mergetags', 'autocorrect', 'typography', 'importword', 'exportword', 'exportpdf'
                             ],
                             toolbar: 'undo redo | blocks | underline strikethrough | link media table | bullist',
                             tinycomments_mode: 'embedded',
@@ -388,11 +417,11 @@ const JSONCreator = () => {
                             {school.images.map((image, imgIndex) => (
                                 <Image
                                     key={imgIndex}
-                                    src={blobUrl+image}
+                                    src={blobUrl + image}
                                     alt={school.title}
                                     width={100}
                                     height={100}
-                                    style={{maxHeight:'-webkit-fill-available'}}
+                                    style={{maxHeight: '-webkit-fill-available'}}
                                 />
                             ))}
                         </div>
@@ -409,12 +438,14 @@ const JSONCreator = () => {
                     <div>
                         <h6>Image Right</h6>
                         <div className="flex flex-wrap gap-2">
-                            <Image
-                                src={blobUrl+school.image_right}
-                                alt={school.title}
-                                width={100}
-                                height={100}
-                            />
+                            {school.image_right &&
+                                <Image
+                                    src={blobUrl + school.image_right}
+                                    alt={school.title}
+                                    width={100}
+                                    height={100}
+                                />
+                            }
                         </div>
                         <input
                             id="image"
@@ -425,6 +456,54 @@ const JSONCreator = () => {
                             className="max-w-sm mt-2"
                             onChange={handleImageChange}
                         />
+                    </div>
+                    <div>
+                        <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>Discount PDF</h6>
+                        <div className="flex items-center gap-2">
+                            {school?.discount_pdf && (
+                                <a
+                                    href={school.discount_pdf}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 hover:underline"
+                                >
+                                    View current PDF
+                                </a>
+                            )}
+                            <input
+                                id="discount_pdf"
+                                name="discount_pdf"
+                                type="file"
+                                accept="application/pdf"
+                                disabled={isUploading}
+                                className="max-w-sm mt-2"
+                                onChange={(e) => handlePdfChange(e, "discount_pdf")}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>Promotions PDF</h6>
+                        <div className="flex items-center gap-2">
+                            {school?.promotions_pdf && (
+                                <a
+                                    href={school.promotions_pdf}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 hover:underline"
+                                >
+                                    View current PDF
+                                </a>
+                            )}
+                            <input
+                                id="promotions_pdf"
+                                name="promotions_pdf"
+                                type="file"
+                                accept="application/pdf"
+                                disabled={isUploading}
+                                className="max-w-sm mt-2"
+                                onChange={(e) => handlePdfChange(e, "promotions_pdf")}
+                            />
+                        </div>
                     </div>
                 </div>
             ))}
