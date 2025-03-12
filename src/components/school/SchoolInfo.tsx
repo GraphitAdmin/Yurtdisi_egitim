@@ -224,7 +224,7 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                                     group.trim() === "" ? (
                                         <p key={index}></p>
                                     ) : (
-                                        <li key={index}>{group}</li>
+                                        <p key={index}>{group}</p>
                                     )
                                 ))
                         )}
