@@ -11,6 +11,7 @@ import {blobUrl, checkLogged, errorToasterStyles, successToasterStyles} from "@/
 import {ICity} from "@/utils/interfaces";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import '../JSONEditor.css'
+import {searchCountries} from "@/data/search";
 
 const JSONCreator = () => {
      useEffect(() => {
@@ -144,7 +145,7 @@ const JSONCreator = () => {
                         placeholder="Description"
                     />
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>Country</h6>
-                    <Dropdown label={'Country'} selected={city.country} setSelected={(value)=>handleInputChange(index, 'country',value)} variants={['United Kingdom','Spain']}/>
+                    <Dropdown label={'Country'} selected={city.country} setSelected={(value)=>handleInputChange(index, 'country',value)} variants={searchCountries}/>
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>Image</h6>
                     <div className="relative rounded-lg image__input">
                         {preview && (

@@ -11,6 +11,7 @@ import {blobUrl, checkLogged, successToasterStyles} from "@/utils/utils";
 import toast from "react-hot-toast";
 import {ICity} from "@/utils/interfaces";
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
+import {searchCountries} from "@/data/search";
 
 interface IJsonEditor {
     name: string;
@@ -159,7 +160,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                                 Country
                             </h6>
-                            <Dropdown label={'Country'} selected={city.country} setSelected={(value)=>handleInputChange(index, 'country',value)} variants={['United Kingdom','Spain']}/>
+                            <Dropdown label={'Country'} selected={city.country} setSelected={(value)=>handleInputChange(index, 'country',value)} variants={searchCountries}/>
                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                                 Image
                             </h6>
