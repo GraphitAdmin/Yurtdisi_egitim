@@ -43,6 +43,7 @@
     background: lightgray 50% / cover no-repeat;
     align-self:stretch;
     width: 100%;
+    object-fit: cover;
     min-width: -webkit-fill-available;
 }
 .image__selector{
