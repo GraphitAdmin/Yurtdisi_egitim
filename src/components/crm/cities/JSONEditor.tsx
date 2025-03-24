@@ -38,7 +38,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
             .then((data: ICity[]) => {
                 setCities(data);
                 data.forEach((city, index) => {
-                    if (city.name === name) {
+                    if (city.name.includes(name)) {
                         setCityIndex(index);
                     }
                 });

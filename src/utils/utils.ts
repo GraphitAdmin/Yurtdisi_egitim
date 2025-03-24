@@ -33,6 +33,7 @@ export function cn(...inputs: ClassValue[]) {
 export const blobUrl = "https://i9ozanmrsquybgxg.public.blob.vercel-storage.com/";
 export function cleanTitle(title:string){
     return title
+        .replace('%E2%80%99',"’")
         .replace(/[^a-zA-Z0-9 ]/g, '')
         .replace(/-/g, '')
         .replace(/ /g, '')

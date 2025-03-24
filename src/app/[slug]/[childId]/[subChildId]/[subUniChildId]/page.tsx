@@ -20,6 +20,7 @@ const fetchSchool = async (slug: string, childId: string, subUniChildId: string,
         if (!response.ok) {
             throw new Error("Failed to fetch JSON")
         }
+        console.log(cleanedName)
         const jsonData: ISchool[] = await response.json()
         const relatedSchools = jsonData.filter(
             (school: ISchool) =>
@@ -55,7 +56,7 @@ export async function generateMetadata({ params }: { params: paramsType }): Prom
         notFound()
     }
 
-    const title = `${subUniChildId.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())} - ${childId.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())}`
+    const title = `${subUniChildId.replace('%E2%80%99',"’").replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())} - ${childId.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())}`
     const description = data.school.school_overview.slice(0,158) || `Learn about ${title}`
 
     return {

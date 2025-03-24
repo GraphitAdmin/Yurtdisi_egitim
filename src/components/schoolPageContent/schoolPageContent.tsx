@@ -31,7 +31,7 @@ const SchoolPageContent: React.FC<SchoolPageContentProps> = ({subUniChildId, sch
             <div className="page__container">
                 {subUniChildId &&
                     <div style={{width: '100%'}}>
-                        <h1 style={{textTransform: 'capitalize'}}>{subUniChildId.replace(/-/g, ' ')}</h1>
+                        <h1 style={{textTransform: 'capitalize'}}>{school.title}</h1>
                     </div>
                 }
                 {school !== null &&
@@ -72,7 +72,7 @@ const SchoolPageContent: React.FC<SchoolPageContentProps> = ({subUniChildId, sch
                                     <div>
                                         <p>Website</p>
                                         <a style={{color: 'var(--courses-brand-blue-400-brand)'}}
-                                           href={school.website}>{school.website.replace('https://', '')}</a>
+                                           href={school.website.includes('https://')?school.website:'https://'+school.website}>{school.website.replace('https://', '')}</a>
                                     </div>
                                 }
                                 {school.capacity &&

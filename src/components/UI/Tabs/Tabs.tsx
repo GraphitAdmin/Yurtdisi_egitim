@@ -11,7 +11,7 @@ const Tabs: React.FC = () => {
         if (typeof window !== "undefined") {
             const tabs = window.location.pathname.split('/').slice(1);
             const formattedTabs = tabs.map((tab) =>
-                tab.replace(/-/g, ' ')
+                tab.replace(/-/g, ' ').replace('%E2%80%99',"’")
                     .replace(/^\w/, (char) => char.toUpperCase())
             );
             setTabsPathArray(tabs)

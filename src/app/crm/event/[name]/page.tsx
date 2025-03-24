@@ -12,7 +12,7 @@ export default async function Home({
         <div className="min-h-screen bg-background">
             <div className="flex"><Sidebar/>
                 <main className="container mx-auto p-4">
-                    <h1 className="text-2xl font-bold mb-4">Edit {name.replace(/-/g, ' ').replace(/^\w/, (char) => char.toUpperCase())}</h1>
+                    <h1 className="text-2xl font-bold mb-4">Edit {name.replace('%E2%80%99',"’").replace(/-/g, ' ').replace(/^\w/, (char) => char.toUpperCase())}</h1>
                     <JSONEditorEvent name={name}/>
                 </main>
             </div>
