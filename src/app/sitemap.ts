@@ -45,58 +45,58 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ])
 
     const eventsUrl = events.map((event: IEvent) => ({
-        url: `https://eeeducation.vercel.app/our-event-calendar/${sanitizeURL(event.title)}`,
+        url: `https://eeedu.co.uk/our-event-calendar/${sanitizeURL(event.title)}`,
         priority: 0.7,
     }))
     const referencesUrl = references.map((reference: IBlog) => ({
-        url: `https://eeeducation.vercel.app/our-student-references/${sanitizeURL(reference.title)}`,
+        url: `https://eeedu.co.uk/our-student-references/${sanitizeURL(reference.title)}`,
         priority: 0.7,
     }))
     const blogsUrls = blogs.map((blog: IBlog) => ({
-        url: `https://eeeducation.vercel.app/blog/${sanitizeURL(blog.title)}`,
+        url: `https://eeedu.co.uk/blog/${sanitizeURL(blog.title)}`,
         priority: 0.7,
     }))
 
     const schoolUrls = schools.map((school: ISchool) => ({
-        url: `https://eeeducation.vercel.app/${school.education_type.replace(/ /g, "-").toLowerCase()}/${school.country.replace(/ /g, "-").toLowerCase()}/${school.city.replace(/ /g, "-").toLowerCase()}/${sanitizeURL(school.title)}`,
+        url: `https://eeedu.co.uk/${school.education_type.replace(/ /g, "-").toLowerCase()}/${school.country.replace(/ /g, "-").toLowerCase()}/${school.city.replace(/ /g, "-").toLowerCase()}/${sanitizeURL(school.title)}`,
         priority: 0.7,
     }))
     const citiesURL = searchTypes.flatMap((typeSearch) =>
         cities.map((city: ICity) => ({
-            url: `https://eeeducation.vercel.app/${sanitizeURL(typeSearch)}/${sanitizeURL(city.country)}/${sanitizeURL(city.name)}`,
+            url: `https://eeedu.co.uk/${sanitizeURL(typeSearch)}/${sanitizeURL(city.country)}/${sanitizeURL(city.name)}`,
             priority: 0.7,
         })),
     )
     const countriesURL = searchTypes.flatMap((typeSearch) =>
         searchCountries.map((country) => ({
-            url: `https://eeeducation.vercel.app/${sanitizeURL(typeSearch)}/${sanitizeURL(country)}`,
+            url: `https://eeedu.co.uk/${sanitizeURL(typeSearch)}/${sanitizeURL(country)}`,
             priority: 0.7,
         })),
     )
     const searchsUrl = searchTypes.map((typeSearch) => ({
-        url: `https://eeeducation.vercel.app/${sanitizeURL(typeSearch)}`,
+        url: `https://eeedu.co.uk/${sanitizeURL(typeSearch)}`,
         priority: 0.8,
     }))
 
     return [
         {
-            url: "https://eeeducation.vercel.app",
+            url: "https://eeedu.co.uk",
             priority: 1,
         },
         {
-            url: "https://eeeducation.vercel.app/blog",
+            url: "https://eeedu.co.uk/blog",
             priority: 0.9,
         },
         {
-            url: "https://eeeducation.vercel.app/contact-us",
+            url: "https://eeedu.co.uk/contact-us",
             priority: 0.9,
         },
         {
-            url: "https://eeeducation.vercel.app/our-event-calendar",
+            url: "https://eeedu.co.uk/our-event-calendar",
             priority: 0.9,
         },
         {
-            url: "https://eeeducation.vercel.app/our-student-references",
+            url: "https://eeedu.co.uk/our-student-references",
             priority: 0.9,
         },
         ...searchsUrl,

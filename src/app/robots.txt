@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 Disallow: /crm/
-Sitemap: https://eeeducation.vercel.app/sitemap.xml
+Sitemap: https://eeedu.co.uk/sitemap.xml
