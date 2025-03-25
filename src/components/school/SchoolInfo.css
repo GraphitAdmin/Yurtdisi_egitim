@@ -34,7 +34,10 @@
     white-space: pre-line;
     position: relative;
 }
-
+.page__school__info__block__div * {
+    font-family: var(--font-urbanist), sans-serif !important;
+    color: var(--Courses-Gray-Gray-600) !important;
+}
 .page__school__info__img{
     height: 480px;
     max-height: 480px;
