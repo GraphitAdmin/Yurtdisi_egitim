@@ -39,7 +39,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
             .then((data: ISchool[]) => {
                 setSchools(data);
                 data.forEach((school, index) => {
-                    if (school.title.toLowerCase() === name.replace(/-/g, ' ').replace('%E2%80%99',"’").toLowerCase()) {
+                    if (cleanTitle(school.title) === cleanTitle(name)) {
                         setSchoolIndex(index);
                         setStartValue(school.detailed_information)
                     }
