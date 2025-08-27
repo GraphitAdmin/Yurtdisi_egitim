@@ -5,7 +5,7 @@ import {Button} from "@/components/crm/ui/button"
 import {Input} from "@/components/crm/ui/input"
 import Textarea from "@/components/UI/TextArea/TextArea"
 import toast from "react-hot-toast"
-import {blobUrl, checkLogged, errorToasterStyles, successToasterStyles} from "@/utils/utils"
+import {blobUrl, checkLogged, errorToasterStyles} from "@/utils/utils"
 import {IStudent} from "@/utils/interfaces"
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import {searchCountries} from "@/data/search";
@@ -78,7 +78,7 @@ const JSONCreator = () => {
             
             // Poll students.json every 1 second until the new student appears
             let attempts = 0;
-            const maxAttempts = 60; // Maximum 30 seconds of polling
+            const maxAttempts = 30; // Maximum 30 seconds of polling
             
             const pollForStudent = async (): Promise<boolean> => {
                 attempts++;
