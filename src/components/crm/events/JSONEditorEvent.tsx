@@ -26,6 +26,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
     const [schoolTitle, setSchoolTitle] = useState<string>('');
     const [schools, setSchools] = useState<ISchool[]>([])
     const [schoolsTitles, setSchoolsTitles] = useState<string[]>([])
@@ -126,21 +127,80 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this event?")
         if (!confirmDelete) return
 
+        setIsDeleting(true);
         try {
-            const updatedBlogs = events.filter((_, index) => index !== eventIndex)
+            const eventToDelete = events[eventIndex];
+            const updatedEvents = events.filter((_, index) => index !== eventIndex)
+            
+            // Delete the event data once
             const response = await fetch("/api/save-events", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(updatedBlogs),
+                body: JSON.stringify(updatedEvents),
             })
             if (!response.ok) throw new Error("Failed to delete")
-            toast.success("Event deleted successfully!", successToasterStyles)
-            window.location.href = '/crm/event'
+            
+            // Poll events.json every 1 second until the event is removed
+            let attempts = 0;
+            const maxAttempts = 30; // Maximum 30 seconds of polling
+            
+            const pollForEventRemoval = async (): Promise<boolean> => {
+                attempts++;
+                
+                try {
+                    const verifyResponse = await fetch(blobUrl + "jsons/events.json", {
+                        cache: "no-store",
+                        next: { revalidate: 1 },
+                    });
+                    
+                    if (!verifyResponse.ok) {
+                        throw new Error("Failed to fetch events.json");
+                    }
+                    
+                    const savedEvents = await verifyResponse.json();
+                    const eventStillExists = savedEvents.some((event: IEvent) => 
+                        event.title === eventToDelete.title
+                    );
+                    
+                    if (!eventStillExists) {
+                        return true; // Event successfully removed
+                    }
+                    
+                    if (attempts >= maxAttempts) {
+                        throw new Error("Timeout: Event still exists after 30 seconds");
+                    }
+                    
+                    // Wait 1 second before next attempt
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return pollForEventRemoval();
+                    
+                } catch (error) {
+                    if (attempts >= maxAttempts) {
+                        throw error;
+                    }
+                    // Wait 1 second before retry
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return pollForEventRemoval();
+                }
+            };
+            
+            // Start polling
+            const eventRemoved = await pollForEventRemoval();
+            
+            if (eventRemoved) {
+                toast.success("Event deleted successfully!", successToasterStyles)
+                window.location.href = '/crm/event'
+            } else {
+                throw new Error("Event deletion verification failed");
+            }
+            
         } catch (err) {
-            setError("Failed to delete event")
+            setError("Failed to delete or verify deletion. Please try again.")
             console.error(err)
+        } finally {
+            setIsDeleting(false)
         }
     }
 
@@ -178,7 +238,18 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 relative">
+            {/* Loading Overlay */}
+            {isDeleting && (
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center">
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+                        <p className="text-lg font-semibold">Deleting event and verifying removal...</p>
+                        <p className="text-sm text-gray-600">Please wait, this may take a few seconds</p>
+                    </div>
+                </div>
+            )}
+            
             {events.map((event, index) => (
                 index === eventIndex &&
                 <div key={index} className="border p-4 rounded-md space-y-2">
@@ -192,6 +263,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 onChange={(e) => handleInputChange(index, "title", e.target.value)}
                                 placeholder="Title"
                                 style={{height: 49}}
+                                disabled={isDeleting}
                             />
                         </div>
                         <div className="w-full">
@@ -209,6 +281,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                     "Degree education",
                                     "Certificate education",
                                 ]}
+                                disabled={isDeleting}
                             />
                         </div>
                     </div>
@@ -219,6 +292,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                         value={event.description}
                         onChange={(e) => handleInputChange(index, 'description', e.target.value)}
                         placeholder="Event Description"
+                        disabled={isDeleting}
                     />
                     <div className="flex flex-row justify-between gap-2">
                         <div className="w-full">
@@ -229,6 +303,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 value={event.date}
                                 onChange={(e) => handleInputChange(index, "date", e.target.value)}
                                 placeholder="Date(example: 01.01.2025)"
+                                disabled={isDeleting}
                             />
                         </div>
                         <div className="w-full">
@@ -239,6 +314,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 value={event.timeStart}
                                 onChange={(e) => handleInputChange(index, "timeStart", e.target.value)}
                                 placeholder="Start Time(example: 13:00)"
+                                disabled={isDeleting}
                             />
                         </div>
                         <div className="w-full">
@@ -249,6 +325,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 value={event.timeEnd}
                                 onChange={(e) => handleInputChange(index, "timeEnd", e.target.value)}
                                 placeholder="End Time(example: 14:00)"
+                                disabled={isDeleting}
                             />
                         </div>
                     </div>
@@ -293,7 +370,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                             name="image"
                             type="file"
                             accept="image/*"
-                            disabled={isUploading}
+                            disabled={isUploading || isDeleting}
                             className="max-w-sm mt-2"
                             onChange={handleFileChange}
                         />
@@ -301,14 +378,15 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                 </div>
             ))}
             <div className="w-full flex justify-center gap-4">
-                <Button onClick={handleSave} className="w-36 border-2 border-black">
+                <Button onClick={handleSave} className="w-36 border-2 border-black" disabled={isDeleting}>
                     Save Changes
                 </Button>
                 <Button
                     onClick={handleDelete}
                     className="w-36 border-2 border-red-400  hover:bg-red-500 hover:text-white"
+                    disabled={isDeleting}
                 >
-                    Delete Event
+                    {isDeleting ? 'Deleting...' : 'Delete Event'}
                 </Button>
             </div>
         </div>

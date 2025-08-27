@@ -22,6 +22,7 @@ const JSONCreator = () => {
     const [error, setError] = useState<string | null>(null)
     const [preview, setPreview] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
         fetch(blobUrl+'jsons/cities.json', {
@@ -105,8 +106,9 @@ const JSONCreator = () => {
             return;
         }
 
-
+        setIsSaving(true);
         try {
+            // Save the city data once
             const response = await fetch('/api/save-cities', {
                 method: 'POST',
                 headers: {
@@ -116,11 +118,65 @@ const JSONCreator = () => {
             });
 
             if (!response.ok) throw new Error('Failed to save');
-            toast.success('Saved successfully!', successToasterStyles);
-            window.location.href = '/crm/city/' + cities[cities.length - 1].name;
+            
+            // Poll cities.json every 1 second until the new city appears
+            let attempts = 0;
+            const maxAttempts = 60; // Maximum 30 seconds of polling
+            
+            const pollForCity = async (): Promise<boolean> => {
+                attempts++;
+                
+                try {
+                    const verifyResponse = await fetch(blobUrl + 'jsons/cities.json', {
+                        cache: 'no-store',
+                        next: { revalidate: 1 },
+                    });
+                    
+                    if (!verifyResponse.ok) {
+                        throw new Error('Failed to fetch cities.json');
+                    }
+                    
+                    const savedCities = await verifyResponse.json();
+                    const cityExists = savedCities.some((city: ICity) => 
+                        city.name === newCity.name && city.name !== 'new'
+                    );
+                    
+                    if (cityExists) {
+                        return true;
+                    }
+                    
+                    if (attempts >= maxAttempts) {
+                        throw new Error('Timeout: City not found after 30 seconds');
+                    }
+                    
+                    // Wait 1 second before next attempt
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return pollForCity();
+                    
+                } catch (error) {
+                    if (attempts >= maxAttempts) {
+                        throw error;
+                    }
+                    // Wait 1 second before retry
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return pollForCity();
+                }
+            };
+            
+            // Start polling
+            const cityFound = await pollForCity();
+            
+            if (cityFound) {
+                window.location.href = '/crm/city/' + cities[cities.length - 1].name;
+            } else {
+                throw new Error('City verification failed');
+            }
+            
         } catch (err) {
-            setError('Failed to save data');
+            setError('Failed to save or verify data. Please try again.');
             console.log(err);
+        } finally {
+            setIsSaving(false);
         }
     };
 
@@ -128,7 +184,18 @@ const JSONCreator = () => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 relative">
+            {/* Loading Overlay */}
+            {isSaving && (
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center">
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+                        <p className="text-lg font-semibold text-gray-600">Saving city and verifying data...</p>
+                        <p className="text-sm text-gray-600">Please wait, this may take a few seconds</p>
+                    </div>
+                </div>
+            )}
+            
             {cities.map((city, index) => (
                 index === cities.length - 1 &&
                 <div key={index} className="border p-4 rounded-md space-y-2">
@@ -137,15 +204,17 @@ const JSONCreator = () => {
                         value={city.name || ''}
                         onChange={(e) => handleInputChange(index, 'name', e.target.value)}
                         placeholder="City name"
+                        disabled={isSaving}
                     />
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>Description</h6>
                     <Textarea
                         value={city.description || ''}
                         onChange={(e) => handleInputChange(index, 'description', e.target.value)}
                         placeholder="Description"
+                        disabled={isSaving}
                     />
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>Country</h6>
-                    <Dropdown label={'Country'} selected={city.country} setSelected={(value)=>handleInputChange(index, 'country',value)} variants={searchCountries}/>
+                    <Dropdown label={'Country'} selected={city.country} setSelected={(value)=>handleInputChange(index, 'country',value)} variants={searchCountries} disabled={isSaving}/>
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>Image</h6>
                     <div className="relative rounded-lg image__input">
                         {preview && (
@@ -162,15 +231,15 @@ const JSONCreator = () => {
                         name="image"
                         type="file"
                         accept="image/*"
-                        disabled={isUploading}
+                        disabled={isUploading || isSaving}
                         className="max-w-sm"
                         onChange={handleFileChange}
                     />
                 </div>
             ))}
             <div className="w-full flex justify-center">
-                <Button onClick={handleSave} className="w-36 border-2 border-black">
-                    Save city
+                <Button onClick={handleSave} className="w-36 border-2 border-black" disabled={isSaving}>
+                    {isSaving ? 'Saving...' : 'Save city'}
                 </Button>
             </div>
         </div>

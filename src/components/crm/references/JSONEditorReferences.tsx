@@ -24,6 +24,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
     const [startValue,setStartValue] = useState<string>('');
     const [contentBlog, setContentBlog] = useState<string>('');
     useEffect(() => {
@@ -111,8 +112,12 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this blog post?")
         if (!confirmDelete) return
 
+        setIsDeleting(true);
         try {
+            const referenceToDelete = blogs[blogIndex];
             const updatedBlogs = blogs.filter((_, index) => index !== blogIndex)
+            
+            // Delete the reference data once
             const response = await fetch("/api/save-references", {
                 method: "POST",
                 headers: {
@@ -121,11 +126,66 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                 body: JSON.stringify(updatedBlogs),
             })
             if (!response.ok) throw new Error("Failed to delete")
-            toast.success("Reference deleted successfully!", successToasterStyles)
-            window.location.href='/crm/references'
+            
+            // Poll references.json every 1 second until the reference is removed
+            let attempts = 0;
+            const maxAttempts = 30; // Maximum 30 seconds of polling
+            
+            const pollForReferenceRemoval = async (): Promise<boolean> => {
+                attempts++;
+                
+                try {
+                    const verifyResponse = await fetch(blobUrl + "jsons/references.json", {
+                        cache: "no-store",
+                        next: { revalidate: 1 },
+                    });
+                    
+                    if (!verifyResponse.ok) {
+                        throw new Error("Failed to fetch references.json");
+                    }
+                    
+                    const savedReferences = await verifyResponse.json();
+                    const referenceStillExists = savedReferences.some((reference: IBlog) => 
+                        reference.title === referenceToDelete.title
+                    );
+                    
+                    if (!referenceStillExists) {
+                        return true; // Reference successfully removed
+                    }
+                    
+                    if (attempts >= maxAttempts) {
+                        throw new Error("Timeout: Reference still exists after 30 seconds");
+                    }
+                    
+                    // Wait 1 second before next attempt
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return pollForReferenceRemoval();
+                    
+                } catch (error) {
+                    if (attempts >= maxAttempts) {
+                        throw error;
+                    }
+                    // Wait 1 second before retry
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return pollForReferenceRemoval();
+                }
+            };
+            
+            // Start polling
+            const referenceRemoved = await pollForReferenceRemoval();
+            
+            if (referenceRemoved) {
+                toast.success("Reference deleted successfully!", successToasterStyles)
+                window.location.href='/crm/references'
+            } else {
+                throw new Error("Reference deletion verification failed");
+            }
+            
         } catch (err) {
-            setError("Failed to delete reference")
+            setError("Failed to delete or verify deletion. Please try again.")
             console.error(err)
+        } finally {
+            setIsDeleting(false)
         }
     }
 
@@ -162,114 +222,131 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="space-y-4">
-                        {blogs.map((blog, index) => (
-                                index === blogIndex &&
-                                <div key={index} className="border p-4 rounded-md space-y-2">
-                                    <div className="flex flex-row justify-between gap-2">
-                                        <div className="w-full">
-                                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                                Reference Title
-                                            </h6>
-                                            <Input
-                                                value={blog.title}
-                                                onChange={(e) => handleInputChange(index, "title", e.target.value)}
-                                                placeholder="Title"
-                                                style={{height: 49}}
-                                            />
-                                        </div>
-                                    </div>
-                                    <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                        Description
-                                    </h6>
-                                    <Textarea
-                                        value={blog.description}
-                                        onChange={(e) => handleInputChange(index, 'description', e.target.value)}
-                                        placeholder="Blog Description"
-                                    />
-                                    <div className="flex flex-row justify-between gap-2">
-                                        <div className="w-full">
-                                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                                Minutes to read
-                                            </h6>
-                                            <Input
-                                                value={blog.minutes_to_read}
-                                                onChange={(e) => handleInputChange(index, "minutes_to_read", e.target.value)}
-                                                placeholder="Number(example: 8)"
-                                            />
-                                        </div>
-                                        <div className="w-full">
-                                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
-                                                Date
-                                            </h6>
-                                            <Input
-                                                value={blog.date}
-                                                onChange={(e) => handleInputChange(index, "date", e.target.value)}
-                                                placeholder="Date(example: 13 january 2025)"
-                                            />
-                                        </div>
-                                    </div>
+        <div className="space-y-4 relative">
+            {/* Loading Overlay */}
+            {isDeleting && (
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center">
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+                        <p className="text-lg font-semibold">Deleting reference and verifying removal...</p>
+                        <p className="text-sm text-gray-600">Please wait, this may take a few seconds</p>
+                    </div>
+                </div>
+            )}
+            
+            {blogs.map((blog, index) => (
+                index === blogIndex &&
+                <div key={index} className="border p-4 rounded-md space-y-2">
+                    <div className="flex flex-row justify-between gap-2">
+                        <div className="w-full">
+                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
+                                Reference Title
+                            </h6>
+                            <Input
+                                value={blog.title}
+                                onChange={(e) => handleInputChange(index, "title", e.target.value)}
+                                placeholder="Title"
+                                style={{height: 49}}
+                                disabled={isDeleting}
+                            />
+                        </div>
+                    </div>
+                    <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
+                        Description
+                    </h6>
+                    <Textarea
+                        value={blog.description}
+                        onChange={(e) => handleInputChange(index, 'description', e.target.value)}
+                        placeholder="Blog Description"
+                        disabled={isDeleting}
+                    />
+                    <div className="flex flex-row justify-between gap-2">
+                        <div className="w-full">
+                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
+                                Minutes to read
+                            </h6>
+                            <Input
+                                value={blog.minutes_to_read}
+                                onChange={(e) => handleInputChange(index, "minutes_to_read", e.target.value)}
+                                placeholder="Number(example: 8)"
+                                disabled={isDeleting}
+                            />
+                        </div>
+                        <div className="w-full">
+                            <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
+                                Date
+                            </h6>
+                            <Input
+                                value={blog.date}
+                                onChange={(e) => handleInputChange(index, "date", e.target.value)}
+                                placeholder="Date(example: 13 january 2025)"
+                                disabled={isDeleting}
+                            />
+                        </div>
+                    </div>
 
-                                    <div>
-                                        <h6 style={{color: "var(--Courses-Base-Black)"}}>Image</h6>
-                                        <div className="flex flex-wrap gap-2">
-                                            {blog.image &&
-                                                <Image
-                                                    src={blobUrl+blog.image}
-                                                    alt={`Reference`}
-                                                    width={100}
-                                                    height={100}
-                                                />
-                                            }
-                                        </div>
-                                        <input
-                                            id="image"
-                                            name="image"
-                                            type="file"
-                                            accept="image/*"
-                                            disabled={isUploading}
-                                            className="max-w-sm mt-2"
-                                            onChange={handleFileChange}
-                                        />
-                                    </div>
+                    <div>
+                        <h6 style={{color: "var(--Courses-Base-Black)"}}>Image</h6>
+                        <div className="flex flex-wrap gap-2">
+                            {blog.image &&
+                                <Image
+                                    src={blobUrl+blog.image}
+                                    alt={`Reference`}
+                                    width={100}
+                                    height={100}
+                                />
+                            }
+                        </div>
+                        <input
+                            id="image"
+                            name="image"
+                            type="file"
+                            accept="image/*"
+                            disabled={isUploading || isDeleting}
+                            className="max-w-sm mt-2"
+                            onChange={handleFileChange}
+                        />
+                    </div>
 
-                                    <Editor
-                                        key={index}
-                                        apiKey='difgncbkx5a7mg2y90vo8lfzwsxo4pjfwpt9dlrspcwx98zu'
-                                        init={{
-                                            plugins: [
-                                                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'table', 'wordcount',
-                                                     
-                                                    
-                                                 
-                                            ],
-                                            toolbar: 'undo redo | blocks | underline strikethrough | link media table | bullist',
-                                            tinycomments_mode: 'embedded',
-                                            tinycomments_author: 'Author name',
-                                            mergetags_list: [
-                                                {value: 'First.Name', title: 'First Name'},
-                                                {value: 'Email', title: 'Email'},
-                                            ],
-                                            ai_request: () => {
-                                            },
-                                        }}
+                    <Editor
+                        key={index}
+                        apiKey='difgncbkx5a7mg2y90vo8lfzwsxo4pjfwpt9dlrspcwx98zu'
+                        init={{
+                            plugins: [
+                                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'table', 'wordcount',
+                                     
+                                    
+                                 
+                            ],
+                            toolbar: 'undo redo | blocks | underline strikethrough | link media table | bullist',
+                            tinycomments_mode: 'embedded',
+                            tinycomments_author: 'Author name',
+                            mergetags_list: [
+                                {value: 'First.Name', title: 'First Name'},
+                                {value: 'Email', title: 'Email'},
+                            ],
+                            ai_request: () => {
+                            },
+                        }}
 
-                                        initialValue={startValue}
-                                        onEditorChange={(content) => {
-                                            setContentBlog(content)
-                                        }}
-                                    />
-                                </div>
-                        ))}
+                        initialValue={startValue}
+                        onEditorChange={(content) => {
+                            setContentBlog(content)
+                        }}
+                        disabled={isDeleting}
+                    />
+                </div>
+            ))}
             <div className="w-full flex justify-center gap-4">
-                <Button onClick={handleSave} className="w-36 border-2 border-black">
+                <Button onClick={handleSave} className="w-36 border-2 border-black" disabled={isDeleting}>
                     Save Changes
                 </Button>
                 <Button
                     onClick={handleDelete}
                     className="w-36 border-2 border-red-400  hover:bg-red-500 hover:text-white"
+                    disabled={isDeleting}
                 >
-                    Delete Reference
+                    {isDeleting ? 'Deleting...' : 'Delete Reference'}
                 </Button>
             </div>
         </div>

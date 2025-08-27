@@ -19,6 +19,7 @@ const JSONCreator = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const [isUploading, setIsUploading] = useState(false)
+    const [isSaving, setIsSaving] = useState(false)
     const [startValue, setStartValue] = useState<string>('');
     const [contentBlog, setContentBlog] = useState<string>('')
     useEffect(() => {
@@ -95,6 +96,7 @@ const JSONCreator = () => {
             return
         }
 
+        setIsSaving(true);
         try {
             const cleanedTitle = cleanTitle(blogs[blogs.length-1].title)
             const responseTxt = await fetch("/api/save-references-content", {
@@ -106,6 +108,7 @@ const JSONCreator = () => {
             });
             if (!responseTxt.ok) throw new Error("Failed to save")
 
+            // Save the reference data once
             const response = await fetch("/api/save-references", {
                 method: "POST",
                 headers: {
@@ -115,11 +118,65 @@ const JSONCreator = () => {
             })
 
             if (!response.ok) throw new Error("Failed to save")
-            toast.success("Saved successfully!", successToasterStyles)
-            window.location.href = "/crm/reference/" + blogs[blogs.length - 1].title.replace(/ /g, '-').toLowerCase()
+            
+            // Poll references.json every 1 second until the new reference appears
+            let attempts = 0;
+            const maxAttempts = 60; // Maximum 30 seconds of polling
+            
+            const pollForReference = async (): Promise<boolean> => {
+                attempts++;
+                
+                try {
+                    const verifyResponse = await fetch(blobUrl + "jsons/references.json", {
+                        cache: "no-store",
+                        next: { revalidate: 1 },
+                    });
+                    
+                    if (!verifyResponse.ok) {
+                        throw new Error("Failed to fetch references.json");
+                    }
+                    
+                    const savedReferences = await verifyResponse.json();
+                    const referenceExists = savedReferences.some((reference: IBlog) => 
+                        reference.title === newSchool.title && reference.title !== "new"
+                    );
+                    
+                    if (referenceExists) {
+                        return true;
+                    }
+                    
+                    if (attempts >= maxAttempts) {
+                        throw new Error("Timeout: Reference not found after 30 seconds");
+                    }
+                    
+                    // Wait 1 second before next attempt
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return pollForReference();
+                    
+                } catch (error) {
+                    if (attempts >= maxAttempts) {
+                        throw error;
+                    }
+                    // Wait 1 second before retry
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return pollForReference();
+                }
+            };
+            
+            // Start polling
+            const referenceFound = await pollForReference();
+            
+            if (referenceFound) {
+                window.location.href = "/crm/reference/" + blogs[blogs.length - 1].title.replace(/ /g, '-').toLowerCase()
+            } else {
+                throw new Error("Reference verification failed");
+            }
+            
         } catch (err) {
-            setError("Failed to save data")
+            setError("Failed to save or verify data. Please try again.")
             console.log(err)
+        } finally {
+            setIsSaving(false)
         }
     }
 
@@ -127,7 +184,18 @@ const JSONCreator = () => {
     if (error) return <div>{error}</div>
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 relative">
+            {/* Loading Overlay */}
+            {isSaving && (
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center">
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+                        <p className="text-lg font-semibold">Saving reference and verifying data...</p>
+                        <p className="text-sm text-gray-600">Please wait, this may take a few seconds</p>
+                    </div>
+                </div>
+            )}
+            
             {blogs.map((blog, index) => (
                 index === blogs.length - 1 &&
                 <div key={index} className="border p-4 rounded-md space-y-2">
@@ -141,6 +209,7 @@ const JSONCreator = () => {
                                 onChange={(e) => handleInputChange(index, "title", e.target.value)}
                                 placeholder="Title"
                                 style={{height: 49}}
+                                disabled={isSaving}
                             />
                         </div>
                     </div>
@@ -151,6 +220,7 @@ const JSONCreator = () => {
                         value={blog.description}
                         onChange={(e) => handleInputChange(index, 'description', e.target.value)}
                         placeholder="Blog Description"
+                        disabled={isSaving}
                     />
                     <div className="flex flex-row justify-between gap-2">
                         <div className="w-full">
@@ -161,6 +231,7 @@ const JSONCreator = () => {
                                 value={blog.minutes_to_read}
                                 onChange={(e) => handleInputChange(index, "minutes_to_read", e.target.value)}
                                 placeholder="Number(example: 8)"
+                                disabled={isSaving}
                             />
                         </div>
                         <div className="w-full">
@@ -171,6 +242,7 @@ const JSONCreator = () => {
                                 value={blog.date}
                                 onChange={(e) => handleInputChange(index, "date", e.target.value)}
                                 placeholder="Date(example: 13 january 2025)"
+                                disabled={isSaving}
                             />
                         </div>
                     </div>
@@ -191,7 +263,7 @@ const JSONCreator = () => {
                             name="image"
                             type="file"
                             accept="image/*"
-                            disabled={isUploading}
+                            disabled={isUploading || isSaving}
                             className="max-w-sm mt-2"
                             onChange={handleFileChange}
                         />
@@ -222,11 +294,14 @@ const JSONCreator = () => {
                         onEditorChange={(content) => {
                             setContentBlog(content)
                         }}
+                        disabled={isSaving}
                     />
                 </div>
             ))}
             <div className="w-full flex justify-center">
-                <Button onClick={handleSave} className="w-36 border-2 border-black">Save Reference</Button>
+                <Button onClick={handleSave} className="w-36 border-2 border-black" disabled={isSaving}>
+                    {isSaving ? 'Saving...' : 'Save Reference'}
+                </Button>
             </div>
 
         </div>

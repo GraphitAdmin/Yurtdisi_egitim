@@ -7,7 +7,7 @@ import {Textarea} from "@/components/crm/ui/textarea"
 import Image from "next/image"
 import {uploadImage} from "@/app/crm/uploadImage"
 import toast from "react-hot-toast"
-import {blobUrl, checkLogged, cleanTitle, errorToasterStyles, successToasterStyles} from "@/utils/utils"
+import {blobUrl, checkLogged, cleanTitle, errorToasterStyles} from "@/utils/utils"
 import {ICity, ISchool} from "@/utils/interfaces"
 import Dropdown from "@/components/UI/Dropdown/Dropdown";
 import {searchCountries, searchTypes} from "@/data/search";
@@ -21,6 +21,7 @@ const JSONCreator = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const [isUploading, setIsUploading] = useState(false)
+    const [isSaving, setIsSaving] = useState(false)
     const [cities, setCities] = useState<ICity[]>([]);
 
     useEffect(() => {
@@ -182,7 +183,9 @@ const JSONCreator = () => {
             return
         }
 
+        setIsSaving(true)
         try {
+            // Save the school data once
             const response = await fetch("/api/save-schools", {
                 method: "POST",
                 headers: {
@@ -192,11 +195,65 @@ const JSONCreator = () => {
             })
 
             if (!response.ok) throw new Error("Failed to save")
-            toast.success("Saved successfully!", successToasterStyles)
-            window.location.href = "/crm/school/" + schools[schools.length - 1].title.replace(/ /g, '-')
+            
+            // Poll schools.json every 1 second until the new school appears
+            let attempts = 0
+            const maxAttempts = 60 // Maximum 30 seconds of polling
+            
+            const pollForSchool = async (): Promise<boolean> => {
+                attempts++
+                
+                try {
+                    const verifyResponse = await fetch(blobUrl + "jsons/schools.json", {
+                        cache: "no-store",
+                        next: { revalidate: 1 },
+                    })
+                    
+                    if (!verifyResponse.ok) {
+                        throw new Error("Failed to fetch schools.json")
+                    }
+                    
+                    const savedSchools = await verifyResponse.json()
+                    const schoolExists = savedSchools.some((school: ISchool) => 
+                        school.title === newSchool.title && school.title !== "new"
+                    )
+                    
+                    if (schoolExists) {
+                        return true
+                    }
+                    
+                    if (attempts >= maxAttempts) {
+                        throw new Error("Timeout: School not found after 30 seconds")
+                    }
+                    
+                    // Wait 1 second before next attempt
+                    await new Promise(resolve => setTimeout(resolve, 1000))
+                    return pollForSchool()
+                    
+                } catch (error) {
+                    if (attempts >= maxAttempts) {
+                        throw error
+                    }
+                    // Wait 1 second before retry
+                    await new Promise(resolve => setTimeout(resolve, 1000))
+                    return pollForSchool()
+                }
+            }
+            
+            // Start polling
+            const schoolFound = await pollForSchool()
+            
+            if (schoolFound) {
+                window.location.href = "/crm/school/" + schools[schools.length - 1].title.replace(/ /g, '-')
+            } else {
+                throw new Error("School verification failed")
+            }
+            
         } catch (err) {
-            setError("Failed to save data")
+            setError("Failed to save or verify data. Please try again.")
             console.log(err)
+        } finally {
+            setIsSaving(false)
         }
     }
     const filteredCities = useMemo(() => {
@@ -213,7 +270,18 @@ const JSONCreator = () => {
     if (error) return <div>{error}</div>
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 relative">
+            {/* Loading Overlay */}
+            {isSaving && (
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center">
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+                        <p className="text-lg font-semibold">Saving school and verifying data...</p>
+                        <p className="text-sm text-gray-600">Please wait, this may take a few seconds</p>
+                    </div>
+                </div>
+            )}
+            
             {schools.map((school, index) => (
                 index === schools.length - 1 &&
                 <div key={index} className="border p-4 rounded-md space-y-2">
@@ -228,6 +296,7 @@ const JSONCreator = () => {
                                 onChange={(e) => handleInputChange(index, "title", e.target.value)}
                                 placeholder="Title"
                                 style={{height: 49}}
+                                disabled={isSaving}
                             />
                         </div>
                         <div className="w-full">
@@ -238,7 +307,8 @@ const JSONCreator = () => {
                                       variants={searchTypes}
                                       setSelected={(value) => {
                                           handleInputChange(index, "education_type", value)
-                                      }}/>
+                                      }}
+                                      disabled={isSaving}/>
                         </div>
                     </div>
                     <div className="flex flex-row justify-between gap-2">
@@ -249,6 +319,7 @@ const JSONCreator = () => {
                             <Dropdown label='Website Active' selected={school.website_active}
                                       setSelected={(value) => handleInputChange(index, "website_active", value)}
                                       variants={['Active', 'Disabled']}
+                                      disabled={isSaving}
                             />
                         </div>
                         <div className="w-full">
@@ -261,6 +332,7 @@ const JSONCreator = () => {
                         value={school.school_overview}
                         onChange={(e) => handleInputChange(index, 'school_overview', e.target.value)}
                         placeholder="School Overview"
+                        disabled={isSaving}
                     />
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                         Detailed Information
@@ -282,11 +354,11 @@ const JSONCreator = () => {
                             ai_request: () => {
                             },
                         }}
-
                         initialValue={''}
                         onEditorChange={(content) => {
                             handleInputChange(index, 'detailed_information', content)
                         }}
+                        disabled={isSaving}
                     />
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                         Why Choose Us
@@ -295,6 +367,7 @@ const JSONCreator = () => {
                         value={school.why_block}
                         onChange={(e) => handleInputChange(index, 'why_block', e.target.value)}
                         placeholder="Why Choose Us"
+                        disabled={isSaving}
                     />
                     <div className="flex flex-row justify-between gap-2">
                         <div className="w-full">
@@ -305,6 +378,7 @@ const JSONCreator = () => {
                                 value={school.website}
                                 onChange={(e) => handleInputChange(index, "website", e.target.value)}
                                 placeholder="Website"
+                                disabled={isSaving}
                             />
                         </div>
                         <div className="w-full">
@@ -315,6 +389,7 @@ const JSONCreator = () => {
                                 value={school.video_url}
                                 onChange={(e) => handleInputChange(index, "video_url", e.target.value)}
                                 placeholder="Video URL"
+                                disabled={isSaving}
                             />
                         </div>
                     </div>
@@ -330,6 +405,7 @@ const JSONCreator = () => {
                                     latitude: e.target.value
                                 })}
                                 placeholder="Latitude"
+                                disabled={isSaving}
                             />
                         </div>
                         <div className="w-full">
@@ -343,6 +419,7 @@ const JSONCreator = () => {
                                     longitude: e.target.value
                                 })}
                                 placeholder="Longitude"
+                                disabled={isSaving}
                             />
                         </div>
                     </div>
@@ -353,7 +430,8 @@ const JSONCreator = () => {
                             </h6>
                             <Dropdown label={'Country'} selected={school.country}
                                       setSelected={(value) => handleInputChange(index, 'country', value)}
-                                      variants={searchCountries}/>
+                                      variants={searchCountries}
+                                      disabled={isSaving}/>
                         </div>
                         <div className="w-full">
                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
@@ -361,7 +439,8 @@ const JSONCreator = () => {
                             </h6>
                             <Dropdown label={'City'} selected={school.city}
                                       setSelected={(value) => handleInputChange(index, 'city', value)}
-                                      variants={filteredCitiesName}/>
+                                      variants={filteredCitiesName}
+                                      disabled={isSaving}/>
                         </div>
                     </div>
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
@@ -371,6 +450,7 @@ const JSONCreator = () => {
                         value={school.address}
                         onChange={(e) => handleInputChange(index, 'address', e.target.value)}
                         placeholder="Address"
+                        disabled={isSaving}
                     />
                     <div className="flex flex-row justify-between gap-2">
                         <div className="w-full">
@@ -381,6 +461,7 @@ const JSONCreator = () => {
                                 value={school.capacity}
                                 onChange={(e) => handleInputChange(index, "capacity", e.target.value)}
                                 placeholder="Capacity"
+                                disabled={isSaving}
                             />
                         </div>
                         <div className="w-full">
@@ -392,6 +473,7 @@ const JSONCreator = () => {
                                 value={school.age_group}
                                 onChange={(e) => handleInputChange(index, "age_group", e.target.value)}
                                 placeholder="Age Group"
+                                disabled={isSaving}
                             />
                         </div>
                     </div>
@@ -402,6 +484,7 @@ const JSONCreator = () => {
                         value={school.programs.join(', ')}
                         onChange={(e) => handleInputChange(index, 'programs', e.target.value.split(', '))}
                         placeholder="Programs (comma-separated)"
+                        disabled={isSaving}
                     />
                     <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
                         Accommodation
@@ -410,6 +493,7 @@ const JSONCreator = () => {
                         value={school.accommodation}
                         onChange={(e) => handleInputChange(index, 'accommodation', e.target.value)}
                         placeholder="Accommodation"
+                        disabled={isSaving}
                     />
                     <div>
                         <h6>Images</h6>
@@ -430,7 +514,7 @@ const JSONCreator = () => {
                             name="image"
                             type="file"
                             accept="image/*"
-                            disabled={isUploading}
+                            disabled={isUploading || isSaving}
                             className="max-w-sm mt-2"
                             onChange={handleFileChange}
                         />
@@ -452,7 +536,7 @@ const JSONCreator = () => {
                             name="image"
                             type="file"
                             accept="image/*"
-                            disabled={isUploading}
+                            disabled={isUploading || isSaving}
                             className="max-w-sm mt-2"
                             onChange={handleImageChange}
                         />
@@ -475,7 +559,7 @@ const JSONCreator = () => {
                                 name="discount_pdf"
                                 type="file"
                                 accept="application/pdf"
-                                disabled={isUploading}
+                                disabled={isUploading || isSaving}
                                 className="max-w-sm mt-2"
                                 onChange={(e) => handlePdfChange(e, "discount_pdf")}
                             />
@@ -499,7 +583,7 @@ const JSONCreator = () => {
                                 name="promotions_pdf"
                                 type="file"
                                 accept="application/pdf"
-                                disabled={isUploading}
+                                disabled={isUploading || isSaving}
                                 className="max-w-sm mt-2"
                                 onChange={(e) => handlePdfChange(e, "promotions_pdf")}
                             />
@@ -508,8 +592,8 @@ const JSONCreator = () => {
                 </div>
             ))}
             <div className="w-full flex justify-center">
-                <Button onClick={handleSave} className="w-36 border-2 border-black"
-                >Save School</Button>
+                <Button onClick={handleSave} className="w-36 border-2 border-black" disabled={isSaving}
+                >{isSaving ? 'Saving...' : 'Save School'}</Button>
             </div>
 
         </div>

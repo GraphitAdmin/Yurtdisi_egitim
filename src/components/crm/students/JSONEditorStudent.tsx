@@ -22,6 +22,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     const [schoolIndex, setSchoolIndex] = useState<null | number>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [isDeleting, setIsDeleting] = useState(false);
     useEffect(() => {
         fetch(`${blobUrl}jsons/students.json`, {
             cache: "no-store",
@@ -73,21 +74,80 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this school?")
         if (!confirmDelete) return
 
+        setIsDeleting(true);
         try {
-            const updatedCities = students.filter((_, index) => index !== schoolIndex)
+            const studentToDelete = students[schoolIndex];
+            const updatedStudents = students.filter((_, index) => index !== schoolIndex)
+            
+            // Delete the student data once
             const response = await fetch("/api/save-students", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(updatedCities),
+                body: JSON.stringify(updatedStudents),
             })
             if (!response.ok) throw new Error("Failed to delete")
-            toast.success("School deleted successfully!", successToasterStyles)
-            window.location.href = '/crm/student'
+            
+            // Poll students.json every 1 second until the student is removed
+            let attempts = 0;
+            const maxAttempts = 30; // Maximum 30 seconds of polling
+            
+            const pollForStudentRemoval = async (): Promise<boolean> => {
+                attempts++;
+                
+                try {
+                    const verifyResponse = await fetch(blobUrl + "jsons/students.json", {
+                        cache: "no-store",
+                        next: { revalidate: 1 },
+                    });
+                    
+                    if (!verifyResponse.ok) {
+                        throw new Error("Failed to fetch students.json");
+                    }
+                    
+                    const savedStudents = await verifyResponse.json();
+                    const studentStillExists = savedStudents.some((student: IStudent) => 
+                        student.id === studentToDelete.id
+                    );
+                    
+                    if (!studentStillExists) {
+                        return true; // Student successfully removed
+                    }
+                    
+                    if (attempts >= maxAttempts) {
+                        throw new Error("Timeout: Student still exists after 30 seconds");
+                    }
+                    
+                    // Wait 1 second before next attempt
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return pollForStudentRemoval();
+                    
+                } catch (error) {
+                    if (attempts >= maxAttempts) {
+                        throw error;
+                    }
+                    // Wait 1 second before retry
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return pollForStudentRemoval();
+                }
+            };
+            
+            // Start polling
+            const studentRemoved = await pollForStudentRemoval();
+            
+            if (studentRemoved) {
+                toast.success("Student deleted successfully!", successToasterStyles)
+                window.location.href = '/crm/student'
+            } else {
+                throw new Error("Student deletion verification failed");
+            }
+            
         } catch (err) {
-            setError("Failed to delete blog")
+            setError("Failed to delete or verify deletion. Please try again.")
             console.error(err)
+        } finally {
+            setIsDeleting(false)
         }
     }
 
@@ -95,7 +155,18 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 relative">
+            {/* Loading Overlay */}
+            {isDeleting && (
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center">
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+                        <p className="text-lg font-semibold">Deleting student and verifying removal...</p>
+                        <p className="text-sm text-gray-600">Please wait, this may take a few seconds</p>
+                    </div>
+                </div>
+            )}
+            
             {students.map((school, index) => (
                 name === school.id &&
                 <div key={index} className="border p-4 rounded-md space-y-2">
@@ -107,8 +178,9 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                             <Input
                                 value={school.firstName}
                                 onChange={(e) => handleInputChange(index, "firstName", e.target.value)}
-                                placeholder="Firt Name"
+                                placeholder="First Name"
                                 style={{height: 49}}
+                                disabled={isDeleting}
                             />
                         </div>
                         <div className="w-full">
@@ -120,6 +192,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 onChange={(e) => handleInputChange(index, "lastName", e.target.value)}
                                 placeholder="Last Name"
                                 style={{height: 49}}
+                                disabled={isDeleting}
                             />
                         </div>
                     </div>
@@ -133,6 +206,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 onChange={(e) => handleInputChange(index, "email", e.target.value)}
                                 placeholder="Email"
                                 style={{height: 49}}
+                                disabled={isDeleting}
                             />
                         </div>
                         <div className="w-full">
@@ -144,6 +218,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 onChange={(e) => handleInputChange(index, "phone", e.target.value)}
                                 placeholder="Phone"
                                 style={{height: 49}}
+                                disabled={isDeleting}
                             />
                         </div>
                     </div>
@@ -157,6 +232,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 onChange={(e) => handleInputChange(index, "programs", e.target.value)}
                                 placeholder="Programs"
                                 style={{height: 49}}
+                                disabled={isDeleting}
                             />
                         </div>
                         <div className="w-full">
@@ -168,6 +244,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                 onChange={(e) => handleInputChange(index, "city", e.target.value)}
                                 placeholder="City"
                                 style={{height: 49}}
+                                disabled={isDeleting}
                             />
                         </div>
                     </div>
@@ -178,7 +255,8 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                             </h6>
                             <Dropdown label={'Country'} selected={school.country}
                                       setSelected={(value) => handleInputChange(index, 'country', value)}
-                                      variants={searchCountries}/>
+                                      variants={searchCountries}
+                                      disabled={isDeleting}/>
                         </div>
                         <div className="w-full">
                             <h6 style={{textAlign: "left", color: "var(--Courses-Base-Black)"}}>
@@ -193,7 +271,8 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                               handleInputChange(index, 'isContacted', 'false')
                                           }
                                       }}
-                                      variants={['Yes', 'No']}/>
+                                      variants={['Yes', 'No']}
+                                      disabled={isDeleting}/>
                         </div>
                     </div>
                     <div className="flex flex-row justify-between gap-2">
@@ -210,14 +289,15 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                 </div>
             ))}
             <div className="w-full flex justify-center  gap-4">
-                <Button onClick={handleSave} className="w-36 border-2 border-black">
+                <Button onClick={handleSave} className="w-36 border-2 border-black" disabled={isDeleting}>
                     Save Changes
                 </Button>
                 <Button
                     onClick={handleDelete}
                     className="w-36 border-2 border-red-400  hover:bg-red-500 hover:text-white"
+                    disabled={isDeleting}
                 >
-                    Delete School
+                    {isDeleting ? 'Deleting...' : 'Delete School'}
                 </Button>
             </div>
         </div>
