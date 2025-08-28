@@ -14,6 +14,10 @@
     gap: 48px 20px;
     height: fit-content;
 }
+.page__country__schools__schools > *{
+     min-width: 0;
+ }
+
 
 .page__country__schools__country {
     display: flex;
