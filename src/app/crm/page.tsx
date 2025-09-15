@@ -9,7 +9,7 @@ export default function AdminPanel() {
     const [password, setPassword] = useState("")
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault()
-        if (username === "Emir" && password === "secretpassword") {
+        if (username === "Emir" && password === "Global1989Emir!!") {
             sessionStorage.setItem('isLoggedIn','true')
             window.location.href='/crm/subscribers'
         } else {
