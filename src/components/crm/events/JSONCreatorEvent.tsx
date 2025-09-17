@@ -329,6 +329,7 @@ const JSONCreator = () => {
                                     alt={`event`}
                                     width={100}
                                     height={100}
+                                    unoptimized={true}
                                 />
                             }
                         </div>

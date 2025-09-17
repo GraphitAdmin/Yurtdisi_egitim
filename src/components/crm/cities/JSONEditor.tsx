@@ -244,13 +244,15 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                             alt={city.name}
                                             width={400}
                                             height={400}
+                                            unoptimized={true}
                                         />
                                     ) :
                                     <Image
                                         width={400}
                                         height={400}
                                         src={blobUrl + city.image}
-                                        alt={city.name}/>
+                                        alt={city.name}
+                                        unoptimized={true}/>
                                 }
                             </div>
                             <input

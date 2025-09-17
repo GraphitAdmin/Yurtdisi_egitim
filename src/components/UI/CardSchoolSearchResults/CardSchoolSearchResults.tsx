@@ -16,7 +16,7 @@ const CardSchoolSearchResults: React.FC<ISchool> = ({image_right, title, country
         }>
             <Image className="w-full"
                    width={720}
-                   height={572} src={blobUrl + image_right} alt={title}/>
+                   height={572} src={blobUrl + image_right} alt={title} unoptimized={true}/>
             <h4 style={{marginTop:12,textAlign:"left",maxHeight:64,minHeight:64}}>{title}</h4>
             <p style={{color: 'var(--Courses-Gray-Gray-500)',textOverflow:'ellipsis',maxHeight:48,minHeight:48,overflow:'hidden',textAlign:'left'}}>
                 {school_overview}

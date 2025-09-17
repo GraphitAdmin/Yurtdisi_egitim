@@ -223,6 +223,7 @@ const JSONCreator = () => {
                                 alt='New city'
                                 width={400}
                                 height={400}
+                                unoptimized={true}
                             />
                         )}
                     </div>

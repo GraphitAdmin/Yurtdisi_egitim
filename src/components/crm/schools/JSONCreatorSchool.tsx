@@ -506,6 +506,7 @@ const JSONCreator = () => {
                                     width={100}
                                     height={100}
                                     style={{maxHeight: '-webkit-fill-available'}}
+                                    unoptimized={true}
                                 />
                             ))}
                         </div>
@@ -528,6 +529,7 @@ const JSONCreator = () => {
                                     alt={school.title}
                                     width={100}
                                     height={100}
+                                    unoptimized={true}
                                 />
                             }
                         </div>

@@ -268,6 +268,7 @@ const JSONCreator = () => {
                                     alt={`Blog`}
                                     width={100}
                                     height={100}
+                                    unoptimized={true}
                                 />
                             }
                         </div>

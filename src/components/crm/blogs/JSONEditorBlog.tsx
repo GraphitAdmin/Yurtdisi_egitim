@@ -307,6 +307,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                     alt={`Blog`}
                                     width={100}
                                     height={100}
+                                    unoptimized={true}
                                 />
                             }
                         </div>

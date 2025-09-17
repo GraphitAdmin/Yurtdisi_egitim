@@ -97,7 +97,7 @@ const CityPageContent: React.FC<CityPageContentProps> = ({slug, childId, subChil
                                     </Link>)}
                             </>}
                         </div>
-                        <Image width={720} height={756} src={blobUrl + city.image} alt={city.name}/>
+                        <Image width={720} height={756} src={blobUrl + city.image} alt={city.name} unoptimized={true}/>
                     </>}
             </div>
         </>

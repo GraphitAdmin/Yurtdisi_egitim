@@ -10,7 +10,7 @@ const CardCity: React.FC<CardCityProps> = ({image_string, title, link, descripti
     return (
         <Link className={buttonDetails ? "card__country card__school" : "card__country card__city"} style={{gap: '8px!important'}}
               href={link}>
-            <Image width={273} height={152} className="w-full" src={blobUrl+image_string} alt={title}/>
+            <Image width={273} height={152} className="w-full" src={blobUrl+image_string} alt={title} unoptimized={true}/>
             <h4 style={{marginTop: 12}}>{title}</h4>
             <p style={{
                 color: 'var(--Courses-Gray-Gray-500)',

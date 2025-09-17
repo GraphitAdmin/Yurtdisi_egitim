@@ -49,7 +49,7 @@ const SchoolPageContent: React.FC<SchoolPageContentProps> = ({subUniChildId, sch
                         </div>
                         <div className="page__school__right">
                             <div className="page__school__right__info">
-                                <Image width='273' height={152} src={blobUrl + school.image_right} alt={school.title}/>
+                                <Image width='273' height={152} src={blobUrl + school.image_right} alt={school.title} unoptimized={true}/>
                                 {school.title &&
                                     <div>
                                         <p>School</p>

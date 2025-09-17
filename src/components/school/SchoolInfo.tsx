@@ -99,6 +99,7 @@ const SchoolInfo: React.FC<SchoolInfoSchool> = ({school}) => {
                         alt={`Image ${index + 1}`}
                         loading="lazy"
                         className="page__school__info__img"
+                        unoptimized={true}
                     />
                 ))}
             </div>

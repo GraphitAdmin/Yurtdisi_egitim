@@ -21,7 +21,7 @@ const Event: React.FC<IEvent> = ({image,type, date, timeStart,timeEnd, title, lo
     return (
         <div className="events__post">
             <Image  width={381}
-                   height={224} className="w-full" src={blobUrl+image} alt={title}/>
+                   height={224} className="w-full" src={blobUrl+image} alt={title} unoptimized={true}/>
             <small style={{marginTop:12}}>{type}</small>
             <h5 style={{textAlign: 'left',marginTop:8}}>{title}</h5>
             <p style={{textAlign: 'left'}}>{description}</p>

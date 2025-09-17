@@ -16,7 +16,7 @@ const CardSchoolSearch: React.FC<ISchool> = ({image_right, title, country,city,e
         }>
             <Image className="w-full"
                    width={720}
-                   height={572} src={blobUrl + image_right} alt={title}/>
+                   height={572} src={blobUrl + image_right} alt={title} unoptimized={true}/>
             <h4 style={{marginTop: 12}}>{title}</h4>
             <p style={{
                 color: 'var(--Courses-Gray-Gray-500)',

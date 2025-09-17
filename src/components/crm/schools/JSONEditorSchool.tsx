@@ -527,6 +527,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                                 height={250}
                                                 alt={school.title}
                                                 style={{maxHeight: '-webkit-fill-available'}}
+                                                unoptimized={true}
                                             />
                                             <XIcon onClick={() => handleRemoveImage(index, image)}
                                                    className="image__crm__x" style={{width: 125, height: 125}}/>
@@ -550,6 +551,7 @@ const JSONEditor: React.FC<IJsonEditor> = ({name}) => {
                                             alt={school.title}
                                             width={100}
                                             height={100}
+                                            unoptimized={true}
                                         />
                                     </div>
                                     <input

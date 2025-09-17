@@ -10,7 +10,7 @@ const Card: React.FC<IBlog> = ({image, minutes_to_read, title, date, description
         <Link className="events__post"
               href={'/blog/' + title.replace(/ /g, '-').toLowerCase()}>
             <Image width={720}
-                   height={572} className="w-full" src={blobUrl+image} alt={title}/>
+                   height={572} className="w-full" src={blobUrl+image} alt={title} unoptimized={true}/>
             <div style={{
                 display: 'flex',
                 flexDirection: 'row',

@@ -10,7 +10,7 @@ const CardReference: React.FC<IBlog> = ({image, title, description}) => {
         <Link className="events__post"
               href={'/our-student-references/' + title.replace(/ /g, '-').toLowerCase()}>
             <Image width={720}
-                   height={572} className="w-full" src={blobUrl+image} alt={title}/>
+                   height={572} className="w-full" src={blobUrl+image} alt={title} unoptimized={true}/>
             <div className="flex flex-row justify-between w-full" style={{marginTop:12}}>
                 <h5 style={{textAlign: 'left', maxWidth: '90%'}}>{title}</h5>
                 <svg style={{marginTop: 3}} xmlns="http://www.w3.org/2000/svg" width="24" height="24"
